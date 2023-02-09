@@ -28,7 +28,16 @@ $(function(){
     /**
      * SIDEBAR BUTTONS
      */
-    $('#fingerings_toggle, highlights_toggle, #notenames_toggle, #print').click(function(){
+    $('#fingerings_toggle, #highlights_toggle, #notenames_toggle, #print').click(function(){
         $(this).toggleClass('active')
     })
+    // load tiny notey toggle button (and other noteys)
+    $('.notey-container').each(function(){
+        $(this).html( $('#notey').html() )
+    })
+    // notey toggler
+    $('#noteyToggle').click(function(){
+        $('#notey').fadeToggle()
+    })
+
 })
