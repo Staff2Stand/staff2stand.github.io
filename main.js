@@ -19,6 +19,7 @@ $(function(){
         canvas_id: "tunes_container",
         warnings_id: "abc-warnings",
         clickListener: function(abcElem, tuneNumber, classes) { 
+            //the presence of this function is enough to add the functionality
             console.log(abcElem, tuneNumber, classes); 
         },
         abcjsParams: abcjsOptions
