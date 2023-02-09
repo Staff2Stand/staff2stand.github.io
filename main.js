@@ -1,7 +1,9 @@
 // import $ from "jquery"
-import abcjs from "abcjs"
+// import abcjs from "abcjs"
 
 $(function(){
+    const abcjs = window.ABCJS
+
     /**
      * ABCJS RENDER OPTIONS
      */
