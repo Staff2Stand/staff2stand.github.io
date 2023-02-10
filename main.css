@@ -448,49 +448,36 @@ header {
   --eStringColor: teal;
 }
 
-:not(.highlight_notes) .tune .abcjs-note {
+:not(.highlight_notes) .abcjs-note {
   --selection_glow: #000;
 }
 
 /* C String */
-.highlight_notes .tune:not([instrument='Bass']) :is(.abcjs-p-7, .abcjs-p-6, .abcjs-p-5, .abcjs-p-4),
-.highlight_notes .tune:not([instrument='Bass']) .abcjs-p-3:has([data-name*="flat"]) /*<--G, flat*/ {
+.highlight_notes .cString{
   --selection_glow: var(--cStringColor);
   fill: var(--cStringColor);
 }
 
 /* G String */
-.highlight_notes .tune:not([instrument='Bass']) :is(.abcjs-p-3, .abcjs-p-2, .abcjs-p-1, .abcjs-p0),
-.highlight_notes .tune:not([instrument='Bass']) .abcjs-p1:has([data-name*="flat"]), /*<--D flat*/
-.highlight_notes .tune[instrument='Bass'] :is(.abcjs-p4, .abcjs-p5, .abcjs-p6, .abcjs-p7, .abcjs-p8, .abcjs-p9) {
+.highlight_notes .gString{
   --selection_glow: var(--gStringColor);
   fill: var(--gStringColor);
 }
 
 /* D String */
-.highlight_notes .tune:not([instrument='Bass']) :is(.abcjs-p1, .abcjs-p2, .abcjs-p3, .abcjs-p4),
-.highlight_notes .tune:not([instrument='Bass']) .abcjs-p5:has([data-name*="flat"]), /*<--A flat*/
-.highlight_notes .tune[instrument='Bass'] :is(.abcjs-p1, .abcjs-p2, .abcjs-p3) {
+.highlight_notes .dString{
   --selection_glow: var(--dStringColor);
   fill: var(--dStringColor);
 }
 
 /* A String */
-.highlight_notes .tune:not([instrument='Bass']) :is(.abcjs-p5, .abcjs-p6, .abcjs-p7, .abcjs-p8),
-.highlight_notes .tune:not([instrument='Bass']) .abcjs-p9:has([data-name*="flat"]), /*<--e flat*/
-.highlight_notes .tune[instrument='Bass'] :is(.abcjs-p-2, .abcjs-p-1, .abcjs-p0),
-.highlight_notes .tune[instrument='viola'] :is(.abcjs-p9) {
+.highlight_notes .aString{
   --selection_glow: var(--aStringColor);
   fill: var(--aStringColor);
 }
 
 /* E String */
-.highlight_notes
-  .tune:not([instrument="Bass"])
-  :is(.abcjs-p9, .abcjs-p10, .abcjs-p11, .abcjs-p12, .abcjs-p13),
-.highlight_notes
-  .tune[instrument="Bass"]
-  :is(.abcjs-p-5, .abcjs-p-4, .abcjs-p-3) {
+.highlight_notes .eString{
   --selection_glow: var(--eStringColor);
   fill: var(--eStringColor);
 }

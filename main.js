@@ -1,8 +1,33 @@
-// import $ from "jquery"
-// import abcjs from "abcjs"
+const abcjs = window.ABCJS
+
+const stringReference = {
+    violin: {
+        g: ['G,' , '^G,' , '_A,' , 'A,' , '^A,' , '_B,' , 'B,' , '^B,' , '_C' , 'C' , '^C' , '_D'],
+        d: ['D' , '^D' , '_E' , 'E' , '^E' , '_F' , 'F' , '^F' , '_G' , 'G' , '^G' , '_A'],
+        a: ['A' , '^A' , '_B' , 'B' , '^B' , '_c' , 'c' , '^c' , '_d' , 'd' , '^d' , '_e'],
+        e: ['e' , '^e' , '_f' , 'f' , '^f' , '_g' , 'g' , '^g' , '_a' , 'a' , '^a' , '_b' , 'b' , '^b']
+    },
+    viola: {
+        c: ['C,' , '^C,' , '_D,' , 'D,', '^D,' , '_E,' , 'E,' , '^E,' , '_F,', 'F,' , '^F' , '_G,'],
+        g: ['G,' , '^G,' , '_A,' , 'A,' , '^A,' , '_B,' , 'B,' , '^B,' , '_C' , 'C' , '^C' , '_D'],
+        d: ['D' , '^D' , '_E' , 'E' , '^E' , '_F' , 'F' , '^F' , '_G' , 'G' , '^G' , '_A'],
+        a: ['A' , '^A' , '_B' , 'B' , '^B' , '_c' , 'c' , '^c' , '_d' , 'd' , '^d' , '_e' , 'e' , '^e'],
+    },
+    cello: {
+        c: ['C,' , '^C,' , '_D,' , 'D,', '^D,' , '_E,' , 'E,' , '^E,' , '_F,', 'F,' , '^F' , '_G,'],
+        g: ['G,' , '^G,' , '_A,' , 'A,' , '^A,' , '_B,' , 'B,' , '^B,' , '_C' , 'C' , '^C' , '_D'],
+        d: ['D' , '^D' , '_E' , 'E' , '^E' , '_F' , 'F' , '^F' , '_G' , 'G' , '^G' , '_A'],
+        a: ['A' , '^A' , '_B' , 'B' , '^B' , '_c' , 'c' , '^c' , '_d' , 'd'],
+    },
+    bass: {
+        g: ['G' , '^G' , '_A' , 'A' , '^A' , '_B' , 'B' , '^B' , '_c' , 'c' , '^c' , '_d' , 'd'],
+        d: ['D' , '^D' , '_E' , 'E' , '^E' , '_F' , 'F' , '^F' , '_G'],
+        a: ['A,' , '^A,' , '_B,' , 'B,' , '^B,' , '_C' , 'C' , '^C' , '_D'],
+        e: ['E,' , '^E,' , '_F,' , 'F,' , '^F,' , '_G,' , 'G,' , '^G,' , '_A,']
+    }
+}
 
 $(function(){
-    const abcjs = window.ABCJS
 
     /**
      * ABCJS RENDER OPTIONS
@@ -20,7 +45,12 @@ $(function(){
         warnings_id: "abc-warnings",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
-            console.log(abcElem, tuneNumber, classes); 
+            console.log(abcElem, tuneNumber, classes)
+        },
+        indicate_changed: true,
+        onchange: function(editorInstance) {
+            console.log(editorInstance)
+            
         },
         abcjsParams: abcjsOptions
     })
@@ -32,7 +62,7 @@ $(function(){
         $(this).toggleClass('active')
     })
     // load tiny notey toggle button (and other noteys)
-    $('.notey-container').each(function(){
+    $('.noteyContainer').each(function(){
         $(this).html( $('#notey').html() )
     })
     // notey toggler
