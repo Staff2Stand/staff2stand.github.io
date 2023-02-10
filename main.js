@@ -56,7 +56,8 @@ $(function(){
                 //check string reference and add the correct string class
                 const instrument = $(this).closest('svg').find('abcjs-voice-name tspan').html().toLowerCase()
                 const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-                $(this).addClass(`${noteName}String`)
+                console.log($(this),noteName, instrument, noteString)
+                $(this).addClass(`${noteString}String`)
             })
         },
         abcjsParams: abcjsOptions
@@ -67,6 +68,9 @@ $(function(){
      */
     $('#fingerings_toggle, #highlights_toggle, #notenames_toggle, #print').click(function(){
         $(this).toggleClass('active')
+    })
+    $('#highlights_toggle').click(function(){
+        $('#main_container').addClass('highlight_notes')
     })
     // load tiny notey toggle button (and other noteys)
     $('.noteyContainer').each(function(){
