@@ -49,12 +49,12 @@ $(function(){
         },
         indicate_changed: true,
         onchange: function(editorInstance) {
-            console.log(editorInstance)
+            // console.log(editorInstance)
             $('.abcjs-note path[data-name]:not([class])').each(function(){
                 //select each path of each note that doesn't have a class (the noteheads don't have a class)
                 const noteName = $(this).attr('data-name')
                 //check string reference and add the correct string class
-                const instrument = $('#tunes_container .abcjs-voice-name tspan').html().toLowerCase()
+                const instrument = $('#tunes_container .abcjs-voice-name tspan').get(0).html().toLowerCase()
                 const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                 console.log($(this),noteName, instrument, noteString)
                 $(this).addClass(`${noteString}String`)
