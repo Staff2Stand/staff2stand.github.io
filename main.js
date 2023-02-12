@@ -50,18 +50,50 @@ $(function(){
         indicate_changed: true,
         onchange: function(editorInstance) {
             // console.log(editorInstance)
-            $('.abcjs-note path[data-name]:not([class])').each(function(){
-                //select each path of each note that doesn't have a class (the noteheads don't have a class)
-                const noteName = $(this).attr('data-name')
-                //check string reference and add the correct string class
-                const instrument = $('#tunes_container .abcjs-voice-name tspan').get(0).html().toLowerCase()
-                const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-                console.log($(this),noteName, instrument, noteString)
-                $(this).addClass(`${noteString}String`)
-            })
         },
         abcjsParams: abcjsOptions
     })
+    /**
+     * TUNES CONTAINER (RE)RENDER OBSERVER
+     */
+    elementToObserve = document.getElementById('tunes_container')
+    observer = new MutationObserver(function(mutationsList, observer) {
+        // callback for tunes container mutations
+        // console.log('tunes container was rendered',mutationsList)
+        addStringClassesToNoteHeads()
+    });
+    observer.observe(elementToObserve, {characterData: false, childList: true, attributes: false})
+
+    /**
+     * ADD STRING CLASSES
+     */
+    function addStringClassesToNoteHeads(){
+        $('.abcjs-note path[data-name]').each(function(i,pathel){
+            const isNotehead = $(pathel).attr('data-name').length <= 2
+            if (!isNotehead) return
+
+            const noteName = $(pathel).attr('data-name')
+            console.log(noteName)
+            //check string reference and add the correct string class
+            const instrument = $(pathel).closest('.abcjs-container').find('.abcjs-voice-name tspan').html().toLowerCase()
+            const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
+
+            console.log(instrument, noteString)
+            
+            $(pathel).addClass(`${noteString}String`)
+        })
+    }
+
+
+    /**
+     * SCORE BOOKMARKS
+     */
+    $('.score_bookmark').click(function(){
+        const abc = $(this).attr('abc').replace(/\\n/g,'\r\n')
+        console.log(abc)
+        $('#editor').val(abc).change()
+    })
+
 
     /**
      * SIDEBAR BUTTONS
