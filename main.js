@@ -88,7 +88,7 @@ $(function(){
     /**
      * AFTER PARSING
      */
-    addFingeringsAndNoteNames(tune, tuneNumber, abcString){
+    function addFingeringsAndNoteNames(tune, tuneNumber, abcString) {
         console.log(tune, tuneNumber, abcString)
 
         //Create Fingerings Reference
