@@ -30,15 +30,6 @@ const stringReference = {
 $(function(){
 
     /**
-     * ABCJS RENDER OPTIONS
-     */
-    const abcjsOptions = {
-        add_classes: true,
-        responsive: 'resize',
-        afterParsing: addFingeringsAndNoteNames()
-    }
-
-    /**
      * INITIALIZE EDITOR
      */
     let editor = new abcjs.Editor("editor",{
@@ -52,7 +43,11 @@ $(function(){
         onchange: function(editorInstance) {
             console.log(editorInstance)
         },
-        abcjsParams: abcjsOptions
+        abcjsParams: {
+            add_classes: true,
+            responsive: 'resize',
+            afterParsing: addFingeringsAndNoteNames(this.abcElem,this.tuneNumber,this.abcString)
+        }
     })
     /**
      * TUNES CONTAINER (RE)RENDER OBSERVER
@@ -73,12 +68,9 @@ $(function(){
             if (!isNotehead) return
 
             const noteName = $(pathel).attr('data-name')
-            console.log(noteName)
             //check string reference and add the correct string class
             const instrument = $(pathel).closest('.abcjs-container').find('.abcjs-voice-name tspan').html().toLowerCase()
             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-
-            console.log(instrument, noteString)
             
             $(pathel).addClass(`${noteString}String`)
         })
@@ -88,8 +80,8 @@ $(function(){
     /**
      * AFTER PARSING
      */
-    function addFingeringsAndNoteNames() {
-        let abcString = $('#editor').val()
+    function addFingeringsAndNoteNames(tuneObj, tuneNumber, abcString) {
+        // let abcString = $('#editor').val()
         if (abcString === '') return
         console.log(abcString)
 
