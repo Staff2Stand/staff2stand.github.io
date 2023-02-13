@@ -90,6 +90,7 @@ $(function(){
      */
     function addFingeringsAndNoteNames() {
         let abcString = $('#editor').val()
+        if (abcString === '') return
         console.log(abcString)
 
         //Create Fingerings Reference
