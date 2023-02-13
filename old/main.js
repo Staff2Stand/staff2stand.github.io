@@ -1,5 +1,5 @@
-import $ from "jquery";
-import abcjs from "abcjs";
+const abcjs = window.ABCJS
+
 
 $(document).ready(() => {
   /** EDITOR
