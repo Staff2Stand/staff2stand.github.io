@@ -228,8 +228,8 @@ $(function(){
             D: "!1!"
         };
 
-        let targetEl = document.getElementById(targetId);
-        let targetInstrument = $(targetEl).attr("instrument").toLowerCase();
+        let targetInstrument = abcString.match(/V:\s?(.*?)\s/)[1].toLowerCase()
+        let key = abcString.match(/K:\s?(.*?)\s/)
 
         //Choose which fingering reference based on instrument (and key)
         let fingeringReference;
@@ -240,8 +240,8 @@ $(function(){
             break;
             case "cello":
             case "bass":
-            fingeringReference = fingerings[targetInstrument][info.key]
-                ? fingerings[targetInstrument][info.key]
+            fingeringReference = fingerings[targetInstrument][key]
+                ? fingerings[targetInstrument][key]
                 : fingerings[targetInstrument]["C"];
             break;
             default:
@@ -250,14 +250,14 @@ $(function(){
         }
         //replace each note to include it's fingering (skip matches that are inbetween quotes)
         const reg = /([_^=])*([A-Ga-g],*'*)/gm;
-        notes = notes.replace(reg, function (
+        abcString = abcString.replace(reg, function (
             note,
             accidental,
             noteWithoutAccidental,
             offset
         ) {
             //count quotation marks in contents before the match. If odd, we're in quotes so skip it
-            const contents_before = notes.substring(0, offset);
+            const contents_before = abcString.substring(0, offset);
             let num_of_quotes = 0;
             for (const char of contents_before) {
             if (char === '"') num_of_quotes++;
@@ -266,28 +266,6 @@ $(function(){
             const in_quote = !!(num_of_quotes % 2);
 
             if (in_quote) return note;
-
-            //check which string the note is on
-            // let string;
-            // if (note.match(/((?<!_)C,)|([_^=])*([DEF],)|_G,/gm)) string = "C";
-            // if (note.match(/((?<!_)G,)|([_^=])*([AB],|C(?!,))|_D(?!,)/gm)) string = "G";
-            // if (note.match(/((?<!_)D(?!,))|([_^=])*([EFG](?!,))|_A(?!,)/gm))
-            //   string = "D";
-            // if (note.match(/((?<!_)A(?!,))|([_^=])*([Bcd](?![,']))|_e/gm)) string = "A";
-            // if (note.match(/((?<!_)e(?!'))|([_^=])*([fgab](?![']))/gm)) string = "E";
-            // //viola needs to put e on the A string
-            // if (targetInstrument === "viola") {
-            //   if (note.match(/e/gm)) string = "A";
-            // }
-            // //bass is different, so check if its bass and redifine string if so
-            // if (targetInstrument === "bass") {
-            //   if (note.match(/((?<!_)E,)|([_^=])*([FG],)|_A,/gm)) string = "E";
-            //   if (note.match(/((?<!_)A,)|([_^=])*(B,|C(?!,))|_D(?!,)/gm)) string = "A";
-            //   if (note.match(/((?<!_)D(?!,))|([_^=])*([EF](?!,))|_G(?!,)/gm))
-            //     string = "D";
-            //   if (note.match(/((?<!_)G(?!,))|([_^=])*([AB](?!,))|_c(?!')/gm))
-            //     string = "G";
-            // }
 
             //convert abc accidental to accidental
             const accidentalTxt =
