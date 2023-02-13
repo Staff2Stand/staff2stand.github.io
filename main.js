@@ -35,7 +35,7 @@ $(function(){
     const abcjsOptions = {
         add_classes: true,
         responsive: 'resize',
-        afterParsing: addFingeringsAndNoteNames(tune, tuneNumber, abcString)
+        afterParsing: addFingeringsAndNoteNames()
     }
 
     /**
@@ -50,7 +50,7 @@ $(function(){
         },
         indicate_changed: true,
         onchange: function(editorInstance) {
-            // console.log(editorInstance)
+            console.log(editorInstance)
         },
         abcjsParams: abcjsOptions
     })
@@ -88,8 +88,9 @@ $(function(){
     /**
      * AFTER PARSING
      */
-    function addFingeringsAndNoteNames(tune, tuneNumber, abcString) {
-        console.log(tune, tuneNumber, abcString)
+    function addFingeringsAndNoteNames() {
+        let abcString = $('#editor').val()
+        console.log(abcString)
 
         //Create Fingerings Reference
         let fingerings = {
