@@ -3,27 +3,43 @@ const abcjs = window.ABCJS
 const stringReference = {
     violin: {
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
+        gFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G' , 'G' , '=G' , '^G' , '_A'],
+        dFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d' , '^d' , '_e'],
-        e: ['e' , '=e' , '^e' , '_f' , 'f' , '=f' , '^f' , '_g' , 'g' , '=g' , '^g' , '_a' , 'a' , '=a' , '^a' , '_b' , 'b' , '=b' , '^b']
+        aFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        e: ['e' , '=e' , '^e' , '_f' , 'f' , '=f' , '^f' , '_g' , 'g' , '=g' , '^g' , '_a' , 'a' , '=a' , '^a' , '_b' , 'b' , '=b' , '^b'],
+        efingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
     },
     viola: {
         c: ['C,' , '=C,' , '^C,' , '_D,' , 'D,' , '=D,' , '^D,' , '_E,' , 'E,' , '=E,' , '^E,' , '_F,', 'F,' , '=F,' , '^F' , '_G,'],
+        cFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , 'low-2' , '2' , '2' , '3' , '2' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
+        gFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G' , 'G' , '=G' , '^G' , '_A'],
+        dFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d' , '^d' , '_e' , 'e' , '=e' , '^e'],
+        aFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
     },
     cello: {
         c: ['C,' , '=C,' , '^C,' , '_D,' , 'D,' , '=D,' , '^D,' , '_E,' , 'E,' , '=E,' , '^E,' , '_F,', 'F,' , '=F,' , '^F' , '_G,'],
+        cFingers: ['0' , '0' , 'x1' , 'x1' , '1' , '1' , '2' , '2' , '3' , '3' , '4' , '3' , '4' , '4' , 'x4' , 'x4'],
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
+        gFingers: ['0' , '0' , 'x1' , 'x1' , '1' , '1' , '2' , '2' , '3' , '3' , '4' , '3' , '4' , '4' , 'x4' , 'x4'],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G' , 'G' , '=G' , '^G' , '_A'],
+        dFingers: ['0' , '0' , 'x1' , 'x1' , '1' , '1' , '2' , '1' , '2' , '2' , '3' , '3' , '4' , '4' , 'x4' , 'x4'],
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d'],
+        aFingers: ['0' , '0' , 'x1' , 'x1' , '1' , '1' , '2' , '1' , '2' , '2' , '3' , '3' , '4' , '4' , 'x4' , 'x4']
     },
     bass: {
         g: ['G' , '=G' , '^G' , '_A' , 'A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d'],
+        gFingers: ['0' , '0' , '1(1/2pos)' , '1(1/2pos)' , '1' , '2' , '2' , '4' , '4' , '' , '' , '' , '' , '' , '' , ''],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G'],
+        dFingers: ['0' , '0' , '1(1/2pos)' , '1(1/2pos)' , '1' , '2' , '1' , '2' , '2' , '4' , '4'],
         a: ['A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
-        e: ['E,' , '=E,' , '^E,' , '_F,' , 'F,' , '=F,' , '^F,' , '_G,' , 'G,' , '=G,' , '^G,' , '_A,']
+        aFingers: ['0' , '0' , '1(1/2pos)' , '1(1/2pos)' , '1' , '2' , '1' , '2' , '2' , '4' , '4'],
+        e: ['E,' , '=E,' , '^E,' , '_F,' , 'F,' , '=F,' , '^F,' , '_G,' , 'G,' , '=G,' , '^G,' , '_A,'],
+        eFingers: ['0' , '0' , '1(1/2pos)' , '0' , '1(1/2pos)' , '1(1/2pos)' , '1' , '1' , '2' , '4' , '4']
     }
 }
 
@@ -45,8 +61,7 @@ $(function(){
         },
         abcjsParams: {
             add_classes: true,
-            responsive: 'resize',
-            afterParsing: addFingeringsAndNoteNames
+            responsive: 'resize'
         }
     })
     /**
@@ -56,11 +71,13 @@ $(function(){
     observer = new MutationObserver(function(mutationsList, observer) {
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
+        addFingeringsAndNoteNames()
     });
     observer.observe(elementToObserve, {characterData: false, childList: true, attributes: false})
 
     /**
      * ADD STRING CLASSES
+     * also add data-noteName to note element
      */
     function addStringClassesToNoteHeads(){
         $('.abcjs-note path[data-name]').each(function(i,pathel){
@@ -73,6 +90,46 @@ $(function(){
             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
             
             $(pathel).addClass(`${noteString}String`)
+
+            //add data-attrs to note
+            $(pathel).closest('.abcjs-note').attr({
+                'data-noteName': noteName,
+                'data-instrument': instrument,
+                'data-string': noteString
+            })
+
+        })
+    }
+
+    /**
+     * FINGERINGS AND NOTE NAMES
+     */
+    function addFingeringsAndNoteNames(){
+        //loop through all the notes (select by abcjs-p... class) and add svg text element child with class fingering
+        $('.abcjs-note').each(function(i,note){
+            const noteX = note.getBBox().x
+            const noteY = note.getBBox().y
+            const noteHeight = note.getBBox().height
+            const noteWidth = note.getBBox().width
+            const noteName = $(note).attr('data-noteName')
+            const instrument = $(note).attr('data-instrument')
+            const noteString = $(note).attr('data-string')
+
+            const noteNameIndex = stringReference[instrument][noteString].indexOf(noteName)
+            const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
+
+            const fingeringTxtY = noteY + 16
+
+            const fingeringTxtHtml = `<text stroke="none" font-size="16" font-style="normal" font-family="Helvetica" font-weight="normal" text-decoration="none" class="abcjs-fingering" text-anchor="middle" x="${noteX}" y="${fingeringTxtY}"><tspan x="${noteX}">${finger}</tspan></text>`
+
+            $(note).append(fingeringTxtHtml)
+
+            const noteNameTxtY = noteY + noteHeight + 16
+
+            const noteNameTxtHtml = `<text stroke="none" font-size="16" font-style="normal" font-family="Helvetica" font-weight="normal" text-decoration="none" class="abcjs-noteName" text-anchor="middle" x="${noteX}" y="${noteNameTxtY}"><tspan x="${noteX}">${noteName}</tspan></text>`
+
+            $(note).append(noteNameTxtHtml)
+
         })
     }
 
@@ -80,7 +137,7 @@ $(function(){
     /**
      * AFTER PARSING
      */
-    function addFingeringsAndNoteNames(tuneObj, tuneNumber, abcString) {
+    function afterParsing(tuneObj, tuneNumber, abcString) {
         // let abcString = $('#editor').val()
         if (abcString === '') return
         console.log(tuneObj, tuneNumber, abcString)
