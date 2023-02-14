@@ -287,6 +287,7 @@ $(function(){
             console.warn("Note ", note, " not found in fingering reference");
             return letterNameTxt + note;
         });
+        console.log(abcString)
     }
 
 
