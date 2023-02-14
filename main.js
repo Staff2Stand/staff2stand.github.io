@@ -106,6 +106,10 @@ $(function(){
      * after the tune is rendered, loop through notes and append text and tspan elements to svg
      */
     function addFingeringsAndNoteNames(){
+        function SVG(tag) {
+            return document.createElementNS('http://www.w3.org/2000/svg', tag);
+        }
+
         //loop through all the notes (select by abcjs-p... class) and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
@@ -122,15 +126,45 @@ $(function(){
 
             const fingeringTxtY = noteY + 16
 
-            const fingeringTxtHtml = `<text stroke="none" font-size="16" font-style="normal" font-family="Helvetica" font-weight="normal" text-decoration="none" class="abcjs-fingering" text-anchor="middle" x="${noteX}" y="${fingeringTxtY}"><tspan x="${noteX}">${finger}</tspan></text>`
-
-            $(note).append(fingeringTxtHtml)
+            $(SVG('text'))
+                .attr({
+                    stroke: 'none',
+                    fontSize: '16',
+                    fontStyle: 'normal',
+                    fontFamily: 'Helvetica',
+                    fontWeight: 'normal',
+                    textDecoration: 'none',
+                    class: 'abcjs-fingering',
+                    textAnchor: 'middle',
+                    x: noteX,
+                    y: fingeringTxtY
+                })
+                .appendTo(note)
+            $(SVG('tspan'))
+                .attr('x',noteX)
+                .text(finger)
+                .appendTo( $(note).find('text.abcjs-fingering') )
 
             const noteNameTxtY = noteY + noteHeight + 16
 
-            const noteNameTxtHtml = `<text stroke="none" font-size="16" font-style="normal" font-family="Helvetica" font-weight="normal" text-decoration="none" class="abcjs-noteName" text-anchor="middle" x="${noteX}" y="${noteNameTxtY}"><tspan x="${noteX}">${noteName}</tspan></text>`
-
-            $(note).append(noteNameTxtHtml)
+            $(SVG('text'))
+                .attr({
+                    stroke: 'none',
+                    fontSize: '16',
+                    fontStyle: 'normal',
+                    fontFamily: 'Helvetica',
+                    fontWeight: 'normal',
+                    textDecoration: 'none',
+                    class: 'abcjs-noteName',
+                    textAnchor: 'middle',
+                    x: noteX,
+                    y: noteNameTxtY
+                })
+                .appendTo(note)
+            $(SVG('tspan'))
+                .attr('x',noteX)
+                .text(noteName)
+                .appendTo( $(note).find('text.abcjs-noteName') )
 
         })
     }
