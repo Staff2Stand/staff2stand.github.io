@@ -46,7 +46,7 @@ $(function(){
         abcjsParams: {
             add_classes: true,
             responsive: 'resize',
-            afterParsing: addFingeringsAndNoteNames(this.abcElem,this.tuneNumber,this.abcString)
+            afterParsing: addFingeringsAndNoteNames
         }
     })
     /**
@@ -83,7 +83,7 @@ $(function(){
     function addFingeringsAndNoteNames(tuneObj, tuneNumber, abcString) {
         // let abcString = $('#editor').val()
         if (abcString === '') return
-        console.log(abcString)
+        console.log(tuneObj, tuneNumber, abcString)
 
         //Create Fingerings Reference
         let fingerings = {
