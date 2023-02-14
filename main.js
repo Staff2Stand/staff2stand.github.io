@@ -244,7 +244,7 @@ $(function(){
         }
         //replace each note to include it's fingering (skip matches that are inbetween quotes)
         const reg = /([_^=])*([A-Ga-g],*'*)/gm;
-        return abcString.replace(reg, function (
+        abcString = abcString.replace(reg, function (
             note,
             accidental,
             noteWithoutAccidental,
