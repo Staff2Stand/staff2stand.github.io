@@ -124,6 +124,7 @@ $(function(){
             console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
+            const txtAboveY = $(note).siblings('.abcjs-staff').getBBox().y - 12
             const fingeringTxtY = noteY - 16
 
             $(SVG('text'))
@@ -146,6 +147,15 @@ $(function(){
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
             const noteNameTxtY = noteY + noteHeight + 16
+            const txtBelowY = $(note).siblings('.abcjs-staff').getBBox().y + $(note).siblings('.abcjs-staff').getBBox().height + 12
+
+            const standardNoteName = noteName
+                .replace(',','')
+                .replace(`'`,'')
+                .replace("^", "\u266F")
+                .replace("_", "\u266D")
+                .replace("=", "\u266E")
+                .toUpperCase()
 
             $(SVG('text'))
                 .attr({
@@ -163,7 +173,7 @@ $(function(){
                 .appendTo(note)
             $(SVG('tspan'))
                 .attr('x',noteX)
-                .text(noteName)
+                .text(standardNoteName)
                 .appendTo( $(note).find('text.abcjs-noteName') )
 
         })
