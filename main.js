@@ -113,8 +113,8 @@ $(function(){
         //loop through all the notes and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
-            const staffY = $(note).siblings('.abcjs-staff').getBBox().y
-            const staffHeight = $(note).siblings('.abcjs-staff').getBBox().height
+            const staffY = $(note).siblings('.abcjs-staff').get(0).getBBox().y
+            const staffHeight = $(note).siblings('.abcjs-staff').get(0).getBBox().height
             const noteName = $(note).attr('data-noteName')
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
