@@ -124,7 +124,7 @@ $(function(){
             console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
-            const fingeringTxtY = noteY + 16
+            const fingeringTxtY = noteY - 16
 
             $(SVG('text'))
                 .attr({
