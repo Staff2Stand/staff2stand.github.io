@@ -117,6 +117,7 @@ $(function(){
             const noteString = $(note).attr('data-string')
 
             const noteNameIndex = stringReference[instrument][noteString].indexOf(noteName)
+            console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
             const fingeringTxtY = noteY + 16
