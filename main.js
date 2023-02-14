@@ -243,7 +243,7 @@ $(function(){
             break;
         }
         //replace each note to include it's fingering (skip matches that are inbetween quotes)
-        const reg = /([_^=])*([A-Ga-g],*'*)/gm;
+        const reg = /(?<!^[A-Z:].*?)([_^=])*([A-Ga-g],*'*)(?!.*\n[A-Z:].*\n)/gm;
         abcString = abcString.replace(reg, function (
             note,
             accidental,
@@ -262,18 +262,18 @@ $(function(){
             if (in_quote) return note;
 
             //convert abc accidental to accidental
-            const accidentalTxt =
-            "" +
-            accidental
+            let accidentalTxt = accidental
                 ?.replace("^", "\u266F")
                 ?.replace("_", "\u266D")
                 ?.replace("=", "\u266E");
+            if (!accidentalTxt) accidentalTxt = '';
 
             //create letter name txt
-            const letterNameTxt = `"_${noteWithoutAccidental
-            .toUpperCase()
-            .replace(",", "")
-            .replace("'", "")}${accidentalTxt}"`;
+            let letterNameTxt = `"_${noteWithoutAccidental
+                .toUpperCase()
+                .replace(",", "")
+                .replace("'", "")}${accidentalTxt}"`;
+            if (!letterNameTxt) letterNameTxt = '';
 
             //check the fingering reference
             if (fingeringReference[note])
