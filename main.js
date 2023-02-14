@@ -113,9 +113,8 @@ $(function(){
         //loop through all the notes and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
-            const noteY = note.getBBox().y
-            const noteHeight = note.getBBox().height
-            const noteWidth = note.getBBox().width
+            const staffY = $(note).siblings('.abcjs-staff').getBBox().y
+            const staffHeight = $(note).siblings('.abcjs-staff').getBBox().height
             const noteName = $(note).attr('data-noteName')
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
@@ -124,8 +123,7 @@ $(function(){
             console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
-            const txtAboveY = $(note).siblings('.abcjs-staff').getBBox().y - 12
-            const fingeringTxtY = noteY - 16
+            const fingeringTxtY = staffY - 16
 
             $(SVG('text'))
                 .attr({
@@ -146,8 +144,7 @@ $(function(){
                 .text(finger)
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
-            const noteNameTxtY = noteY + noteHeight + 16
-            const txtBelowY = $(note).siblings('.abcjs-staff').getBBox().y + $(note).siblings('.abcjs-staff').getBBox().height + 12
+            const noteNameTxtY = staffY + staffHeight + 16
 
             const standardNoteName = noteName
                 .replace(',','')
