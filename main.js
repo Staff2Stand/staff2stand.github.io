@@ -103,6 +103,7 @@ $(function(){
 
     /**
      * FINGERINGS AND NOTE NAMES
+     * after the tune is rendered, loop through notes and append text and tspan elements to svg
      */
     function addFingeringsAndNoteNames(){
         //loop through all the notes (select by abcjs-p... class) and add svg text element child with class fingering
