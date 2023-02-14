@@ -9,7 +9,7 @@ const stringReference = {
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d' , '^d' , '_e'],
         aFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
         e: ['e' , '=e' , '^e' , '_f' , 'f' , '=f' , '^f' , '_g' , 'g' , '=g' , '^g' , '_a' , 'a' , '=a' , '^a' , '_b' , 'b' , '=b' , '^b'],
-        efingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
+        eFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
     },
     viola: {
         c: ['C,' , '=C,' , '^C,' , '_D,' , 'D,' , '=D,' , '^D,' , '_E,' , 'E,' , '=E,' , '^E,' , '_F,', 'F,' , '=F,' , '^F' , '_G,'],
@@ -110,7 +110,7 @@ $(function(){
             return document.createElementNS('http://www.w3.org/2000/svg', tag);
         }
 
-        //loop through all the notes (select by abcjs-p... class) and add svg text element child with class fingering
+        //loop through all the notes and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
             const noteY = note.getBBox().y
