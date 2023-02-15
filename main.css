@@ -458,31 +458,36 @@ header {
 }
 
 /* C String */
-.highlight_notes .cString{
+.highlight_notes .cString,
+.highlight_notes .cString + :is(.abcjs-fingering, .abcjs-noteName){
   --selection_glow: var(--cStringColor);
   fill: var(--cStringColor);
 }
 
 /* G String */
-.highlight_notes .gString{
+.highlight_notes .gString,
+.highlight_notes .gString + :is(.abcjs-fingering, .abcjs-noteName){
   --selection_glow: var(--gStringColor);
   fill: var(--gStringColor);
 }
 
 /* D String */
-.highlight_notes .dString{
+.highlight_notes .dString,
+.highlight_notes .dString + :is(.abcjs-fingering, .abcjs-noteName){
   --selection_glow: var(--dStringColor);
   fill: var(--dStringColor);
 }
 
 /* A String */
-.highlight_notes .aString{
+.highlight_notes .aString,
+.highlight_notes .aString + :is(.abcjs-fingering, .abcjs-noteName){
   --selection_glow: var(--aStringColor);
   fill: var(--aStringColor);
 }
 
 /* E String */
-.highlight_notes .eString{
+.highlight_notes .eString,
+.highlight_notes .eString + :is(.abcjs-fingering, .abcjs-noteName){
   --selection_glow: var(--eStringColor);
   fill: var(--eStringColor);
 }
