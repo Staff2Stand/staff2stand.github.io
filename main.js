@@ -75,7 +75,12 @@ $(function(){
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
     });
-    observer.observe(elementToObserve, {characterData: false, childList: true, attributes: false})
+    observer.observe(elementToObserve, {
+        characterData: false, 
+        childList: true, 
+        attributes: false, 
+        subtree:true
+    })
 
     /**
      * ADD STRING CLASSES
