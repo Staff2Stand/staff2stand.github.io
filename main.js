@@ -67,21 +67,19 @@ $(function(){
         }
     })
     /**
-     * TUNES CONTAINER (RE)RENDER OBSERVER
+     * TUNES (RE)RENDER OBSERVER
      */
-    elementToObserve = document.getElementById('tunes_container')
     observer = new MutationObserver(function(mutationsList, observer) {
         // console.log('mutation:',mutationsList)
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
     });
-    observer.observe(elementToObserve, {
-        characterData: false, 
-        childList: true, 
-        attributes: false, 
-        subtree:true
-    })
+    observerOpts = {characterData:false, childList:true, attributes:false}
+    observer.observe( $('#tunes-violin') , observerOpts)
+    observer.observe( $('#tunes-viola') , observerOpts)
+    observer.observe( $('#tunes-cello') , observerOpts)
+    observer.observe( $('#tunes-bass') , observerOpts)
 
     /**
      * ADD STRING CLASSES
