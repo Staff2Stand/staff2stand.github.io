@@ -71,6 +71,7 @@ $(function(){
      */
     elementToObserve = document.getElementById('tunes_container')
     observer = new MutationObserver(function(mutationsList, observer) {
+        console.log('mutation:',mutationsList)
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
@@ -88,6 +89,7 @@ $(function(){
      */
     function addStringClassesToNoteHeads(){
         $('.abcjs-note path[data-name]').each(function(i,pathel){
+            console.log('path element:',pathel)
             const isNotehead = $(pathel).attr('data-name').length <= 2
             if (!isNotehead) return
 
@@ -119,6 +121,7 @@ $(function(){
 
         //loop through all the notes and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
+            console.log('note:',note)
             const noteX = note.getBBox().x
             const noteY = note.getBBox().y
             const noteHeight = note.getBBox().height
@@ -129,7 +132,6 @@ $(function(){
             const noteString = $(note).attr('data-string')
 
             const noteNameIndex = stringReference[instrument][noteString].indexOf(noteName)
-            console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
             const chordTxtEl = $(note).find('.abcjs-chord')
