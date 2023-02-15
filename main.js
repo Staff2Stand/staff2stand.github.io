@@ -148,7 +148,7 @@ $(function(){
                                     chord_aboveStaff ? noteY - 6 :
                                     staffY - 16
 
-            const xAdjustmentForChord = chordTxtEl ? -6 : 0
+            const xAdjustmentForChord = hasChordTxtEl ? -6 : 0
             const fingeringTxtX = noteX + xAdjustmentForChord
 
 
