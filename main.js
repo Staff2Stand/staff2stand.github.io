@@ -93,7 +93,7 @@ $(function(){
 
             const noteName = $(pathel).attr('data-name')
             //check string reference and add the correct string class
-            const instrument = $(pathel).closest('.abcjs-container').find('.abcjs-voice-name tspan').html().toLowerCase()
+            const instrument = $(pathel).closest('.abcjs-container').attr('instrument').toLowerCase()
             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
             
             $(pathel).addClass(`${noteString}String`)
