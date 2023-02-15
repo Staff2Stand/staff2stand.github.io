@@ -59,7 +59,7 @@ $(function(){
         },
         indicate_changed: true,
         onchange: function(editorInstance) {
-            console.log('editorInstance',editorInstance)
+            // console.log('editorInstance',editorInstance)
         },
         abcjsParams: {
             add_classes: true,
@@ -70,7 +70,7 @@ $(function(){
      * TUNES (RE)RENDER OBSERVER
      */
     observer = new MutationObserver(function(mutationsList, observer) {
-        // console.log('mutation:',mutationsList)
+        console.log('mutation:',mutationsList)
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
