@@ -59,7 +59,7 @@ $(function(){
         },
         indicate_changed: true,
         onchange: function(editorInstance) {
-            // console.log(editorInstance)
+            console.log('editorInstance',editorInstance)
         },
         abcjsParams: {
             add_classes: true,
