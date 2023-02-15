@@ -76,10 +76,10 @@ $(function(){
         addFingeringsAndNoteNames()
     });
     observerOpts = {characterData:false, childList:true, attributes:false}
-    observer.observe( $('#tunes-violin') , observerOpts)
-    observer.observe( $('#tunes-viola') , observerOpts)
-    observer.observe( $('#tunes-cello') , observerOpts)
-    observer.observe( $('#tunes-bass') , observerOpts)
+    document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
+        //impliment observer on each individual instrument's tunes container
+        observer.observe(instrumentTunes, observerOpts)
+    })
 
     /**
      * ADD STRING CLASSES
