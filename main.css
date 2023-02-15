@@ -492,10 +492,6 @@ header {
   fill: var(--selection_glow);
   filter: drop-shadow(0px 0px 6px var(--selection_glow));
 }
-.tune .abcjs-note_selected .noteFingering,
-.tune .abcjs-note_selected .noteLetterName {
-  display: block !important;
-}
 /* deselected note */
 :is(.abcjs-note, .abcjs-rest):not(.abcjs-note_selected) {
   fill: #000;
@@ -517,6 +513,21 @@ text.abcjs-annotation[text-anchor="start"] {
 /* note letter names */
 .abcjs-annotation.noteLetterName {
   fill: inherit !important;
+}
+
+/* FINGERING AND LETTER NAME VISIBILITY */
+.abcjs-fingering,
+.abcjs-noteName{
+  opacity: 0;
+  transition: opacity 400ms ease-in-out;
+}
+#main_container:has(#fingerings_toggle.active) .abcjs-fingering,
+#main_container:has(#notenames_toggle.active) .abcjs-noteName{
+  opacity: 100%;
+}
+.abcjs-note_selected .abcjs-fingering,
+.abcjs-note_selected .abcjs-noteName {
+  opacity: 100%;
 }
 
 /* FOOTER */
