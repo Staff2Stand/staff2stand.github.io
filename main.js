@@ -55,11 +55,11 @@ $(function(){
         warnings_id: "abc-warnings",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
-            console.log(abcElem, tuneNumber, classes)
+            // console.log(abcElem, tuneNumber, classes)
         },
         indicate_changed: true,
         onchange: function(editorInstance) {
-            console.log(editorInstance)
+            // console.log(editorInstance)
         },
         abcjsParams: {
             add_classes: true,
