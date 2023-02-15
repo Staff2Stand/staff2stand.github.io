@@ -63,8 +63,7 @@ $(function(){
         },
         abcjsParams: {
             add_classes: true,
-            responsive: 'resize',
-            oneSvgPerLine: true
+            responsive: 'resize'
         }
     })
     /**
