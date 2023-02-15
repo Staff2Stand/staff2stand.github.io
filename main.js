@@ -74,6 +74,7 @@ $(function(){
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
+        $('#notey').fadeOut()
     });
     observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
@@ -132,12 +133,23 @@ $(function(){
             const noteNameIndex = stringReference[instrument][noteString].indexOf(noteName)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
-            const chordTxtEl = $(note).find('.abcjs-chord')
-            const yAdjustmentForChord = chordTxtEl ? 10 : 0
+            const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
+            let noteIsAboveStaff = false
+                $(note).find('path').each(function(i,pathEl){
+                    if ( pathEl.getBBox().y < staffY ) noteIsAboveStaff = true
+                })
+            const noChord_inStaff = !hasChordTxtEl && !noteIsAboveStaff
+            const chord_inStaff = hasChordTxtEl && !noteIsAboveStaff
+            const noChord_aboveStaff = !hasChordTxtEl && noteIsAboveStaff
+            const chord_aboveStaff = hasChordTxtEl && noteIsAboveStaff
+            const fingeringTxtY =   noChord_inStaff ? staffY - 16 :
+                                    noChord_aboveStaff ? noteY - 16 :
+                                    chord_inStaff ? staffY - 6 :
+                                    chord_aboveStaff ? noteY - 6
+
             const xAdjustmentForChord = chordTxtEl ? -6 : 0
-            const noteIntersectTop = noteY < staffY - 16 + yAdjustmentForChord
-            const fingeringTxtY = (noteIntersectTop ? noteY - 16 : staffY - 16) + (chordTxtEl ? 32 : 0)
             const fingeringTxtX = noteX + xAdjustmentForChord
+
 
             $(SVG('text'))
                 .attr({
@@ -159,7 +171,7 @@ $(function(){
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
             let noteNameTxtY = staffY + staffHeight + 16
-            if (noteY + noteHeight > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 16
+            if (noteY + noteHeight > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
 
             const standardNoteName = noteName
                 .replace(',','')
@@ -196,7 +208,11 @@ $(function(){
      * SCORE BOOKMARKS
      */
     $('.score_bookmark').click(function(){
+        $('#notey').fadeIn()
         const abcViolin = $(this).attr('abc-violin').replace(/\\n/g,'\r\n')
+        const abcViola = $(this).attr('abc-viola').replace(/\\n/g,'\r\n')
+        const abcCello = $(this).attr('abc-cello').replace(/\\n/g,'\r\n')
+        const abcBass = $(this).attr('abc-bass').replace(/\\n/g,'\r\n')
         $('#editor-violin').val(abcViolin).change()
     })
 
