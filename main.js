@@ -63,7 +63,8 @@ $(function(){
         },
         abcjsParams: {
             add_classes: true,
-            responsive: 'resize'
+            responsive: 'resize',
+            oneSvgPerLine: true
         }
     })
     /**
@@ -131,7 +132,7 @@ $(function(){
             const yAdjustmentForChord = chordTxtEl ? 10 : 0
             const xAdjustmentForChord = chordTxtEl ? -6 : 0
             const noteIntersectTop = noteY < staffY - 16 + yAdjustmentForChord
-            const fingeringTxtY = (noteIntersectTop ? noteY - 16 : staffY - 16) + yAdjustmentForChord
+            const fingeringTxtY = (noteIntersectTop ? noteY - 16 : staffY - 16) + (chordTxtEl ? 32 : 0)
             const fingeringTxtX = noteX + xAdjustmentForChord
 
             $(SVG('text'))
