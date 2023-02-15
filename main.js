@@ -1,25 +1,27 @@
 const abcjs = window.ABCJS
 
+// \u2193 = down arrow
+// \u2191 = up arrow
 const stringReference = {
     violin: {
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
-        gFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        gFingers: ['0' , '0' , '\u21931' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G' , 'G' , '=G' , '^G' , '_A'],
-        dFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        dFingers: ['0' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21911' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d' , '^d' , '_e'],
-        aFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        aFingers: ['0' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21911' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         e: ['e' , '=e' , '^e' , '_f' , 'f' , '=f' , '^f' , '_g' , 'g' , '=g' , '^g' , '_a' , 'a' , '=a' , '^a' , '_b' , 'b' , '=b' , '^b'],
-        eFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
+        eFingers: ['0' , '0' , '\u21931' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4' , 'x4']
     },
     viola: {
         c: ['C,' , '=C,' , '^C,' , '_D,' , 'D,' , '=D,' , '^D,' , '_E,' , 'E,' , '=E,' , '^E,' , '_F,', 'F,' , '=F,' , '^F' , '_G,'],
-        cFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , 'low-2' , '2' , '2' , '3' , '2' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        cFingers: ['0' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21911' , '\u21932' , '2' , '2' , '3' , '2' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
-        gFingers: ['0' , '0' , 'low-1' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        gFingers: ['0' , '0' , '\u21931' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         d: ['D' , '=D' , '^D' , '_E' , 'E' , '=E' , '^E' , '_F' , 'F' , '=F' , '^F' , '_G' , 'G' , '=G' , '^G' , '_A'],
-        dFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4'],
+        dFingers: ['0' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21911' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4'],
         a: ['A' , '=A' , '^A' , '_B' , 'B' , '=B' , '^B' , '_c' , 'c' , '=c' , '^c' , '_d' , 'd' , '=d' , '^d' , '_e' , 'e' , '=e' , '^e'],
-        aFingers: ['0' , '0' , 'low-1' , 'low-1' , '1' , '1' , 'high-1' , '1' , 'low-2' , 'low-2' , '2' , 'low-3' , '3' , '3' , 'high-3' , 'low-4' , '4' , '4' , 'x4']
+        aFingers: ['0' , '0' , '\u21931' , '\u21931' , '1' , '1' , '\u21911' , '1' , '\u21932' , '\u21932' , '2' , '\u21933' , '3' , '3' , '\u21913' , '\u21934' , '4' , '4' , 'x4']
     },
     cello: {
         c: ['C,' , '=C,' , '^C,' , '_D,' , 'D,' , '=D,' , '^D,' , '_E,' , 'E,' , '=E,' , '^E,' , '_F,', 'F,' , '=F,' , '^F' , '_G,'],
@@ -113,6 +115,8 @@ $(function(){
         //loop through all the notes and add svg text element child with class fingering
         $('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
+            const noteY = note.getBBox().y
+            const noteHeight = note.getBBox().height
             const staffY = $(note).siblings('.abcjs-staff').get(0).getBBox().y
             const staffHeight = $(note).siblings('.abcjs-staff').get(0).getBBox().height
             const noteName = $(note).attr('data-noteName')
@@ -123,7 +127,11 @@ $(function(){
             console.log(noteName,instrument,noteString,noteNameIndex)
             const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
 
-            const fingeringTxtY = staffY - 16
+            const chordTxtEl = $(note).find('.abcjs-chord')
+            const yAdjustmentForChord = chordTxtEl ? 10 : 0
+            const xAdjustmentForChord = chordTxtEl ? -6 : 0
+            const fingeringTxtY = staffY - 16 + yAdjustmentForChord
+            const fingeringTxtX = noteX + xAdjustmentForChord
 
             $(SVG('text'))
                 .attr({
@@ -135,7 +143,7 @@ $(function(){
                     textDecoration: 'none',
                     class: 'abcjs-fingering',
                     textAnchor: 'middle',
-                    x: noteX,
+                    x: fingeringTxtX,
                     y: fingeringTxtY
                 })
                 .appendTo(note)
@@ -144,7 +152,8 @@ $(function(){
                 .text(finger)
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
-            const noteNameTxtY = staffY + staffHeight + 16
+            let noteNameTxtY = staffY + staffHeight + 16
+            if (noteY + noteHeight > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 16
 
             const standardNoteName = noteName
                 .replace(',','')
