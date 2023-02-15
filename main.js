@@ -50,9 +50,9 @@ $(function(){
     /**
      * INITIALIZE EDITOR
      */
-    let editor = new abcjs.Editor("editor",{
-        canvas_id: "tunes_container",
-        warnings_id: "abc-warnings",
+    let editor = new abcjs.Editor("editor-violin",{
+        canvas_id: "tunes-violin",
+        warnings_id: "abc-warnings-violin",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
             // console.log(abcElem, tuneNumber, classes)
@@ -191,9 +191,8 @@ $(function(){
      * SCORE BOOKMARKS
      */
     $('.score_bookmark').click(function(){
-        const abc = $(this).attr('abc').replace(/\\n/g,'\r\n')
-        console.log(abc)
-        $('#editor').val(abc).change()
+        const abcViolin = $(this).attr('abc-violin').replace(/\\n/g,'\r\n')
+        $('#editor-violin').val(abcViolin).change()
     })
 
 
