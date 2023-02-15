@@ -130,7 +130,8 @@ $(function(){
             const chordTxtEl = $(note).find('.abcjs-chord')
             const yAdjustmentForChord = chordTxtEl ? 10 : 0
             const xAdjustmentForChord = chordTxtEl ? -6 : 0
-            const fingeringTxtY = staffY - 16 + yAdjustmentForChord
+            const noteIntersectTop = noteY < staffY - 16 + yAdjustmentForChord
+            const fingeringTxtY = (noteIntersectTop ? noteY - 16 : staffY - 16) + yAdjustmentForChord
             const fingeringTxtX = noteX + xAdjustmentForChord
 
             $(SVG('text'))
@@ -187,220 +188,6 @@ $(function(){
 
 
     /**
-     * AFTER PARSING
-     */
-    function afterParsing(tuneObj, tuneNumber, abcString) {
-        // let abcString = $('#editor').val()
-        if (abcString === '') return
-        console.log(tuneObj, tuneNumber, abcString)
-
-        //Create Fingerings Reference
-        let fingerings = {
-            violin: {
-            "G,": "!0!",
-            "^G,": "!1!",
-            "A,": "!1!",
-            "B,": "!2!",
-            C: "!3!",
-            _D: "!4!",
-            D: "!0!",
-            "^D": "!1!",
-            E: "!1!",
-            F: "!2!",
-            G: "!3!",
-            _A: "!4!",
-            A: "!0!",
-            "^A": "!1!",
-            B: "!1!",
-            c: "!2!",
-            d: "!3!",
-            _e: "!4!",
-            e: "!0!",
-            "^e": "!1!",
-            f: "!1!",
-            g: "!2!",
-            a: "!3!",
-            b: "!4!"
-            },
-            viola: {
-            "C,": "!0!",
-            "^C,": "!1!",
-            "D,": "!1!",
-            "E,": "!2!",
-            "F,": "!3!",
-            _G: "!4!",
-            "G,": "!0!",
-            "^G,": "!1!",
-            "A,": "!1!",
-            "B,": "!2!",
-            C: "!3!",
-            _D: "!4!",
-            D: "!0!",
-            "^D": "!1!",
-            E: "!1!",
-            F: "!2!",
-            G: "!3!",
-            _A: "!4!",
-            A: "!0!",
-            "^A": "!1!",
-            B: "!1!",
-            c: "!2!",
-            d: "!3!",
-            e: "!4!"
-            },
-            cello: {
-            C: {
-                "C,": "!0!",
-                "^C,": "!1!",
-                "D,": "!1!",
-                "E,": "!3!",
-                "F,": "!4!",
-                "G,": "!0!",
-                "^G,": "!1!",
-                "A,": "!1!",
-                "B,": "!3!",
-                C: "!4!",
-                D: "!0!",
-                "^D": "!1!",
-                E: "!1!",
-                F: "!2!",
-                G: "!4!",
-                A: "!0!",
-                "^A": "!1!",
-                B: "!1!",
-                c: "!2!",
-                d: "!4!"
-            }
-            },
-            bass: {
-            C: {
-                "E,": "!0!",
-                "^E,": "!1!",
-                "F,": "!1!",
-                "G,": "!2!",
-                "A,": "!0!",
-                "^A,": "!1!",
-                "B,": "!1!",
-                C: "!2!",
-                D: "!0!",
-                "^D": "!1!",
-                E: "!1!",
-                F: "!2!",
-                G: "!0!",
-                "^G": "!1!",
-                A: "!1!",
-                B: "!4!"
-            }
-            }
-        };
-        //define other keys by merging the previous key and changing just those notes that need changing
-        //for cello, we're changing notes that change from 2->3 or visa versa
-        //for bass, 2->4 or visa versa
-        fingerings.cello["G"] = {
-            ...fingerings.cello["C"],
-            F: "!3!"
-        };
-        fingerings.cello["D"] = {
-            ...fingerings.cello["G"],
-            c: "!3!"
-        };
-        fingerings.cello["A"] = {
-            ...fingerings.cello["D"],
-            G: "!1!"
-        };
-        fingerings.cello["E"] = {
-            ...fingerings.cello["A"],
-            D: "!1!",
-            "D,": "2"
-        };
-
-        fingerings.bass["G"] = {
-            ...fingerings.bass["C"],
-            F: "!4!"
-        };
-        fingerings.bass["D"] = {
-            ...fingerings.bass["G"],
-            C: "!4!"
-        };
-        fingerings.bass["A"] = {
-            ...fingerings.bass["D"],
-            G: "!1!"
-        };
-        fingerings.cello["E"] = {
-            ...fingerings.cello["A"],
-            D: "!1!"
-        };
-
-        let targetInstrument = abcString.match(/V:\s?(.*?)\s/)[1].toLowerCase()
-        let key = abcString.match(/K:\s?(.*?)\s/)
-
-        //Choose which fingering reference based on instrument (and key)
-        let fingeringReference;
-        switch (targetInstrument) {
-            case "violin":
-            case "viola":
-            fingeringReference = fingerings[targetInstrument];
-            break;
-            case "cello":
-            case "bass":
-            fingeringReference = fingerings[targetInstrument][key]
-                ? fingerings[targetInstrument][key]
-                : fingerings[targetInstrument]["C"];
-            break;
-            default:
-            console.error("instrument not supported");
-            break;
-        }
-        //replace each note to include it's fingering (skip matches that are inbetween quotes)
-        const reg = /(?<!^[A-Z:].*?)([_^=])*([A-Ga-g],*'*)(?!.*\n[A-Z:].*\n)/gm;
-        abcString = abcString.replace(reg, function (
-            note,
-            accidental,
-            noteWithoutAccidental,
-            offset
-        ) {
-            //count quotation marks in contents before the match. If odd, we're in quotes so skip it
-            const contents_before = abcString.substring(0, offset);
-            let num_of_quotes = 0;
-            for (const char of contents_before) {
-            if (char === '"') num_of_quotes++;
-            }
-            //at end, if odd, then we're in a quote
-            const in_quote = !!(num_of_quotes % 2);
-
-            if (in_quote) return note;
-
-            //convert abc accidental to accidental
-            let accidentalTxt = accidental
-                ?.replace("^", "\u266F")
-                ?.replace("_", "\u266D")
-                ?.replace("=", "\u266E");
-            if (!accidentalTxt) accidentalTxt = '';
-
-            //create letter name txt
-            let letterNameTxt = `"_${noteWithoutAccidental
-                .toUpperCase()
-                .replace(",", "")
-                .replace("'", "")}${accidentalTxt}"`;
-            if (!letterNameTxt) letterNameTxt = '';
-
-            //check the fingering reference
-            if (fingeringReference[note])
-            return fingeringReference[note] + letterNameTxt + note;
-
-            //if fingeringReference[note] is undefined, try referencing it without the accidental
-            if (fingeringReference[noteWithoutAccidental])
-            return fingeringReference[noteWithoutAccidental] + letterNameTxt + note;
-
-            //if still undefined, just return the note
-            console.warn("Note ", note, " not found in fingering reference");
-            return letterNameTxt + note;
-        });
-        console.log(abcString)
-    }
-
-
-    /**
      * SCORE BOOKMARKS
      */
     $('.score_bookmark').click(function(){
@@ -419,10 +206,24 @@ $(function(){
     $('#highlights_toggle').click(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
+
+
+    /**
+     * NOTEY
+     */
     // load tiny notey toggle button (and other noteys)
     $('.noteyContainer').each(function(){
         $(this).html( $('#notey').html() )
     })
+    //hover
+    $(".noteyContainer").hover(
+        function () {
+            $(this).addClass("eyes-blinking");
+        },
+        function () {
+            $(this).removeClass("eyes-blinking");
+        }
+    )
     // notey toggler
     $('#noteyToggle').click(function(){
         $('#notey').fadeToggle()
