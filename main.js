@@ -210,10 +210,10 @@ $(function(){
      */
     $('.score_bookmark').click(function(){
         $('#notey').fadeIn()
-        const abcViolin = $(this).attr('abc-violin').replace(/\\n/g,'\r\n')
-        const abcViola = $(this).attr('abc-viola').replace(/\\n/g,'\r\n')
-        const abcCello = $(this).attr('abc-cello').replace(/\\n/g,'\r\n')
-        const abcBass = $(this).attr('abc-bass').replace(/\\n/g,'\r\n')
+        const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
+        const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
+        const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
+        const abcBass = $(this).attr('abc-bass')?.replace(/\\n/g,'\r\n')
         $('#editor-violin').val(abcViolin).change()
     })
 
