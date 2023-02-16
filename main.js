@@ -106,7 +106,7 @@ $(function(){
         addFingeringsAndNoteNames(mutationTarget)
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
-    observerOpts = {characterData:false, childList:true, attributes:false}
+    const observerOpts = {characterData:false, childList:true, attributes:false}
     $('.instrument_tunes').each(()=>observer.observe(this,observerOpts))
     // document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
     //     //impliment observer on each individual instrument's tunes container
