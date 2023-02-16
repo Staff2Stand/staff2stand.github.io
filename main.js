@@ -238,15 +238,28 @@ $(function(){
      * SCORE BOOKMARKS
      */
     $('.score_bookmark').click(function(){
-        $('#notey').fadeIn()
+        //show loading icon
+        //  which is notey playing violin
+        $("#notey")
+            .attr("class", "")
+            .addClass("eyes-blinking looking-at-left-hand playing-violin")
+            .fadeIn()
+        setTimeout(function () {
+            loadScore($clicked_bookmark).then(function () {
+                $("#notey").fadeOut("def", function () {
+                    $("#notey").removeClass("playing-violin").addClass("holding-violin")
+                })
+            })
+        }, 1000)
+        
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
         const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
         const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
         const abcBass = $(this).attr('abc-bass')?.replace(/\\n/g,'\r\n')
         $('#editor-violin').val(abcViolin).change()
-        $('#editor-viola').val(abcViolin).change()
-        $('#editor-cello').val(abcViolin).change()
-        $('#editor-bass').val(abcViolin).change()
+        $('#editor-viola').val(abcViola).change()
+        $('#editor-cello').val(abcCello).change()
+        $('#editor-bass').val(abcBass).change()
     })
 
 
