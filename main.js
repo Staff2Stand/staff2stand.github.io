@@ -103,13 +103,15 @@ $(function(){
         // callback for tunes container mutations
         addStringClassesToNoteHeads()
         addFingeringsAndNoteNames()
-        $('#notey').fadeOut()
+        $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     observerOpts = {characterData:false, childList:true, attributes:false}
-    document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
-        //impliment observer on each individual instrument's tunes container
-        observer.observe(instrumentTunes, observerOpts)
-    })
+    $('.instrument_tunes').each(()=>observer.observe(this,observerOpts))
+    // document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
+    //     //impliment observer on each individual instrument's tunes container
+    //     observer.observe(instrumentTunes, observerOpts)
+    // })
+
 
     /**
      * ADD STRING CLASSES
@@ -159,8 +161,8 @@ $(function(){
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
 
-            const noteNameIndex = stringReference[instrument][noteString].indexOf(noteName)
-            const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
+            const noteNameIndex = stringReference[instrument][noteString]?.indexOf(noteName)
+            const finger = noteNameIndex ? stringReference[instrument][noteString+'Fingers'][noteNameIndex] : ''
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
             let noteIsAboveStaff = false
@@ -244,13 +246,6 @@ $(function(){
             .attr("class", "")
             .addClass("eyes-blinking looking-at-left-hand playing-violin")
             .fadeIn()
-        setTimeout(function () {
-            loadScore($clicked_bookmark).then(function () {
-                $("#notey").fadeOut("def", function () {
-                    $("#notey").removeClass("playing-violin").addClass("holding-violin")
-                })
-            })
-        }, 1000)
 
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
         const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
