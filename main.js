@@ -172,7 +172,7 @@ $(function(){
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
             let noteNameTxtY = staffY + staffHeight + 16
-            if (noteY + noteHeight > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
+            if (noteY + noteHeight - 6 > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
 
             const standardNoteName = noteName
                 .replace(',','')
