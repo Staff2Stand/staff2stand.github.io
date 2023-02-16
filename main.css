@@ -422,9 +422,10 @@ header {
 
 
 .abcEditor{
-  width: 100%;
+  width: calc(100% - 12px);
   height: 15em;
   padding: 2px 6px;
+  margin: 0 6px;
 }
 
 .abc-warnings {
