@@ -98,7 +98,7 @@ $(function(){
     /**
      * TUNES (RE)RENDER OBSERVER
      */
-    let observer = new MutationObserver(function(mutationsList, observer) {
+    var observer = new MutationObserver(function(mutationsList, observer) {
         console.log('mutation:',mutationsList)
         // callback for tunes container mutations
         const mutationTarget = mutationsList[0].target
@@ -107,11 +107,11 @@ $(function(){
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false}
-    $('.instrument_tunes').each(()=>observer.observe(this,observerOpts))
-    // document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
-    //     //impliment observer on each individual instrument's tunes container
-    //     observer.observe(instrumentTunes, observerOpts)
-    // })
+    // $('.instrument_tunes').each(()=> observer.observe(this, observerOpts))
+    document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
+        //impliment observer on each individual instrument's tunes container
+        observer.observe(instrumentTunes, observerOpts)
+    })
 
 
     /**
