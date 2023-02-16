@@ -419,10 +419,26 @@ header {
   grid-column: 2;
 }
 
+
+
 .abcEditor{
   width: 100%;
   height: 15em;
 }
+
+.instrument_tunes:before{
+  content: attr(instrument);
+  width: min-content;
+  height: 1em;
+  position: absolute;
+  top: -1.5em;
+  font-size: 32;
+  text-transform: capitalize;
+}
+
+
+
+
 
 /* misc settings */
 .score_settings_misc {
