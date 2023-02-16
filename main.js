@@ -330,10 +330,6 @@ $(function(){
     /**
      * PRINTING
      */
-    $("#print").click(function () {
-        $(this).toggleClass("active");
-    });
-
     // Print instrument buttons
     $("#printMenu span").click(function () {
         let printInstruments = "";

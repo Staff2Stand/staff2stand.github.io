@@ -34,21 +34,21 @@
   
     /* selectively print */
     /* first, hide all tunes */
-    #tunes_container:not([printInstruments="allVisible"]) .tune {
+    #tunes_container:not([printinstruments="allVisible"]) .instrument_tunes {
       display: none !important;
     }
   
     /* then, show only the ones we want */
-    #tunes_container[printInstruments*="violin"] .instrument_tunes[instrument="violin"] {
+    #tunes_container[printinstruments*="violin"] .instrument_tunes[instrument="violin"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="viola"] .instrument_tunes[instrument="viola"] {
+    #tunes_container[printinstruments*="viola"] .instrument_tunes[instrument="viola"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="cello"] .instrument_tunes[instrument="cello"] {
+    #tunes_container[printinstruments*="cello"] .instrument_tunes[instrument="cello"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="bass"] .instrument_tunes[instrument="bass"] {
+    #tunes_container[printinstruments*="bass"] .instrument_tunes[instrument="bass"] {
       display: inline-block !important;
     }
   }
