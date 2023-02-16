@@ -107,11 +107,10 @@ $(function(){
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false}
-    $('.instrument_tunes').each(()=> observer.observe(this, observerOpts))
-    // document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
-    //     //impliment observer on each individual instrument's tunes container
-    //     observer.observe(instrumentTunes, observerOpts)
-    // })
+    document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
+        //impliment observer on each individual instrument's tunes container
+        observer.observe(instrumentTunes, observerOpts)
+    })
 
 
     /**
@@ -326,5 +325,44 @@ $(function(){
     $('#noteyToggle').click(function(){
         $('#notey').fadeToggle()
     })
+
+
+    /**
+     * PRINTING
+     */
+    $("#print").click(function () {
+        $(this).toggleClass("active");
+    });
+
+    // Print instrument buttons
+    $("#printMenu span").click(function () {
+        let printInstruments = "";
+        switch ($(this).attr("id")) {
+        case "printViolin":
+            printInstruments = "violin";
+            break;
+        case "printViola":
+            printInstruments = "viola";
+            break;
+        case "printCello":
+            printInstruments = "cello";
+            break;
+        case "printBass":
+            printInstruments = "bass";
+            break;
+        case "printAll":
+            printInstruments = "violin,viola,cello,bass";
+            break;
+        case "printAllVisible":
+            printInstruments = "allVisible";
+            break;
+        default:
+            console.error("print instrument error");
+        }
+
+        $("#tunes_container").attr("printInstruments", printInstruments);
+        window.print();
+        $("#print").removeClass("active");
+    });
 
 })

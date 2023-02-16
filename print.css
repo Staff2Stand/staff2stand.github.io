@@ -5,17 +5,17 @@
       margin: 0;
     }
   
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  
+    /* hide elements we don't want */
     #topbar,
     #sidebar,
     .score_settings,
     .tune_settings,
     footer,
-    header {
-      display: none;
+    header,
+    .abc-warnings,
+    .abcEditor,
+    ::-webkit-scrollbar {
+      display: none !important;
     }
   
     #page_content {
@@ -39,16 +39,16 @@
     }
   
     /* then, show only the ones we want */
-    #tunes_container[printInstruments*="violin"] .tune[instrument="Violin"] {
+    #tunes_container[printInstruments*="violin"] .instrument_tunes[instrument="violin"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="viola"] .tune[instrument="Viola"] {
+    #tunes_container[printInstruments*="viola"] .instrument_tunes[instrument="viola"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="cello"] .tune[instrument="Cello"] {
+    #tunes_container[printInstruments*="cello"] .instrument_tunes[instrument="cello"] {
       display: inline-block !important;
     }
-    #tunes_container[printInstruments*="bass"] .tune[instrument="Bass"] {
+    #tunes_container[printInstruments*="bass"] .instrument_tunes[instrument="bass"] {
       display: inline-block !important;
     }
   }
