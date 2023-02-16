@@ -251,7 +251,7 @@ $(function(){
                 })
             })
         }, 1000)
-        
+
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
         const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
         const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
@@ -263,14 +263,50 @@ $(function(){
     })
 
 
+    /** SIDEBAR TOGGLE */
+    $("#sidebar_toggle_container").on("click", () => {
+        $("#main_container").toggleClass("sidebar_collapsed")
+    })
+
+    /** SIDEBAR SECTION COLLAPSING */
+    //add height to subtract prop
+    $("#sidebar .score_bookmark_section").each(function (i, section) {
+        const heading_height = $(section).children().first().outerHeight()
+        const height_to_subtract = $(section).height() - heading_height + 2 //<- 2 is for the 2px border on the bookmark section
+        $(section).prop("height_to_subtract", height_to_subtract)
+    })
+    // click listener
+    $("#sidebar :is(h1,h2,h3,h4,h5,h6)").click(function () {
+        const $section = $(this).closest(".score_bookmark_section")
+        const height_to_subtract = $section.prop("height_to_subtract")
+
+        if ($section.hasClass("collapsed")) {
+        $section.removeClass("collapsed")
+        $section.animate({ height: `+=${height_to_subtract}` }, 300)
+        } else {
+        $section.addClass("collapsed")
+        $section.animate({ height: `-=${height_to_subtract}` }, 300)
+        }
+    })
+
+
     /**
      * SIDEBAR BUTTONS
      */
+    //toggle active
     $('#fingerings_toggle, #highlights_toggle, #notenames_toggle, #print').click(function(){
         $(this).toggleClass('active')
+                .animate({ width: "+=6px", marginLeft: "-=3px" }, 200)
+                .animate({ width: "-=6px", marginLeft: "+=3px" }, 200)
     })
+    //highlights
     $('#highlights_toggle').click(function(){
         $('#main_container').toggleClass('highlight_notes')
+    })
+    //clear scores
+    $("#clear_scores").click(function () {
+        $('.abcEditor').each((i,editor) => $(editor).val('').change())
+        $(".score_bookmark.current").removeClass("current")
     })
 
 
