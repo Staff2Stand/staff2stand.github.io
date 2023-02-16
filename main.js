@@ -1,5 +1,7 @@
 const abcjs = window.ABCJS
 
+const instruments = ['violin','viola','cello','bass']
+
 // \u2193 = down arrow
 // \u2191 = up arrow
 const stringReference = {
@@ -48,9 +50,13 @@ const stringReference = {
 $(function(){
 
     /**
-     * INITIALIZE EDITOR
+     * INITIALIZE EDITOR for each instrument
      */
-    let editor = new abcjs.Editor("editor-violin",{
+    const abcOpts = {
+        add_classes: true,
+        responsive: 'resize'
+    }
+    let editor_violin = new abcjs.Editor("editor-violin",{
         canvas_id: "tunes-violin",
         warnings_id: "abc-warnings-violin",
         clickListener: function(abcElem, tuneNumber, classes) { 
@@ -61,11 +67,34 @@ $(function(){
         onchange: function(editorInstance) {
             // console.log('editorInstance',editorInstance)
         },
-        abcjsParams: {
-            add_classes: true,
-            responsive: 'resize'
-        }
+        abcjsParams: abcOpts
     })
+    let editor_viola = new abcjs.Editor("editor-viola",{
+        canvas_id: "tunes-viola",
+        warnings_id: "abc-warnings-viola",
+        clickListener: function(abcElem, tuneNumber, classes) {},
+        indicate_changed: true,
+        onchange: function(editorInstance) {},
+        abcjsParams: abcOpts
+    })
+    let editor_cello = new abcjs.Editor("editor-cello",{
+        canvas_id: "tunes-cello",
+        warnings_id: "abc-warnings-cello",
+        clickListener: function(abcElem, tuneNumber, classes) {},
+        indicate_changed: true,
+        onchange: function(editorInstance) {},
+        abcjsParams: abcOpts
+    })
+    let editor_bass = new abcjs.Editor("editor-bass",{
+        canvas_id: "tunes-bass",
+        warnings_id: "abc-warnings-bass",
+        clickListener: function(abcElem, tuneNumber, classes) {},
+        indicate_changed: true,
+        onchange: function(editorInstance) {},
+        abcjsParams: abcOpts
+    })
+
+
     /**
      * TUNES (RE)RENDER OBSERVER
      */
@@ -215,6 +244,9 @@ $(function(){
         const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
         const abcBass = $(this).attr('abc-bass')?.replace(/\\n/g,'\r\n')
         $('#editor-violin').val(abcViolin).change()
+        $('#editor-viola').val(abcViolin).change()
+        $('#editor-cello').val(abcViolin).change()
+        $('#editor-bass').val(abcViolin).change()
     })
 
 
