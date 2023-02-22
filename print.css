@@ -39,16 +39,16 @@
     }
   
     /* then, show only the ones we want */
-    #tunes_container[printinstruments*="violin"] .instrument_tunes[instrument="violin"] {
+    #tunes_container[printinstruments*="violin"] .part[instrument="violin"] {
       display: inline-block !important;
     }
-    #tunes_container[printinstruments*="viola"] .instrument_tunes[instrument="viola"] {
+    #tunes_container[printinstruments*="viola"] .part[instrument="viola"] {
       display: inline-block !important;
     }
-    #tunes_container[printinstruments*="cello"] .instrument_tunes[instrument="cello"] {
+    #tunes_container[printinstruments*="cello"] .part[instrument="cello"] {
       display: inline-block !important;
     }
-    #tunes_container[printinstruments*="bass"] .instrument_tunes[instrument="bass"] {
+    #tunes_container[printinstruments*="bass"] .part[instrument="bass"] {
       display: inline-block !important;
     }
   }

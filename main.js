@@ -56,6 +56,7 @@ $(function(){
         add_classes: true,
         responsive: 'resize'
     }
+
     let editor_violin = new abcjs.Editor("editor-violin",{
         canvas_id: "tunes-violin",
         warnings_id: "abc-warnings-violin",
@@ -333,6 +334,7 @@ $(function(){
     // Print instrument buttons
     $("#printMenu span").click(function () {
         let printInstruments = "";
+        
         switch ($(this).attr("id")) {
         case "printViolin":
             printInstruments = "violin";
