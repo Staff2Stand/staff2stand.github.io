@@ -421,6 +421,13 @@ header {
 
 
 
+
+
+
+.part{
+  position: relative;
+}
+
 .abcEditor{
   width: calc(100% - 12px);
   height: 15em;
@@ -437,7 +444,33 @@ header {
   height: 1em;
   font-size: 22;
   text-transform: capitalize;
-  margin: .5em 6px 6px 6px;
+  margin: 6px 18px 6px 6px;
+}
+
+.part-utils{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row wrap;
+  height: 22;
+  font-size: 22;
+  margin: .5em 18px 6px 6px;
+  justify-content: flex-end;
+}
+.part-utils span{
+  width: 22;
+}
+.part-utils span svg{
+  fill: #333;
+}
+
+.part-utils span:hover{
+  cursor: pointer;
+}
+.part-utils span:hover svg{
+  fill: #000;
+  filter: drop-shadow(0px 0px 1px black);
 }
 
 

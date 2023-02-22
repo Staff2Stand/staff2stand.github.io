@@ -334,7 +334,7 @@ $(function(){
     // Print instrument buttons
     $("#printMenu span").click(function () {
         let printInstruments = "";
-        
+
         switch ($(this).attr("id")) {
         case "printViolin":
             printInstruments = "violin";
@@ -362,5 +362,13 @@ $(function(){
         window.print();
         $("#print").removeClass("active");
     });
+
+
+    /**
+     *  PART UTILITIES 
+    */
+    //copy part utils template html to each part util div
+    const partUtilsTemplate = $('#part-utils-template').html()
+    $('.part-utils').each((i,partUtil)=> $(partUtil).html(partUtilsTemplate))
 
 })
