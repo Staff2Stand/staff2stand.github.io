@@ -445,18 +445,15 @@ header {
   font-size: 22;
   text-transform: capitalize;
   margin: 6px 18px 6px 6px;
+  display: inline-block;
 }
 
 .part-utils{
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
+  display: inline-flex;
   flex-flow: row wrap;
   height: 22;
   font-size: 22;
   margin: .5em 18px 6px 6px;
-  justify-content: flex-end;
 }
 .part-utils span{
   width: 22;

@@ -369,6 +369,16 @@ $(function(){
     */
     //copy part utils template html to each part util div
     const partUtilsTemplate = $('#part-utils-template').html()
-    $('.part-utils').each((i,partUtil)=> $(partUtil).html(partUtilsTemplate))
+    $('.part-utils')
+        .each((i,partUtil) => {
+            $(partUtil)
+                //copy content from template
+                .html(partUtilsTemplate)
+                //HIDE BUTTON
+                .find('.hide').click(function(){
+                    $(this).closest('.part-utils').siblings('textarea, div').toggle()
+                })
+        })
+        
 
 })
