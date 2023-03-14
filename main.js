@@ -248,6 +248,10 @@ $(function(){
             .addClass("eyes-blinking looking-at-left-hand playing-violin")
             .fadeIn()
 
+        //show all parts
+        $('.part').children().show()
+
+        //load abcEditor content from attribute
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
         const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
         const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
@@ -290,7 +294,7 @@ $(function(){
      * SIDEBAR BUTTONS
      */
     //toggle active
-    $('#fingerings_toggle, #highlights_toggle, #notenames_toggle, #print').click(function(){
+    $('#sidebar_buttons > span').click(function(){
         $(this).toggleClass('active')
                 .animate({ width: "+=6px", marginLeft: "-=3px" }, 200)
                 .animate({ width: "-=6px", marginLeft: "+=3px" }, 200)
@@ -303,6 +307,10 @@ $(function(){
     $("#clear_scores").click(function () {
         $('.abcEditor').each((i,editor) => $(editor).val('').change())
         $(".score_bookmark.current").removeClass("current")
+    })
+    //show editors
+    $('#show_editors').click(function(){
+        $('.abcEditor').slideToggle()
     })
 
 

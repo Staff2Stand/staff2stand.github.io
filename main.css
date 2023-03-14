@@ -255,6 +255,14 @@ header {
 #sidebar_buttons #notenames_toggle svg {
   fill: hsl(var(--h) var(--s) var(--l));
 }
+/* edit toggle */
+#sidebar_buttons #show_editors {
+  --h:300deg;
+}
+#sidebar_buttons #show_editors svg {
+  fill: hsl(var(--h) var(--s) var(--l));
+}
+
 /* inactive saturation and lightness */
 #sidebar_buttons span {
   --s: 60%;
