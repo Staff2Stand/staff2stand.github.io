@@ -308,8 +308,11 @@ $(function(){
         $('.abcEditor').each((i,editor) => $(editor).val('').change())
         $(".score_bookmark.current").removeClass("current")
     })
-    //show editors
-    $('#show_editors').click(function(){
+    //toggle editors
+    $('#show_editors').click(function(){        
+        //show all hidden parts
+        $('.instrument_tunes:hidden').closest('.part').children(':not(.abcEditor)').show()
+        //toggle editors
         $('.abcEditor').slideToggle()
     })
 
@@ -382,7 +385,7 @@ $(function(){
             $(partUtil)
                 //copy content from template
                 .html(partUtilsTemplate)
-                //HIDE BUTTON
+                //HIDE BUTTON / TOGGLE PART
                 .find('.hide').click(function(){
                     $(this).closest('.part-utils').siblings('textarea, div').toggle()
                 })
