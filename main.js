@@ -58,20 +58,27 @@ $(function(){
     }
 
     //create max number of tune divs that could be necessary
-        // count how many Xs are present in each abc-violin attribute
+        // count how many Xs are present in each abc-${instrument} attribute
         // the highest of that is how many divs we need to create
-    let count = 0
-    $('.score_bookmark[abc-violin]').each(function(i,bkmk){
-        const numXsInString = $(bkmk).attr('abc-violin').match(/X:\s?\d+/gm).length
-        if (numXsInString > count) count = numXsInString
+    instruments.forEach(function(instrument){
+        let count = 0
+        $(`.score_bookmark[abc-${instrument}]`).each(function(i,bkmk){
+            const numXsInString = $(bkmk).attr(`abc-${instrument}`).match(/X:\s?\d+/gm).length
+            if (numXsInString > count) count = numXsInString
+        })
+        //create num of divs in instrument tunes == count
+        for(let i=0; i < count; i++){
+            $(`#tunes-${instrument}`).append('<div></div>')
+        }
     })
-    //create num of divs in violin tunes == count
-    for(let i=0; i < count; i++){
-        $('#tunes-violin').append('<div></div>')
-    }
-    //return array of violin tune divs
-    const violin_divs = $('#tunes-violin div').toArray()
 
+    //define array of tune divs
+    const violin_divs = $('#tunes-violin div').toArray()
+    const viola_divs = $('#tunes-viola div').toArray()
+    const cello_divs = $('#tunes-cello div').toArray()
+    const bass_divs = $('#tunes-bass div').toArray()
+
+    //Initialize Editors
     let editor_violin = new abcjs.Editor("editor-violin",{
         canvas_id: violin_divs,
         warnings_id: "abc-warnings-violin",
@@ -86,7 +93,7 @@ $(function(){
         abcjsParams: abcOpts
     })
     let editor_viola = new abcjs.Editor("editor-viola",{
-        canvas_id: "tunes-viola",
+        canvas_id: viola_divs,
         warnings_id: "abc-warnings-viola",
         clickListener: function(abcElem, tuneNumber, classes) {},
         indicate_changed: true,
@@ -94,7 +101,7 @@ $(function(){
         abcjsParams: abcOpts
     })
     let editor_cello = new abcjs.Editor("editor-cello",{
-        canvas_id: "tunes-cello",
+        canvas_id: cello_divs,
         warnings_id: "abc-warnings-cello",
         clickListener: function(abcElem, tuneNumber, classes) {},
         indicate_changed: true,
@@ -102,7 +109,7 @@ $(function(){
         abcjsParams: abcOpts
     })
     let editor_bass = new abcjs.Editor("editor-bass",{
-        canvas_id: "tunes-bass",
+        canvas_id: bass_divs,
         warnings_id: "abc-warnings-bass",
         clickListener: function(abcElem, tuneNumber, classes) {},
         indicate_changed: true,
