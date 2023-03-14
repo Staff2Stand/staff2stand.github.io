@@ -248,8 +248,8 @@ $(function(){
             .addClass("eyes-blinking looking-at-left-hand playing-violin")
             .fadeIn()
 
-        //show all parts
-        $('.part').children().show()
+        //show all parts (ignore editors)
+        $('.part').children('div').show()
 
         //load abcEditor content from attribute
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
