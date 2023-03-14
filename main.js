@@ -66,10 +66,13 @@ $(function(){
             const numXsInString = $(bkmk).attr(`abc-${instrument}`).match(/X:\s?\d+/gm).length
             if (numXsInString > count) count = numXsInString
         })
+        console.log('count=',count)
         //create num of divs in instrument tunes == count
-        for(let i=0; i < count; i++){
+        let j = 0
+        for(j; j < count; j++){
             $(`#tunes-${instrument}`).append('<div></div>')
         }
+        console.log('loops done')
     })
 
     //define array of tune divs
