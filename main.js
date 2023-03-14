@@ -387,7 +387,7 @@ $(function(){
                 .html(partUtilsTemplate)
                 //HIDE BUTTON / TOGGLE PART
                 .find('.hide').click(function(){
-                    $(this).closest('.part-utils').siblings('textarea, div').toggle()
+                    $(this).closest('.part-utils').siblings('div').toggle()
                 })
         })
         
