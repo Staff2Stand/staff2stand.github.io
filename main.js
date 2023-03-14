@@ -58,7 +58,7 @@ $(function(){
     }
 
     let editor_violin = new abcjs.Editor("editor-violin",{
-        canvas_id: "tunes-violin",
+        // canvas_id: "tunes-violin",
         warnings_id: "abc-warnings-violin",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
