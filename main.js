@@ -57,8 +57,20 @@ $(function(){
         responsive: 'resize'
     }
 
+    //create max number of tune divs that could be necessary
+        // count how many Xs are present in each abc-violin attribute
+        // the highest of that is how many divs we need to create
+    const max_violin_divs = (function(){
+        let count = 0
+        $('.score_bookmark[abc-violin]').each(function(i,bkmk){
+            const numXsInString = $(bkmk).attr('abc-violin').match(/X:\s?\d+/gm).length
+            if (numXsInString > count) count = numXsInString
+        })
+        //create num of divs in violin tunes == count
+    })
+
     let editor_violin = new abcjs.Editor("editor-violin",{
-        // canvas_id: "tunes-violin",
+        canvas_id: "tunes-violin",
         warnings_id: "abc-warnings-violin",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
