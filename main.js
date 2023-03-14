@@ -311,7 +311,7 @@ $(function(){
     //toggle editors
     $('#show_editors').click(function(){        
         //show all hidden parts
-        $('.instrument_tunes:hidden').closest('.part').children(':not(.abcEditor)').show()
+        $('.instrument_tunes:hidden').show().siblings('div').show()
         //toggle editors
         $('.abcEditor').slideToggle()
     })
