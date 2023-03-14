@@ -70,7 +70,7 @@ $(function(){
         $('#tunes-violin').append('<div></div>')
     }
     //return array of violin tune divs
-    const violin_divs = $('#tunes-violin div')
+    const violin_divs = $('#tunes-violin div').toArray()
 
     let editor_violin = new abcjs.Editor("editor-violin",{
         canvas_id: violin_divs,
