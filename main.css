@@ -341,7 +341,7 @@ header {
 
 .part h1{
   height: 1em;
-  font-size: 22;
+  font-size: 28;
   text-transform: capitalize;
   margin: 6px 18px 6px 6px;
   display: inline-block;
@@ -350,14 +350,14 @@ header {
 .part-utils{
   display: inline-flex;
   flex-flow: row wrap;
-  height: 22;
-  font-size: 22;
+  height: 28;
+  font-size: 28;
   margin: .5em 18px 6px 6px;
 }
 .part-utils span{
   width: 22;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 .part-utils span svg{
   fill: #333;
