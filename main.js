@@ -125,7 +125,7 @@ $(function(){
      * TUNES (RE)RENDER OBSERVER
      */
     var observer = new MutationObserver(function(mutationsList, observer) {
-        console.log('mutation:',mutationsList)
+        // console.log('mutation:',mutationsList)
         // callback for tunes container mutations
         const mutationTarget = mutationsList[0].target
         addStringClassesToNoteHeads(mutationTarget)
@@ -133,9 +133,10 @@ $(function(){
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false, subtree:true}
-    document.querySelectorAll('.instrument_tunes > div').forEach(function(instrumentTunesDiv){
+    document.querySelectorAll('.instrument_tunes > div').forEach(function(abcContainer){
+        console.log('abcContainer:',abcContainer)
         //impliment observer on each individual instrument's tunes container
-        observer.observe(instrumentTunesDiv, observerOpts)
+        observer.observe(abcContainer, observerOpts)
     })
 
 
@@ -143,8 +144,8 @@ $(function(){
      * ADD STRING CLASSES
      * also add data-noteName to note element
      */
-    function addStringClassesToNoteHeads(instrument_tunes_context){
-        $(instrument_tunes_context).find('.abcjs-note path[data-name]').each(function(i,pathel){
+    function addStringClassesToNoteHeads(abcContainer){
+        $(abcContainer).find('.abcjs-note path[data-name]').each(function(i,pathel){
             // console.log('path element:',pathel)
             const isNotehead = $(pathel).attr('data-name').length <= 2
             if (!isNotehead) return
@@ -170,13 +171,13 @@ $(function(){
      * FINGERINGS AND NOTE NAMES
      * after the tune is rendered, loop through notes and append text and tspan elements to svg
      */
-    function addFingeringsAndNoteNames(instrument_tunes_context){
+    function addFingeringsAndNoteNames(abcContainer){
         function SVG(tag) {
             return document.createElementNS('http://www.w3.org/2000/svg', tag);
         }
 
         //loop through all the notes and add svg text element child with class fingering
-        $(instrument_tunes_context).find('.abcjs-note').each(function(i,note){
+        $(abcContainer).find('.abcjs-note').each(function(i,note){
             // console.log('note:',note)
             const noteX = note.getBBox().x
             const noteY = note.getBBox().y
