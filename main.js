@@ -428,7 +428,7 @@ $(function(){
                 .html(partUtilsTemplate)
                 //HIDE BUTTON / TOGGLE PART
                 .find('.hide').click(function(){
-                    $(this).closest('.part-utils').siblings('div').toggle()
+                    $(this).closest('.part-utils').siblings('.instrument-tunes, .abc-warnings').toggle()
                 })
         })
         
