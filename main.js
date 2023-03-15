@@ -72,7 +72,7 @@ $(function(){
         for(j; j < count; j++){
             $(`#tunes-${instrument}`).append('<div></div>')
         }
-        console.log('loops done')
+        console.log(instrument,'loop done')
     })
 
     //define array of tune divs
@@ -132,7 +132,7 @@ $(function(){
         addFingeringsAndNoteNames(mutationTarget)
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
-    const observerOpts = {characterData:false, childList:true, attributes:false}
+    const observerOpts = {characterData:false, childList:true, attributes:false, subtree:true}
     document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
         //impliment observer on each individual instrument's tunes container
         observer.observe(instrumentTunes, observerOpts)
