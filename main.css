@@ -314,123 +314,14 @@ header {
   box-shadow: -6px 0px 6px 6px #333;
 }
 
-/* TUNE */
-/* Part Titles */
-.tune::before {
-  content: attr(instrument) " " attr(part);
-  font-family: "Lucida Sans", sans-serif;
-  font-size: 1.5vw;
-  font-weight: bold;
-  font-style: italic;
-  position: relative;
-  left: 1em;
-}
 
-/* SETTINGS */
-.score {
-  position: relative;
-  max-width: 100% !important;
-}
-
-.score_settings {
-  position: absolute;
-  top: 1em;
-  left: 1.5vw;
-  z-index: 1;
-  background: #333;
-  color: #fff;
-  padding: 4px;
-  border-radius: 8px;
-  margin-top: -1.5em;
-}
-.score_settings {
-  top: 6px;
-  max-width: 80%;
-  margin-top: 0;
-}
-
-/* expand settings on hover */
-.score_settings .score_settings_main {
-  display: none;
-}
-.score_settings:hover .score_settings_main {
-  display: grid;
-}
-/* toggler */
-.score_settings .score_settings_toggler {
-  cursor: default;
-  text-align: right;
-  font-size: 1.5vw;
-}
-.score_settings .score_settings_toggler svg {
-  fill: #f0f0f0;
-  width: 22px;
-}
-/* 'Settings' text */
-.score_settings .score_settings_main::before {
-  content: "Part Settings";
-  position: absolute;
-  top: 2px;
-  text-align: center;
-  width: 100%;
-  font-weight: bold;
-  font-style: italic;
-}
-.score_settings .score_settings_main::before {
-  content: "Score Settings";
-}
-/* score settings layout */
-.score_settings_main {
-  display: grid;
-  grid-template-columns: max-content min-content;
-  column-gap: 12px;
-}
-.score_settings_main div {
-  position: relative;
-}
-.score_settings_main div:first-child::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  width: 4px;
-  height: 100%;
+.part :is(h1,.part-utils,.abceditor){
+  position: sticky;
   top: 0;
-  right: -9px;
-  background: linear-gradient(180deg, transparent, #fff, transparent);
 }
-/* headings */
-.score_settings h4 {
-  margin: 6px;
+.part .abcEditor {
+  top: 1em;
 }
-
-/* Parts Toggles */
-.parts_toggles {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-evenly;
-}
-.parts_toggles label {
-  text-transform: capitalize;
-}
-.score_settings_parts_togglers {
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  grid-template-rows: repeat(auto, 20px);
-}
-.score_settings_parts_togglers h4 {
-  grid-column: 1 / span 2;
-}
-.score_settings_parts_togglers input {
-  grid-column: 1;
-}
-.score_settings_parts_togglers label {
-  grid-column: 2;
-}
-
-
-
-
-
 
 .part{
   position: relative;
