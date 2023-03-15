@@ -146,11 +146,26 @@ $(function(){
      */
     function addStringClassesToNoteHeads(abcContainer){
         $(abcContainer).find('.abcjs-note path[data-name]').each(function(i,pathel){
-            // console.log('path element:',pathel)
+            // skip if its not a notehead
             const isNotehead = $(pathel).attr('data-name').length <= 2
             if (!isNotehead) return
 
-            const noteName = $(pathel).attr('data-name')
+            //check sharps in keysig
+            const numKeysigSharps = $(pathel).closest('.abcjs-key-signature').find('path[data-name="accidentals.sharp"]').length
+            const sharps = ['F','C','G','D','A','E','B']
+            const sharpsInKey = sharps.slice(0,numKeysigSharps)
+
+            //check flats in keysig
+            const numKeysigFlats = $(pathel).closest('.abcjs-key-signature').find('path[data-name="accidentals.flat"]').length
+            const flats = ['B','E','A','D','G','C','F']
+            const flatsInKey = flats.slice(0,numKeysigFlats)
+
+            //define notename
+            let noteName = $(pathel).attr('data-name')
+            //check if note is in keysig
+            if (sharpsInKey.includes(noteName)) noteName = '^'+noteName
+            if (flatsInKey.includes(noteName)) noteName = '_'+noteName
+
             //check string reference and add the correct string class
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
