@@ -315,18 +315,8 @@ header {
 }
 
 
-.part :is(h1,.part-utils,.abceditor){
-  position: sticky;
-  top: 0;
-}
-.part .abcEditor {
-  top: 1em;
-}
 
-.part{
-  position: relative;
-}
-
+/* PARTS */
 .abcEditor{
   width: calc(100% - 12px);
   height: 15em;
@@ -368,6 +358,18 @@ header {
 .part-utils span:hover svg{
   fill: #000;
   filter: drop-shadow(0px 0px 1px black);
+}
+
+.part :is(h1,.part-utils,.abceditor){
+  position: sticky;
+  top: 0;
+}
+.part .abcEditor {
+  top: 1em;
+}
+
+.part{
+  position: relative;
 }
 
 
