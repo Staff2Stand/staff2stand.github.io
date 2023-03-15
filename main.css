@@ -363,9 +363,10 @@ header {
 .part :is(h1,.part-utils,.abceditor){
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 .part .abcEditor {
-  top: 1em;
+  top: 2em;
 }
 
 .part{
