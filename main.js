@@ -133,9 +133,9 @@ $(function(){
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false, subtree:true}
-    document.querySelectorAll('.instrument_tunes').forEach(function(instrumentTunes){
+    document.querySelectorAll('.instrument_tunes > div').forEach(function(instrumentTunesDiv){
         //impliment observer on each individual instrument's tunes container
-        observer.observe(instrumentTunes, observerOpts)
+        observer.observe(instrumentTunesDiv, observerOpts)
     })
 
 
