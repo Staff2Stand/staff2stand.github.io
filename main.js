@@ -189,7 +189,7 @@ $(function(){
             const noteString = $(note).attr('data-string')
 
             const noteNameIndex = stringReference[instrument][noteString]?.indexOf(noteName)
-            const finger = noteNameIndex ? stringReference[instrument][noteString+'Fingers'][noteNameIndex] : ''
+            const finger = noteNameIndex !== undefined ? stringReference[instrument][noteString+'Fingers'][noteNameIndex] : ''
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
             let noteIsAboveStaff = false
