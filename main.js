@@ -85,12 +85,9 @@ $(function(){
         warnings_id: "abc-warnings-violin",
         clickListener: function(abcElem, tuneNumber, classes) { 
             //the presence of this function is enough to add the functionality
-            // console.log(abcElem, tuneNumber, classes)
         },
         indicate_changed: true,
-        onchange: function(editorInstance) {
-            // console.log('editorInstance',editorInstance)
-        },
+        onchange: function(editorInstance) {},
         abcjsParams: abcOpts
     })
     let editor_viola = new abcjs.Editor("editor-viola",{
@@ -127,7 +124,6 @@ $(function(){
         const targets = [...new Set(mutationsList.map((item) => item.target))]
         //add highlights and such to each target
         targets.forEach(function(target){
-            console.log('mutation target:',target)
             addStringClassesToNoteHeads(target)
             addFingeringsAndNoteNames(target)
         })
@@ -193,7 +189,6 @@ $(function(){
 
         //loop through all the notes and add svg text element child with class fingering
         $(abcContainer).find('.abcjs-note').each(function(i,note){
-            // console.log('note:',note)
             const noteX = note.getBBox().x
             const noteY = note.getBBox().y
             const noteHeight = note.getBBox().height
@@ -428,7 +423,7 @@ $(function(){
                 .html(partUtilsTemplate)
                 //HIDE BUTTON / TOGGLE PART
                 .find('.hide').click(function(){
-                    $(this).closest('.part-utils').siblings('.instrument-tunes, .abc-warnings').toggle()
+                    $(this).closest('.part-utils').siblings('.instrument_tunes, .abc-warnings').toggle()
                 })
         })
         
