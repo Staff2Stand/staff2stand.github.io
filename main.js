@@ -125,18 +125,20 @@ $(function(){
      * TUNES (RE)RENDER OBSERVER
      */
     var observer = new MutationObserver(function(mutationsList, observer) {
-        // console.log('mutation:',mutationsList)
-        // callback for tunes container mutations
-        const mutationTarget = mutationsList[0].target
-        addStringClassesToNoteHeads(mutationTarget)
-        addFingeringsAndNoteNames(mutationTarget)
+        //create an array of unique targets from the mutations list
+        const targets = [...new Set(mutationsList.map((item) => item.target))]
+        //add highlights and such to each target
+        targets.forEach(function(target){
+            console.log('mutation target:',target)
+            addStringClassesToNoteHeads(target)
+            addFingeringsAndNoteNames(target)
+        })
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false, subtree:true}
-    document.querySelectorAll('.instrument_tunes > div').forEach(function(abcContainer){
-        console.log('abcContainer:',abcContainer)
+    document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
         //impliment observer on each individual instrument's tunes container
-        observer.observe(abcContainer, observerOpts)
+        observer.observe(div, observerOpts)
     })
 
 
