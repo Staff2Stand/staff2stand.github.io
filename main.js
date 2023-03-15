@@ -66,13 +66,11 @@ $(function(){
             const numXsInString = $(bkmk).attr(`abc-${instrument}`).match(/X:\s?\d+/gm).length
             if (numXsInString > count) count = numXsInString
         })
-        console.log('count=',count)
         //create num of divs in instrument tunes == count
         let j = 0
         for(j; j < count; j++){
             $(`#tunes-${instrument}`).append('<div></div>')
         }
-        console.log(instrument,'loop done')
     })
 
     //define array of tune divs
@@ -135,7 +133,7 @@ $(function(){
         })
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
-    const observerOpts = {characterData:false, childList:true, attributes:false, subtree:true}
+    const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
         //impliment observer on each individual instrument's tunes container
         observer.observe(div, observerOpts)
