@@ -151,12 +151,12 @@ $(function(){
             if (!isNotehead) return
 
             //check sharps in keysig
-            const numKeysigSharps = $(pathel).closest('.abcjs-key-signature').find('path[data-name="accidentals.sharp"]').length
+            const numKeysigSharps = $(pathel).siblings('.abcjs-key-signature').find('path[data-name="accidentals.sharp"]').length
             const sharps = ['F','C','G','D','A','E','B']
             const sharpsInKey = sharps.slice(0,numKeysigSharps)
 
             //check flats in keysig
-            const numKeysigFlats = $(pathel).closest('.abcjs-key-signature').find('path[data-name="accidentals.flat"]').length
+            const numKeysigFlats = $(pathel).siblings('.abcjs-key-signature').find('path[data-name="accidentals.flat"]').length
             const flats = ['B','E','A','D','G','C','F']
             const flatsInKey = flats.slice(0,numKeysigFlats)
 
