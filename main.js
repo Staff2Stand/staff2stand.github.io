@@ -287,6 +287,10 @@ $(function(){
         //show all parts (ignore editors)
         $('.part').children('div').show()
 
+        //Clear style attr of all abcjsContainer divs
+        //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
+        $('.instrument_tunes .abcjs-container').attr('style','')
+
         //load abcEditor content from attribute
         const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
         const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
