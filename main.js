@@ -276,30 +276,42 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-    $('.score_bookmark').click(function(){
+    $('.score_bookmark').click(function(e){
         //show loading icon
         //  which is notey playing violin
         $("#notey")
             .attr("class", "")
             .addClass("eyes-blinking looking-at-left-hand playing-violin")
             .fadeIn()
+        
+        const $bkmk = $(this)
+        
+        instruments.forEach((instrument,i)=>{
+            //get abc string from the bkmk's attr
+            const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
+            //define current instrument editor and its value
+            const $instrEditor = $(`#editor-${instrument}`)
+            const currentEditorVal = $instrEditor.val()
 
-        //show all parts (ignore editors)
-        $('.part').children('div').show()
+            //if SHIFT CLICKing append txt to editors, then return
+            if (e.shiftKey){
+                $instrEditor.val(currentEditorVal+newAbc).change()
+                return
+            }
 
-        //Clear style attr of all abcjsContainer divs
-        //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
-        $('.instrument_tunes .abcjs-container').attr('style','')
+            //do only once
+            if (i===0) {
+                //show all parts (ignore editors)
+                $('.part').children('div').show()
 
-        //load abcEditor content from attribute
-        const abcViolin = $(this).attr('abc-violin')?.replace(/\\n/g,'\r\n')
-        const abcViola = $(this).attr('abc-viola')?.replace(/\\n/g,'\r\n')
-        const abcCello = $(this).attr('abc-cello')?.replace(/\\n/g,'\r\n')
-        const abcBass = $(this).attr('abc-bass')?.replace(/\\n/g,'\r\n')
-        $('#editor-violin').val(abcViolin).change()
-        $('#editor-viola').val(abcViola).change()
-        $('#editor-cello').val(abcCello).change()
-        $('#editor-bass').val(abcBass).change()
+                //Clear style attr of all abcjsContainer divs
+                //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
+                $('.instrument_tunes .abcjs-container').attr('style','')
+            }
+
+            //set editor to 
+            $instrEditor.val(newAbc).change()
+        })
     })
 
 
