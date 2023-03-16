@@ -420,16 +420,69 @@ $(function(){
     */
     //copy part utils template html to each part util div
     const partUtilsTemplate = $('#part-utils-template').html()
-    $('.part-utils')
-        .each((i,partUtil) => {
-            $(partUtil)
-                //copy content from template
-                .html(partUtilsTemplate)
-                //HIDE BUTTON / TOGGLE PART
-                .find('.hide').click(function(){
-                    $(this).closest('.part-utils').siblings('.instrument_tunes, .abc-warnings').toggle()
-                })
-        })
+    $('.part-utils').each((i,partUtils) => {
+        $(partUtils)
+            //copy content from template
+            .html(partUtilsTemplate)
+            //HIDE BUTTON / TOGGLE PART
+            .find('.hide').click(function(){
+                $(this).closest('.part-utils').siblings('.instrument_tunes, .abc-warnings').toggle()
+            })
+    })
+
+    /**
+     *  EDITOR UTILITIES
+     */
+    //copy editor utils template html to each editor util div
+    const abcEditorUtilsTemplate = $('#abcEditor-utils-template').html()
+    $('.abcEditor-utils').each((i,abcEditorUtils) => {
+        $(abcEditorUtils)
+            //copy content from template
+            .html(abcEditorUtilsTemplate)
+            //COPY TXT AS STRING
+            .find('.copyTxtAsString').click(function(){
+                const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
+                const text = editor.value
+                copyTextToClipboard(text)
+            })
+    })
         
 
 })
+
+
+
+function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Fallback: Copying text command was ' + msg);
+    } catch (err) {
+        console.error('Fallback: Oops, unable to copy', err);
+    }
+
+    document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+    });
+}
