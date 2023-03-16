@@ -442,7 +442,8 @@ $(function(){
             //COPY TXT AS STRING
             .find('.copyTxtAsString').click(function(){
                 const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
-                const text = editor.value
+                const text = $(editor).val()
+                console.log('editor',editor,'text',text)
                 copyTextToClipboard(text)
             })
     })
