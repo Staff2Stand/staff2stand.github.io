@@ -328,6 +328,7 @@ header {
 .abc-warnings {
   color: #b90000;
   padding: 2px 6px;
+  display: none;
 }
 
 .part .part-top-bg{
