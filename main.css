@@ -351,17 +351,15 @@ header {
 .abcEditor-utils{
   display: inline-flex;
   flex-flow: row wrap;
-  height: 28;
-  font-size: 28;
+  height: 24;
   margin: .5em 18px 6px 6px;
 }
 :is(.part-utils,.abcEditor-utils) span{
-  width: 22;
-  display: flex;
-  align-items: center;
+  height: 100%;
 }
 :is(.part-utils,.abcEditor-utils) span svg{
   fill: #333;
+  height: 100%;
 }
 
 :is(.part-utils,.abcEditor-utils) span:hover{
@@ -529,11 +527,14 @@ footer {
 
 #tunes_container :is(.part-utils, .abceditor-utils) span[tooltip]:hover:after{
   font-size: 14px;
-  width: 8.5em;
-  margin-left: calc(9.25em * -1 - 4px);
+  width: max-content;
   top: 0;
   padding: 2px 0.5em;
-  text-align: right;
+  margin-left: 2px;
+}
+#tunes_container .part-utils span[tooltip]:hover:after{
+  /* put tooltip on top of editor utils */
+  z-index: 2;
 }
 
 /* LOADING ICON */
