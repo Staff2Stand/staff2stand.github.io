@@ -303,7 +303,7 @@ $(function(){
             //do only once
             if (i===0) {
                 //show all parts (ignore editors)
-                $('.part').children('div').show()
+                $('.part').children('div:not(.abc-warnings)').show()
 
                 //Clear style attr of all abcjsContainer divs
                 //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
