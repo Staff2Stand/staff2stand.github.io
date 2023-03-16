@@ -533,7 +533,7 @@ footer {
   padding: 2px 0.5em;
   margin-left: 2px;
 }
-#tunes_container .part-utils span[tooltip]:hover:after{
+#tunes_container .part-utils{
   /* put tooltip on top of editor utils */
   z-index: 2;
 }
