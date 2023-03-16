@@ -533,6 +533,7 @@ footer {
   margin-left: calc(9.25em * -1 - 4px);
   top: 0;
   padding: 2px 0.5em;
+  text-align: right;
 }
 
 /* LOADING ICON */
