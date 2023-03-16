@@ -14,6 +14,8 @@
     header,
     .abc-warnings,
     .abcEditor,
+    .part-utils,
+    .abcEditor-utils,
     ::-webkit-scrollbar {
       display: none !important;
     }
