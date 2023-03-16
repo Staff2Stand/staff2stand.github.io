@@ -527,6 +527,14 @@ footer {
   margin-left: 32px;
 }
 
+#tunes_container :is(.part-utils, .abceditor-utils) span[tooltip]:hover:after{
+  font-size: 14px;
+  width: 8.5em;
+  margin-left: calc(9.25em * -1 - 4px);
+  top: 0;
+  padding: 2px 0.5em;
+}
+
 /* LOADING ICON */
 #page_content {
   position: relative;
