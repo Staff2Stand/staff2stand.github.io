@@ -295,7 +295,7 @@ $(function(){
 
             //if SHIFT CLICKing append txt to editors, then return
             if (e.shiftKey){
-                $instrEditor.val(currentEditorVal+newAbc).change()
+                $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
                 return
             }
 
@@ -360,12 +360,12 @@ $(function(){
         $('.abcEditor').each((i,editor) => $(editor).val('').change())
         $(".score_bookmark.current").removeClass("current")
     })
-    //toggle editors
+    //toggle editors (Edit Button)
     $('#show_editors').click(function(){        
         //show all hidden parts
-        $('.instrument_tunes:hidden').show().siblings('div').show()
+        $('.instrument_tunes:hidden').show().siblings('div:not(.abc-warnings)').show()
         //toggle editors
-        $('.abcEditor').slideToggle()
+        $('.abcEditor, .abc-warnings').slideToggle()
     })
 
 
@@ -438,7 +438,7 @@ $(function(){
             .html(partUtilsTemplate)
             //HIDE BUTTON / TOGGLE PART
             .find('.hide').click(function(){
-                $(this).closest('.part-utils').siblings('.instrument_tunes, .abc-warnings').toggle()
+                $(this).closest('.part-utils').siblings('.instrument_tunes').toggle()
             })
     })
 
