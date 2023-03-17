@@ -333,7 +333,13 @@ $(function(){
     $("#sidebar_toggle_container").on("click", () => {
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
-        $('#pageSize').attr('max', $('#page_content').width() )
+        //  and set value to account for same difference (200px)
+        const currentSliderValue = $('#pageSize').val()
+        const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
+        $('#pageSize').attr({
+            'max': $('#page_content').width(),
+            'value': sidebar_collapsed ? currentSliderValue+200 : currentSliderValue-200
+        })
     })
 
     /** SIDEBAR SECTION COLLAPSING */
