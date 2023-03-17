@@ -332,6 +332,8 @@ $(function(){
     /** SIDEBAR TOGGLE */
     $("#sidebar_toggle_container").on("click", () => {
         $("#main_container").toggleClass("sidebar_collapsed")
+        //set max val of pageSize slider, to account for change of page_content size
+        $('#pageSize').attr('max', $('#page_content').width() )
     })
 
     /** SIDEBAR SECTION COLLAPSING */
@@ -480,12 +482,15 @@ $(function(){
     //PAGE SIZE SLIDER
     const $pageContent = $('#page_content')
     const maxPageWidth = $pageContent.width()
-    $('#pageSize').on('input', e => {
-        const currentPageWidth = $pageContent.width()
-        const sliderVal = e.target.value
-        const newWidth = maxPageWidth * (sliderVal/100) + 'px'
-        $pageContent.css('width',newWidth)
-    })
+    $('#pageSize')
+        //set max val on slider to max page width
+        .attr('max',maxPageWidth)
+        //on input, set page width to slider val
+        .on('input', e => {
+            const sliderVal = e.target.value
+            const newWidth = sliderVal+'px'
+            $pageContent.css('width',newWidth)
+        })
         
 
 })
