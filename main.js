@@ -477,6 +477,7 @@ $(function(){
     /**
      * TOP BAR
      */
+    //PAGE SIZE SLIDER
     const $pageContent = $('#page_content')
     const maxPageWidth = $pageContent.width()
     $('#pageSize').on('input', e => {
