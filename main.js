@@ -483,7 +483,7 @@ $(function(){
     $('#pageSize').on('input', e => {
         const currentPageWidth = $pageContent.width()
         const sliderVal = e.target.value
-        const newWidth = maxPageWidth * (sliderVal/100) + '%'
+        const newWidth = maxPageWidth * (sliderVal/100) + 'px'
         $pageContent.css('width',newWidth)
     })
         
