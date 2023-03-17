@@ -332,15 +332,17 @@ $(function(){
     /** SIDEBAR TOGGLE */
     $("#sidebar_toggle_container").on("click", () => {
         const oldPageContentWidth = $('#page_content').width()
+        const scrollbarWidth = $('#page_content').outerWidth() - $('#page_content').width()
+        const collapseWidth = 200 - scrollbarWidth
+        const expandedPageWidth = oldPageContentWidth + collapseWidth
+        const contractedPageWidth = oldPageContentWidth - collapseWidth
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
-        //  and set value to account for same difference (200px)
-        const currentSliderValue = parseInt($('#pageSize').val())
         const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
         $('#pageSize')
             .attr({
-                'max': sidebar_collapsed ? oldPageContentWidth+200 : oldPageContentWidth-200,
-                'value': sidebar_collapsed ? currentSliderValue+200 : currentSliderValue-200
+                'max': sidebar_collapsed ? expandedPageWidth : contractedPageWidth,
+                'value': sidebar_collapsed ? expandedPageWidth : contractedPageWidth
             })
             .trigger('input')
     })
