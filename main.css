@@ -383,6 +383,14 @@ header {
   position: relative;
 }
 
+/* top bar */
+span:has(#pageSize){
+  width: 150px;
+}
+#pageSize{
+  width: 100%;
+}
+
 
 
 

@@ -473,6 +473,18 @@ $(function(){
                 copyTextToClipboard(textSingleLine)
             })
     })
+
+    /**
+     * TOP BAR
+     */
+    const $pageContent = $('#page_content')
+    const maxPageWidth = $pageContent.width()
+    $('#pageSize').on('input', e => {
+        const currentPageWidth = $pageContent.width()
+        const sliderVal = e.target.value
+        const newWidth = maxPageWidth * (sliderVal/100) + '%'
+        $pageContent.css('width',newWidth)
+    })
         
 
 })
