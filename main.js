@@ -149,19 +149,19 @@ $(function(){
 
             //check sharps in keysig
             const numKeysigSharps = $(pathel).parent().siblings('.abcjs-key-signature').find('path[data-name="accidentals.sharp"]').length
-            const sharps = ['F','C','G','D','A','E','B']
+            const sharps = ['f','c','g','d','a','e','b']
             const sharpsInKey = sharps.slice(0,numKeysigSharps)
 
             //check flats in keysig
             const numKeysigFlats = $(pathel).parent().siblings('.abcjs-key-signature').find('path[data-name="accidentals.flat"]').length
-            const flats = ['B','E','A','D','G','C','F']
+            const flats = ['b','e','a','d','g','c','f']
             const flatsInKey = flats.slice(0,numKeysigFlats)
 
             //define notename
             let noteName = $(pathel).attr('data-name')
             //check if note is in keysig
-            if (sharpsInKey.includes(noteName)) noteName = '^'+noteName
-            if (flatsInKey.includes(noteName)) noteName = '_'+noteName
+            if (sharpsInKey.includes(noteName.toLowerCase())) noteName = '^'+noteName
+            if (flatsInKey.includes(noteName.toLowerCase())) noteName = '_'+noteName
 
             //check string reference and add the correct string class
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
