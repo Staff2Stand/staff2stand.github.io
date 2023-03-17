@@ -335,7 +335,7 @@ $(function(){
         const scrollbarWidth = $('#page_content').outerWidth() - $('#page_content').width()
         const collapseWidth = 200 - 35 - scrollbarWidth //200 is full sidebar, 35 is sidebar buttons area
         const expandedPageWidth = oldPageContentWidth + collapseWidth
-        const contractedPageWidth = oldPageContentWidth - collapseWidth
+        const contractedPageWidth = oldPageContentWidth
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
         const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
