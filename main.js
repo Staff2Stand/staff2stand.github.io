@@ -331,7 +331,7 @@ $(function(){
 
     /** SIDEBAR TOGGLE */
     $("#sidebar_toggle_container").on("click", () => {
-        const oldPageContentWidth = $('#page_content').offsetWidth
+        const oldPageContentWidth = $('#page_content').outerWidth()
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
         //  and set value to account for same difference (200px)
@@ -490,7 +490,7 @@ $(function(){
      */
     //PAGE SIZE SLIDER
     const $pageContent = $('#page_content')
-    const maxPageWidth = $pageContent.offsetWidth
+    const maxPageWidth = $pageContent.outerWidth()
     $('#pageSize')
         //set max and val on slider to max page width
         .attr({
