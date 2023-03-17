@@ -331,7 +331,7 @@ $(function(){
 
     /** SIDEBAR TOGGLE */
     $("#sidebar_toggle_container").on("click", () => {
-        const oldPageContentWidth = $('#page_content').outerWidth()
+        const oldPageContentWidth = $('#page_content').width()
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
         //  and set value to account for same difference (200px)
