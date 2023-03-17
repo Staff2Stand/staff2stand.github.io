@@ -490,7 +490,10 @@ $(function(){
     const maxPageWidth = $pageContent.width()
     $('#pageSize')
         //set max val on slider to max page width
-        .attr('max',maxPageWidth)
+        .attr({
+            'max': maxPageWidth,
+            'value': maxPageWidth
+        })
         //on input, set page width to slider val
         .on('input', e => {
             const sliderVal = e.target.value
