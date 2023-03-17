@@ -334,12 +334,14 @@ $(function(){
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
         //  and set value to account for same difference (200px)
-        const currentSliderValue = $('#pageSize').val()
+        const currentSliderValue = parseInt($('#pageSize').val())
         const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
-        $('#pageSize').attr({
-            'max': $('#page_content').width(),
-            'value': sidebar_collapsed ? currentSliderValue+200 : currentSliderValue-200
-        })
+        $('#pageSize')
+            .attr({
+                'max': $('#page_content').width(),
+                'value': sidebar_collapsed ? currentSliderValue+200 : currentSliderValue-200
+            })
+            .trigger('input')
     })
 
     /** SIDEBAR SECTION COLLAPSING */
@@ -489,7 +491,7 @@ $(function(){
     const $pageContent = $('#page_content')
     const maxPageWidth = $pageContent.width()
     $('#pageSize')
-        //set max val on slider to max page width
+        //set max and val on slider to max page width
         .attr({
             'max': maxPageWidth,
             'value': maxPageWidth
