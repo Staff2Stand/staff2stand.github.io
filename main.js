@@ -331,6 +331,7 @@ $(function(){
 
     /** SIDEBAR TOGGLE */
     $("#sidebar_toggle_container").on("click", () => {
+        const oldPageContentWidth = parseInt($('#page_content').width())
         $("#main_container").toggleClass("sidebar_collapsed")
         //set max val of pageSize slider, to account for change of page_content size
         //  and set value to account for same difference (200px)
@@ -338,7 +339,7 @@ $(function(){
         const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
         $('#pageSize')
             .attr({
-                'max': $('#page_content').width(),
+                'max': sidebar_collapsed ? oldPageContentWidth+200 : oldPageContentWidth-200,
                 'value': sidebar_collapsed ? currentSliderValue+200 : currentSliderValue-200
             })
             .trigger('input')
