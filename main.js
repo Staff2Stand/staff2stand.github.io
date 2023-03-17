@@ -333,7 +333,7 @@ $(function(){
     $("#sidebar_toggle_container").on("click", () => {
         const oldPageContentWidth = $('#page_content').width()
         const scrollbarWidth = $('#page_content').outerWidth() - $('#page_content').width()
-        const collapseWidth = 200 - scrollbarWidth
+        const collapseWidth = 200 - 35 - scrollbarWidth //200 is full sidebar, 35 is sidebar buttons area
         const expandedPageWidth = oldPageContentWidth + collapseWidth
         const contractedPageWidth = oldPageContentWidth - collapseWidth
         $("#main_container").toggleClass("sidebar_collapsed")
