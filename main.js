@@ -316,8 +316,8 @@ $(function(){
                 //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
                 //  also empty editors so that clearing style attr doesn't cause all abcjs containers to overlap and cause that jumbled mess
                 $('.instrument_tunes .abcjs-container')
+                    .one('change',()=> $(this).attr('style',''))
                     .val('').change()
-                    .attr('style','')
             }
 
             //set editor to new abc string
