@@ -278,14 +278,17 @@ $(function(){
      * SCORE BOOKMARKS
      */
     $('.score_bookmark').click(function(e){
-        //show loading icon
-        //  which is notey playing violin
+        const $bkmk = $(this)
+
+        //if they clicked (not shift-click) the same score, return
+        const scoreAlreadyLoaded = $bkmk.hasClass('active')
+        if (!e.shiftKey && scoreAlreadyLoaded) return
+
+        //show notey playing violin
         $("#notey")
             .attr("class", "")
             .addClass("eyes-blinking looking-at-left-hand playing-violin")
             .fadeIn()
-        
-        const $bkmk = $(this)
         
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
@@ -302,17 +305,27 @@ $(function(){
 
             //do only once
             if (i===0) {
+                //remove active class from all bkmks
+                $('.score_bookmark.active').removeClass('active')
+
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
 
+
                 //Clear style attr of all abcjsContainer divs
                 //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
-                $('.instrument_tunes .abcjs-container').attr('style','')
+                //  also empty editors so that clearing style attr doesn't cause all abcjs containers to overlap and cause that jumbled mess
+                $('.instrument_tunes .abcjs-container')
+                    .val('').change()
+                    .attr('style','')
             }
 
-            //set editor to 
+            //set editor to new abc string
             $instrEditor.val(newAbc).change()
         })
+
+        //add active class to bkmk to indicate its already loaded
+        $bkmk.addClass('active')
     })
 
 

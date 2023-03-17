@@ -119,11 +119,10 @@ header {
 #sidebar .score_bookmark:hover::after {
   color: #888;
 }
-#sidebar .score_bookmark.current {
-  cursor: default;
+#sidebar .score_bookmark.active {
   color: #888;
 }
-#sidebar .score_bookmark.current:hover::after {
+#sidebar .score_bookmark.active:hover::after {
   color: #888;
 }
 
