@@ -42,7 +42,7 @@ header {
 /* sidebar toggle */
 #main_container,
 header,
-#sidebar_toggle_container {
+#sidebar_resize_handle_container {
   transition: all ease-in-out 0.4s;
 }
 #main_container {
@@ -126,7 +126,7 @@ header {
   color: #888;
 }
 
-#sidebar_toggle_container {
+#sidebar_resize_handle_container {
   cursor: pointer;
   position: absolute;
   top: 6px;
@@ -135,12 +135,12 @@ header {
   height: var(--hamburger-height);
   transform: rotateY(0deg);
 }
-.sidebar_collapsed #sidebar_toggle_container {
+.sidebar_collapsed #sidebar_resize_handle_container {
   transform: rotateY(180deg);
 }
-#sidebar_toggle,
-#sidebar_toggle::before,
-#sidebar_toggle::after {
+#sidebar_resize_handle,
+#sidebar_resize_handle::before,
+#sidebar_resize_handle::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -149,19 +149,20 @@ header {
   border-radius: var(--hamburger-line-height);
   top: calc(50% - var(--hamburger-line-height) / 2);
 }
-#sidebar_toggle::before {
+#sidebar_resize_handle::before {
   transform: rotateZ(45deg);
   width: 75%;
   left: -4px;
   top: calc(var(--hamburger-line-height) * 2 - 4px);
 }
-#sidebar_toggle::after {
+#sidebar_resize_handle::after {
   top: unset;
   transform: rotateZ(-45deg);
   width: 75%;
   left: -4px;
   bottom: calc(var(--hamburger-line-height) * 2 - 4px);
 }
+
 /* sidebar buttons */
 #sidebar_buttons {
   position: absolute;
