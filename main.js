@@ -348,7 +348,7 @@ $(function(){
     }) */
     $('#sidebar').resizable({
         handles: 'e',
-        // alsoResizeReverse: '#page#content'
+        // alsoResizeReverse: '#page_content'
         alsoResizeReverse: '#tunes_container'
     })
 
