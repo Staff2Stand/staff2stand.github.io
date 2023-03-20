@@ -15,21 +15,19 @@ body {
 
 /* LAYOUT */
 #main_container {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "sidebar page_content";
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: var(--header_height) calc(100vh - var(--header_height));
+  display: flex;
+  flex-flow: column wrap;
   position: relative;
   width: 100%;
+  height: 100vh;
   left: 0;
 }
 header {
-  grid-area: header;
+  width: 100%;
 }
 #page_content {
-  grid-area: page_content;
+  flex-grow: 1;
+  align-self: stretch;
   overflow-y: scroll;
   position: relative;
   display: flex;
@@ -37,24 +35,10 @@ header {
   justify-content: space-between;
 }
 #sidebar {
-  grid-area: sidebar;
+  width: 200px;
 }
-/* sidebar toggle */
-#main_container,
-header,
-#sidebar_resize_handle_container {
-  transition: all ease-in-out 0.4s;
-}
-#main_container {
-  --slide_amount: calc(200px - 35px);
-}
-#main_container.sidebar_collapsed {
-  left: calc(var(--slide_amount) * -1);
-  width: calc(100% + var(--slide_amount));
-}
-#main_container.sidebar_collapsed header {
-  /* % is now relative to the new main_container width, so we're using 20vw bc 20% of the old main_container width === 20vw */
-  padding-left: calc(var(--slide_amount) + var(--header_content_padding));
+footer{
+  width: 100%;
 }
 
 /* HEADER */
