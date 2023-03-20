@@ -43,9 +43,6 @@ header {
   #tunes_container{
     flex-grow: 1;
   }
-  footer{
-    /* width: 100%; */
-  }
 
 /* HEADER */
 header {
