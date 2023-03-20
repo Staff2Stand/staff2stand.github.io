@@ -332,7 +332,7 @@ $(function(){
     /** SIDEBAR TOGGLE */
     $('#sidebar').resizable({
         handles: {
-            'e':'#sidebar_resize_handle_container'
+            'e':'#sidebar_resize_handle'
         },
         minWidth: 35,
         alsoResizeReverse: '#page_content'

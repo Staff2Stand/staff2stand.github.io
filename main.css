@@ -108,23 +108,12 @@ header {
   color: #888;
 }
 
-#sidebar_resize_handle_container {
-  cursor: ew-resize;
-  position: absolute;
-  top: 6px;
-  right: 3px;
-  width: 30px;
-  color: #fff;
-}
-#sidebar_resize_handle svg{
-  fill: #fff;
-}
 
 /* sidebar buttons */
 #sidebar_buttons {
-  position: absolute;
-  right: 0;
-  top: 40px;
+  position: sticky;
+  float: right;
+  top: calc(var(--header_height) + 40px);
   width: 32px;
   display: flex;
   flex-flow: column wrap;
@@ -140,6 +129,14 @@ header {
 }
 #sidebar_buttons .spaceAbove {
   margin-top: 1em;
+}
+
+/* Sidebar Resize Handle */
+#sidebar_resize_handle {
+  cursor: ew-resize;
+}
+#sidebar_resize_handle svg{
+  fill: #fff;
 }
 
 /* Print */
