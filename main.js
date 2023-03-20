@@ -347,7 +347,9 @@ $(function(){
             .trigger('input')
     }) */
     $('#sidebar').resizable({
-        handles: 'e',
+        handles: {
+            'e':'#sidebar_resize_handle'
+        },
         // alsoResizeReverse: '#page_content'
         alsoResizeReverse: '#tunes_container'
     })

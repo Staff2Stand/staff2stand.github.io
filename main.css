@@ -127,40 +127,10 @@ header {
 }
 
 #sidebar_resize_handle_container {
-  cursor: pointer;
+  cursor: ew-resize;
   position: absolute;
   top: 6px;
   right: 6px;
-  width: calc(var(--hamburger-line-height) * 5);
-  height: var(--hamburger-height);
-  transform: rotateY(0deg);
-}
-.sidebar_collapsed #sidebar_resize_handle_container {
-  transform: rotateY(180deg);
-}
-#sidebar_resize_handle,
-#sidebar_resize_handle::before,
-#sidebar_resize_handle::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: var(--hamburger-line-height);
-  background-color: #fff;
-  border-radius: var(--hamburger-line-height);
-  top: calc(50% - var(--hamburger-line-height) / 2);
-}
-#sidebar_resize_handle::before {
-  transform: rotateZ(45deg);
-  width: 75%;
-  left: -4px;
-  top: calc(var(--hamburger-line-height) * 2 - 4px);
-}
-#sidebar_resize_handle::after {
-  top: unset;
-  transform: rotateZ(-45deg);
-  width: 75%;
-  left: -4px;
-  bottom: calc(var(--hamburger-line-height) * 2 - 4px);
 }
 
 /* sidebar buttons */
