@@ -330,26 +330,11 @@ $(function(){
 
 
     /** SIDEBAR TOGGLE */
-    /* $("#sidebar_toggle_container").on("click", () => {
-        const oldPageContentWidth = $('#page_content').width()
-        const scrollbarWidth = $('#page_content').outerWidth() - $('#page_content').width()
-        const collapseWidth = 200 - scrollbarWidth
-        const expandedPageWidth = oldPageContentWidth + collapseWidth
-        const contractedPageWidth = oldPageContentWidth - collapseWidth
-        $("#main_container").toggleClass("sidebar_collapsed")
-        //set max val of pageSize slider, to account for change of page_content size
-        const sidebar_collapsed = $('#main_container').hasClass('sidebar_collapsed')
-        $('#pageSize')
-            .attr({
-                'max': sidebar_collapsed ? expandedPageWidth : contractedPageWidth,
-                'value': sidebar_collapsed ? expandedPageWidth : contractedPageWidth
-            })
-            .trigger('input')
-    }) */
     $('#sidebar').resizable({
         handles: {
             'e':'#sidebar_resize_handle_container'
         },
+        minWidth: 35,
         alsoResizeReverse: '#page_content'
     })
 

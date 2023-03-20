@@ -246,33 +246,6 @@ header {
   );
 }
 
-/* SCORE INFO */
-.score_info {
-  padding: 0 15px;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: #fff;
-}
-.title,
-.subtitle,
-.composer {
-  font-family: "Lucida Sans";
-}
-.title,
-.subtitle {
-  text-align: center;
-}
-.composer {
-  text-align: right;
-}
-
-.score_info.stuck {
-  box-shadow: -6px 0px 6px 6px #333;
-}
-
-
-
 /* PARTS */
 .abcEditor{
   width: calc(100% - 12px);
@@ -293,7 +266,7 @@ header {
   height: 2em;
   background: #fff;
   position: sticky;
-  top: 0;
+  top: var(--header_height);
   z-index: 1;
 }
 
@@ -330,7 +303,7 @@ header {
 
 .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
   position: sticky;
-  top: 0;
+  top: var(--header_height);
   z-index: 1;
 }
 .part .abcEditor {
