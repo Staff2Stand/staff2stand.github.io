@@ -23,29 +23,29 @@ body {
   flex-flow: row wrap;
 }
 header {
-  /* width: 100%; */
+  width: 100%;
 }
 #sidebar_and_content_container{
   flex-grow: 1;
+  display: flex;
 }
 #sidebar {
   width: 200px;
   height: calc(100vh - var(--header_height));
-  display: inline-block;
 }
 #page_content {
   overflow-y: scroll;
   position: relative;
-  display: inline-block;
   width: calc(100% - 235px);
-  height: calc(100vh - var(--header_height));
+  display: flex;
+  flex-flow: column;
 }
-#tunes_container{
-  
-}
-footer{
-  /* width: 100%; */
-}
+  #tunes_container{
+    flex-grow: 1;
+  }
+  footer{
+    /* width: 100%; */
+  }
 
 /* HEADER */
 header {
