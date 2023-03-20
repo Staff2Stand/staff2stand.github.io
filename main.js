@@ -329,7 +329,7 @@ $(function(){
     })
 
 
-    /** SIDEBAR TOGGLE */
+    /** SIDEBAR RESIZE */
     $('#sidebar').resizable({
         handles: {
             e: $('#sidebar_resize_handle').get(0)
@@ -337,6 +337,19 @@ $(function(){
         minWidth: 35,
         alsoResizeReverse: '#page_content'
     })
+    //hide bookmark sections if the sidebar is resized below 43px
+    //  this prevents the bookmarks from jumping below the sidebar buttons and screwing up the layout
+    $( "#sidebar" ).on( "resize", function( event, ui ) {
+        const sidebarWidth = $('#sidebar').width()
+        if (sidebarWidth < 43) {
+            $('.score_bookmark_section').hide()
+            return
+        }
+        //sidebar width is >= 43
+        $('.score_bookmark_section').show()
+    })
+
+
 
     /** SIDEBAR SECTION COLLAPSING */
     //add height to subtract prop
