@@ -113,7 +113,7 @@ header {
 #sidebar_buttons {
   position: sticky;
   float: right;
-  top: calc(var(--header_height) + 40px);
+  top: var(--header_height);
   width: 32px;
   display: flex;
   flex-flow: column wrap;
