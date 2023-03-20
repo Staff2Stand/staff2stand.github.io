@@ -348,8 +348,9 @@ $(function(){
     }) */
     $('#sidebar').resizable({
         handles: {
-            'e':'#sidebar_resize_handle'
+            'e':'#sidebar_resize_handle_container'
         },
+        minWidth: 37,
         // alsoResizeReverse: '#page_content'
         alsoResizeReverse: '#tunes_container'
     })
