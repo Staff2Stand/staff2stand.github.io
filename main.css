@@ -30,7 +30,7 @@ header {
   display: flex;
 }
 #sidebar {
-  width: 200px;
+  width: 235px;
   height: calc(100vh - var(--header_height));
 }
 #page_content {
@@ -61,7 +61,7 @@ header {
 
   color: #fff;
   position: relative;
-  padding-right: 35px;
+  padding-right: 0;
   padding-left: 0;
   user-select: none;
   -webkit-user-select: none;
@@ -80,7 +80,7 @@ header {
 #sidebar .score_bookmark_section {
   --height: auto;
   height: var(--height);
-  width: calc(100% - 14px);
+  width: calc(100% - 14px - 35px);
   list-style-type: none;
   margin: 0;
   margin-top: 12px;
