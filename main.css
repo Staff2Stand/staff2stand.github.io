@@ -133,7 +133,7 @@ header {
 
 /* Sidebar Resize Handle */
 #sidebar_resize_handle {
-  cursor: ew-resize;
+  cursor: ew-resize !important;
 }
 #sidebar_resize_handle svg{
   fill: #fff;
