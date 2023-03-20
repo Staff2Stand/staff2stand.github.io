@@ -351,8 +351,7 @@ $(function(){
             'e':'#sidebar_resize_handle_container'
         },
         minWidth: 35,
-        // alsoResizeReverse: '#page_content'
-        alsoResizeReverse: '#tunes_container'
+        alsoResizeReverse: '#page_content'
     })
 
     /** SIDEBAR SECTION COLLAPSING */
