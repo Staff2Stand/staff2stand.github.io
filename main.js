@@ -350,7 +350,7 @@ $(function(){
         handles: {
             'e':'#sidebar_resize_handle_container'
         },
-        minWidth: 37,
+        minWidth: 35,
         // alsoResizeReverse: '#page_content'
         alsoResizeReverse: '#tunes_container'
     })
