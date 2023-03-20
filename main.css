@@ -15,30 +15,31 @@ body {
 
 /* LAYOUT */
 #main_container {
-  display: flex;
-  flex-flow: column wrap;
   position: relative;
   width: 100%;
   height: 100vh;
   left: 0;
 }
 header {
-  width: 100%;
-}
-#page_content {
-  flex-grow: 1;
-  align-self: stretch;
-  overflow-y: scroll;
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+  /* width: 100%; */
 }
 #sidebar {
   width: 200px;
+  height: calc(100vh - var(--header_height));
+  display: inline-block;
+}
+#page_content {
+  overflow-y: scroll;
+  position: relative;
+  display: inline-block;
+  width: calc(100% - 235px);
+  height: calc(100vh - var(--header_height));
+}
+#tunes_container{
+  
 }
 footer{
-  width: 100%;
+  /* width: 100%; */
 }
 
 /* HEADER */
@@ -54,16 +55,12 @@ header {
 
 /* SIDEBAR */
 #sidebar {
-  --hamburger-line-height: 5px;
-  --hamburger-height: calc(var(--hamburger-line-height) * 7);
-  --left_margin: 0px;
-
   background: linear-gradient(270deg, #333 0 35px, #222 35px 100%);
 
   color: #fff;
   position: relative;
-  padding-right: calc(var(--hamburger-height) + var(--left_margin));
-  padding-left: var(--left_margin);
+  padding-right: 35px;
+  padding-left: 0;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -344,9 +341,6 @@ header {
 }
 
 /* top bar */
-span:has(#pageSize){
-  
-}
 #pageSize{
   width: 150px;
 }
