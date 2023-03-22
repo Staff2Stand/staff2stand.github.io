@@ -303,28 +303,24 @@ $(function(){
                 return
             }
 
-            //do only once
+            //do only once (rather than for each instrument)
             if (i===0) {
                 //remove active class from all bkmks
                 $('.score_bookmark.active').removeClass('active')
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
-
-
-                //Clear style attr of all abcjsContainer divs
-                //  Otherwise it retains the styles even if its not being used, creating a lot of empty white space
-                //  also empty editors so that clearing style attr doesn't cause all abcjs containers to overlap and cause that jumbled mess
-                $('.instrument_tunes .abcjs-container')
-                    .one('change',()=> $(this).attr('style',''))
-                    .val('').change()
             }
 
             //set editor to new abc string
             $instrEditor.val(newAbc).change()
         })
 
-        //add active class to bkmk to indicate its already loaded
+        //Clear style attr of all abcjsContainer divs
+        //  Otherwise they retain the styles even if its not being used, creating a lot of empty white space
+        $('.instrument_tunes .abcjs-container:empty').attr('style','')
+
+        //Add active class to bkmk to indicate its already loaded
         $bkmk.addClass('active')
     })
 
@@ -344,10 +340,6 @@ $(function(){
         const $bkmkSections = $('.score_bookmark_section')
         //hide/show bkmk sections at sidebar width of 43px
         sidebarWidth < 43 ? $bkmkSections.hide() : $bkmkSections.show()
-
-        // const $tunesContainer = $('#tunes_container')
-        // const $pagecontent = $('#page_content')
-        // if ($tunesContainer.height() > $pageContent.height()) $pageContent.css('height','')
     })
 
 
@@ -575,7 +567,6 @@ $.ui.plugin.add("resizable", "alsoResizeReverse", {
             os = that.originalSize,
             op = that.originalPosition,
             delta = {
-                // height: (that.size.height - os.height) || 0,
                 width: (that.size.width - os.width) || 0,
                 top: (that.position.top - op.top) || 0,
                 left: (that.position.left - op.left) || 0
@@ -584,7 +575,6 @@ $.ui.plugin.add("resizable", "alsoResizeReverse", {
         $(o.alsoResizeReverse).each(function() {
             var el = $(this), start = $(this).data("ui-resizable-alsoresize-reverse"), style = {},
                 css = el.parents(ui.originalElement[0]).length ?
-                    // [ "width", "height" ] :
                     [ "width" ] :
                     [ "width", "height", "top", "left" ];
 
