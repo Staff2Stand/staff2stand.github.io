@@ -318,7 +318,7 @@ $(function(){
 
         //Clear style attr of all empty abcjsContainer divs
         //  Otherwise they retain the styles even if its not being used, creating a lot of empty white space
-        $('.abcjs-container:not(:has(*))').attr('style','')
+        $('.abcjs-container:not(:has(svg))').attr('style','')
 
         //Add active class to bkmk to indicate its already loaded
         $bkmk.addClass('active')
