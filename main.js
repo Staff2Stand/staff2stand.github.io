@@ -123,11 +123,18 @@ $(function(){
     var observer = new MutationObserver(function(mutationsList, observer) {
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
+        
         //add highlights and such to each target
         targets.forEach(function(target){
             addStringClassesToNoteHeads(target)
             addFingeringsAndNoteNames(target)
         })
+
+        //Clear style attr of all empty abcjsContainer divs
+        //  Otherwise they retain the styles even if its not being used, creating a lot of empty white space
+        $('.abcjs-container:not(:has(svg))').attr('style','')
+        
+        //fade out notey
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
     const observerOpts = {characterData:false, childList:true, attributes:false}
@@ -315,10 +322,6 @@ $(function(){
             //set editor to new abc string
             $instrEditor.val(newAbc).change()
         })
-
-        //Clear style attr of all empty abcjsContainer divs
-        //  Otherwise they retain the styles even if its not being used, creating a lot of empty white space
-        $('.abcjs-container:not(:has(svg))').attr('style','')
 
         //Add active class to bkmk to indicate its already loaded
         $bkmk.addClass('active')
