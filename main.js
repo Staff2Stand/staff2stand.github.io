@@ -488,6 +488,11 @@ $(function(){
     })
 
     /**
+     * INITIALIZE TOOLTIPS
+     */
+    $(document).tooltip()
+
+    /**
      * TOP BAR
      */
     //PAGE SIZE SLIDER
