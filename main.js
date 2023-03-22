@@ -341,12 +341,13 @@ $(function(){
     //  this prevents the bookmarks from jumping below the sidebar buttons and screwing up the layout
     $( "#sidebar" ).on( "resize", function( event, ui ) {
         const sidebarWidth = $('#sidebar').width()
-        if (sidebarWidth < 43) {
-            $('.score_bookmark_section').hide()
-            return
-        }
-        //sidebar width is >= 43
-        $('.score_bookmark_section').show()
+        const $bkmkSections = $('.score_bookmark_section')
+        //hide/show bkmk sections at sidebar width of 43px
+        sidebarWidth < 43 ? $bkmkSections.hide() : $bkmkSections.show()
+
+        // const $tunesContainer = $('#tunes_container')
+        // const $pagecontent = $('#page_content')
+        // if ($tunesContainer.height() > $pageContent.height()) $pageContent.css('height','')
     })
 
 
@@ -574,7 +575,7 @@ $.ui.plugin.add("resizable", "alsoResizeReverse", {
             os = that.originalSize,
             op = that.originalPosition,
             delta = {
-                height: (that.size.height - os.height) || 0,
+                // height: (that.size.height - os.height) || 0,
                 width: (that.size.width - os.width) || 0,
                 top: (that.position.top - op.top) || 0,
                 left: (that.position.left - op.left) || 0
@@ -583,7 +584,8 @@ $.ui.plugin.add("resizable", "alsoResizeReverse", {
         $(o.alsoResizeReverse).each(function() {
             var el = $(this), start = $(this).data("ui-resizable-alsoresize-reverse"), style = {},
                 css = el.parents(ui.originalElement[0]).length ?
-                    [ "width", "height" ] :
+                    // [ "width", "height" ] :
+                    [ "width" ] :
                     [ "width", "height", "top", "left" ];
 
             $.each(css, function(i, prop) {
