@@ -134,6 +134,11 @@ header {
 /* Sidebar Resize Handle */
 #sidebar_resize_handle {
   cursor: ew-resize !important;
+  /* unset the following, because jquery ui sets them and messes up the layout */
+  right: unset;
+  top: unset;
+  position: unset;
+  font-size: unset;
 }
 #sidebar_resize_handle svg{
   fill: #fff;

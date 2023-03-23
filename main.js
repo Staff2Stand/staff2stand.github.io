@@ -490,7 +490,10 @@ $(function(){
     /**
      * INITIALIZE TOOLTIPS
      */
-    $(document).tooltip()
+    $(document).tooltip({
+        track: true,
+        my: "left center"
+    })
 
     /**
      * TOP BAR
