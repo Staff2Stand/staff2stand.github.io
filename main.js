@@ -513,12 +513,40 @@ $(function(){
             const newWidth = sliderVal+'px'
             $pageContent.css('width',newWidth)
         })
-        
+    
+    /**
+     * SAVE SCORE
+     */
+    $('#saveCurrent').click(()=>{
+        const filename = 'test'
+        const contents = JSON.stringify('this is a test')
+        saveFile(filename,contents)
+    })
 
+    /**
+     * LOAD SCORE(S)
+     */
+    const fileReader = new FileReader()
+    // when the file has finished reading, store it's contents to a variable (async)
+    fileReader.onload = function( ev ) {
+        const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
+        // execute follow-up work here...
+        console.log('file contents: ',contents)
+    }
+    // when the file input changes (ie: user selects a file)
+    $('#loadScores input').on("change", function() {
+        // get the file item from the input field
+        const file = this.files[0]
+        // read the file as text
+        fileReader.readAsText( file )
+        // and then then the fileReader's load event will trigger (see above)
+    })
 })
 
 
-
+/**
+ * COPY TEXT TO CLIPBOARD 
+ */
 function fallbackCopyTextToClipboard(text) {
     var textArea = document.createElement("textarea");
     textArea.value = text;
@@ -604,3 +632,25 @@ $.ui.plugin.add("resizable", "alsoResizeReverse", {
         $(this).removeData("resizable-alsoresize-reverse");
     }
 });
+
+/** 
+ * SAVE
+ * @param {string} filename
+ * @param {JSON} stringified_contents
+ */
+function saveFile(filename,stringified_contents){
+    // create a link DOM fragment
+    var $link = $("<a />");  
+    // encode any special characters in the JSON
+    var text = encodeURIComponent( stringified_contents );
+
+    // <a download="filename.txt" href='data:application/octet-stream,...'></a>
+    $link
+        .attr( "download", filename+".s2s" )
+        .attr( "href", "data:application/octet-stream," + text )
+        .appendTo( "body" )
+        .get(0)
+        .click()
+    
+    console.log('file downloaded',filename,stringified_contents)
+}
