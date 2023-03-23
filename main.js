@@ -534,7 +534,7 @@ $(function(){
         console.log('file contents: ',contents)
     }
     // when the file input changes (ie: user selects a file)
-    $('#loadScores input').on("change", function() {
+    $('#loadScores').on("change", function() {
         // get the file item from the input field
         const file = this.files[0]
         // read the file as text

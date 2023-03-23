@@ -66,6 +66,12 @@ header {
 #header_buttons span:hover{
   outline: 4px solid;
 }
+#loadScoresContainer{
+
+}
+#loadScores{
+  width: 0;
+}
 
 
 /* SIDEBAR */
