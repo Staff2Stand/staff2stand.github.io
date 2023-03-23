@@ -61,6 +61,7 @@ header {
   border-radius: 4px;
   padding: 1px 6px;
   margin: 0 10px;
+  transition: all 50ms;
 }
 #header_buttons span:hover{
   outline: 4px solid;
