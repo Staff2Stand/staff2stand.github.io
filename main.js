@@ -518,9 +518,17 @@ $(function(){
      * SAVE SCORE
      */
     $('#saveCurrent').click(()=>{
-        
+        //get the abcstring for each instrument
+        contentsObj = {}
+        instruments.forEach(function(instrument){
+            contentsObj['abc'+instrument] = $('#editor-'+instrument).val().replace(/\n/gm,'\\n')
+        })
+
+        //ask user for a filename
         const filename = 'test'
-        const contents = JSON.stringify('this is a test')
+        contentsObj['_title'] = filename
+
+        const contents = JSON.stringify(contentsObj)
         saveFile(filename,contents)
     })
 
