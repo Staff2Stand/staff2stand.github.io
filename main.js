@@ -518,6 +518,7 @@ $(function(){
      * SAVE SCORE
      */
     $('#saveCurrent').click(()=>{
+        
         const filename = 'test'
         const contents = JSON.stringify('this is a test')
         saveFile(filename,contents)
