@@ -52,7 +52,19 @@ header {
   color: #fff;
   padding: var(--header_content_padding);
   height: var(--header_content_height);
+  display: flex;
+  justify-content: space-between;
 }
+#header_buttons{
+
+}
+#header_buttons span{
+  cursor: pointer;
+  outline: 2px solid;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
 
 /* SIDEBAR */
 #sidebar {

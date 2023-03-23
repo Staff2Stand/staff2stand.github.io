@@ -4,7 +4,6 @@
         <link rel="stylesheet" href="abcjs-audio.css" />
         <link rel="stylesheet" href="main.css" />
         <link rel="stylesheet" type="text/css" media="print" href="print.css" />
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
         <script src="jquery-ui/external/jquery/jquery.js"></script>
         <script src="jquery-ui/jquery-ui.js"></script>
         <script src="abcjs.js"></script>
@@ -107,9 +106,11 @@
       <div id="main_container">
         <header id="top_bar">
           <span id="logo">Staff To Stand</span>
-          <span>Save Current</span>
-          <span>Save All</span>
-          <span>Load Score(s)</span>
+          <div id="header_buttons">
+            <span id="saveCurrent">Save Current</span>
+            <span id="saveAll">Save All</span>
+            <span id="loadScores">Load Score(s)</span>
+          </div>
           <span style="float:right;font-size:12;color:gray;">V 0.0.117</span>
         </header>
     
