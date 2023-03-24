@@ -69,6 +69,9 @@ header {
 #loadScores{
   width: 0;
 }
+#loadScoresContainer label{
+  cursor: pointer;
+}
 
 #fileName{
   width: 150px;
