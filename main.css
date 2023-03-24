@@ -133,6 +133,14 @@ header {
   color: #888;
 }
 
+/* if my scores is empty */
+#myScores:not(:has(li)) h1:after {
+  content: 'Your saved scores will appear here.';
+  display: block;
+  font-weight: normal;
+  color: #999;
+}
+
 
 /* sidebar buttons */
 #sidebar_buttons {
