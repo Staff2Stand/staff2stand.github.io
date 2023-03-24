@@ -609,6 +609,7 @@ $(function(){
 
     // when the file input changes (ie: user selects a file)
     $('#loadScores').on("change", function() {
+        console.log('loading file')
         // get the file item from the input field
         const file = this.files[0]
         // read the file as text
