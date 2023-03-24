@@ -515,33 +515,87 @@ $(function(){
         })
     
     /**
-     * SAVE SCORE
+     * SAVE CURRENT
+     * save the current value of the abc editors as an object as json
      */
     $('#saveCurrent').click(()=>{
         //get the abcstring for each instrument
         contentsObj = {}
         instruments.forEach(function(instrument){
-            contentsObj['abc'+instrument] = $('#editor-'+instrument).val().replace(/\n/gm,'\\n')
+            contentsObj['abc-'+instrument] = $('#editor-'+instrument).val().replace(/\n/gm,'\\n')
         })
 
         //ask user for a filename
         const filename = 'test'
         contentsObj['_title'] = filename
 
-        const contents = JSON.stringify(contentsObj)
+        const contentsArray = [contentsObj]
+
+        const contents = JSON.stringify(contentsArray)
         saveFile(filename,contents)
     })
 
     /**
+     * SAVE ALL
+     * save all the scores in the My Scores section
+     */
+    $('#saveAll').click(()=>{
+        const $myScores = $('#myScores li.score_bookmark')
+        //essentially same as save current except
+        //  - _title prop is gotten from each bkmk
+
+        if ($myScores.length === 0) {
+            console.warn('my scores section is empty')
+            return
+        }
+
+        const contentsArray = []
+
+        //create an obj of all attributes of each score and push it to contentsArray
+        $myScores.each(function(){
+            const contentsObj = {}
+            $.each(this.attributes,function(i,attr){
+                contentsObj[attr.name] = attr.value
+            })
+            contentsArray.push(contentsObj)
+        })
+
+        const filename = 'test'
+
+        //stringify and save
+        const contents = JSON.stringify(contentsArray)
+        saveFile(filename,contents)
+        
+    })
+
+    /**
      * LOAD SCORE(S)
+     * 
      */
     const fileReader = new FileReader()
-    // when the file has finished reading, store it's contents to a variable (async)
+    // when the file has finished reading
     fileReader.onload = function( ev ) {
+        //validate the file extension
+
+        //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
-        // execute follow-up work here...
-        console.log('file contents: ',contents)
+        //  if the length of the array is empty, throw an error
+
+        //append each score in the contents array to the My Scores section
+        const $myScores = $('#myScores')
+        contents.forEach((scoreData)=>{
+            let bkmkHTML = `<li class="score_bookmark"`
+            for (const prop in scoreData){
+                bkmkHTML += ` ${prop}="${scoreData[prop]}"`
+            }
+            bkmkHTML += `></li>`
+            $myScores.append(bkmkHTML)
+        })
+
+        //if the contents array only contains 1 score, load the score by simulating click event on the bkmk
+        if (contents.length === 1) $myScores.last().click()
     }
+
     // when the file input changes (ie: user selects a file)
     $('#loadScores').on("change", function() {
         // get the file item from the input field
