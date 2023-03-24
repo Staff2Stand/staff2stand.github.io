@@ -546,7 +546,7 @@ $(function(){
         if ($myScores.length === 0) {
             console.warn('my scores section is empty')
             $('#dialog')
-                .attr('title','My Scores Section is Empty')
+                .dialog('option','title','My Scores Section is Empty')
                 .html('Click the "Save" button to save the current score to the My Scores section.')
                 .dialog('open')
             return
@@ -581,7 +581,16 @@ $(function(){
 
         //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
+        console.log(contents)
+
         //  if the length of the array is empty, throw an error
+        if (contents.length === 0){
+            $('#dialog')
+                .dialog('option','title','File contents error')
+                .html('There was an error with the file contents.')
+                .dialog('open')
+            return
+        }
 
         //append each score in the contents array to the My Scores section
         const $myScores = $('#myScores')
