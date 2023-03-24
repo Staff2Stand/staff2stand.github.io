@@ -70,6 +70,10 @@ header {
   width: 0;
 }
 
+#fileName{
+  width: 150px;
+}
+
 
 /* SIDEBAR */
 #sidebar {

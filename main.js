@@ -514,6 +514,7 @@ $(function(){
             $pageContent.css('width',newWidth)
         })
     
+
     /**
      * SAVE CURRENT
      * save the current value of the abc editors as an object as json
@@ -526,7 +527,7 @@ $(function(){
         })
 
         //ask user for a filename
-        const filename = 'test'
+        const filename = $('#fileName').val() || 'MyScore'
         contentsObj['_title'] = filename
 
         const contentsArray = [contentsObj]
@@ -541,11 +542,13 @@ $(function(){
      */
     $('#saveAll').click(()=>{
         const $myScores = $('#myScores li.score_bookmark')
-        //essentially same as save current except
-        //  - _title prop is gotten from each bkmk
-
+        
         if ($myScores.length === 0) {
             console.warn('my scores section is empty')
+            $('#dialog')
+                .attr('title','My Scores Section is Empty')
+                .html('Click the "Save" button to save the current score to the My Scores section.')
+                .dialog('open')
             return
         }
 
@@ -560,12 +563,11 @@ $(function(){
             contentsArray.push(contentsObj)
         })
 
-        const filename = 'test'
+        const filename = $('#fileName').val() || 'MyScores'
 
         //stringify and save
         const contents = JSON.stringify(contentsArray)
         saveFile(filename,contents)
-        
     })
 
     /**
@@ -604,7 +606,24 @@ $(function(){
         fileReader.readAsText( file )
         // and then then the fileReader's load event will trigger (see above)
     })
-})
+
+
+    /**
+     * DIALOG OPTIONS
+     */
+    $('#dialog').dialog({
+        autoOpen: false,
+        buttons: [
+            {
+              text: "Ok",
+              click: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+        ]
+    })
+
+}) //end on page load
 
 
 /**
