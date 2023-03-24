@@ -284,7 +284,7 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-    $('.score_bookmark').click(function(e){
+    $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
 
         //if they clicked (not shift-click) the same score, return
