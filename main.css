@@ -295,6 +295,10 @@ header {
   padding: 2px 6px;
   display: none;
 }
+.abc-warnings:not(:has(span)) {
+  /* hide warnings if there aren't any warnings */
+  display: none !important;
+}
 
 .part .part-top-bg{
   width: 100%;
