@@ -602,7 +602,7 @@ $(function(){
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
         const unsavedchanges = $('.abcEditor.abc_textarea_dirty').length > 0
-        if ( unsavedchanges ) return
+        if ( !unsavedchanges ) return
 
         let canceled = false
         $('#dialog')
