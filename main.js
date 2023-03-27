@@ -599,6 +599,34 @@ $(function(){
         // and then then the fileReader's load event will trigger (see above)
     })
 
+    //if there are unsaved changes, prompt user asking if its okay to continue
+    $('#loadScores').on('click',function(e){
+        let canceled = false
+        $('#dialog')
+            .dialog('option','title','Unsaved Changes')
+            .html('You have unsaved changes. Do you wish to continue?')
+            .dialog('option','buttons',[
+                {
+                    text: 'Cancel',
+                    click: function(){
+                        $(this).dialog('close')
+                        canceled = true
+                    }
+                },{
+                    text: 'Continue',
+                    click: function(){
+                        $(this).dialog('close')
+                    }
+                }
+            ])
+            .dialog('open')
+        
+        if (canceled) {
+            e.preventDefault()
+            e.stopPropagation()
+        }
+    })
+
 
     /**
      * DIALOG OPTIONS
