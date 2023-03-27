@@ -513,10 +513,10 @@ $(function(){
         
         if ($myScores.length === 0) {
             console.warn('my scores section is empty')
-            $('#dialog')
-                .dialog('option','title','My Scores Section is Empty')
-                .html('Click the "Save" button to save the current score to the My Scores section.')
-                .dialog('open')
+            openDialog(
+                'My Scores Section is Empty',
+                'Click the "Save" button to save the current score to the My Scores section.'
+            )
             return
         }
 
@@ -553,10 +553,10 @@ $(function(){
 
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
-            $('#dialog')
-                .dialog('option','title','File contents error')
-                .html('There was an error with the file contents.')
-                .dialog('open')
+            openDialog(
+                'File contents error',
+                'There was an error with the file contents.'
+            )
             return
         }
 
@@ -587,10 +587,10 @@ $(function(){
         //validate file extension and type
         const validExtension = /.s2s$/g.test(file.name)
         if( !validExtension ) {
-            $('#dialog')
-                .dialog('option','title','Invalid File Extension')
-                .html('Please upload a .s2s (staff to string) file')
-                .dialog('open')
+            openDialog(
+                'Invalid File Extension',
+                'Please upload a .s2s (staff to string) file'
+            )
             return
         }
 
@@ -605,24 +605,26 @@ $(function(){
         if ( !unsavedchanges ) return
 
         let canceled = false
-        $('#dialog')
-            .dialog('option','title','Unsaved Changes')
-            .html('You have unsaved changes. Do you wish to continue?')
-            .dialog('option','buttons',[
+
+        openDialog(
+            'Unsaved Changes',
+            'You have unsaved changes. Do you wish to continue?',
+            [
                 {
                     text: 'Cancel',
                     click: function(){
                         $(this).dialog('close')
                         canceled = true
                     }
-                },{
+                },
+                {
                     text: 'Continue',
                     click: function(){
                         $(this).dialog('close')
                     }
                 }
-            ])
-            .dialog('open')
+            ]
+        )
         
         if (canceled) {
             e.preventDefault()
@@ -632,10 +634,19 @@ $(function(){
 
 
     /**
-     * DIALOG OPTIONS
+     * DIALOG
      */
+    //default options
+    const header_height = $('#top_bar').height()
+    const dialogTop = header_height + 10
     $('#dialog').dialog({
         autoOpen: false,
+        position:{
+            my:'center top',
+            at:'center top+'+dialogTop+'px',
+            of: window
+        },
+        modal:true,
         buttons: [
             {
               text: "Ok",
@@ -645,6 +656,32 @@ $(function(){
             }
         ]
     })
+    /**
+     * open dialog
+     * @param {String} title 
+     * @param {String} html 
+     * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
+     * @param {Boolean} modal 
+     * @param {Boolean} fixedPos 
+     */
+    function openDialog(title,html,buttons,modal=true,fixedPos=true){
+        if (!buttons) buttons = [
+            {
+                text: 'OK',
+                click: function(){
+                    $(this).dialog('close')
+                }
+            }
+        ]
+
+        $('#dialog')
+            .dialog('option','title',title)
+            .html(html)
+            .dialog('option','buttons',buttons)
+            .dialog('option','modal',modal)
+            .dialog('open')
+        if (fixedPos) $('#dialog').css('position','fixed')
+    }
 
     /**
      * SET ALL NOT DIRTY

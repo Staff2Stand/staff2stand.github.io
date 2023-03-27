@@ -88,7 +88,7 @@ header {
   padding-left: 0;
   user-select: none;
   -webkit-user-select: none;
-  z-index: 999;
+  z-index: 100;
 }
 
 #sidebar :is(h1, h2, h3, h4, h5, h6) {
@@ -202,7 +202,7 @@ header {
   left: 35px;
   bottom: 0;
   width: max-content;
-  z-index: 999;
+  z-index: 100;
 }
 #print.active + #printMenu {
   display: flex;
@@ -782,7 +782,7 @@ footer {
   position: fixed;
   top: 50vh;
   right: calc(50vw - 100px);
-  z-index: 9999999999999;
+  z-index: 100;
 }
 
 #sidebar_buttons .notey {
