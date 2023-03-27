@@ -572,7 +572,7 @@ $(function(){
         })
 
         //if the contents array only contains 1 score, render the score
-        if (contents.length === 1) renderScoreFromBkmk($myScores.last())
+        if (contents.length === 1) renderScoreFromBkmk($myScores.find('.score_bookmark').last())
     }
 
     // when the file input changes (ie: user selects a file)
@@ -722,6 +722,8 @@ function saveFile(filename,stringified_contents){
  * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
  */
 function renderScoreFromBkmk($bkmk,appendScore=false){
+    console.log('rendering score from bkmk:',$bkmk)
+
     //show notey playing violin
     $("#notey")
     .attr("class", "")
