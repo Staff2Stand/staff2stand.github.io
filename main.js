@@ -572,7 +572,10 @@ $(function(){
         })
 
         //if the contents array only contains 1 score, render the score
-        if (contents.length === 1) renderScoreFromBkmk($myScores.find('.score_bookmark').last())
+        if (contents.length === 1) {
+            renderScoreFromBkmk($myScores.find('.score_bookmark').last())
+            setAllNotDirty()
+        }
     }
 
     // when the file input changes (ie: user selects a file)
@@ -724,6 +727,8 @@ function saveFile(filename,stringified_contents){
         .click()
     
     console.log('file downloaded',filename,stringified_contents)
+
+    setAllNotDirty()
 }
 
 
@@ -769,4 +774,11 @@ function renderScoreFromBkmk($bkmk,appendScore=false){
 
     //Add active class to bkmk to indicate its already loaded
     $bkmk.addClass('active')
+}
+
+function setAllNotDirty(){
+    editor_violin.setNotDirty()
+    editor_viola.setNotDirty()
+    editor_cello.setNotDirty()
+    editor_bass.setNotDirty()
 }
