@@ -292,7 +292,7 @@ $(function(){
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
         //call function to render the score
-        renderScoreFromBkmk($bkmk)
+        renderScoreFromBkmk($bkmk, e.shiftKey)
     })
 
 
@@ -719,8 +719,9 @@ function saveFile(filename,stringified_contents){
 /**
  * 
  * @param {jquery element} $bkmk jquery element: score bookmark to render
+ * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
  */
-function renderScoreFromBkmk($bkmk){
+function renderScoreFromBkmk($bkmk,appendScore=false){
     //show notey playing violin
     $("#notey")
     .attr("class", "")
@@ -734,8 +735,8 @@ function renderScoreFromBkmk($bkmk){
         const $instrEditor = $(`#editor-${instrument}`)
         const currentEditorVal = $instrEditor.val()
 
-        //if SHIFT CLICKing append txt to editors, then return
-        if (e.shiftKey){
+        //if appending txt to editors (user shift-clicked a bkmk), then return
+        if (appendScore){
             $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
             return
         }
