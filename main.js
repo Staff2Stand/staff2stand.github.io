@@ -646,6 +646,17 @@ $(function(){
         ]
     })
 
+    /**
+     * SET ALL NOT DIRTY
+     */
+    function setAllNotDirty(){
+        editor_violin.setNotDirty()
+        editor_viola.setNotDirty()
+        editor_cello.setNotDirty()
+        editor_bass.setNotDirty()
+    }
+
+
 }) //end on page load
 
 
@@ -805,11 +816,4 @@ function renderScoreFromBkmk($bkmk,appendScore=false){
 
     //Add active class to bkmk to indicate its already loaded
     $bkmk.addClass('active')
-}
-
-function setAllNotDirty(){
-    editor_violin.setNotDirty()
-    editor_viola.setNotDirty()
-    editor_cello.setNotDirty()
-    editor_bass.setNotDirty()
 }
