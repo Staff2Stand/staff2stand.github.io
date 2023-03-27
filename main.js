@@ -814,6 +814,8 @@ function renderScoreFromBkmk($bkmk,appendScore=false){
         $instrEditor.val(newAbc).change()
     })
 
+    setAllNotDirty()
+
     //Add active class to bkmk to indicate its already loaded
     $bkmk.addClass('active')
 }
