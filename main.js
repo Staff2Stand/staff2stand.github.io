@@ -694,9 +694,6 @@ $(function(){
     }
 
 
-}) //end on page load
-
-
 /**
  * COPY TEXT TO CLIPBOARD 
  */
@@ -856,3 +853,9 @@ function renderScoreFromBkmk($bkmk,appendScore=false){
     //Add active class to bkmk to indicate its already loaded
     $bkmk.addClass('active')
 }
+
+
+
+
+
+}) //end on page load
