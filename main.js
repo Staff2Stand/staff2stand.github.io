@@ -291,40 +291,8 @@ $(function(){
         const scoreAlreadyLoaded = $bkmk.hasClass('active')
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
-        //show notey playing violin
-        $("#notey")
-            .attr("class", "")
-            .addClass("eyes-blinking looking-at-left-hand playing-violin")
-            .fadeIn()
-        
-        instruments.forEach((instrument,i)=>{
-            //get abc string from the bkmk's attr
-            const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
-            //define current instrument editor and its value
-            const $instrEditor = $(`#editor-${instrument}`)
-            const currentEditorVal = $instrEditor.val()
-
-            //if SHIFT CLICKing append txt to editors, then return
-            if (e.shiftKey){
-                $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
-                return
-            }
-
-            //do only once (rather than for each instrument)
-            if (i===0) {
-                //remove active class from all bkmks
-                $('.score_bookmark.active').removeClass('active')
-
-                //show all parts (ignore editors)
-                $('.part').children('div:not(.abc-warnings)').show()
-            }
-
-            //set editor to new abc string
-            $instrEditor.val(newAbc).change()
-        })
-
-        //Add active class to bkmk to indicate its already loaded
-        $bkmk.addClass('active')
+        //call function to render the score
+        renderScoreFromBkmk($bkmk)
     })
 
 
@@ -603,8 +571,8 @@ $(function(){
             $myScores.append(bkmkHTML)
         })
 
-        //if the contents array only contains 1 score, load the score by simulating click event on the bkmk
-        if (contents.length === 1) $myScores.last().click()
+        //if the contents array only contains 1 score, render the score
+        if (contents.length === 1) renderScoreFromBkmk($myScores.last())
     }
 
     // when the file input changes (ie: user selects a file)
@@ -745,4 +713,46 @@ function saveFile(filename,stringified_contents){
         .click()
     
     console.log('file downloaded',filename,stringified_contents)
+}
+
+
+/**
+ * 
+ * @param {jquery element} $bkmk jquery element: score bookmark to render
+ */
+function renderScoreFromBkmk($bkmk){
+    //show notey playing violin
+    $("#notey")
+    .attr("class", "")
+    .addClass("eyes-blinking looking-at-left-hand playing-violin")
+    .fadeIn()
+
+    instruments.forEach((instrument,i)=>{
+        //get abc string from the bkmk's attr
+        const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
+        //define current instrument editor and its value
+        const $instrEditor = $(`#editor-${instrument}`)
+        const currentEditorVal = $instrEditor.val()
+
+        //if SHIFT CLICKing append txt to editors, then return
+        if (e.shiftKey){
+            $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
+            return
+        }
+
+        //do only once (rather than for each instrument)
+        if (i===0) {
+            //remove active class from all bkmks
+            $('.score_bookmark.active').removeClass('active')
+
+            //show all parts (ignore editors)
+            $('.part').children('div:not(.abc-warnings)').show()
+        }
+
+        //set editor to new abc string
+        $instrEditor.val(newAbc).change()
+    })
+
+    //Add active class to bkmk to indicate its already loaded
+    $bkmk.addClass('active')
 }
