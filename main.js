@@ -582,7 +582,14 @@ $(function(){
         console.log('loading file',file)
 
         //validate file extension and type
-        
+        const validExtension = /.s2s$/g.test(file.name)
+        if( !validExtension ) {
+            $('#dialog')
+                .dialog('option','title','Invalid File Extension')
+                .html('Please upload a .s2s (staff to string) file')
+                .dialog('open')
+            return
+        }
 
         // read the file as text
         fileReader.readAsText( file )
