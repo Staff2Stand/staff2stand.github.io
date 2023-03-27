@@ -301,15 +301,15 @@ header {
 }
 
 .abcEditor.abc_textarea_dirty ~ .instrument_tunes .abcjs-container:before {
-  /* unsaved changes */
   content: 'Unsaved Changes';
   display: block;
-  width: 90%;
+  width: 95%;
   height: 1em;
   position: absolute;
   top: 0;
   left: 0;
   color: #b90000;
+  padding: 2px 6px;
 }
 
 .part .part-top-bg{
