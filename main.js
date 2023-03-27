@@ -292,7 +292,7 @@ $(function(){
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
         //check for unsaved changes and if so prompt user before continuing
-        let renderScore = areAnyDirty ? false : true
+        let renderScore = areAnyDirty() ? false : true
 
         if (!renderScore) openDialog(
             'Unsaved Changes',
@@ -309,6 +309,7 @@ $(function(){
                     text: 'Continue',
                     click: function(){
                         $(this).dialog('close')
+                        renderScore = true
                     }
                 }
             ]
