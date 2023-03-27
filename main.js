@@ -291,8 +291,31 @@ $(function(){
         const scoreAlreadyLoaded = $bkmk.hasClass('active')
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
+        //check for unsaved changes and if so prompt user before continuing
+        let renderScore = areAnyDirty ? false : true
+
+        if (!renderScore) openDialog(
+            'Unsaved Changes',
+            'You have unsaved changes. Do you wish to continue?',
+            [
+                {
+                    text: 'Cancel',
+                    click: function(){
+                        $(this).dialog('close')
+                        renderScore = false
+                    }
+                },
+                {
+                    text: 'Continue',
+                    click: function(){
+                        $(this).dialog('close')
+                    }
+                }
+            ]
+        )
+        
         //call function to render the score
-        renderScoreFromBkmk($bkmk, e.shiftKey)
+        if (renderScore) renderScoreFromBkmk($bkmk, e.shiftKey)
     })
 
 
@@ -601,12 +624,9 @@ $(function(){
 
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
-        const unsavedchanges = $('.abcEditor.abc_textarea_dirty').length > 0
-        if ( !unsavedchanges ) return
+        let stop = areAnyDirty() ? true : false
 
-        let canceled = false
-
-        openDialog(
+        if (!stop) openDialog(
             'Unsaved Changes',
             'You have unsaved changes. Do you wish to continue?',
             [
@@ -614,7 +634,7 @@ $(function(){
                     text: 'Cancel',
                     click: function(){
                         $(this).dialog('close')
-                        canceled = true
+                        stop = true
                     }
                 },
                 {
@@ -626,7 +646,7 @@ $(function(){
             ]
         )
         
-        if (canceled) {
+        if (stop) {
             e.preventDefault()
             e.stopPropagation()
         }
@@ -684,7 +704,7 @@ $(function(){
     }
 
     /**
-     * SET ALL NOT DIRTY
+     *  DIRTY flag
      */
     function setAllNotDirty(){
         editor_violin.setNotDirty()
@@ -692,167 +712,170 @@ $(function(){
         editor_cello.setNotDirty()
         editor_bass.setNotDirty()
     }
-
-
-/**
- * COPY TEXT TO CLIPBOARD 
- */
-function fallbackCopyTextToClipboard(text) {
-    var textArea = document.createElement("textarea");
-    textArea.value = text;
-
-    // Avoid scrolling to bottom
-    textArea.style.top = "0";
-    textArea.style.left = "0";
-    textArea.style.position = "fixed";
-
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-
-    try {
-        var successful = document.execCommand('copy');
-        var msg = successful ? 'successful' : 'unsuccessful';
-        console.log('Fallback: Copying text command was ' + msg);
-    } catch (err) {
-        console.error('Fallback: Oops, unable to copy', err);
+    function areAnyDirty(){
+        return $('.abcEditor.abc_textarea_dirty').length > 0
     }
 
-    document.body.removeChild(textArea);
-}
-function copyTextToClipboard(text) {
-    if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
-        return;
+
+    /**
+     * COPY TEXT TO CLIPBOARD 
+     */
+    function fallbackCopyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+
+        document.body.removeChild(textArea);
     }
-    navigator.clipboard.writeText(text).then(function() {
-        console.log('Async: Copying to clipboard was successful!');
-    }, function(err) {
-        console.error('Async: Could not copy text: ', err);
+    function copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+        navigator.clipboard.writeText(text).then(function() {
+            console.log('Async: Copying to clipboard was successful!');
+        }, function(err) {
+            console.error('Async: Could not copy text: ', err);
+        });
+    }
+
+    /**
+     * ADD ALSO RESIZE REVERSE OPTION TO JQUERY UI RESIZE
+     */
+    $.ui.plugin.add("resizable", "alsoResizeReverse", {
+
+        start: function() {
+            var that = $(this).resizable( "instance" ),
+                o = that.options;
+
+            $(o.alsoResizeReverse).each(function() {
+                var el = $(this);
+                el.data("ui-resizable-alsoresizeReverse", {
+                    width: parseInt(el.width(), 10), height: parseInt(el.height(), 10),
+                    left: parseInt(el.css("left"), 10), top: parseInt(el.css("top"), 10)
+                });
+            });
+        },
+
+        resize: function(event, ui) {
+            var that = $(this).resizable( "instance" ),
+                o = that.options,
+                os = that.originalSize,
+                op = that.originalPosition,
+                delta = {
+                    width: (that.size.width - os.width) || 0,
+                    top: (that.position.top - op.top) || 0,
+                    left: (that.position.left - op.left) || 0
+                };
+
+            $(o.alsoResizeReverse).each(function() {
+                var el = $(this), start = $(this).data("ui-resizable-alsoresize-reverse"), style = {},
+                    css = el.parents(ui.originalElement[0]).length ?
+                        [ "width" ] :
+                        [ "width", "height", "top", "left" ];
+
+                $.each(css, function(i, prop) {
+                    var sum = (start[prop] || 0) - (delta[prop] || 0);
+                    if (sum && sum >= 0) {
+                        style[prop] = sum || null;
+                    }
+                });
+
+                el.css(style);
+            });
+        },
+
+        stop: function() {
+            $(this).removeData("resizable-alsoresize-reverse");
+        }
     });
-}
 
-/**
- * ADD ALSO RESIZE REVERSE OPTION TO JQUERY UI RESIZE
- */
-$.ui.plugin.add("resizable", "alsoResizeReverse", {
+    /** 
+     * SAVE
+     * @param {string} filename
+     * @param {JSON} stringified_contents
+     */
+    function saveFile(filename,stringified_contents){
+        // create a link DOM fragment
+        var $link = $("<a />");  
+        // encode any special characters in the JSON
+        var text = encodeURIComponent( stringified_contents );
 
-    start: function() {
-        var that = $(this).resizable( "instance" ),
-            o = that.options;
+        // <a download="filename.txt" href='data:application/octet-stream,...'></a>
+        $link
+            .attr( "download", filename+".s2s" )
+            .attr( "href", "data:application/octet-stream," + text )
+            .appendTo( "body" )
+            .get(0)
+            .click()
+        
+        console.log('file downloaded',filename,stringified_contents)
 
-        $(o.alsoResizeReverse).each(function() {
-            var el = $(this);
-            el.data("ui-resizable-alsoresizeReverse", {
-                width: parseInt(el.width(), 10), height: parseInt(el.height(), 10),
-                left: parseInt(el.css("left"), 10), top: parseInt(el.css("top"), 10)
-            });
-        });
-    },
-
-    resize: function(event, ui) {
-        var that = $(this).resizable( "instance" ),
-            o = that.options,
-            os = that.originalSize,
-            op = that.originalPosition,
-            delta = {
-                width: (that.size.width - os.width) || 0,
-                top: (that.position.top - op.top) || 0,
-                left: (that.position.left - op.left) || 0
-            };
-
-        $(o.alsoResizeReverse).each(function() {
-            var el = $(this), start = $(this).data("ui-resizable-alsoresize-reverse"), style = {},
-                css = el.parents(ui.originalElement[0]).length ?
-                    [ "width" ] :
-                    [ "width", "height", "top", "left" ];
-
-            $.each(css, function(i, prop) {
-                var sum = (start[prop] || 0) - (delta[prop] || 0);
-                if (sum && sum >= 0) {
-                    style[prop] = sum || null;
-                }
-            });
-
-            el.css(style);
-        });
-    },
-
-    stop: function() {
-        $(this).removeData("resizable-alsoresize-reverse");
+        setAllNotDirty()
     }
-});
-
-/** 
- * SAVE
- * @param {string} filename
- * @param {JSON} stringified_contents
- */
-function saveFile(filename,stringified_contents){
-    // create a link DOM fragment
-    var $link = $("<a />");  
-    // encode any special characters in the JSON
-    var text = encodeURIComponent( stringified_contents );
-
-    // <a download="filename.txt" href='data:application/octet-stream,...'></a>
-    $link
-        .attr( "download", filename+".s2s" )
-        .attr( "href", "data:application/octet-stream," + text )
-        .appendTo( "body" )
-        .get(0)
-        .click()
-    
-    console.log('file downloaded',filename,stringified_contents)
-
-    setAllNotDirty()
-}
 
 
-/**
- * 
- * @param {jquery element} $bkmk jquery element: score bookmark to render
- * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
- */
-function renderScoreFromBkmk($bkmk,appendScore=false){
-    console.log('rendering score from bkmk:',$bkmk)
+    /**
+     * 
+     * @param {jquery element} $bkmk jquery element: score bookmark to render
+     * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
+     */
+    function renderScoreFromBkmk($bkmk,appendScore=false){
+        console.log('rendering score from bkmk:',$bkmk)
 
-    //show notey playing violin
-    $("#notey")
-    .attr("class", "")
-    .addClass("eyes-blinking looking-at-left-hand playing-violin")
-    .fadeIn()
+        //show notey playing violin
+        $("#notey")
+        .attr("class", "")
+        .addClass("eyes-blinking looking-at-left-hand playing-violin")
+        .fadeIn()
 
-    instruments.forEach((instrument,i)=>{
-        //get abc string from the bkmk's attr
-        const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
-        //define current instrument editor and its value
-        const $instrEditor = $(`#editor-${instrument}`)
-        const currentEditorVal = $instrEditor.val()
+        instruments.forEach((instrument,i)=>{
+            //get abc string from the bkmk's attr
+            const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
+            //define current instrument editor and its value
+            const $instrEditor = $(`#editor-${instrument}`)
+            const currentEditorVal = $instrEditor.val()
 
-        //if appending txt to editors (user shift-clicked a bkmk), then return
-        if (appendScore){
-            $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
-            return
-        }
+            //if appending txt to editors (user shift-clicked a bkmk), then return
+            if (appendScore){
+                $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
+                return
+            }
 
-        //do only once (rather than for each instrument)
-        if (i===0) {
-            //remove active class from all bkmks
-            $('.score_bookmark.active').removeClass('active')
+            //do only once (rather than for each instrument)
+            if (i===0) {
+                //remove active class from all bkmks
+                $('.score_bookmark.active').removeClass('active')
 
-            //show all parts (ignore editors)
-            $('.part').children('div:not(.abc-warnings)').show()
-        }
+                //show all parts (ignore editors)
+                $('.part').children('div:not(.abc-warnings)').show()
+            }
 
-        //set editor to new abc string
-        $instrEditor.val(newAbc).change()
-    })
+            //set editor to new abc string
+            $instrEditor.val(newAbc).change()
+        })
 
-    setAllNotDirty()
+        setAllNotDirty()
 
-    //Add active class to bkmk to indicate its already loaded
-    $bkmk.addClass('active')
-}
+        //Add active class to bkmk to indicate its already loaded
+        $bkmk.addClass('active')
+    }
 
 
 
