@@ -577,9 +577,13 @@ $(function(){
 
     // when the file input changes (ie: user selects a file)
     $('#loadScores').on("change", function() {
-        console.log('loading file')
         // get the file item from the input field
         const file = this.files[0]
+        console.log('loading file',file)
+
+        //validate file extension and type
+        
+
         // read the file as text
         fileReader.readAsText( file )
         // and then then the fileReader's load event will trigger (see above)
