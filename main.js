@@ -721,7 +721,7 @@ $(function(){
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
                 //add titleIcon
-                $('<i class="fa-solid fa-'+titleIcon+'"></i>').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+                $('<i class="fas fa-'+titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
             } )
             .dialog('open')
     }
