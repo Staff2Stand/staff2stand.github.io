@@ -292,31 +292,29 @@ $(function(){
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
         //check for unsaved changes and if so prompt user before continuing
-        let renderScore = areAnyDirty() ? false : true
-
-        if (!renderScore) openDialog(
-            'Unsaved Changes',
-            'You have unsaved changes. Do you wish to continue?',
-            [
-                {
-                    text: 'Cancel',
-                    click: function(){
-                        $(this).dialog('close')
-                        renderScore = false
+        if (areAnyDirty()) {
+            openDialog(
+                'Unsaved Changes',
+                'You have unsaved changes. Do you wish to continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        click: function(){
+                            $(this).dialog('close')
+                        }
+                    },
+                    {
+                        text: 'Continue',
+                        click: function(){
+                            $(this).dialog('close')
+                            renderScoreFromBkmk($bkmk, e.shiftKey)
+                        }
                     }
-                },
-                {
-                    text: 'Continue',
-                    click: function(){
-                        $(this).dialog('close')
-                        renderScore = true
-                    }
-                }
-            ]
-        )
-        
-        //call function to render the score
-        if (renderScore) renderScoreFromBkmk($bkmk, e.shiftKey)
+                ]
+            )
+        } else {
+            renderScoreFromBkmk($bkmk, e.shiftKey)
+        }
     })
 
 
@@ -625,31 +623,28 @@ $(function(){
 
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
-        let stop = areAnyDirty() ? true : false
-
-        if (!stop) openDialog(
-            'Unsaved Changes',
-            'You have unsaved changes. Do you wish to continue?',
-            [
-                {
-                    text: 'Cancel',
-                    click: function(){
-                        $(this).dialog('close')
-                        stop = true
+        if (areAnyDirty()){
+            openDialog(
+                'Unsaved Changes',
+                'You have unsaved changes. Do you wish to continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        click: function(){
+                            $(this).dialog('close')
+                            e.preventDefault()
+                            e.stopPropagation()
+                        }
+                    },
+                    {
+                        text: 'Continue',
+                        click: function(){
+                            $(this).dialog('close')
+                            stop = false
+                        }
                     }
-                },
-                {
-                    text: 'Continue',
-                    click: function(){
-                        $(this).dialog('close')
-                    }
-                }
-            ]
-        )
-        
-        if (stop) {
-            e.preventDefault()
-            e.stopPropagation()
+                ]
+            )
         }
     })
 
