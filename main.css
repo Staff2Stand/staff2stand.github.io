@@ -89,6 +89,10 @@ header {
 .ui-dialog.warn .ui-dialog-titlebar{
   background: #b39703;
 }
+/* icon */
+.ui-dialog i.fas{
+  margin-right: 1em;
+}
 /* buttons */
 .ui-dialog.alert .ui-dialog-buttonpane button{
   background: #b91919;
