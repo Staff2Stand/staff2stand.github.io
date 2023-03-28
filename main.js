@@ -295,7 +295,7 @@ $(function(){
         if (areAnyDirty()) {
             openDialog(
                 'alert',
-                'Unsaved Changes',
+                '<span class="ui-icon ui-icon-flag"></span> Unsaved Changes',
                 'You have unsaved changes. Do you wish to continue?',
                 [
                     {
@@ -538,7 +538,7 @@ $(function(){
             console.warn('my scores section is empty')
             openDialog(
                 'warn',
-                'My Scores Section is Empty',
+                '<span class="ui-icon ui-icon-notice"></span> My Scores Section is Empty',
                 'Click the "Save" button to save the current score to the My Scores section.'
             )
             return
@@ -579,7 +579,7 @@ $(function(){
         if (contents.length === 0){
             openDialog(
                 'warn',
-                'File contents error',
+                '<span class="ui-icon ui-icon-notice"></span> File contents error',
                 'There was an error with the file contents.'
             )
             return
@@ -614,7 +614,7 @@ $(function(){
         if( !validExtension ) {
             openDialog(
                 'warn',
-                'Invalid File Extension',
+                '<span class="ui-icon ui-icon-notice"></span> Invalid File Extension',
                 'Please upload a .s2s (staff to string) file'
             )
             return
@@ -630,7 +630,7 @@ $(function(){
         if (areAnyDirty()){
             openDialog(
                 'alert',
-                'Unsaved Changes',
+                '<span class="ui-icon ui-icon-flag"></span> Unsaved Changes',
                 'You have unsaved changes. Do you wish to continue?',
                 [
                     {
@@ -680,7 +680,7 @@ $(function(){
     })
     /**
      * open dialog
-     * @param {String} addClass name of class in my css to add to the ui-dialog
+     * @param {String} addClass name of class to add to .ui-dialog
      * @param {String} title 
      * @param {String} html 
      * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
@@ -698,11 +698,11 @@ $(function(){
         ]
 
         $('#dialog')
-            .dialog( "option", "classes.ui-dialog", addClass )
             .dialog('option','title',title)
             .html(html)
             .dialog('option','buttons',buttons)
             .dialog('option','modal',modal)
+            .dialog('option','classes.ui-dialog',addClass)
             .dialog('open')
         if (fixedPos) $('#dialog').dialog( "option", "classes.ui-dialog", "fixed-dialog" )
     }
