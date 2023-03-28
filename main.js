@@ -704,7 +704,7 @@ $(function(){
             .dialog('option','buttons',buttons)
             .dialog('option','modal',modal)
             .dialog('open')
-        if (fixedPos) $('#dialog').css('position','fixed')
+        if (fixedPos) $('#dialog').dialog( "option", "classes.ui-dialog", "fixed-dialog" )
     }
 
     /**

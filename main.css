@@ -78,6 +78,10 @@ header {
 }
 
 /* DIALOG */
+/* fixed */
+.ui-dialog.fixed-dialog{
+  position: fixed;
+}
 /* titlebar */
 .ui-dialog.alert .ui-dialog-titlebar{
  background: #b91919 url(images/ui-bg_diagonals-thick_8_333333_40x40.png) 50% 50% repeat;
