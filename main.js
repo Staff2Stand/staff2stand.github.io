@@ -676,7 +676,13 @@ $(function(){
               }
             }
         ],
-        resizable: false
+        resizable: false,
+        //hide the close button and disable close on escape
+        //  all dialogs have an ok button by default that closes the dialog
+        closeOnEscape: false,
+        open: function(e, ui) {
+            $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+        }
     })
     /**
      * open dialog
