@@ -709,18 +709,19 @@ $(function(){
             }
         ]
 
+        const addClasses = addClass + fixedPos?' fixed-dialog':''
+
         $('#dialog')
             .dialog('option','title',title)
             .html(html)
             .dialog('option','buttons',buttons)
             .dialog('option','modal',modal)
-            .dialog('option','classes.ui-dialog',addClass)
+            .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
                 //add titleIcon
-                $('<span class="ui-icon ui-icon-'+titleIcon+'"></span>').prependTo($(this).dialog('widget').children('.ui-dialog-titlebar'))
+                $('<span class="ui-icon ui-icon-'+titleIcon+'"></span>').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
             } )
             .dialog('open')
-        if (fixedPos) $('#dialog').dialog( "option", "classes.ui-dialog", "fixed-dialog" )
     }
 
     /**
