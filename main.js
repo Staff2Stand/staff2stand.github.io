@@ -686,7 +686,7 @@ $(function(){
         //  all dialogs have an ok button by default that closes the dialog
         closeOnEscape: false,
         open: function(e, ui) {
-            $(".ui-dialog-titlebar-close", ui.dialog || ui).hide();
+            $(".ui-dialog-titlebar-close").hide();
         }
     })
     /**
