@@ -540,7 +540,7 @@ $(function(){
             openDialog(
                 'warn',
                 'My Scores Section is Empty',
-                'notice',
+                'exclamation',
                 'Click the "Save" button to save the current score to the My Scores section.'
             )
             return
@@ -582,7 +582,7 @@ $(function(){
             openDialog(
                 'warn',
                 'File contents error',
-                'notice',
+                'exclamation',
                 'There was an error with the file contents.'
             )
             return
@@ -618,7 +618,7 @@ $(function(){
             openDialog(
                 'warn',
                 'Invalid File Extension',
-                'notice',
+                'exclamation',
                 'Please upload a .s2s (staff to string) file'
             )
             return
@@ -721,7 +721,7 @@ $(function(){
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
                 //add titleIcon
-                $('<span class="ui-icon ui-icon-'+titleIcon+'"></span>').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+                $('<i class="fa-solid fa-'+titleIcon+'"></i>').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
             } )
             .dialog('open')
     }
