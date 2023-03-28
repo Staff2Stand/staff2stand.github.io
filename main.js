@@ -709,7 +709,8 @@ $(function(){
             }
         ]
 
-        const addClasses = ''+addClass + fixedPos?' fixed-dialog':''
+        console.log('add class:',addClass)
+        const addClasses = addClass + fixedPos?' fixed-dialog':''
         console.log('add classes: ',addClasses)
 
         $('#dialog')
