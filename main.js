@@ -295,7 +295,8 @@ $(function(){
         if (areAnyDirty()) {
             openDialog(
                 'alert',
-                '<span class="ui-icon ui-icon-flag"></span> Unsaved Changes',
+                'Unsaved Changes',
+                'flag',
                 'You have unsaved changes. Do you wish to continue?',
                 [
                     {
@@ -538,7 +539,8 @@ $(function(){
             console.warn('my scores section is empty')
             openDialog(
                 'warn',
-                '<span class="ui-icon ui-icon-notice"></span> My Scores Section is Empty',
+                'My Scores Section is Empty',
+                'notice',
                 'Click the "Save" button to save the current score to the My Scores section.'
             )
             return
@@ -579,7 +581,8 @@ $(function(){
         if (contents.length === 0){
             openDialog(
                 'warn',
-                '<span class="ui-icon ui-icon-notice"></span> File contents error',
+                'File contents error',
+                'notice',
                 'There was an error with the file contents.'
             )
             return
@@ -614,7 +617,8 @@ $(function(){
         if( !validExtension ) {
             openDialog(
                 'warn',
-                '<span class="ui-icon ui-icon-notice"></span> Invalid File Extension',
+                'Invalid File Extension',
+                'notice',
                 'Please upload a .s2s (staff to string) file'
             )
             return
@@ -630,7 +634,8 @@ $(function(){
         if (areAnyDirty()){
             openDialog(
                 'alert',
-                '<span class="ui-icon ui-icon-flag"></span> Unsaved Changes',
+                'Unsaved Changes',
+                'flag',
                 'You have unsaved changes. Do you wish to continue?',
                 [
                     {
@@ -688,12 +693,13 @@ $(function(){
      * open dialog
      * @param {String} addClass name of class to add to .ui-dialog
      * @param {String} title 
+     * @param {String} titleIcon html to prepend to title
      * @param {String} html 
      * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
      * @param {Boolean} modal 
      * @param {Boolean} fixedPos 
      */
-    function openDialog(addClass,title,html,buttons,modal=true,fixedPos=true){
+    function openDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
         if (!buttons) buttons = [
             {
                 text: 'OK',
@@ -709,6 +715,10 @@ $(function(){
             .dialog('option','buttons',buttons)
             .dialog('option','modal',modal)
             .dialog('option','classes.ui-dialog',addClass)
+            .on( "dialogopen", function( event, ui ) {
+                //add titleIcon
+                $('<span class="ui-icon ui-icon-'+titleIcon+'"></span>').prependTo($(this).dialog('widget').children('.ui-dialog-titlebar'))
+            } )
             .dialog('open')
         if (fixedPos) $('#dialog').dialog( "option", "classes.ui-dialog", "fixed-dialog" )
     }
