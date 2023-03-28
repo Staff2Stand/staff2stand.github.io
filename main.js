@@ -339,24 +339,24 @@ $(function(){
 
 
 
-    /** SIDEBAR SECTION COLLAPSING */
-    //add height to subtract prop
-    $("#sidebar .score_bookmark_section").each(function (i, section) {
-        const heading_height = $(section).children().first().outerHeight()
-        const height_to_subtract = $(section).height() - heading_height + 2 //<- 2 is for the 2px border on the bookmark section
-        $(section).prop("height_to_subtract", height_to_subtract)
-    })
-    // click listener
+    /** SIDEBAR SECTION COLLAPSING */    
     $("#sidebar :is(h1,h2,h3,h4,h5,h6)").click(function () {
         const $section = $(this).closest(".score_bookmark_section")
-        const height_to_subtract = $section.prop("height_to_subtract")
+
+        const heading_height = $section.children().first().outerHeight()
+        const section_border_height = 2
+        let height_to_subtract = $section.prop("height_to_subtract") | $section.height() - heading_height + section_border_height
+
+        $section.prop('height_to_subtract',height_to_subtract)
 
         if ($section.hasClass("collapsed")) {
-        $section.removeClass("collapsed")
-        $section.animate({ height: `+=${height_to_subtract}` }, 300)
+            $section.removeClass("collapsed")
+            $section.animate({ height: `+=${height_to_subtract}` }, 300)
         } else {
-        $section.addClass("collapsed")
-        $section.animate({ height: `-=${height_to_subtract}` }, 300)
+            //re-define height to subtract to account for possible change in height of My Scores Section
+            height_to_subtract = $section.height() - heading_height + section_border_height
+            $section.addClass("collapsed")
+            $section.animate({ height: `-=${height_to_subtract}` }, 300)
         }
     })
 
