@@ -431,7 +431,7 @@ $(function(){
             printInstruments = "bass";
             break;
         case "printAll":
-            printInstruments = "violin,viola,cello,bass";
+            printInstruments = instruments.join(',');
             break;
         case "printAllVisible":
             printInstruments = "allVisible";
