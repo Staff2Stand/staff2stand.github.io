@@ -92,6 +92,9 @@ header {
 .ui-dialog.warn .ui-dialog-buttonpane button{
   background: #b39703 url(images/ui-bg_glass_40_111111_1x400.png) 50% 50% repeat-x;
 }
+.ui-dialog .ui-dialog-buttonpane button:hover{
+  filter: brightness(1.1);
+}
 
 /* SIDEBAR */
 #sidebar {
