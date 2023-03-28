@@ -77,6 +77,21 @@ header {
   width: 150px;
 }
 
+/* DIALOG */
+/* titlebar */
+.ui-dialog.alert .ui-dialog-titlebar{
+ background: #b91919 url(images/ui-bg_diagonals-thick_8_333333_40x40.png) 50% 50% repeat;
+}
+.ui-dialog.warn .ui-dialog-titlebar{
+  background: #b39703 url(images/ui-bg_diagonals-thick_8_333333_40x40.png) 50% 50% repeat;
+}
+/* buttons */
+.ui-dialog.alert .ui-dialog-buttonpane button{
+  background: #b91919 url(images/ui-bg_glass_40_111111_1x400.png) 50% 50% repeat-x;
+}
+.ui-dialog.warn .ui-dialog-buttonpane button{
+  background: #b39703 url(images/ui-bg_glass_40_111111_1x400.png) 50% 50% repeat-x;
+}
 
 /* SIDEBAR */
 #sidebar {

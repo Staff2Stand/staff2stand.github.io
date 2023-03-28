@@ -294,6 +294,7 @@ $(function(){
         //check for unsaved changes and if so prompt user before continuing
         if (areAnyDirty()) {
             openDialog(
+                'alert',
                 'Unsaved Changes',
                 'You have unsaved changes. Do you wish to continue?',
                 [
@@ -536,6 +537,7 @@ $(function(){
         if ($myScores.length === 0) {
             console.warn('my scores section is empty')
             openDialog(
+                'warn',
                 'My Scores Section is Empty',
                 'Click the "Save" button to save the current score to the My Scores section.'
             )
@@ -576,6 +578,7 @@ $(function(){
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
             openDialog(
+                'warn',
                 'File contents error',
                 'There was an error with the file contents.'
             )
@@ -610,6 +613,7 @@ $(function(){
         const validExtension = /.s2s$/g.test(file.name)
         if( !validExtension ) {
             openDialog(
+                'warn',
                 'Invalid File Extension',
                 'Please upload a .s2s (staff to string) file'
             )
@@ -625,6 +629,7 @@ $(function(){
     $('#loadScores').on('click',function(e){
         if (areAnyDirty()){
             openDialog(
+                'alert',
                 'Unsaved Changes',
                 'You have unsaved changes. Do you wish to continue?',
                 [
@@ -670,17 +675,19 @@ $(function(){
                 $( this ).dialog( "close" );
               }
             }
-        ]
+        ],
+        resizable: false
     })
     /**
      * open dialog
+     * @param {String} addClass name of class in my css to add to the ui-dialog
      * @param {String} title 
      * @param {String} html 
      * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
      * @param {Boolean} modal 
      * @param {Boolean} fixedPos 
      */
-    function openDialog(title,html,buttons,modal=true,fixedPos=true){
+    function openDialog(addClass,title,html,buttons,modal=true,fixedPos=true){
         if (!buttons) buttons = [
             {
                 text: 'OK',
@@ -691,6 +698,7 @@ $(function(){
         ]
 
         $('#dialog')
+            .dialog( "option", "classes.ui-dialog", addClass )
             .dialog('option','title',title)
             .html(html)
             .dialog('option','buttons',buttons)
