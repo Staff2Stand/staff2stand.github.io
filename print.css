@@ -29,17 +29,6 @@
     .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
       position: static;
     }
-
-    /* is this even used? */
-    .score {
-      width: 100% !important;
-    }
-    /* is this even used? */
-    #main_container {
-      grid-template-areas: "page_content";
-      grid-template-columns: auto;
-      grid-template-rows: auto;
-    }
   
     /* selectively print */
     /* first, hide all tunes */

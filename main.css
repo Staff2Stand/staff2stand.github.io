@@ -78,7 +78,7 @@ header {
 }
 
 /* DIALOG */
-/* fixed */
+/* fixed pos */
 .ui-dialog.fixed-dialog{
   position: fixed;
 }
@@ -326,6 +326,7 @@ header {
   display: none !important;
 }
 
+/* show Unsaved Changes text below any editors that are dirty */
 .abcEditor.abc_textarea_dirty ~ .instrument_tunes .abcjs-container:before {
   content: 'Unsaved Changes';
   display: block;
@@ -391,34 +392,6 @@ header {
   position: relative;
 }
 
-/* top bar */
-#pageSize{
-  width: 150px;
-}
-
-
-
-
-
-/* misc settings */
-.score_settings_misc {
-  margin: 6px;
-  grid-column: 2;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-evenly;
-}
-
-/* score size */
-.score_settings_size {
-  grid-column: 1 / span 2;
-}
-.score_settings_size h4 {
-  text-align: center;
-}
-.score_settings_size input {
-  width: 99%;
-}
 
 /* HIGHLIGHTING */
 #tunes_container {
@@ -485,7 +458,7 @@ header {
 text.abcjs-annotation[text-anchor="start"] {
   fill: #000;
 }
-/* move text annotations attatched to the last barline, down closer to the barling
+/* move text annotations attatched to the last barline, down closer to the barline
       otherwise it was looking like it was text below the line above.
 */
 .abcjs-bar:last-of-type text.abcjs-annotation[text-anchor="start"] {
@@ -550,45 +523,6 @@ footer {
   z-index: 2;
 }
 
-/* LOADING ICON */
-#page_content {
-  position: relative;
-}
-#loadingIcon {
-  display: none;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: calc(50vh - 100px);
-  left: calc(50% - 50px);
-}
-#loadingIcon svg {
-  animation: spin 3s cubic-bezier(0.52, 0.27, 0.46, 0.69) 0s infinite;
-  fill: hsl(0 100% 0%);
-}
-@keyframes spin {
-  0% {
-    transform: rotatez(0deg);
-    width: 100px;
-    height: 100px;
-    top: calc(50vh - 100px);
-    left: calc(50% - 50px);
-  }
-  50% {
-    width: 150px;
-    height: 150px;
-    top: calc(50vh - 150px);
-    left: calc(50% - 75px);
-    transform: rotatez(180deg);
-  }
-  100% {
-    transform: rotatez(360deg);
-    width: 100px;
-    height: 100px;
-    top: calc(50vh - 100px);
-    left: calc(50% - 50px);
-  }
-}
 
 /* NOTEY */
 /* Create Notey */
