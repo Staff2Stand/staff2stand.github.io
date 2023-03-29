@@ -915,7 +915,7 @@ $(function(){
         //hide print menu
         const clicked_print_menu = $target.closest("#printMenu,#print").length
         if (!clicked_print_menu) $("#print").removeClass("active");
-    }
+    })
 
 
 
