@@ -29,6 +29,13 @@
     .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
       position: static;
     }
+
+    .part h1{
+      /* move instrument headings up and make them smaller */
+      position: absolute;
+      top: 0;
+      font-size: 20px;
+    }
   
     /* selectively print */
     /* first, hide all tunes */
@@ -53,5 +60,19 @@
     #tunes_container[printinstruments*="bass"] .part[instrument="bass"],
     #tunes_container[printinstruments*="bass"] .part[instrument="bass"] .instrument_tunes {
       display: block !important;
+    }
+
+    /* footer */
+    body:after {
+      content: 'Staff To String';
+      display: block;
+      width: 200px;
+      height: fit-content;
+      position: fixed;
+      bottom: 0;
+      color: #000;
+      z-index: 200;
+      text-align: center;
+      left: calc(50% - 100px);
     }
   }
