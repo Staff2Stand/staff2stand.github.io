@@ -917,6 +917,11 @@ $(function(){
         if (!clicked_print_menu) $("#print").removeClass("active");
     })
 
+    /**
+     * MAKE NOTEY DRAGGABLE
+     */
+    $('#notey .notey').draggable()
+
 
 
 

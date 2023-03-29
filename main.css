@@ -742,7 +742,7 @@ footer {
   position: fixed;
   top: 50vh;
   right: calc(50vw - 100px);
-  z-index: 100;
+  z-index: 101;
 }
 
 #sidebar_buttons .notey {
