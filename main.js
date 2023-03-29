@@ -377,7 +377,7 @@ $(function(){
     //clear scores
     $("#clear_scores").click(function () {
         $('.abcEditor').each((i,editor) => $(editor).val('').change())
-        $(".score_bookmark.current").removeClass("active")
+        $(".score_bookmark.active").removeClass("active")
     })
     //toggle editors (Edit Button)
     $('#show_editors').click(function(){        
