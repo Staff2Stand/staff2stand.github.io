@@ -900,6 +900,23 @@ $(function(){
         $bkmk.addClass('active')
     }
 
+    /**
+     * CLICK ANYWHERE ON DOCUMENT
+     * deselect notes, hide the print menu
+     */
+    $(document).on("click", function (e) {
+        const $target = $(e.target);
+    
+        //deselect note
+        const $selectedNotes = $(".abcjs-note_selected");
+        const clicked_note = $target.closest($selectedNotes).length
+        if (!clicked_note) selectedNotes.removeClass("abcjs-note_selected");
+    
+        //hide print menu
+        const clicked_print_menu = $target.closest("#printMenu,#print").length
+        if (!clicked_print_menu) $("#print").removeClass("active");
+    }
+
 
 
 
