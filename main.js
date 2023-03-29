@@ -910,7 +910,7 @@ $(function(){
         //deselect note
         const $selectedNotes = $(".abcjs-note_selected");
         const clicked_note = $target.closest($selectedNotes).length
-        if (!clicked_note) selectedNotes.removeClass("abcjs-note_selected");
+        if (!clicked_note) $selectedNotes.removeClass("abcjs-note_selected");
     
         //hide print menu
         const clicked_print_menu = $target.closest("#printMenu,#print").length
