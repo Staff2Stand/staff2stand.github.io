@@ -474,7 +474,7 @@ $(function(){
             .find('.copyTxtAsString').click(function(){
                 const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
                 const text = $(editor).val()
-                const textSingleLine = text.replace(/\n/gm,'\\n')
+                const textSingleLine = text.replace(/[\n"']/gm,'\\$&')
                 copyTextToClipboard(textSingleLine)
             })
     })
@@ -888,6 +888,9 @@ $(function(){
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
+
+                //change val of file name input to bkmk title
+                $('#fileName').val( $bkmk.attr('_title') )
             }
 
             //set editor to new abc string
