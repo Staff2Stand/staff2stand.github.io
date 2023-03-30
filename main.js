@@ -474,7 +474,7 @@ $(function(){
             .find('.copyTxtAsString').click(function(){
                 const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
                 const text = $(editor).val()
-                const textSingleLine = text.replace(/[\n"']/gm,'\\$&')
+                const textSingleLine = escapeABC(text)
                 copyTextToClipboard(textSingleLine)
             })
     })
@@ -515,7 +515,7 @@ $(function(){
         //get the abcstring for each instrument
         contentsObj = {}
         instruments.forEach(function(instrument){
-            contentsObj['abc-'+instrument] = $('#editor-'+instrument).val().replace(/[\n"']/gm,'\$&')
+            contentsObj['abc-'+instrument] = escapeABC($('#editor-'+instrument).val())
         })
 
         //ask user for a filename
@@ -870,7 +870,7 @@ $(function(){
 
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
-            const newAbc = $bkmk.attr(`abc-${instrument}`)?.replace(/\\n/g,'\r\n')
+            const newAbc = unescapeABC($bkmk.attr(`abc-${instrument}`))
             //define current instrument editor and its value
             const $instrEditor = $(`#editor-${instrument}`)
             const currentEditorVal = $instrEditor.val()
@@ -924,6 +924,22 @@ $(function(){
      * MAKE NOTEY DRAGGABLE
      */
     $('#notey .notey').draggable()
+
+
+    /**
+     * ESCAPE AND UNESCAPE ABC STRINGS
+     */
+    function escapeABC(abc,toHTML=true){
+        if (!toHTML) return abc.replace(/[\n"']/gm,'\$&')
+
+        return abc.replace(/\n/gm,'\\n').replace(/"/gm,'&quot;').replace(/'/gm,'&apos;')
+    }
+
+    function unescapeABC(abc,fromHTML=true){
+        if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
+
+        return abc.replace(/\\n/g,'\r\n').replace('&quot;','"').replace('&apos;',"'")
+    }
 
 
 
