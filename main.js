@@ -569,6 +569,7 @@ $(function(){
      * 
      */
     const fileReader = new FileReader()
+    //FILE INPUT LOAD
     // when the file has finished reading
     fileReader.onload = function( ev ) {
         //validate the file extension
@@ -606,7 +607,8 @@ $(function(){
         }
     }
 
-    // when the file input changes (ie: user selects a file)
+    // FILE INPUT CHANGE
+    //when the file input changes (ie: user selects a file)
     $('#loadScores').on("change", function() {
         // get the file item from the input field
         const file = this.files[0]
@@ -629,9 +631,14 @@ $(function(){
         // and then then the fileReader's load event will trigger (see above)
     })
 
+    // FILE INPUT CLICK
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
         if (areAnyDirty()){
+            //first, stop click event from bubbling
+            e.preventDefault()
+            e.stopPropagation()
+
             openDialog(
                 'alert',
                 'Unsaved Changes',
@@ -642,15 +649,14 @@ $(function(){
                         text: 'Cancel',
                         click: function(){
                             $(this).dialog('close')
-                            e.preventDefault()
-                            e.stopPropagation()
                         }
                     },
                     {
                         text: 'Continue',
                         click: function(){
                             $(this).dialog('close')
-                            stop = false
+                            //trigger change event on input
+                            $('#loadScores').change()
                         }
                     }
                 ]
