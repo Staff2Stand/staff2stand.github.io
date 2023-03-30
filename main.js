@@ -515,7 +515,7 @@ $(function(){
         //get the abcstring for each instrument
         contentsObj = {}
         instruments.forEach(function(instrument){
-            contentsObj['abc-'+instrument] = $('#editor-'+instrument).val().replace(/\n/gm,'\\n')
+            contentsObj['abc-'+instrument] = $('#editor-'+instrument).val().replace(/[\n"']/gm,'\\$&')
         })
 
         //ask user for a filename
