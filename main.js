@@ -133,6 +133,9 @@ $(function(){
         //Clear style attr of all empty abcjsContainer divs
         //  Otherwise they retain the styles even if its not being used, creating a lot of empty white space
         $('.abcjs-container:not(:has(svg))').attr('style','')
+
+        //Add/Remove disabled class on file input
+        areAnyDirty() ? $('#fileInput').addClass('disabled') : $('#fileInput').removeClass('disabled')
         
         //fade out notey
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
@@ -634,11 +637,12 @@ $(function(){
     // FILE INPUT CLICK
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
-        if (areAnyDirty()){
+        if ( $('#fileInput').hasClass('disabled') ){
             //first, stop click event from bubbling
             e.preventDefault()
             e.stopPropagation()
 
+            //
             openDialog(
                 'alert',
                 'Unsaved Changes',
@@ -655,8 +659,10 @@ $(function(){
                         text: 'Continue',
                         click: function(){
                             $(this).dialog('close')
-                            //trigger change event on input
-                            $('#loadScores').change()
+                            //remove disabled class and trigger click
+                                //now, since file input doesn't have the disabled class, the click will bubble
+                            $('#fileInput').removeClass('disabled')
+                            $('#loadScores').click()
                         }
                     }
                 ]
@@ -907,6 +913,9 @@ $(function(){
 
         //Add active class to bkmk to indicate its already loaded
         $bkmk.addClass('active')
+
+        //remove disabled class from file input
+        $('#fileInput').removeClass('disabled')
     }
 
     /**
