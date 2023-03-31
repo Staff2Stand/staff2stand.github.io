@@ -135,7 +135,7 @@ $(function(){
         $('.abcjs-container:not(:has(svg))').attr('style','')
 
         //Add/Remove disabled class on file input
-        areAnyDirty() ? $('#fileInput').addClass('disabled') : $('#fileInput').removeClass('disabled')
+        areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
         
         //fade out notey
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
@@ -381,6 +381,7 @@ $(function(){
     $("#clear_scores").click(function () {
         $('.abcEditor').each((i,editor) => $(editor).val('').change())
         $(".score_bookmark.active").removeClass("active")
+        setAllNotDirty()
     })
     //toggle editors (Edit Button)
     $('#show_editors').click(function(){        
@@ -637,7 +638,7 @@ $(function(){
     // FILE INPUT CLICK
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
-        if ( $('#fileInput').hasClass('disabled') ){
+        if ( $('#loadScores').hasClass('disabled') ){
             //first, stop click event from bubbling
             e.preventDefault()
             e.stopPropagation()
@@ -661,7 +662,7 @@ $(function(){
                             $(this).dialog('close')
                             //remove disabled class and trigger click
                                 //now, since file input doesn't have the disabled class, the click will bubble
-                            $('#fileInput').removeClass('disabled')
+                            $('#loadScores').removeClass('disabled')
                             $('#loadScores').click()
                         }
                     }
@@ -867,7 +868,7 @@ $(function(){
 
 
     /**
-     * 
+     * RENDER SCORE FROM BOOKMARK
      * @param {jquery element} $bkmk jquery element: score bookmark to render
      * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
      */
@@ -915,7 +916,7 @@ $(function(){
         $bkmk.addClass('active')
 
         //remove disabled class from file input
-        $('#fileInput').removeClass('disabled')
+        $('#loadScores').removeClass('disabled')
     }
 
     /**
