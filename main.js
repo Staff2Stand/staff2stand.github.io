@@ -854,7 +854,6 @@ $(function(){
         // encode any special characters in the JSON
         var text = encodeURIComponent( stringified_contents );
 
-        // <a download="filename.txt" href='data:application/octet-stream,...'></a>
         $link
             .attr( "download", filename+".s2s" )
             .attr( "href", "data:application/octet-stream," + text )
@@ -862,7 +861,7 @@ $(function(){
             .get(0)
             .click()
         
-        console.log('file downloaded',filename,stringified_contents)
+        console.log('FILE SAVED',filename,stringified_contents)
 
         setAllNotDirty()
     }
