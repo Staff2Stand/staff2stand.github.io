@@ -862,7 +862,8 @@ $(function(){
             .click()
         
         console.log('FILE SAVED',filename)
-        console.log(stringified_contents)
+        //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
+        console.log(stringified_contents.substring(1,stringified_contents.length-1))
 
         setAllNotDirty()
     }
