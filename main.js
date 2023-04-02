@@ -331,6 +331,7 @@ $(function(){
         minWidth: 35,
         alsoResizeReverse: '#page_content'
     })
+
     //hide bookmark sections if the sidebar is resized below 43px
     //  this prevents the bookmarks from jumping below the sidebar buttons and screwing up the layout
     $( "#sidebar" ).on( "resize", function( event, ui ) {
