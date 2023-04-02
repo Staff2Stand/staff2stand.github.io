@@ -861,7 +861,8 @@ $(function(){
             .get(0)
             .click()
         
-        console.log('FILE SAVED',filename,stringified_contents)
+        console.log('FILE SAVED',filename)
+        console.log(stringified_contents)
 
         setAllNotDirty()
     }
