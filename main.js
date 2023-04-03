@@ -497,7 +497,7 @@ $(function(){
             })
         //EDITOR UTILS MENU SELECTION
         //initialize menu and add event listener for menu item selection
-        $('.editorUtils_copyFromMenu').menu({
+        $('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
                 console.log('active menu item',$(activeMenuItem))
                 console.log('menu item li',$(activeMenuItem).attr('instrument'))
