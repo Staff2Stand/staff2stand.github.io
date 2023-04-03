@@ -497,7 +497,7 @@ $(function(){
             })
         //EDITOR UTILS MENU SELECTION
         //initialize menu and add event listener for menu item selection
-        $('.editorUtilMenu').menu({
+        $(thisEditorUtils).closest('.part').find('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
                 const selectedInstrument = $(activeMenuItem.item[0]).find('div').attr('instrument')
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
