@@ -301,32 +301,7 @@ $(function(){
         const scoreAlreadyLoaded = $bkmk.hasClass('active')
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
-        //check for unsaved changes and if so prompt user before continuing
-        if (areAnyDirty()) {
-            openDialog(
-                'alert',
-                'Unsaved Changes',
-                'flag',
-                'You have unsaved changes. Do you wish to continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        click: function(){
-                            $(this).dialog('close')
-                        }
-                    },
-                    {
-                        text: 'Continue',
-                        click: function(){
-                            $(this).dialog('close')
-                            renderScoreFromBkmk($bkmk, e.shiftKey)
-                        }
-                    }
-                ]
-            )
-        } else {
-            renderScoreFromBkmk($bkmk, e.shiftKey)
-        }
+        checkForUnsavedChanges(()=> renderScoreFromBkmk($bkmk, e.shiftKey))
     })
 
 
@@ -387,30 +362,7 @@ $(function(){
     })
     //clear scores
     $("#new_score").click(function () {
-        //check for unsaved changes and if so prompt user before continuing
-        if (areAnyDirty()) {
-            openDialog(
-                'alert',
-                'Unsaved Changes',
-                'flag',
-                'You have unsaved changes. Do you wish to continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        click: function(){
-                            $(this).dialog('close')
-                        }
-                    },
-                    {
-                        text: 'Continue',
-                        click: function(){
-                            $(this).dialog('close')
-                            newScore()
-                        }
-                    }
-                ]
-            )
-        } else { newScore() }
+        checkForUnsavedChanges(()=>newScore())
 
         function newScore(){
             $('.abcEditor').each((i,editor) => $(editor).val('').change())
@@ -696,32 +648,14 @@ $(function(){
             //first, stop click event from bubbling
             e.preventDefault()
             e.stopPropagation()
-
-            //
-            openDialog(
-                'alert',
-                'Unsaved Changes',
-                'flag',
-                'You have unsaved changes. Do you wish to continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        click: function(){
-                            $(this).dialog('close')
-                        }
-                    },
-                    {
-                        text: 'Continue',
-                        click: function(){
-                            $(this).dialog('close')
-                            //remove disabled class and trigger click
-                                //now, since file input doesn't have the disabled class, the click will bubble
-                            $('#loadScores').removeClass('disabled')
-                            $('#loadScores').click()
-                        }
-                    }
-                ]
-            )
+            
+            //don't check for unsaved changes bc it having the disabled class means there are unsaved changes
+            unsavedChangesPrompt(()=>{
+                //remove disabled class and trigger click
+                //now, since file input doesn't have the disabled class, the click will bubble
+                $('#loadScores').removeClass('disabled')
+                $('#loadScores').click()
+            })
         }
     })
 
@@ -766,30 +700,30 @@ $(function(){
      * @param {Boolean} modal 
      * @param {Boolean} fixedPos 
      */
-    function oldOpenDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
-        if (!buttons) buttons = [
-            {
-                text: 'OK',
-                click: function(){
-                    $(this).dialog('close')
-                }
-            }
-        ]
+    // function openDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
+    //     if (!buttons) buttons = [
+    //         {
+    //             text: 'OK',
+    //             click: function(){
+    //                 $(this).dialog('close')
+    //             }
+    //         }
+    //     ]
 
-        const addClasses = addClass + (fixedPos?' fixed-dialog':'')
+    //     const addClasses = addClass + (fixedPos?' fixed-dialog':'')
 
-        $('#dialog')
-            .dialog('option','title',title)
-            .html(html)
-            .dialog('option','buttons',buttons)
-            .dialog('option','modal',modal)
-            .dialog('option','classes.ui-dialog',addClasses)
-            .on( "dialogopen", function( event, ui ) {
-                //add titleIcon
-                $('<i class="fas fa-'+titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
-            } )
-            .dialog('open')
-    }
+    //     $('#dialog')
+    //         .dialog('option','title',title)
+    //         .html(html)
+    //         .dialog('option','buttons',buttons)
+    //         .dialog('option','modal',modal)
+    //         .dialog('option','classes.ui-dialog',addClasses)
+    //         .on( "dialogopen", function( event, ui ) {
+    //             //add titleIcon
+    //             $('<i class="fas fa-'+titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+    //         } )
+    //         .dialog('open')
+    // }
 
     /**
      * OPEN DIALOG
@@ -801,26 +735,22 @@ $(function(){
         addClass: 'myDialog',               //any custom classes to add to dialog
         title: 'Staff To Stand',            //heading of the dialog
         titleIcon: 'exclamation',           //ex: flag, exclamation
-        buttons: ['OK'],                    //array of button text (length of array is number of buttons)
+        buttons: [{                         //array of jqui button objs
+            text: 'OK',
+            click: function(){ $(this).dialog('close') }
+        }],
         modal: true,                        //whether the dialog should be a modal
         fixedPos: true                      //whether dialog should be fixed
     }
-    function openDialog(html, opts=openDialogOptsDefault, ...buttonFunctions){
-        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
+    function openDialog(html, opts){
+        opts = {...openDialogOptsDefault, ...opts}
 
-        const buttons = []
-        opts.buttons.forEach(function(buttonTxt,i){
-            //create jqui button obj and push it to the buttons array
-            buttons.push({
-                text: buttonTxt,
-                click: buttonFunctions[i] ? buttonFunctions[i] : function(){$(this).dialog('close')}
-            })
-        })
+        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
 
         $('#dialog')
             .dialog('option','title',opts.title)
             .html(html)
-            .dialog('option','buttons',buttons)
+            .dialog('option','buttons',opts.buttons)
             .dialog('option','modal',opts.modal)
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
@@ -828,6 +758,51 @@ $(function(){
                 $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
             } )
             .dialog('open')
+    }
+
+    /**
+     * UNSAVED CHANGES
+     * @param {Function} onContinue 
+     * @param {Function} onCancel 
+     */
+    function unsavedChangesPrompt(onContinue,onCancel){
+        openDialog(
+            'You have unsaved changes. Do you wish to continue?',
+            {
+                addClass: 'alert',
+                title: 'Unsaved Changes',
+                titleIcon: 'flag',
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        click: function(){
+                            $(this).dialog('close')
+                            if (onCancel) onCancel()
+                        }
+                    },
+                    {
+                        text: 'Continue',
+                        click: function(){
+                            $(this).dialog('close')
+                            if (onContinue) onContinue()
+                        }
+                    }
+                ]
+            }
+        )
+    }
+    /**
+     * CHECK FOR UNSAVED CHANGES
+     * Checks if any editors are dirty and calls unsavedChangesPrompt if so, and onContinue arg if not.
+     * @param {Function} onContinue 
+     * @param {Function} onCancel 
+     */
+    function checkForUnsavedChanges(onContinue,onCancel){
+        if(areAnyDirty()){
+            unsavedChangesPrompt(onContinue,onCancel)
+        }else{
+            onContinue()
+        }
     }
     
 
