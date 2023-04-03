@@ -499,8 +499,8 @@ $(function(){
         //initialize menu and add event listener for menu item selection
         $('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
-                const selectedInstrument = $(activeMenuItem.item).attr('instrument')
-                console.log('selected instrument',selectedInstrument,activeMenuItem.item[0].item)
+                const selectedInstrument = $(activeMenuItem.item[0]).attr('instrument')
+                console.log('selected instrument',selectedInstrument,activeMenuItem.item[0])
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[selectedInstrument]
                 //replace all instances of the voice field with the appropriate voice field
