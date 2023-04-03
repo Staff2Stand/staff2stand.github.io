@@ -766,7 +766,7 @@ $(function(){
      * @param {Boolean} modal 
      * @param {Boolean} fixedPos 
      */
-    function openDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
+    function oldOpenDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
         if (!buttons) buttons = [
             {
                 text: 'OK',
@@ -776,9 +776,7 @@ $(function(){
             }
         ]
 
-        console.log('add class:',addClass)
         const addClasses = addClass + (fixedPos?' fixed-dialog':'')
-        console.log('add classes: ',addClasses)
 
         $('#dialog')
             .dialog('option','title',title)
@@ -792,6 +790,43 @@ $(function(){
             } )
             .dialog('open')
     }
+
+    /**
+     * OPEN DIALOG
+     * @param {String} html the html (content) of the dialog
+     * @param {Object} opts addClass, title, titleIcon (FA icon name), buttons (array of jqui button objs), modal, fixedPos
+     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
+     */
+    const openDialogOptsDefault = {
+        addClass: 'myDialog',               //any custom classes to add to dialog
+        title: 'Staff To Stand',            //heading of the dialog
+        titleIcon: 'exclamation',           //ex: flag, exclamation
+        buttons: ['OK'],                    //array of button text (length of array is number of buttons)
+        modal: true,                        //whether the dialog should be a modal
+        fixedPos: true                      //whether dialog should be fixed
+    }
+    function openDialog(html, opts=openDialogOptsDefault, ...buttonFunctions){
+        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
+
+        const buttons = []
+        opts.buttons.forEach(function(buttonTxt,i){
+            //create jqui button obj and push it to the buttons array
+            //click: buttonFunctions[i]
+        })
+
+        $('#dialog')
+            .dialog('option','title',opts.title)
+            .html(html)
+            .dialog('option','buttons',buttons)
+            .dialog('option','modal',opts.modal)
+            .dialog('option','classes.ui-dialog',addClasses)
+            .on( "dialogopen", function( event, ui ) {
+                //add titleIcon
+                $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+            } )
+            .dialog('open')
+    }
+    
 
     /**
      *  DIRTY flag
