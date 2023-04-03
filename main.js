@@ -480,15 +480,15 @@ $(function(){
     //copy editor utils template html to each editor util div
     $('.abcEditor-utils').each((i,abcEditorUtils) => {
         const thisInstrument = $(abcEditorUtils).closest('.part').attr('instrument')
-        //create new array of allother instruments and remove this instrument from it
-        const allOtherInstruments = instruments
-        allOtherInstruments.splice( allOtherInstruments.indexOf(thisInstrument),1 )
 
         $(abcEditorUtils)
             //copy content from template
             .html($abcEditorUtilsTemplate.html())
             //populate editorUtils_copyFromMenu with each instrument
             .find('.editorUtils_copyFromMenu').each(function(i,menu){
+                //create new array of allother instruments and remove this instrument from it
+                const allOtherInstruments = instruments
+                allOtherInstruments.splice( allOtherInstruments.indexOf(thisInstrument),1 )
                 //append menu item for each other instrument
                 allOtherInstruments.forEach(function(otherInstrument){
                     $(menu)
