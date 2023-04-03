@@ -503,7 +503,7 @@ $(function(){
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[selectedInstrument]
                 //replace all instances of the voice field with the appropriate voice field
-                editorVal = editorVal.replace(/V:\s?(.*)\n/gm,correctVoiceField)
+                editorVal = editorVal.replace(/(?<=V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
                 //set this instrument's editor to that val and trigger change
                 $(`#editor-${thisInstrument}`).val(editorVal).change()
             }
