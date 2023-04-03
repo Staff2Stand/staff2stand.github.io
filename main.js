@@ -2,6 +2,13 @@ const abcjs = window.ABCJS
 
 const instruments = ['violin','viola','cello','bass']
 
+const voiceFieldReference = {
+    violin: 'violin clef=treble',
+    viola: 'viola clef=alto',
+    cello: 'cello clef=bass octave=-1',
+    bass: 'bass clef=bass octave=-1'
+}
+
 // \u2193 = down arrow
 // \u2191 = up arrow
 const stringReference = {
@@ -496,8 +503,9 @@ $(function(){
                 console.log('menu item li',$(activeMenuItem).attr('instrument'))
                 console.log('menu item div',$(activeMenuItem).find('div').attr('instrument'))
                 const selectedInstrument = $(activeMenuItem).attr('instrument')
-                //get text of selected instrument's editor
-                //replace all instances of the clef field with the appropriate clef field
+                let editorVal = $(`#editor-${selectedInstrument}`).val()
+                const correctVoiceField = voiceFieldReference[selectedInstrument]
+                //replace all instances of the voice field with the appropriate voice field
                 //set this instrument's editor to that val and trigger change
             }
         })
