@@ -500,7 +500,6 @@ $(function(){
         $('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
                 const selectedInstrument = $(activeMenuItem.item[0]).find('div').attr('instrument')
-                console.log('selected instrument',selectedInstrument)
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[selectedInstrument]
                 //replace all instances of the voice field with the appropriate voice field

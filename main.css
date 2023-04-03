@@ -379,13 +379,21 @@ header {
   filter: drop-shadow(0px 0px 1px black);
 }
 
+.ui-icon-caret-1-e{
+  background-position-y: 7px;
+}
+
 .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
   position: sticky;
   top: var(--header_height);
   z-index: 3;
 }
+.abcEditor-utils{
+  z-index: 3;
+}
+
 .part .abcEditor {
-  top: 2em;
+  top: calc(var(--header_height) + 2em);
 }
 
 .part{
