@@ -469,18 +469,37 @@ $(function(){
     /**
      *  EDITOR UTILITIES
      */
+    const $abcEditorUtilsTemplate = $('#abcEditor-utils-template')
     //copy editor utils template html to each editor util div
-    const abcEditorUtilsTemplate = $('#abcEditor-utils-template').html()
     $('.abcEditor-utils').each((i,abcEditorUtils) => {
+        const thisInstrument = $(abcEditorUtils).closest('.part').attr('instrument')
+        //create new array of allother instruments and remove this instrument from it
+        const allOtherInstruments = instruments
+        allOtherInstruments.splice( allOtherInstruments.indexOf(thisInstrument),1 )
+
         $(abcEditorUtils)
             //copy content from template
-            .html(abcEditorUtilsTemplate)
-            //COPY TXT AS STRING
-            .find('.copyTxtAsString').click(function(){
-                const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
-                const text = $(editor).val()
-                const textSingleLine = escapeABC(text)
-                copyTextToClipboard(textSingleLine)
+            .html($abcEditorUtilsTemplate.html())
+            //populate editorUtils_copyFromMenu with each instrument
+            .find('.editorUtils_copyFromMenu').each(function(i,menu){
+                //append menu item for each other instrument
+                allOtherInstruments.forEach(function(otherInstrument){
+                    $(menu)
+                        .append(`<li><div style="text-transform:capitalize;" instrument="${otherInstrument}">${otherInstrument}</div></li>`)
+                })
+                //initialize menu and add event listener for menu item selection
+                $(menu).menu({
+                    select: function(e,activeMenuItem){
+                        //EDITOR UTILS MENU SELECTION
+                        console.log('active menu item',$(activeMenuItem))
+                        console.log('menu item li',$(activeMenuItem).attr('instrument'))
+                        console.log('menu item div',$(activeMenuItem).find('div').attr('instrument'))
+                        const selectedInstrument = $(activeMenuItem).attr('instrument')
+                        //get text of selected instrument's editor
+                        //replace all instances of the clef field with the appropriate clef field
+                        //set this instrument's editor to that val and trigger change
+                    }
+                })
             })
     })
 
