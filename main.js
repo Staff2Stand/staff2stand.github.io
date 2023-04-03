@@ -486,23 +486,19 @@ $(function(){
             .html($abcEditorUtilsTemplate.html())
             //populate editorUtils_copyFromMenu with each instrument
             .find('.editorUtils_copyFromMenu').each(function(i,menu){
-                //create new array of allother instruments and remove this instrument from it
-                const allOtherInstruments = instruments
-                allOtherInstruments.splice( allOtherInstruments.indexOf(thisInstrument),1 )
                 //append menu item for each other instrument
-                allOtherInstruments.forEach(function(otherInstrument){
-                    $(menu)
-                        .append(`<li><div style="text-transform:capitalize;" instrument="${otherInstrument}">${otherInstrument}</div></li>`)
+                instruments.forEach(function(instrument){
+                    if (instrument !== thisInstrument){
+                        $(menu).append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
+                    }
                 })
             })
         //EDITOR UTILS MENU SELECTION
         //initialize menu and add event listener for menu item selection
         $('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
-                console.log('active menu item',$(activeMenuItem))
-                console.log('menu item li',$(activeMenuItem).attr('instrument'))
-                console.log('menu item div',$(activeMenuItem).find('div').attr('instrument'))
-                const selectedInstrument = $(activeMenuItem).attr('instrument')
+                const selectedInstrument = $(activeMenuItem[0].item[0]).attr('instrument')
+                console.log('selected instrument',selectedInstrument)
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[selectedInstrument]
                 //replace all instances of the voice field with the appropriate voice field
