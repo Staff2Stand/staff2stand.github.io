@@ -811,7 +811,10 @@ $(function(){
         const buttons = []
         opts.buttons.forEach(function(buttonTxt,i){
             //create jqui button obj and push it to the buttons array
-            //click: buttonFunctions[i]
+            buttons.push({
+                text: buttonTxt,
+                click: buttonFunctions[i] ? buttonFunctions[i] : function(){$(this).dialog('close')}
+            })
         })
 
         $('#dialog')
