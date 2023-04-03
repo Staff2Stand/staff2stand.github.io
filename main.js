@@ -478,20 +478,20 @@ $(function(){
      */
     const $abcEditorUtilsTemplate = $('#abcEditor-utils-template')
     //copy editor utils template html to each editor util div
-    $('.abcEditor-utils').each((i,abcEditorUtils) => {
-        const thisInstrument = $(abcEditorUtils).closest('.part').attr('instrument')
+    $('.abcEditor-utils').each((i,thisEditorUtils) => {
+        const thisInstrument = $(thisEditorUtils).closest('.part').attr('instrument')
 
-        $(abcEditorUtils)
+        $(thisEditorUtils)
             //copy content from template
             .html($abcEditorUtilsTemplate.html())
             //populate editorUtils_copyFromMenu with each instrument
             .find('.editorUtils_copyFromMenu').each(function(i,menu){
                 //append menu item for each other instrument
                 instruments.forEach(function(instrument){
-                    if (instrument !== thisInstrument){
-                        //clear html first so that the template's menu items aren't copied over as well
-                        $(menu).html('').append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
-                    }
+                    if (instrument == thisInstrument) return
+                    //clear html first so that the template's menu items aren't copied over as well
+                    $(menu).html('').append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
+                    
                 })
             })
         //EDITOR UTILS MENU SELECTION
@@ -499,7 +499,7 @@ $(function(){
         $('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
                 const selectedInstrument = $(activeMenuItem).attr('instrument')
-                console.log('selected instrument',selectedInstrument,activeMenuItem[0].item[0])
+                console.log('selected instrument',selectedInstrument,activeMenuItem)
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[selectedInstrument]
                 //replace all instances of the voice field with the appropriate voice field
