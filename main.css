@@ -380,7 +380,7 @@ header {
 }
 
 .ui-icon-caret-1-e{
-  background-position-y: 7px;
+  background-position-y: 7px !important;
 }
 
 .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
