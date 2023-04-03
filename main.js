@@ -386,10 +386,37 @@ $(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
     //clear scores
-    $("#clear_scores").click(function () {
-        $('.abcEditor').each((i,editor) => $(editor).val('').change())
-        $(".score_bookmark.active").removeClass("active")
-        setAllNotDirty()
+    $("#new_score").click(function () {
+        //check for unsaved changes and if so prompt user before continuing
+        if (areAnyDirty()) {
+            openDialog(
+                'alert',
+                'Unsaved Changes',
+                'flag',
+                'You have unsaved changes. Do you wish to continue?',
+                [
+                    {
+                        text: 'Cancel',
+                        click: function(){
+                            $(this).dialog('close')
+                        }
+                    },
+                    {
+                        text: 'Continue',
+                        click: function(){
+                            $(this).dialog('close')
+                            newScore()
+                        }
+                    }
+                ]
+            )
+        } else { newScore() }
+
+        function newScore(){
+            $('.abcEditor').each((i,editor) => $(editor).val('').change())
+            $(".score_bookmark.active").removeClass("active")
+            setAllNotDirty()
+        }
     })
     //toggle editors (Edit Button)
     $('#show_editors').click(function(){        

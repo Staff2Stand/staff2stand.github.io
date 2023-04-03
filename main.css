@@ -244,12 +244,12 @@ header {
   color: #fff;
 }
 
-/* clear scores */
-#sidebar_buttons #clear_scores svg {
-  fill: #ff4e4e;
+/* new scores */
+#sidebar_buttons #new_scores svg {
+  fill: #63ff4e;
 }
-#sidebar_buttons #clear_scores:hover svg {
-  fill: #ff7a7a;
+#sidebar_buttons #new_scores:hover svg {
+  fill: #63ff4e;
 }
 
 /* fingerings toggle */
