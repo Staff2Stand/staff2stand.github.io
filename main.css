@@ -382,7 +382,7 @@ header {
 .part :is(h1,.part-utils,.abceditor,.abcEditor-utils){
   position: sticky;
   top: var(--header_height);
-  z-index: 2;
+  z-index: 3;
 }
 .part .abcEditor {
   top: 2em;
