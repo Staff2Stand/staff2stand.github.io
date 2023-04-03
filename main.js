@@ -487,20 +487,20 @@ $(function(){
                     $(menu)
                         .append(`<li><div style="text-transform:capitalize;" instrument="${otherInstrument}">${otherInstrument}</div></li>`)
                 })
-                //initialize menu and add event listener for menu item selection
-                $(menu).menu({
-                    select: function(e,activeMenuItem){
-                        //EDITOR UTILS MENU SELECTION
-                        console.log('active menu item',$(activeMenuItem))
-                        console.log('menu item li',$(activeMenuItem).attr('instrument'))
-                        console.log('menu item div',$(activeMenuItem).find('div').attr('instrument'))
-                        const selectedInstrument = $(activeMenuItem).attr('instrument')
-                        //get text of selected instrument's editor
-                        //replace all instances of the clef field with the appropriate clef field
-                        //set this instrument's editor to that val and trigger change
-                    }
-                })
             })
+        //EDITOR UTILS MENU SELECTION
+        //initialize menu and add event listener for menu item selection
+        $('.editorUtils_copyFromMenu').menu({
+            select: function(e,activeMenuItem){
+                console.log('active menu item',$(activeMenuItem))
+                console.log('menu item li',$(activeMenuItem).attr('instrument'))
+                console.log('menu item div',$(activeMenuItem).find('div').attr('instrument'))
+                const selectedInstrument = $(activeMenuItem).attr('instrument')
+                //get text of selected instrument's editor
+                //replace all instances of the clef field with the appropriate clef field
+                //set this instrument's editor to that val and trigger change
+            }
+        })
     })
 
     /**
