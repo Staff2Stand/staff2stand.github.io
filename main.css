@@ -85,20 +85,24 @@ header {
 /* titlebar */
 .ui-dialog.alert .ui-dialog-titlebar{
  background: #b91919;
+ color: #fff;
 }
 .ui-dialog.warn .ui-dialog-titlebar{
   background: #b39703;
+  color: #fff;
 }
 /* icon */
-.ui-dialog i.fas{
+.ui-dialog .svg-inline--fa{
   margin-right: 1em;
 }
 /* buttons */
 .ui-dialog.alert .ui-dialog-buttonpane button{
   background: #b91919;
+  color: #fff;
 }
 .ui-dialog.warn .ui-dialog-buttonpane button{
   background: #b39703;
+  color: #fff;
 }
 .ui-dialog .ui-dialog-buttonpane button:hover{
   filter: brightness(1.1);
