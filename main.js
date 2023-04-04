@@ -376,6 +376,8 @@ $(function(){
         $('.instrument_tunes:hidden').show().siblings('div:not(.abc-warnings)').show()
         //toggle editors
         $('.abcEditor, .abc-warnings').slideToggle()
+        //toggle editor utils
+        $('.abcEditor-utils').toggleClass('hidden')
     })
 
 
