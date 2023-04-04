@@ -408,7 +408,7 @@ header {
   top: calc(var(--header_height) + 26px) !important;
 }
 .abcEditor-utils.hidden{
-  display: none;
+  display: none !important;
 }
 .ui-menu.editorUtilMenu {
   position: absolute;
