@@ -190,6 +190,10 @@ header {
   margin-top: 1em;
 }
 
+#sidebar_buttons span svg{
+  font-size: 1.75em;
+}
+
 /* Sidebar Resize Handle */
 #sidebar_resize_handle {
   cursor: ew-resize !important;
@@ -245,10 +249,10 @@ header {
 }
 
 /* new scores */
-#sidebar_buttons #new_scores {
-  color: #63ff4e;
+#sidebar_buttons #new_score {
+  color: #4bb83d;
 }
-#sidebar_buttons #new_scores:hover {
+#sidebar_buttons #new_score:hover {
   color: #63ff4e;
 }
 
