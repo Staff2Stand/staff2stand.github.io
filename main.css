@@ -199,25 +199,25 @@ header {
   position: unset;
   font-size: unset;
 }
-#sidebar_resize_handle svg{
-  fill: #fff;
+#sidebar_resize_handle{
+  color: #fff;
 }
 
 /* Print */
-#print svg {
+#print {
   /* the sidebar button */
-  fill: #cdcdcd;
+  color: #cdcdcd;
 }
-#print:hover svg {
-  fill: #fff;
+#print:hover {
+  color: #fff;
 }
 #sidebar_buttons #print.active {
   --h: 255;
   --s: 0%;
   --l: 80%; /*<- for glow*/
 }
-#print.active svg {
-  fill: #fff;
+#print.active {
+  color: #fff;
 }
 #printMenu {
   display: none;
@@ -245,40 +245,40 @@ header {
 }
 
 /* new scores */
-#sidebar_buttons #new_scores svg {
-  fill: #63ff4e;
+#sidebar_buttons #new_scores {
+  color: #63ff4e;
 }
-#sidebar_buttons #new_scores:hover svg {
-  fill: #63ff4e;
+#sidebar_buttons #new_scores:hover {
+  color: #63ff4e;
 }
 
 /* fingerings toggle */
 #sidebar_buttons #fingerings_toggle {
   --h: 182deg;
 }
-#sidebar_buttons #fingerings_toggle svg {
-  fill: hsl(var(--h) var(--s) var(--l));
+#sidebar_buttons #fingerings_toggle {
+  color: hsl(var(--h) var(--s) var(--l));
 }
 /* highlights toggle */
 #sidebar_buttons #highlights_toggle {
   --h: 64deg;
 }
-#sidebar_buttons #highlights_toggle svg {
-  fill: hsl(var(--h) var(--s) var(--l));
+#sidebar_buttons #highlights_toggle  {
+  color: hsl(var(--h) var(--s) var(--l));
 }
 /* notenames toggle */
 #sidebar_buttons #notenames_toggle {
   --h: 122deg;
 }
-#sidebar_buttons #notenames_toggle svg {
-  fill: hsl(var(--h) var(--s) var(--l));
+#sidebar_buttons #notenames_toggle  {
+  color: hsl(var(--h) var(--s) var(--l));
 }
 /* edit toggle */
 #sidebar_buttons #show_editors {
   --h:300deg;
 }
-#sidebar_buttons #show_editors svg {
-  fill: hsl(var(--h) var(--s) var(--l));
+#sidebar_buttons #show_editors {
+  color: hsl(var(--h) var(--s) var(--l));
 }
 
 /* inactive saturation and lightness */
@@ -366,16 +366,16 @@ header {
 :is(.part-utils,.abcEditor-utils) span{
   height: 100%;
 }
-:is(.part-utils,.abcEditor-utils) span svg{
-  fill: #333;
+:is(.part-utils,.abcEditor-utils) span{
+  color: #333;
   height: 100%;
 }
 
 :is(.part-utils,.abcEditor-utils) span:hover{
   cursor: pointer;
 }
-:is(.part-utils,.abcEditor-utils) span:hover svg{
-  fill: #000;
+:is(.part-utils,.abcEditor-utils) span:hover{
+  color: #000;
   filter: drop-shadow(0px 0px 1px black);
 }
 
