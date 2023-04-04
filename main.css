@@ -250,10 +250,10 @@ header {
 
 /* new scores */
 #sidebar_buttons #new_score {
-  color: #4bb83d;
+  color: #ff8100;
 }
 #sidebar_buttons #new_score:hover {
-  color: #63ff4e;
+  color: #ffa54a;
 }
 
 /* fingerings toggle */
