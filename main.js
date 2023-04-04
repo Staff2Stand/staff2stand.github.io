@@ -488,6 +488,13 @@ $(function(){
             }
         })
     })
+    /**
+     * EDITOR UTIL MENU TOGGLE
+     */
+    $('.editorUtilMenuToggle').click(function(){
+        const $menu = $(this).closest('.editorUtilMenuToggle')
+        $menu.next('.editorUtilMenu').toggle()
+    })
 
     /**
      * INITIALIZE TOOLTIPS
