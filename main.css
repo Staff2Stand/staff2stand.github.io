@@ -413,6 +413,9 @@ header {
   width: max-content;
   display: none;
 }
+.editorUtilMenu .ui-menu-item-wrapper {
+  padding-left: 0.5em;
+}
 .editorUtilMenuToggle {
   line-height: 150%;
   background: #ddd;
