@@ -661,7 +661,7 @@ $(function(){
 
 
     /**
-     * DIALOG
+     * INITIALIZE DIALOG
      */
     //default options
     const header_height = $('#top_bar').height()
@@ -690,40 +690,6 @@ $(function(){
             $(".ui-dialog-titlebar-close").hide();
         }
     })
-    /**
-     * open dialog
-     * @param {String} addClass name of class to add to .ui-dialog
-     * @param {String} title 
-     * @param {String} titleIcon html to prepend to title
-     * @param {String} html 
-     * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
-     * @param {Boolean} modal 
-     * @param {Boolean} fixedPos 
-     */
-    // function openDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
-    //     if (!buttons) buttons = [
-    //         {
-    //             text: 'OK',
-    //             click: function(){
-    //                 $(this).dialog('close')
-    //             }
-    //         }
-    //     ]
-
-    //     const addClasses = addClass + (fixedPos?' fixed-dialog':'')
-
-    //     $('#dialog')
-    //         .dialog('option','title',title)
-    //         .html(html)
-    //         .dialog('option','buttons',buttons)
-    //         .dialog('option','modal',modal)
-    //         .dialog('option','classes.ui-dialog',addClasses)
-    //         .on( "dialogopen", function( event, ui ) {
-    //             //add titleIcon
-    //             $('<i class="fas fa-'+titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
-    //         } )
-    //         .dialog('open')
-    // }
 
     /**
      * OPEN DIALOG
@@ -754,8 +720,10 @@ $(function(){
             .dialog('option','modal',opts.modal)
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
-                //add titleIcon
-                $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+                //add titleIcon if it doesn't already exist
+                const $dialogWidget = $(this).dialog('widget')
+                const hasTitleIcon = $dialogWidget.find('[data-fa-i2svg]').length > 0
+                if (!hasTitleIcon) $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
             } )
             .dialog('open')
     }
