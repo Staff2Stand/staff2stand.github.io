@@ -414,6 +414,7 @@ header {
   display: none;
 }
 .editorUtilMenu .ui-menu-item-wrapper {
+  /* ui menu items */
   padding-left: 0.5em;
 }
 .editorUtilMenuToggle {
