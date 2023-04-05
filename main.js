@@ -294,6 +294,10 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
+    //Load Bookmarks From Json File on page load
+    
+
+    //On Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
 
@@ -896,7 +900,7 @@ $(function(){
         var $link = $("<a />");  
         // encode any special characters in the JSON
         var text = encodeURIComponent( stringified_contents );
-
+        //create link and click to initiate download
         $link
             .attr( "download", filename+".s2s" )
             .attr( "href", "data:application/octet-stream," + text )
