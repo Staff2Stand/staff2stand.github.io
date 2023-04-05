@@ -475,9 +475,9 @@ $(function(){
         $(partUtils)
             //copy content from template
             .html(partUtilsTemplate)
-            //HIDE BUTTON / TOGGLE PART
+            //HIDE PART BUTTON / TOGGLE PART
             .find('.hide').click(function(){
-                $(this).closest('.part-utils').siblings('.instrument_tunes').toggle()
+                $(this).closest('.part-utils').siblings('.instrument_tunes, .extra_html').toggle()
             })
     })
 
@@ -981,7 +981,7 @@ $(function(){
             //set editor to new abc string
             $instrEditor.val(newAbc).change()
         })
-        
+
         //set extra html
         const extra_html = $bkmk.attr('extra_html') || ''
         $('.extra_html').html(extra_html)
