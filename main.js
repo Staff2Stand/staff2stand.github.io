@@ -1,3 +1,6 @@
+import scoreData from './scoreData.json' assert { type: 'JSON' }
+console.log('SCORE DATA',scoreData)
+
 const abcjs = window.ABCJS
 
 const instruments = ['violin','viola','cello','bass']
