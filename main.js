@@ -1,4 +1,4 @@
-import scoreData from './scoreData.json' assert { type: 'JSON' }
+import scoreData from './scoreData.json' assert { type: 'json' }
 console.log('SCORE DATA',scoreData)
 
 const abcjs = window.ABCJS
