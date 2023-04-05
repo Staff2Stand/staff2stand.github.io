@@ -1,5 +1,5 @@
 import scoreData from './scoreData.json' assert { type: 'json' }
-console.log('SCORE DATA',scoreData)
+console.log('SCORE BOOKMARKS DATA',scoreData)
 
 const abcjs = window.ABCJS
 
@@ -981,6 +981,10 @@ $(function(){
             //set editor to new abc string
             $instrEditor.val(newAbc).change()
         })
+        
+        //set extra html
+        const extra_html = $bkmk.attr('extra_html') || ''
+        $('.extra_html').html(extra_html)
 
         setAllNotDirty()
 
