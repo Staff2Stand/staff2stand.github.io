@@ -526,6 +526,14 @@ text.abcjs-annotation[text-anchor="start"] {
   opacity: 100%;
 }
 
+/* EXTRA HTML */
+.extra_html{
+  padding: 0 12px;
+  margin-left: 6px;
+  border-left: 4px solid #333;
+  border-radius: 6px;
+}
+
 /* FOOTER */
 footer {
   background: #333;
