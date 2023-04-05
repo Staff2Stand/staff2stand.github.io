@@ -302,7 +302,7 @@ $(function(){
         const heading = section.heading
         const id = section.id || ''
 
-        let html = `<ul class="score_bookmark_section" id="${id}>`
+        let html = `<ul class="score_bookmark_section" id="${id}">`
         html += `<h1>${heading}</h1>`
         //each bookmark is an li
         section.bookmarks.forEach(bkmk=>{
