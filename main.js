@@ -297,7 +297,7 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-    //Load Bookmarks From Json File on page load
+    //Load JSON: Load Bookmarks From Json File on page load
     scoreData.forEach(section=>{
         const heading = section.heading
         const id = section.id || ''
@@ -309,7 +309,8 @@ $(function(){
             html += '<li class="score_bookmark"'
             //each bookmark gets attributes ...  key = value
             for (const prop in bkmk) {
-                html += ` ${prop}="${bkmk[prop]}"`
+                const abcHtmlString = escapeABC(bkmk[prop])
+                html += ` ${prop}="${abcHtmlString}"`
             }
             html += '</li>'
         })
@@ -1015,13 +1016,18 @@ $(function(){
 
     /**
      * ESCAPE AND UNESCAPE ABC STRINGS
+     * @param {String} abc
+     * @param {Boolean} toHTML default true
      */
     function escapeABC(abc,toHTML=true){
         if (!toHTML) return abc.replace(/[\n"']/gm,'\$&')
 
         return abc.replace(/\n/gm,'\\n').replace(/"/gm,'&quot;').replace(/'/gm,'&apos;')
     }
-
+    /**
+     * @param {String} abc
+     * @param {Boolean} fromHTML default true
+     */
     function unescapeABC(abc,fromHTML=true){
         if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
 
