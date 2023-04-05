@@ -298,7 +298,26 @@ $(function(){
      * SCORE BOOKMARKS
      */
     //Load Bookmarks From Json File on page load
-    
+    scoreData.forEach(section=>{
+        const heading = section.heading
+        const id = section.id || ''
+
+        let html = `<ul class="score_bookmark_section" id="${id}>`
+        html += `<h1>${heading}</h1>`
+        //each bookmark is an li
+        section.bookmarks.forEach(bkmk=>{
+            html += '<li class="score_bookmark"'
+            //each bookmark gets attributes ...  key = value
+            for (const prop in bkmk) {
+                html += ` ${prop}="${bkmk[prop]}"`
+            }
+            html += '</li>'
+        })
+        html += '</ul>'
+
+        //append this section to the sidebar
+        $('#sidebar').append(html)
+    })
 
     //On Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
