@@ -48,7 +48,7 @@ header {
   background: #333;
   position: sticky;
   top: 0;
-  z-index: 3;
+  z-index: 101;
   color: #fff;
   padding: var(--header_content_padding);
   height: var(--header_content_height);
