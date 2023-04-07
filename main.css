@@ -145,6 +145,10 @@ header {
   border-radius: 3px;
   overflow: hidden;
 }
+#sidebar .score_bookmark_section:last-child {
+  position: sticky;
+  top: var(--header_height);
+}
 
 #sidebar .score_bookmark {
   cursor: pointer;
