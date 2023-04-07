@@ -1,6 +1,16 @@
+import scoreData from './scoreData.json' assert { type: 'json' }
+console.log('SCORE BOOKMARKS DATA',scoreData)
+
 const abcjs = window.ABCJS
 
 const instruments = ['violin','viola','cello','bass']
+
+const voiceFieldReference = {
+    violin: 'violin clef=treble',
+    viola: 'viola clef=alto',
+    cello: 'cello clef=bass octave=-1',
+    bass: 'bass clef=bass octave=-1'
+}
 
 // \u2193 = down arrow
 // \u2191 = up arrow
@@ -287,6 +297,30 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
+    //Load JSON: Load Bookmarks From Json File on page load
+    scoreData.forEach(section=>{
+        const heading = section.heading
+        const id = section.id || ''
+
+        let html = `<ul class="score_bookmark_section" id="${id}">`
+        html += `<h1>${heading}</h1>`
+        //each bookmark is an li
+        section.bookmarks.forEach(bkmk=>{
+            html += '<li class="score_bookmark"'
+            //each bookmark gets attributes ...  key = value
+            for (const prop in bkmk) {
+                const abcHtmlString = escapeABC(bkmk[prop])
+                html += ` ${prop}="${abcHtmlString}"`
+            }
+            html += '</li>'
+        })
+        html += '</ul>'
+
+        //append this section to the sidebar
+        $('#sidebar').append(html)
+    })
+
+    //On Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
 
@@ -294,32 +328,7 @@ $(function(){
         const scoreAlreadyLoaded = $bkmk.hasClass('active')
         if (!e.shiftKey && scoreAlreadyLoaded) return
 
-        //check for unsaved changes and if so prompt user before continuing
-        if (areAnyDirty()) {
-            openDialog(
-                'alert',
-                'Unsaved Changes',
-                'flag',
-                'You have unsaved changes. Do you wish to continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        click: function(){
-                            $(this).dialog('close')
-                        }
-                    },
-                    {
-                        text: 'Continue',
-                        click: function(){
-                            $(this).dialog('close')
-                            renderScoreFromBkmk($bkmk, e.shiftKey)
-                        }
-                    }
-                ]
-            )
-        } else {
-            renderScoreFromBkmk($bkmk, e.shiftKey)
-        }
+        checkForUnsavedChanges(()=> renderScoreFromBkmk($bkmk, e.shiftKey))
     })
 
 
@@ -331,6 +340,7 @@ $(function(){
         minWidth: 35,
         alsoResizeReverse: '#page_content'
     })
+
     //hide bookmark sections if the sidebar is resized below 43px
     //  this prevents the bookmarks from jumping below the sidebar buttons and screwing up the layout
     $( "#sidebar" ).on( "resize", function( event, ui ) {
@@ -378,10 +388,14 @@ $(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
     //clear scores
-    $("#clear_scores").click(function () {
-        $('.abcEditor').each((i,editor) => $(editor).val('').change())
-        $(".score_bookmark.active").removeClass("active")
-        setAllNotDirty()
+    $("#new_score").click(function () {
+        checkForUnsavedChanges(()=>newScore())
+
+        function newScore(){
+            $('.abcEditor').each((i,editor) => $(editor).val('').change())
+            $(".score_bookmark.active").removeClass("active")
+            setAllNotDirty()
+        }
     })
     //toggle editors (Edit Button)
     $('#show_editors').click(function(){        
@@ -389,6 +403,8 @@ $(function(){
         $('.instrument_tunes:hidden').show().siblings('div:not(.abc-warnings)').show()
         //toggle editors
         $('.abcEditor, .abc-warnings').slideToggle()
+        //toggle editor utils
+        $('.abcEditor-utils').toggleClass('hidden')
     })
 
 
@@ -459,28 +475,54 @@ $(function(){
         $(partUtils)
             //copy content from template
             .html(partUtilsTemplate)
-            //HIDE BUTTON / TOGGLE PART
+            //HIDE PART BUTTON / TOGGLE PART
             .find('.hide').click(function(){
-                $(this).closest('.part-utils').siblings('.instrument_tunes').toggle()
+                $(this).closest('.part-utils').siblings('.instrument_tunes, .extra_html').toggle()
             })
     })
 
     /**
      *  EDITOR UTILITIES
      */
+    const $abcEditorUtilsTemplate = $('#abcEditor-utils-template')
     //copy editor utils template html to each editor util div
-    const abcEditorUtilsTemplate = $('#abcEditor-utils-template').html()
-    $('.abcEditor-utils').each((i,abcEditorUtils) => {
-        $(abcEditorUtils)
+    $('.abcEditor-utils').each((i,thisEditorUtils) => {
+        const thisInstrument = $(thisEditorUtils).closest('.part').attr('instrument')
+
+        $(thisEditorUtils)
             //copy content from template
-            .html(abcEditorUtilsTemplate)
-            //COPY TXT AS STRING
-            .find('.copyTxtAsString').click(function(){
-                const editor = $(this).closest('.abcEditor-utils').siblings('.abcEditor')
-                const text = $(editor).val()
-                const textSingleLine = escapeABC(text)
-                copyTextToClipboard(textSingleLine)
+            .html($abcEditorUtilsTemplate.html())
+            //populate editorUtils_copyFromMenu with each instrument
+            .find('.editorUtils_copyFromMenu').each(function(i,menu){
+                //clear html first so that the template's menu items aren't copied over as well
+                $(menu).html('')
+                //append menu item for each other instrument
+                instruments.forEach(function(instrument){
+                    if (instrument == thisInstrument) return
+                    $(menu).append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
+                    
+                })
             })
+        //EDITOR UTILS MENU SELECTION
+        //initialize menu and add event listener for menu item selection
+        $(thisEditorUtils).closest('.part').find('.editorUtilMenu').menu({
+            select: function(e,activeMenuItem){
+                const selectedInstrument = $(activeMenuItem.item[0]).find('div').attr('instrument')
+                let editorVal = $(`#editor-${selectedInstrument}`).val()
+                const correctVoiceField = voiceFieldReference[selectedInstrument]
+                //replace all instances of the voice field with the appropriate voice field
+                editorVal = editorVal.replace(/(?<=V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
+                //set this instrument's editor to that val and trigger change
+                $(`#editor-${thisInstrument}`).val(editorVal).change()
+            }
+        })
+    })
+    /**
+     * EDITOR UTIL MENU TOGGLE
+     */
+    $('.editorUtilMenuToggle').click(function(){
+        const $menu = $(this).closest('.editorUtilMenuToggle')
+        $menu.next('.editorUtilMenu').toggle()
     })
 
     /**
@@ -642,38 +684,20 @@ $(function(){
             //first, stop click event from bubbling
             e.preventDefault()
             e.stopPropagation()
-
-            //
-            openDialog(
-                'alert',
-                'Unsaved Changes',
-                'flag',
-                'You have unsaved changes. Do you wish to continue?',
-                [
-                    {
-                        text: 'Cancel',
-                        click: function(){
-                            $(this).dialog('close')
-                        }
-                    },
-                    {
-                        text: 'Continue',
-                        click: function(){
-                            $(this).dialog('close')
-                            //remove disabled class and trigger click
-                                //now, since file input doesn't have the disabled class, the click will bubble
-                            $('#loadScores').removeClass('disabled')
-                            $('#loadScores').click()
-                        }
-                    }
-                ]
-            )
+            
+            //don't check for unsaved changes bc it having the disabled class means there are unsaved changes
+            unsavedChangesPrompt(()=>{
+                //remove disabled class and trigger click
+                //now, since file input doesn't have the disabled class, the click will bubble
+                $('#loadScores').removeClass('disabled')
+                $('#loadScores').click()
+            })
         }
     })
 
 
     /**
-     * DIALOG
+     * INITIALIZE DIALOG
      */
     //default options
     const header_height = $('#top_bar').height()
@@ -702,42 +726,89 @@ $(function(){
             $(".ui-dialog-titlebar-close").hide();
         }
     })
-    /**
-     * open dialog
-     * @param {String} addClass name of class to add to .ui-dialog
-     * @param {String} title 
-     * @param {String} titleIcon html to prepend to title
-     * @param {String} html 
-     * @param {Array} buttons an array of objects where each object is a button.  [{text:'OK',click:function(){...}}]
-     * @param {Boolean} modal 
-     * @param {Boolean} fixedPos 
-     */
-    function openDialog(addClass,title,titleIcon,html,buttons,modal=true,fixedPos=true){
-        if (!buttons) buttons = [
-            {
-                text: 'OK',
-                click: function(){
-                    $(this).dialog('close')
-                }
-            }
-        ]
 
-        console.log('add class:',addClass)
-        const addClasses = addClass + (fixedPos?' fixed-dialog':'')
-        console.log('add classes: ',addClasses)
+    /**
+     * OPEN DIALOG
+     * @param {String} html the html (content) of the dialog
+     * @param {Object} opts addClass, title, titleIcon (FA icon name), buttons (array of jqui button objs), modal, fixedPos
+     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
+     */
+    const openDialogOptsDefault = {
+        addClass: 'myDialog',               //any custom classes to add to dialog
+        title: 'Staff To Stand',            //heading of the dialog
+        titleIcon: 'exclamation',           //ex: flag, exclamation
+        buttons: [{                         //array of jqui button objs
+            text: 'OK',
+            click: function(){ $(this).dialog('close') }
+        }],
+        modal: true,                        //whether the dialog should be a modal
+        fixedPos: true                      //whether dialog should be fixed
+    }
+    function openDialog(html, opts){
+        opts = {...openDialogOptsDefault, ...opts}
+
+        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
 
         $('#dialog')
-            .dialog('option','title',title)
+            .dialog('option','title',opts.title)
             .html(html)
-            .dialog('option','buttons',buttons)
-            .dialog('option','modal',modal)
+            .dialog('option','buttons',opts.buttons)
+            .dialog('option','modal',opts.modal)
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
-                //add titleIcon
-                $('<i class="fas fa-'+titleIcon+'"></i> ').prependTo($(this).dialog('widget').find('.ui-dialog-title'))
+                //add titleIcon if it doesn't already exist
+                const $dialogWidget = $(this).dialog('widget')
+                const hasTitleIcon = $dialogWidget.find('[data-fa-i2svg]').length > 0
+                if (!hasTitleIcon) $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
             } )
             .dialog('open')
     }
+
+    /**
+     * UNSAVED CHANGES
+     * @param {Function} onContinue 
+     * @param {Function} onCancel 
+     */
+    function unsavedChangesPrompt(onContinue,onCancel){
+        openDialog(
+            'You have unsaved changes. Do you wish to continue?',
+            {
+                addClass: 'alert',
+                title: 'Unsaved Changes',
+                titleIcon: 'flag',
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        click: function(){
+                            $(this).dialog('close')
+                            if (onCancel) onCancel()
+                        }
+                    },
+                    {
+                        text: 'Continue',
+                        click: function(){
+                            $(this).dialog('close')
+                            if (onContinue) onContinue()
+                        }
+                    }
+                ]
+            }
+        )
+    }
+    /**
+     * CHECK FOR UNSAVED CHANGES
+     * Checks if any editors are dirty and calls unsavedChangesPrompt if so, and onContinue arg if not.
+     * @param {Function} onContinue 
+     * @param {Function} onCancel 
+     */
+    function checkForUnsavedChanges(onContinue,onCancel){
+        if(areAnyDirty()){
+            unsavedChangesPrompt(onContinue,onCancel)
+        }else{
+            onContinue()
+        }
+    }
+    
 
     /**
      *  DIRTY flag
@@ -852,8 +923,7 @@ $(function(){
         var $link = $("<a />");  
         // encode any special characters in the JSON
         var text = encodeURIComponent( stringified_contents );
-
-        // <a download="filename.txt" href='data:application/octet-stream,...'></a>
+        //create link and click to initiate download
         $link
             .attr( "download", filename+".s2s" )
             .attr( "href", "data:application/octet-stream," + text )
@@ -861,7 +931,9 @@ $(function(){
             .get(0)
             .click()
         
-        console.log('file downloaded',filename,stringified_contents)
+        console.log('FILE SAVED',filename)
+        //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
+        console.log(stringified_contents.substring(1,stringified_contents.length-1))
 
         setAllNotDirty()
     }
@@ -910,6 +982,10 @@ $(function(){
             $instrEditor.val(newAbc).change()
         })
 
+        //set extra html
+        const extra_html = $bkmk.attr('extra_html') || ''
+        $('.extra_html').html(extra_html)
+
         setAllNotDirty()
 
         //Add active class to bkmk to indicate its already loaded
@@ -944,13 +1020,18 @@ $(function(){
 
     /**
      * ESCAPE AND UNESCAPE ABC STRINGS
+     * @param {String} abc
+     * @param {Boolean} toHTML default true
      */
     function escapeABC(abc,toHTML=true){
         if (!toHTML) return abc.replace(/[\n"']/gm,'\$&')
 
         return abc.replace(/\n/gm,'\\n').replace(/"/gm,'&quot;').replace(/'/gm,'&apos;')
     }
-
+    /**
+     * @param {String} abc
+     * @param {Boolean} fromHTML default true
+     */
     function unescapeABC(abc,fromHTML=true){
         if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
 
