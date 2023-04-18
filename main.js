@@ -387,12 +387,13 @@ $(function(){
     $('#highlights_toggle').click(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
-    //clear scores
+    //new score
     $("#new_score").click(function () {
         checkForUnsavedChanges(()=>newScore())
 
         function newScore(){
             $('.abcEditor').each((i,editor) => $(editor).val('').change())
+            $('.extra_html').html('')
             $(".score_bookmark.active").removeClass("active")
             setAllNotDirty()
         }
@@ -509,9 +510,9 @@ $(function(){
             select: function(e,activeMenuItem){
                 const selectedInstrument = $(activeMenuItem.item[0]).find('div').attr('instrument')
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
-                const correctVoiceField = voiceFieldReference[selectedInstrument]
+                const correctVoiceField = voiceFieldReference[thisInstrument]
                 //replace all instances of the voice field with the appropriate voice field
-                editorVal = editorVal.replace(/(?<=V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
+                editorVal = editorVal.replace(/(?<=V:[\s]?)(.*)/gm,`${correctVoiceField}`)
                 //set this instrument's editor to that val and trigger change
                 $(`#editor-${thisInstrument}`).val(editorVal).change()
             }
@@ -559,7 +560,7 @@ $(function(){
      */
     $('#saveCurrent').click(()=>{
         //get the abcstring for each instrument
-        contentsObj = {}
+        const contentsObj = {}
         instruments.forEach(function(instrument){
             contentsObj['abc-'+instrument] = escapeABC($('#editor-'+instrument).val())
         })
