@@ -560,7 +560,7 @@ $(function(){
      */
     $('#saveCurrent').click(()=>{
         //get the abcstring for each instrument
-        contentsObj = {}
+        const contentsObj = {}
         instruments.forEach(function(instrument){
             contentsObj['abc-'+instrument] = escapeABC($('#editor-'+instrument).val())
         })
