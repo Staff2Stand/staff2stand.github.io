@@ -387,12 +387,13 @@ $(function(){
     $('#highlights_toggle').click(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
-    //clear scores
+    //new score
     $("#new_score").click(function () {
         checkForUnsavedChanges(()=>newScore())
 
         function newScore(){
             $('.abcEditor').each((i,editor) => $(editor).val('').change())
+            $('.extra_html').html('')
             $(".score_bookmark.active").removeClass("active")
             setAllNotDirty()
         }
