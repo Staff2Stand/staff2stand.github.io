@@ -1,12 +1,7 @@
-let scoreData
-// read local JSON file in javascript
-fetch('scoreData.json')
-    .then(response => response.json())
-    .then(data => scoreData = data)
-console.log('SCORE BOOKMARKS DATA',scoreData)
-
+// READ ABCJS
 const abcjs = window.ABCJS
 
+// DEFINE INSTRUMENTS AND REFERENCES
 const instruments = ['violin','viola','cello','bass']
 
 const voiceFieldReference = {
@@ -62,6 +57,37 @@ const stringReference = {
 }
 
 $(function(){
+    /**
+     * READ SCORE DATA JSON
+     */
+    fetch('scoreData.json')
+    .then(response => response.json())
+    .then(scoreData => {
+        console.log('SCORE BOOKMARKS DATA',scoreData)
+        //Load Bookmarks From Json File and append each bookmark to the sidebar
+        scoreData.forEach(section=>{
+            const heading = section.heading
+            const id = section.id || ''
+
+            let html = `<ul class="score_bookmark_section" id="${id}">`
+            html += `<h1>${heading}</h1>`
+            //each bookmark is an li
+            section.bookmarks.forEach(bkmk=>{
+                html += '<li class="score_bookmark"'
+                //each bookmark gets attributes ...  key = value
+                for (const prop in bkmk) {
+                    const abcHtmlString = escapeABC(bkmk[prop])
+                    html += ` ${prop}="${abcHtmlString}"`
+                }
+                html += '</li>'
+            })
+            html += '</ul>'
+
+            //append this section to the sidebar
+            $('#sidebar').append(html)
+        })
+    })
+
     /**
      * INITIALIZE EDITOR for each instrument
      */
@@ -300,29 +326,6 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-    //Load JSON: Load Bookmarks From Json File on page load
-    scoreData.forEach(section=>{
-        const heading = section.heading
-        const id = section.id || ''
-
-        let html = `<ul class="score_bookmark_section" id="${id}">`
-        html += `<h1>${heading}</h1>`
-        //each bookmark is an li
-        section.bookmarks.forEach(bkmk=>{
-            html += '<li class="score_bookmark"'
-            //each bookmark gets attributes ...  key = value
-            for (const prop in bkmk) {
-                const abcHtmlString = escapeABC(bkmk[prop])
-                html += ` ${prop}="${abcHtmlString}"`
-            }
-            html += '</li>'
-        })
-        html += '</ul>'
-
-        //append this section to the sidebar
-        $('#sidebar').append(html)
-    })
-
     //On Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
