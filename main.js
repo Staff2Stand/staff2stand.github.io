@@ -1,4 +1,12 @@
-import scoreData from './scoreData.json' assert { type: 'json' }
+// import scoreData from './scoreData.json' assert { type: 'json' }
+
+let scoreData
+// read local JSON file in javascript
+fetch("./lib/examples/employee.json")
+    .then(function (response) { return response.json() })
+    .then(function (data) {
+        scoreData = data
+    })
 console.log('SCORE BOOKMARKS DATA',scoreData)
 
 const abcjs = window.ABCJS
