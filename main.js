@@ -58,9 +58,6 @@ const stringReference = {
 }
 
 $(function(){
-    alert('page loaded...this is from main.js')
-
-
     /**
      * INITIALIZE EDITOR for each instrument
      */
