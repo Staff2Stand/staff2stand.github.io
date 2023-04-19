@@ -58,7 +58,7 @@ const stringReference = {
 }
 
 $(function(){
-    console.log('page loaded... this is from main.js')
+    alert('page loaded...this is from main.js')
 
 
     /**
