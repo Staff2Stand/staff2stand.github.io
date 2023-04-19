@@ -295,6 +295,7 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
+    
      // READ SCORE DATA JSON
     $.getJSON('scoreData.json', scoreData => {
         console.log('SCORE BOOKMARKS DATA',scoreData)
