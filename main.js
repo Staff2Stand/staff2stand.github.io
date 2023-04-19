@@ -1,6 +1,6 @@
 let scoreData
 // read local JSON file in javascript
-fetch("./scoreData.json")
+fetch('scoreData.json')
     .then(function (response) { return response.json() })
     .then(function (data) {
         scoreData = data
