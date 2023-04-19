@@ -1,10 +1,8 @@
 let scoreData
 // read local JSON file in javascript
 fetch('scoreData.json')
-    .then(function (response) { return response.json() })
-    .then(function (data) {
-        scoreData = data
-    })
+    .then(response => response.json())
+    .then(data => scoreData = data)
 console.log('SCORE BOOKMARKS DATA',scoreData)
 
 const abcjs = window.ABCJS
