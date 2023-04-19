@@ -1,8 +1,6 @@
-// import scoreData from './scoreData.json' assert { type: 'json' }
-
 let scoreData
 // read local JSON file in javascript
-fetch("./lib/examples/employee.json")
+fetch("./scoreData.json")
     .then(function (response) { return response.json() })
     .then(function (data) {
         scoreData = data
