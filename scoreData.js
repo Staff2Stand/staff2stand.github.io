@@ -1,6 +1,6 @@
 console.log('||S2S|| Loading Score Data...')
 if (!window.S2S) window.S2S = {}
-S2S.scoreData = `[
+const scoreData = [
     {
         "type":"section",
         "heading":"My Scores",
@@ -84,5 +84,8 @@ S2S.scoreData = `[
             }
         ]
     }
-]`
+]
+
+S2S.scoreData = JSON.stringify(scoreData)
+
 if(S2S.scoreData) console.log('||S2S||  Score Data Loaded')
