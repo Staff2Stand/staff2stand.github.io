@@ -312,7 +312,7 @@ $(function(){
     
     //READ SCORE DATA JSON from window.scoreData (see scoreData.js)
     const scoreData = JSON.parse(S2S.scoreData)
-    console.log('SCORE BOOKMARKS DATA',scoreData)
+    console.log('||S2S||  SCORE BOOKMARKS DATA',scoreData)
     //Load Bookmarks From Json File and append each bookmark to the sidebar
     scoreData.forEach(section=>{
         const heading = section.heading
@@ -475,7 +475,7 @@ $(function(){
             printInstruments = "allVisible";
             break;
         default:
-            console.error("print instrument error");
+            console.error("||S2S||  print instrument error");
         }
 
         $("#tunes_container").attr("printInstruments", printInstruments);
@@ -600,7 +600,7 @@ $(function(){
         const $myScores = $('#myScores li.score_bookmark')
         
         if ($myScores.length === 0) {
-            console.warn('my scores section is empty')
+            console.warn('||S2S||  my scores section is empty')
             openDialog(
                 'Click the "Save" button to save the current score to the My Scores section.',
                 {
@@ -642,7 +642,7 @@ $(function(){
 
         //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
-        console.log(contents)
+        console.log('||S2S||  ',contents)
 
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
@@ -680,7 +680,7 @@ $(function(){
     $('#loadScores').on("change", function() {
         // get the file item from the input field
         const file = this.files[0]
-        console.log('loading file',file)
+        console.log('||S2S||  loading file',file)
 
         //validate file extension and type
         const validExtension = /.s2s$/g.test(file.name)
@@ -868,9 +868,9 @@ $(function(){
         try {
             var successful = document.execCommand('copy');
             var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Fallback: Copying text command was ' + msg);
+            console.log('||S2S||  Fallback: Copying text command was ' + msg);
         } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
+            console.error('||S2S||  Fallback: Oops, unable to copy', err);
         }
 
         document.body.removeChild(textArea);
@@ -881,9 +881,9 @@ $(function(){
             return;
         }
         navigator.clipboard.writeText(text).then(function() {
-            console.log('Async: Copying to clipboard was successful!');
+            console.log('||S2S||  Async: Copying to clipboard was successful!');
         }, function(err) {
-            console.error('Async: Could not copy text: ', err);
+            console.error('||S2S||  Async: Could not copy text: ', err);
         });
     }
 
@@ -956,7 +956,7 @@ $(function(){
             .get(0)
             .click()
         
-        console.log('FILE SAVED',filename)
+        console.log('||S2S||  FILE SAVED',filename)
         //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
         console.log(stringified_contents.substring(1,stringified_contents.length-1))
 
@@ -970,7 +970,7 @@ $(function(){
      * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
      */
     function renderScoreFromBkmk($bkmk,appendScore=false){
-        console.log('rendering score from bkmk:',$bkmk)
+        console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
         //show notey playing violin
         $("#notey")
