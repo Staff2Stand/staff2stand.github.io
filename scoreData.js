@@ -91,3 +91,4 @@ const scoreData = [
 S2S.scoreData = JSON.stringify(scoreData)
 
 if(S2S.scoreData) console.log('||S2S||  Score Data Loaded')
+if(S2S.scoreData) $('#footer').append('<p>score data loaded</p>')
