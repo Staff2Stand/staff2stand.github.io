@@ -68,6 +68,7 @@ $(function(){
                 title: 'Error Loading Score Data'
             }
         )
+        window.S2S = {}
     }
 
     /**

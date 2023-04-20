@@ -1,4 +1,5 @@
-window.S2S.scoreData = `[
+if (!window.S2S) window.S2S = {}
+S2S.scoreData = `[
     {
         "type":"section",
         "heading":"My Scores",
