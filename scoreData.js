@@ -1,3 +1,4 @@
+console.log('||S2S|| Loading Score Data...')
 if (!window.S2S) window.S2S = {}
 S2S.scoreData = `[
     {
@@ -84,3 +85,4 @@ S2S.scoreData = `[
         ]
     }
 ]`
+if(S2S.scoreData) console.log('||S2S||  Score Data Loaded')
