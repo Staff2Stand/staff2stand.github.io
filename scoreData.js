@@ -1,4 +1,4 @@
-[
+window.scoreData = `[
     {
         "type":"section",
         "heading":"My Scores",
@@ -82,4 +82,4 @@
             }
         ]
     }
-]
+]`
