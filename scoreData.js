@@ -91,6 +91,3 @@ const scoreData = [
 S2S.scoreData = JSON.stringify(scoreData)
 
 if(S2S.scoreData) console.log('||S2S||  Score Data Loaded')
-//for mobile testing
-alert(scoreData[0].heading)
-//
