@@ -1,5 +1,7 @@
 console.log('||S2S|| Loading Score Data...')
+
 if (!window.S2S) window.S2S = {}
+
 const scoreData = [
     {
         "type":"section",
