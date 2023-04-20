@@ -58,6 +58,19 @@ const stringReference = {
 
 $(function(){
     /**
+     * CHECK S2S GLOBAL OBJ
+     */
+    if (!S2S) {
+        openDialog(
+            `<p>Please report this error. You may still be able to create and edit a new score.</p>`,
+            {
+                addClass: 'alert',
+                title: 'Error Loading Score Data'
+            }
+        )
+    }
+
+    /**
      * INITIALIZE EDITOR for each instrument
      */
     const abcOpts = {
@@ -588,10 +601,12 @@ $(function(){
         if ($myScores.length === 0) {
             console.warn('my scores section is empty')
             openDialog(
-                'warn',
-                'My Scores Section is Empty',
-                'exclamation',
-                'Click the "Save" button to save the current score to the My Scores section.'
+                'Click the "Save" button to save the current score to the My Scores section.',
+                {
+                    addClass: 'warn',
+                    title: 'My Scores Section is Empty',
+                    titleIcon: 'exclamation'
+                }
             )
             return
         }
@@ -631,10 +646,12 @@ $(function(){
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
             openDialog(
-                'warn',
-                'File contents error',
-                'exclamation',
-                'There was an error with the file contents.'
+                'There was an error with the file contents.',
+                {
+                    addClass: 'warn',
+                    title: 'File Contents Error',
+                    titleIcon: 'exclamation'
+                }                
             )
             return
         }
@@ -668,10 +685,12 @@ $(function(){
         const validExtension = /.s2s$/g.test(file.name)
         if( !validExtension ) {
             openDialog(
-                'warn',
-                'Invalid File Extension',
-                'exclamation',
-                'Please upload a .s2s (staff to string) file'
+                'Please upload a .s2s (staff to string) file',
+                {
+                    addClass: 'warn',
+                    title: 'Invalid File Extension',
+                    titleIcon: 'exclamation'
+                }
             )
             return
         }
@@ -731,12 +750,7 @@ $(function(){
         }
     })
 
-    /**
-     * OPEN DIALOG
-     * @param {String} html the html (content) of the dialog
-     * @param {Object} opts addClass, title, titleIcon (FA icon name), buttons (array of jqui button objs), modal, fixedPos
-     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
-     */
+    
     const openDialogOptsDefault = {
         addClass: 'myDialog',               //any custom classes to add to dialog
         title: 'Staff To Stand',            //heading of the dialog
@@ -748,6 +762,12 @@ $(function(){
         modal: true,                        //whether the dialog should be a modal
         fixedPos: true                      //whether dialog should be fixed
     }
+    /**
+     * OPEN DIALOG
+     * @param {String} html the html (content) of the dialog
+     * @param {Object} opts addClass (string as 'classA classB etc')(alert,warn), title (string), titleIcon (FA icon name), buttons (array of jqui button objs), modal (def true), fixedPos (def true)
+     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
+     */
     function openDialog(html, opts){
         opts = {...openDialogOptsDefault, ...opts}
 
