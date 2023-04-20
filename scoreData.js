@@ -1,4 +1,4 @@
-window.scoreData = `[
+window.S2S.scoreData = `[
     {
         "type":"section",
         "heading":"My Scores",

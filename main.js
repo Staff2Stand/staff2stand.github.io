@@ -297,7 +297,7 @@ $(function(){
      */
     
     //READ SCORE DATA JSON from window.scoreData (see scoreData.js)
-    const scoreData = JSON.parse(window.scoreData)
+    const scoreData = JSON.parse(S2S.scoreData)
     console.log('SCORE BOOKMARKS DATA',scoreData)
     //Load Bookmarks From Json File and append each bookmark to the sidebar
     scoreData.forEach(section=>{
