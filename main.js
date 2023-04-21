@@ -1,7 +1,3 @@
-// FOR MOBILE TESTING
-window.mainJsLoaded = true
-console.error('This should be caught by the error event listener')
-
 // READ ABCJS
 const abcjs = window.ABCJS
 
@@ -61,10 +57,6 @@ const stringReference = {
 }
 
 $(function(){
-    // mobile test
-    if(mobileAndTabletCheck) $('#mobileLog').append('<p>mobile (main.js)</p>')
-
-
     /**
      * CHECK S2S GLOBAL OBJ
      */
