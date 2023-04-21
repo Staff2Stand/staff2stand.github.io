@@ -58,6 +58,7 @@ const stringReference = {
 
 $(function(){
     // mobile test
+    window.mainJsLoaded = true
     if(mobileAndTabletCheck) $('#mobileLog').append('<p>mobile (main.js)</p>')
 
 
