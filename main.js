@@ -1040,8 +1040,10 @@ $(function(){
         //      The hidden class only has a css rule on small screens, 
         //       so no need to check for small screens here
         const $header_btns = $('#header_buttons')
-        const clicked_header_buttons_menu = $target.closest($header_btns).length
-        if(!clicked_header_buttons_menu) $header_btns.addClass('hidden')
+        const clicked_header_buttons = $target.closest($header_btns).length
+        const clicked_header_toggler = $target.closest('#header_buttons_toggle').length
+        const clicked_either_header_buttons_or_menu = !!(clicked_header_buttons || clicked_header_toggler)
+        if(!clicked_either_header_buttons_or_menu) $header_btns.addClass('hidden')
     })
 
     /**
