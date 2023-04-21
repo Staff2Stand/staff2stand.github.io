@@ -233,7 +233,7 @@
 
               <!-- FOOTER -->
               <footer>
-                <span style="float:right;font-size:12;color:gray;">V 0.2.25</span>
+                <span style="float:right;font-size:12;color:gray;">V 0.2.26</span>
                 <p style="text-align: center;"><span class="logo">Staff To Stand</span></p>
                 <p style="text-align:center; font-size: 12; color: gray;">Copyright &copy; <script>document.write(new Date().getFullYear())</script> Andrew Tilles</p>
                 <div id="mobileLog" style="font-size: 12; color:gray;"></div>
@@ -264,20 +264,8 @@
 
       <!-- app -->
       <script src="abcjs.js"></script>
-      <script>
-        if (ABCJS && mobileAndTabletCheck) $('#mobileLog').append('<p>ABCJS loaded (inline)</p>')
-      </script>
       <script src="scoreData.js"></script>
-      <script>
-        if (S2S && mobileAndTabletCheck) $('#mobileLog').append('<p>S2S loaded (inline)</p>')
-      </script>
-      <script src="main.js"></script>
-      <script>
-        if (mainJsLoaded && mobileAndTabletCheck) {
-          $('#mobileLog').append('<p>main.js loaded (inline)</p>')
-        }
-      </script>
-      
+      <script src="main.js"></script>      
 
     </body>
 </html>
