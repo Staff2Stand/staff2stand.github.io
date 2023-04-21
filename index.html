@@ -110,6 +110,7 @@
       <div id="main_container">
         <header id="top_bar">
           <span id="logo" class="logo">Staff To Stand</span>
+          <span id="header_buttons_toggle" class="fa-solid fa-hamburger"></span>
           <div id="header_buttons">
             <span id="fileNameContainer"><input type="text" id="fileName" placeholder="file name"></span>
             <span id="saveCurrent">Save Current</span>
@@ -255,7 +256,7 @@
         //add error event listener to window to log errors to footer so they are visible on mobile
         if(mobileAndTabletCheck){
           window.addEventListener("error", (event) => {
-            $('#mobileLog').append(`ERROR<br><p>${event.message}<br>(${event.filename}:${event.lineno}:${event.colno})</p>`)
+            $('#mobileLog').append(`<p><b>ERROR</b><br>${event.message}<br>(${event.filename}:${event.lineno}:${event.colno})</p>`)
           })
         }
       </script>

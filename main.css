@@ -77,6 +77,29 @@ header {
   width: 150px;
 }
 
+#header_buttons_toggle{
+  display: none;
+}
+@media only screen and (max-width:900px) {
+  /* 
+    show header buttons toggler
+    hide header buttons on hidden class (toggler click event)
+    header buttons into a drop-down menu
+   */
+  #header_buttons.hidden{
+    display: none !important;
+  }
+  #header_buttons_toggle{
+    display: inline;
+  }
+
+  #header_buttons{
+    display: flex;
+    flex-flow: column nowrap;
+    height: max-content;
+  }
+}
+
 /* DIALOG */
 /* fixed pos */
 .ui-dialog.fixed-dialog{

@@ -1065,6 +1065,15 @@ $(function(){
 
 
 
+    /**
+     * header buttons toggler
+     */
+    $('#header_buttons_toggle').click(function(){
+        $('#header_buttons').toggleClass('hidden')
+    })
+
+
+
 
 
 }) //end on page load
