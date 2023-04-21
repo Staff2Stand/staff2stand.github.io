@@ -121,6 +121,16 @@ header {
     padding-bottom: 8px;
     border-radius: 0 0 8px 8px;
   }
+  #header_buttons:before {
+    width: 100%;
+    content: '';
+    height: calc(100% + 8px);
+    box-shadow: -4px 4px 4px black;
+    display: block;
+    position: absolute;
+    border-radius: 0 0 8px 8px;
+    top: -9px;
+  }
 }
 
 /* DIALOG */
