@@ -257,11 +257,11 @@
       <!-- app -->
       <script src="abcjs.js"></script>
       <script>
-        if (ABCJS) $('#mobileLog').append('<p>ABCJS loaded (inline)</p>')
+        if (ABCJS && mobileAndTabletCheck) $('#mobileLog').append('<p>ABCJS loaded (inline)</p>')
       </script>
       <script src="scoreData.js"></script>
       <script>
-        if (S2S) $('#mobileLog').append('<p>S2S loaded (inline)</p>')
+        if (S2S && mobileAndTabletCheck) $('#mobileLog').append('<p>S2S loaded (inline)</p>')
       </script>
       <script src="main.js"></script>
 
