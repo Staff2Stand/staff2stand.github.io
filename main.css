@@ -75,6 +75,20 @@ header {
 
 #fileName{
   width: 150px;
+  background: none;
+  border: none;
+  border-bottom: 2px dashed;
+  color: #fff;
+}
+#fileName::placeholder{
+  color: #aaa
+}
+#fileName:focus {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid;
 }
 
 #header_buttons_toggle{
