@@ -1068,7 +1068,7 @@ $(function(){
     /**
      * header buttons toggler
      */
-    $('#header_buttons_toggle').click(function(){
+    $(document).on('click','#header_buttons_toggle',function(){
         $('#header_buttons').toggleClass('hidden')
     })
 
