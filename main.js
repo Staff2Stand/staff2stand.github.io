@@ -1,3 +1,6 @@
+// FOR MOBILE TESTING
+window.mainJsLoaded = true
+
 // READ ABCJS
 const abcjs = window.ABCJS
 
@@ -58,7 +61,6 @@ const stringReference = {
 
 $(function(){
     // mobile test
-    window.mainJsLoaded = true
     if(mobileAndTabletCheck) $('#mobileLog').append('<p>mobile (main.js)</p>')
 
 
