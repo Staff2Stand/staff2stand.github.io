@@ -102,7 +102,7 @@ const scoreData = [
                 "abc-viola": "X:1\\nV: viola clef=alto \\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 FE | D2 F2 ^G2 | A4 AA |\\nF3 E D2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 FE | D2F2^G2 | A4 AA |\\nF3ED2 | c4 Bc | d2d2A2 | F2D2 FF | \\nF2G2A2| A4 GF | E2 F2 G2 | G4 G2| \\nF3E D2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | E2 GF ED | d2 Hc2 AA |\\nD3 E FG | A4 DE | F3 G E2| D4 |]",
                 "abc-cello": "X:1\\nV: cello clef=bass octave=-1\\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 fe | d2 F2 ^G2 | A4 AA |\\nf3 e d2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 fe | d2F2^G2 | A4 AA |\\nf3ed2 | c4 Bc | d2d2A2 | F2D2 ff | \\nf2g2a2| a4 gf | e2 f2 g2 | g4 g2| \\nf3e d2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | e2 gf ed | d2 Hc2 AA |\\nd3 e fg | a4 de | f3 g e2| d4 |]",
                 "abc-bass": "X:1\\nV: bass clef=bass octave=-1\\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 fe | d2 F2 ^G2 | A4 AA |\\nf3 e d2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 fe | d2F2^G2 | A4 AA |\\nf3ed2 | c4 Bc | d2d2A2 | F2D2 ff | \\nf2g2a2| a4 gf | e2 f2 g2 | g4 g2| \\nf3e d2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | e2 gf ed | d2 Hc2 AA |\\nd3 e fg | a4 de | f3 g e2| d4 |]",
-                "_title": "StarSpangledBanner"
+                "_title": "Star Spangled Banner"
             }
         ]
     }
