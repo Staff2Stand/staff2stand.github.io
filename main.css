@@ -59,7 +59,7 @@ header {
   cursor: pointer;
   outline: 2px solid;
   border-radius: 4px;
-  padding: 1px 6px;
+  padding: 4px 6px;
   margin: 0 10px;
   transition: all 50ms;
 }
