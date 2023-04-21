@@ -59,7 +59,6 @@ const stringReference = {
 $(function(){
     // mobile test
     if(mobileAndTabletCheck) $('footer').append('<p>mobile (main.js)</p>')
-    if(!mobileAndTabletCheck) $('footer').append('<p>desktop (main.js)</p>')
 
 
     /**
