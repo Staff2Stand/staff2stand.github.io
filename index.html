@@ -265,7 +265,9 @@
       </script>
       <script src="main.js"></script>
       <script>
-        if (mainJsLoaded && mobileAndTabletCheck) $('#mobileLog').append('<p>main.js loaded (inline)</p>')
+        if (mainJsLoaded && mobileAndTabletCheck) {
+          $('#mobileLog').append('<p>main.js loaded (inline)</p>')
+        } else { $('#mobileLog').append('<p>main.js NOT loaded (inline)</p>') }
       </script>
       
 
