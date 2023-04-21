@@ -1022,7 +1022,7 @@ $(function(){
 
     /**
      * CLICK ANYWHERE ON DOCUMENT
-     * deselect notes, hide the print menu
+     * detect click on document to hide certain elements
      */
     $(document).on("click", function (e) {
         const $target = $(e.target);
@@ -1035,6 +1035,13 @@ $(function(){
         //hide print menu
         const clicked_print_menu = $target.closest("#printMenu,#print").length
         if (!clicked_print_menu) $("#print").removeClass("active");
+
+        //hide header buttons menu (mobile only)
+        //      The hidden class only has a css rule on small screens, 
+        //       so no need to check for small screens here
+        const $header_btns = $('#header_buttons')
+        const clicked_header_buttons_menu = $target.closest($header_btns).length
+        if(!clicked_header_buttons_menu) $header_btns.addClass('hidden')
     })
 
     /**
