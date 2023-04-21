@@ -1,8 +1,7 @@
-import scoreData from './scoreData.json' assert { type: 'json' }
-console.log('SCORE BOOKMARKS DATA',scoreData)
-
+// READ ABCJS
 const abcjs = window.ABCJS
 
+// DEFINE INSTRUMENTS AND REFERENCES
 const instruments = ['violin','viola','cello','bass']
 
 const voiceFieldReference = {
@@ -58,6 +57,19 @@ const stringReference = {
 }
 
 $(function(){
+    /**
+     * CHECK S2S GLOBAL OBJ
+     */
+    if (!S2S) {
+        openDialog(
+            `<p>Please report this error. You may still be able to create and edit a new score.</p>`,
+            {
+                addClass: 'alert',
+                title: 'Error Loading Score Data'
+            }
+        )
+        window.S2S = {}
+    }
 
     /**
      * INITIALIZE EDITOR for each instrument
@@ -94,7 +106,7 @@ $(function(){
     let editor_violin = new abcjs.Editor("editor-violin",{
         canvas_id: violin_divs,
         warnings_id: "abc-warnings-violin",
-        clickListener: function(abcElem, tuneNumber, classes) { 
+        clickListener: function(abcElem, tuneNumber, classes) {
             //the presence of this function is enough to add the functionality
         },
         indicate_changed: true,
@@ -133,7 +145,7 @@ $(function(){
     var observer = new MutationObserver(function(mutationsList, observer) {
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
-        
+
         //add highlights and such to each target
         targets.forEach(function(target){
             addStringClassesToNoteHeads(target)
@@ -146,7 +158,7 @@ $(function(){
 
         //Add/Remove disabled class on file input
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
-        
+
         //fade out notey
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
     });
@@ -186,7 +198,7 @@ $(function(){
             //check string reference and add the correct string class
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-            
+
             $(pathel).addClass(`${noteString}String`)
 
             //add data-attrs to note
@@ -297,7 +309,11 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-    //Load JSON: Load Bookmarks From Json File on page load
+
+    //READ SCORE DATA JSON from window.scoreData (see scoreData.js)
+    const scoreData = JSON.parse(S2S.scoreData)
+    console.log('||S2S||  SCORE BOOKMARKS DATA',scoreData)
+    //Load Bookmarks From Json File and append each bookmark to the sidebar
     scoreData.forEach(section=>{
         const heading = section.heading
         const id = section.id || ''
@@ -319,6 +335,7 @@ $(function(){
         //append this section to the sidebar
         $('#sidebar').append(html)
     })
+
 
     //On Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
@@ -352,7 +369,7 @@ $(function(){
 
 
 
-    /** SIDEBAR SECTION COLLAPSING */    
+    /** SIDEBAR SECTION COLLAPSING */
     $("#sidebar :is(h1,h2,h3,h4,h5,h6)").click(function () {
         const $section = $(this).closest(".score_bookmark_section")
 
@@ -399,7 +416,7 @@ $(function(){
         }
     })
     //toggle editors (Edit Button)
-    $('#show_editors').click(function(){        
+    $('#show_editors').click(function(){
         //show all hidden parts
         $('.instrument_tunes:hidden').show().siblings('div:not(.abc-warnings)').show()
         //toggle editors
@@ -458,7 +475,7 @@ $(function(){
             printInstruments = "allVisible";
             break;
         default:
-            console.error("print instrument error");
+            console.error("||S2S||  print instrument error");
         }
 
         $("#tunes_container").attr("printInstruments", printInstruments);
@@ -468,7 +485,7 @@ $(function(){
 
 
     /**
-     *  PART UTILITIES 
+     *  PART UTILITIES
     */
     //copy part utils template html to each part util div
     const partUtilsTemplate = $('#part-utils-template').html()
@@ -501,7 +518,7 @@ $(function(){
                 instruments.forEach(function(instrument){
                     if (instrument == thisInstrument) return
                     $(menu).append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
-                    
+
                 })
             })
         //EDITOR UTILS MENU SELECTION
@@ -512,7 +529,7 @@ $(function(){
                 let editorVal = $(`#editor-${selectedInstrument}`).val()
                 const correctVoiceField = voiceFieldReference[thisInstrument]
                 //replace all instances of the voice field with the appropriate voice field
-                editorVal = editorVal.replace(/(?<=V:[\s]?)(.*)/gm,`${correctVoiceField}`)
+                editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
                 //set this instrument's editor to that val and trigger change
                 $(`#editor-${thisInstrument}`).val(editorVal).change()
             }
@@ -552,7 +569,7 @@ $(function(){
             const newWidth = sliderVal+'px'
             $pageContent.css('width',newWidth)
         })
-    
+
 
     /**
      * SAVE CURRENT
@@ -581,14 +598,16 @@ $(function(){
      */
     $('#saveAll').click(()=>{
         const $myScores = $('#myScores li.score_bookmark')
-        
+
         if ($myScores.length === 0) {
-            console.warn('my scores section is empty')
+            console.warn('||S2S||  my scores section is empty')
             openDialog(
-                'warn',
-                'My Scores Section is Empty',
-                'exclamation',
-                'Click the "Save" button to save the current score to the My Scores section.'
+                'Click the "Save" button to save the current score to the My Scores section.',
+                {
+                    addClass: 'warn',
+                    title: 'My Scores Section is Empty',
+                    titleIcon: 'exclamation'
+                }
             )
             return
         }
@@ -613,7 +632,7 @@ $(function(){
 
     /**
      * LOAD SCORE(S)
-     * 
+     *
      */
     const fileReader = new FileReader()
     //FILE INPUT LOAD
@@ -623,15 +642,17 @@ $(function(){
 
         //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
-        console.log(contents)
+        console.log('||S2S||  ',contents)
 
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
             openDialog(
-                'warn',
-                'File contents error',
-                'exclamation',
-                'There was an error with the file contents.'
+                'There was an error with the file contents.',
+                {
+                    addClass: 'warn',
+                    title: 'File Contents Error',
+                    titleIcon: 'exclamation'
+                }
             )
             return
         }
@@ -659,16 +680,18 @@ $(function(){
     $('#loadScores').on("change", function() {
         // get the file item from the input field
         const file = this.files[0]
-        console.log('loading file',file)
+        console.log('||S2S||  loading file',file)
 
         //validate file extension and type
         const validExtension = /.s2s$/g.test(file.name)
         if( !validExtension ) {
             openDialog(
-                'warn',
-                'Invalid File Extension',
-                'exclamation',
-                'Please upload a .s2s (staff to string) file'
+                'Please upload a .s2s (staff to string) file',
+                {
+                    addClass: 'warn',
+                    title: 'Invalid File Extension',
+                    titleIcon: 'exclamation'
+                }
             )
             return
         }
@@ -685,7 +708,7 @@ $(function(){
             //first, stop click event from bubbling
             e.preventDefault()
             e.stopPropagation()
-            
+
             //don't check for unsaved changes bc it having the disabled class means there are unsaved changes
             unsavedChangesPrompt(()=>{
                 //remove disabled class and trigger click
@@ -728,12 +751,7 @@ $(function(){
         }
     })
 
-    /**
-     * OPEN DIALOG
-     * @param {String} html the html (content) of the dialog
-     * @param {Object} opts addClass, title, titleIcon (FA icon name), buttons (array of jqui button objs), modal, fixedPos
-     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
-     */
+
     const openDialogOptsDefault = {
         addClass: 'myDialog',               //any custom classes to add to dialog
         title: 'Staff To Stand',            //heading of the dialog
@@ -745,6 +763,12 @@ $(function(){
         modal: true,                        //whether the dialog should be a modal
         fixedPos: true                      //whether dialog should be fixed
     }
+    /**
+     * OPEN DIALOG
+     * @param {String} html the html (content) of the dialog
+     * @param {Object} opts addClass (string as 'classA classB etc')(alert,warn), title (string), titleIcon (FA icon name), buttons (array of jqui button objs), modal (def true), fixedPos (def true)
+     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
+     */
     function openDialog(html, opts){
         opts = {...openDialogOptsDefault, ...opts}
 
@@ -767,8 +791,8 @@ $(function(){
 
     /**
      * UNSAVED CHANGES
-     * @param {Function} onContinue 
-     * @param {Function} onCancel 
+     * @param {Function} onContinue
+     * @param {Function} onCancel
      */
     function unsavedChangesPrompt(onContinue,onCancel){
         openDialog(
@@ -799,8 +823,8 @@ $(function(){
     /**
      * CHECK FOR UNSAVED CHANGES
      * Checks if any editors are dirty and calls unsavedChangesPrompt if so, and onContinue arg if not.
-     * @param {Function} onContinue 
-     * @param {Function} onCancel 
+     * @param {Function} onContinue
+     * @param {Function} onCancel
      */
     function checkForUnsavedChanges(onContinue,onCancel){
         if(areAnyDirty()){
@@ -809,7 +833,7 @@ $(function(){
             onContinue()
         }
     }
-    
+
 
     /**
      *  DIRTY flag
@@ -826,7 +850,7 @@ $(function(){
 
 
     /**
-     * COPY TEXT TO CLIPBOARD 
+     * COPY TEXT TO CLIPBOARD
      */
     function fallbackCopyTextToClipboard(text) {
         var textArea = document.createElement("textarea");
@@ -844,9 +868,9 @@ $(function(){
         try {
             var successful = document.execCommand('copy');
             var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Fallback: Copying text command was ' + msg);
+            console.log('||S2S||  Fallback: Copying text command was ' + msg);
         } catch (err) {
-            console.error('Fallback: Oops, unable to copy', err);
+            console.error('||S2S||  Fallback: Oops, unable to copy', err);
         }
 
         document.body.removeChild(textArea);
@@ -857,9 +881,9 @@ $(function(){
             return;
         }
         navigator.clipboard.writeText(text).then(function() {
-            console.log('Async: Copying to clipboard was successful!');
+            console.log('||S2S||  Async: Copying to clipboard was successful!');
         }, function(err) {
-            console.error('Async: Could not copy text: ', err);
+            console.error('||S2S||  Async: Could not copy text: ', err);
         });
     }
 
@@ -914,14 +938,14 @@ $(function(){
         }
     });
 
-    /** 
+    /**
      * SAVE
      * @param {string} filename
      * @param {JSON} stringified_contents
      */
     function saveFile(filename,stringified_contents){
         // create a link DOM fragment
-        var $link = $("<a />");  
+        var $link = $("<a />");
         // encode any special characters in the JSON
         var text = encodeURIComponent( stringified_contents );
         //create link and click to initiate download
@@ -931,8 +955,8 @@ $(function(){
             .appendTo( "body" )
             .get(0)
             .click()
-        
-        console.log('FILE SAVED',filename)
+
+        console.log('||S2S||  FILE SAVED',filename)
         //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
         console.log(stringified_contents.substring(1,stringified_contents.length-1))
 
@@ -946,7 +970,7 @@ $(function(){
      * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
      */
     function renderScoreFromBkmk($bkmk,appendScore=false){
-        console.log('rendering score from bkmk:',$bkmk)
+        console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
         //show notey playing violin
         $("#notey")
@@ -1002,12 +1026,12 @@ $(function(){
      */
     $(document).on("click", function (e) {
         const $target = $(e.target);
-    
+
         //deselect note
         const $selectedNotes = $(".abcjs-note_selected");
         const clicked_note = $target.closest($selectedNotes).length
         if (!clicked_note) $selectedNotes.removeClass("abcjs-note_selected");
-    
+
         //hide print menu
         const clicked_print_menu = $target.closest("#printMenu,#print").length
         if (!clicked_print_menu) $("#print").removeClass("active");

@@ -1,14 +1,18 @@
-[
+console.log('||S2S|| Loading Score Data...')
+
+if (!window.S2S) window.S2S = {}
+
+const scoreData = [
     {
-        "type":"section",
-        "heading":"My Scores",
-        "id":"myScores",
-        "bookmarks":[]
+        type:"section",
+        heading:"My Scores",
+        id:"myScores",
+        bookmarks:[]
     },
     {
-        "type":"section",
-        "heading":"Spring Concert",
-        "bookmarks":[
+        type:"section",
+        heading:"Spring Concert",
+        bookmarks:[
             {
                 "_title":"Kamwongia",
                 "abc-violin":"X:1\nT:Kamwongia\nC:Traditional Kenyan\nM:4/4\nL:1/8\nK:G\nV: violin clef=treble \nGG GB BA GA | DG GB BG G2 | DE D3/2G/ GD D2 | DE D3/2G/ GD D2 | \nGG GB BA GA | DG GB Bd d2 | DE D3/2G/ GD D2 | DE D3/2G/ G2 z2 |]\n[M:7/8] ||: Bd dB Bdd | BG GB GED | Bd dB Bdd |1 [M:4/4] BG GB B2 G2 :|2 [M:4/4] BG GB D2 G2 |]",
@@ -28,9 +32,9 @@
         ]
     },
     {
-        "type":"section",
-        "heading":"Beginner",
-        "bookmarks":[
+        type:"section",
+        heading:"Beginner",
+        bookmarks:[
             {
                 "_title":"Hot Cross Buns",
                 "abc-violin":"X: 1\nT:Hot Cross Buns\nC:Traditional\nM:4/4\nL:1/8\nK:D\nV: violin clef=treble \nF2 E2 D2 z2 | F2 E2 D2 z2 | DD DD EE EE | F2 E2 D2 z2 |]",
@@ -79,7 +83,31 @@
                 "abc-viola":"X:1\nV: viola clef=alto \nT:Lullaby\nC: Brahms\nM:3/4\nL:1/8\nK:D \nFF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\n| d3 d BG | A4 FD | G2 A2 B2 | A4 DD |\n| d3 d BG | A4 FD | G2 F2 E2 | D6 |]",
                 "abc-cello":"X:1\nV: cello clef=bass octave=-1\nT:Lullaby\nC: Brahms\nM:3/4\nL:1/8\nK:D \nFF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\n| d3 d BG | A4 FD | G2 A2 B2 | A4 DD |\n| d3 d BG | A4 FD | G2 F2 E2 | D6 |]",
                 "abc-bass":"X:1\nV: bass clef=bass octave=-1\nT:Lullaby\nC: Brahms\nM:3/4\nL:1/8\nK:D \nFF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\n| d3 d BG | A4 FD | G2 A2 B2 | A4 DD |\n| d3 d BG | A4 FD | G2 F2 E2 | D6 |]"
+            },
+            {
+                "abc-violin": "X:1\\nV: violin clef=treble\\nT:New World Lullaby\\nC: Brahms and Dvorak, Arr. by Andrew Tilles\\nM:3/4\\nL:1/8\\nK:D \\n&quot;^lullaby&quot;FF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \\nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\\nd3 d BG | A4 FD | G2 A2 B2 | A4 DD |\\nd3 d BG | A4 FD | G2 F2 E2 | D6 &quot;^fine&quot;||\\n[M:4/4] &quot;^new world symphony&quot;F3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | F3 E D4 | E2F2E3 D | D8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nF3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | d3 e f4 | e2 d2 e3 B | d8 |\\ne2 d2 e3 B | &quot;^d.c. al fine&quot;d8 ||",
+                "abc-viola": "X:1\\nV: viola clef=alto\\nT:New World Lullaby\\nC: Brahms and Dvorak, Arr. by Andrew Tilles\\nM:3/4\\nL:1/8\\nK:D \\n&quot;^lullaby&quot;FF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \\nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\\nd3 d BG | A4 FD | G2 A2 B2 | A4 DD |\\nd3 d BG | A4 FD | G2 F2 E2 | D6 &quot;^fine&quot;||\\n[M:4/4] &quot;^new world symphony&quot;F3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | F3 E D4 | E2F2E3 D | D8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nF3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | d3 e f4 | e2 d2 e3 B | d8 |\\ne2 d2 e3 B | &quot;^d.c. al fine&quot;d8 ||",
+                "abc-cello": "X:1\\nV: cello clef=bass middle=D\\nT:New World Lullaby\\nC: Brahms and Dvorak, Arr. by Andrew Tilles\\nM:3/4\\nL:1/8\\nK:D \\n&quot;^lullaby&quot;FF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \\nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\\nd3 d BG | A4 FD | G2 A2 B2 | A4 DD |\\nd3 d BG | A4 FD | G2 F2 E2 | D6 &quot;^fine&quot;||\\n[M:4/4] &quot;^new world symphony&quot;F3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | F3 E D4 | E2F2E3 D | D8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nF3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | d3 e f4 | e2 d2 e3 B | d8 |\\ne2 d2 e3 B | &quot;^d.c. al fine&quot;d8 ||",
+                "abc-bass": "X:1\\nV: bass clef=bass middle=D\\nT:New World Lullaby\\nC: Brahms and Dvorak, Arr. by Andrew Tilles\\nM:3/4\\nL:1/8\\nK:D \\n&quot;^lullaby&quot;FF | A4 FF | A4 FA | d2c2B2 | B2 A2 EF| \\nG2 E2 EF | G4 EG | cB A2 c2 | d4 DD|\\nd3 d BG | A4 FD | G2 A2 B2 | A4 DD |\\nd3 d BG | A4 FD | G2 F2 E2 | D6 &quot;^fine&quot;||\\n[M:4/4] &quot;^new world symphony&quot;F3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | F3 E D4 | E2F2E3 D | D8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nB3 d d4 | c2 A2 B4 | B2 d2 c2 A2 | B8 |\\nF3 A A4 | F3 E D4 | E3 F A3 F | E8 |\\nF3 A A4 | d3 e f4 | e2 d2 e3 B | d8 |\\ne2 d2 e3 B | &quot;^d.c. al fine&quot;d8 ||",
+                "_title": "New World Lullaby"
+            }
+        ]
+    },
+    {
+        type:"section",
+        heading:"Patriotic",
+        bookmarks:[
+            {
+                "abc-violin": "X:1\\nV: violin clef=treble \\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 fe | d2 F2 ^G2 | A4 AA |\\nf3 e d2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 fe | d2F2^G2 | A4 AA |\\nf3ed2 | c4 Bc | d2d2A2 | F2D2 ff | \\nf2g2a2| a4 gf | e2 f2 g2 | g4 g2| \\nf3e d2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | e2 gf ed | d2 Hc2 AA |\\nd3 e fg | a4 de | f3 g e2| d4 |]",
+                "abc-viola": "X:1\\nV: viola clef=alto \\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 FE | D2 F2 ^G2 | A4 AA |\\nF3 E D2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 FE | D2F2^G2 | A4 AA |\\nF3ED2 | c4 Bc | d2d2A2 | F2D2 FF | \\nF2G2A2| A4 GF | E2 F2 G2 | G4 G2| \\nF3E D2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | E2 GF ED | d2 Hc2 AA |\\nD3 E FG | A4 DE | F3 G E2| D4 |]",
+                "abc-cello": "X:1\\nV: cello clef=bass octave=-1\\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 fe | d2 F2 ^G2 | A4 AA |\\nf3 e d2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 fe | d2F2^G2 | A4 AA |\\nf3ed2 | c4 Bc | d2d2A2 | F2D2 ff | \\nf2g2a2| a4 gf | e2 f2 g2 | g4 g2| \\nf3e d2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | e2 gf ed | d2 Hc2 AA |\\nd3 e fg | a4 de | f3 g e2| d4 |]",
+                "abc-bass": "X:1\\nV: bass clef=bass octave=-1\\nT:Star Spangled Banner\\nC:lyrics by Francis Scott Key, music by John Stafford Smith\\nM:3/4\\nL:1/8\\nK:D\\nAF | D2F2A2 | d4 fe | d2 F2 ^G2 | A4 AA |\\nf3 e d2 | c4 Bc | d2d2A2 | F2D2 AF | \\nD2F2A2 | d4 fe | d2F2^G2 | A4 AA |\\nf3ed2 | c4 Bc | d2d2A2 | F2D2 ff | \\nf2g2a2| a4 gf | e2 f2 g2 | g4 g2| \\nf3e d2 | c4 Bc | d2F2^G2 | A4 A2 |\\nd2d2 dc | B2B2B2 | e2 gf ed | d2 Hc2 AA |\\nd3 e fg | a4 de | f3 g e2| d4 |]",
+                "_title": "Star Spangled Banner"
             }
         ]
     }
 ]
+
+S2S.scoreData = JSON.stringify(scoreData)
+
+if(S2S.scoreData) console.log('||S2S||  Score Data Loaded')
