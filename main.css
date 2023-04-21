@@ -91,12 +91,17 @@ header {
   }
   #header_buttons_toggle{
     display: inline;
+    position: absolute;
+    right: 8px;
   }
 
   #header_buttons{
     display: flex;
     flex-flow: column nowrap;
     height: max-content;
+    position: absolute;
+    right: 0;
+    top: var(--header_height);
   }
 }
 
