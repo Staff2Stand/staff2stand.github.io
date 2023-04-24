@@ -249,6 +249,9 @@ header {
   margin-left: 2px;
   height: 40px;
   display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 #sidebar_buttons .spaceAbove {
   margin-top: 1em;
