@@ -367,12 +367,7 @@ header {
 }
 /* active span */
 #sidebar_buttons span.active {
-  /* outline: 2px solid blue; */
-  border-radius: 50%;
-  background: radial-gradient(
-    hsla(var(--h) var(--s) calc(var(--l) - 25%) / 1),
-    hsla(var(--h) var(--s) var(--l) / 0) 80%
-  );
+  filter: drop-shadow(0px 0px 4px hsla(var(--h) var(--s) calc(var(--l) - 25%) / 1));
 }
 
 /* PARTS */
