@@ -525,13 +525,20 @@ $(function(){
         //initialize menu and add event listener for menu item selection
         $(thisEditorUtils).closest('.part').find('.editorUtilMenu').menu({
             select: function(e,activeMenuItem){
-                const selectedInstrument = $(activeMenuItem.item[0]).find('div').attr('instrument')
-                let editorVal = $(`#editor-${selectedInstrument}`).val()
-                const correctVoiceField = voiceFieldReference[thisInstrument]
-                //replace all instances of the voice field with the appropriate voice field
-                editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
-                //set this instrument's editor to that val and trigger change
-                $(`#editor-${thisInstrument}`).val(editorVal).change()
+                const $activeMenuItem = $(activeMenuItem.item[0])
+                if ($activeMenuItem.hasClass('submenu_parent')) return
+
+                //COPY FROM
+                if ($activeMenuItem.closest('editorUtils_copyFromMenu').length){
+                    const selectedInstrument = $activeMenuItem.find('div').attr('instrument')
+                    let editorVal = $(`#editor-${selectedInstrument}`).val()
+                    const correctVoiceField = voiceFieldReference[thisInstrument]
+                    //replace all instances of the voice field with the appropriate voice field
+                    editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
+                    //set this instrument's editor to that val and trigger change
+                    $(`#editor-${thisInstrument}`).val(editorVal).change()
+                }
+                
             }
         })
     })
