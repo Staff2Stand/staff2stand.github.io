@@ -555,7 +555,9 @@ $(function(){
      */
     $(document).tooltip({
         track: true,
-        my: "left center"
+        my: "left center",
+        show: 200,
+        hide: 100
     })
 
     /**
