@@ -529,7 +529,7 @@ $(function(){
                 if ($activeMenuItem.hasClass('submenu_parent')) return
 
                 //COPY FROM
-                if ($activeMenuItem.closest('editorUtils_copyFromMenu').length){
+                if ($activeMenuItem.closest('.editorUtils_copyFromMenu').length){
                     const selectedInstrument = $activeMenuItem.find('div').attr('instrument')
                     let editorVal = $(`#editor-${selectedInstrument}`).val()
                     const correctVoiceField = voiceFieldReference[thisInstrument]
