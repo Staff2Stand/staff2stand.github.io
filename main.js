@@ -188,7 +188,10 @@ $(function(){
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
 
             // skip if its not a notehead
-            const isNotehead = $(pathel).attr('data-name').length <= 2
+            function hasOnly1Letter(string){
+                return (string.match(/[A-Za-z]/g) || []).length === 1
+            }
+            const isNotehead = hasOnly1Letter( $(pathel).attr('data-name') )
             if (!isNotehead) return
 
             //check sharps in keysig
@@ -251,17 +254,19 @@ $(function(){
                 if (instrument === 'piano') return 'piano'
                 return stringReference[instrument][noteString]?.indexOf(noteName)
             })()
-            
+
             const finger = (function(){
                 if (instrument === 'piano' || noteNameIndex === undefined) return ''
                 return stringReference[instrument][noteString+'Fingers'][noteNameIndex]
             })()
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
-            let noteIsAboveStaff = false
+            const noteIsAboveStaff = (function(){
                 $(note).find('path').each(function(i,pathEl){
-                    if ( pathEl.getBBox().y < staffY ) noteIsAboveStaff = true
+                    if ( pathEl.getBBox().y < staffY ) return true
                 })
+                return false
+            })()
             const noChord_inStaff = !hasChordTxtEl && !noteIsAboveStaff
             const chord_inStaff = hasChordTxtEl && !noteIsAboveStaff
             const noChord_aboveStaff = !hasChordTxtEl && noteIsAboveStaff
