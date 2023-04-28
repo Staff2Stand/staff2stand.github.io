@@ -304,8 +304,8 @@ $(function(){
             if (noteY + noteHeight + 6 > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
 
             const standardNoteName = noteName
-                .replace(',','')
-                .replace(`'`,'')
+                .replace(/,+/g,'')
+                .replace(/'+/g,'')
                 .replace("^", "\u266F")
                 .replace("_", "\u266D")
                 .replace("=", "\u266E")
