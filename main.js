@@ -2,13 +2,14 @@
 const abcjs = window.ABCJS
 
 // DEFINE INSTRUMENTS AND REFERENCES
-const instruments = ['violin','viola','cello','bass']
+const instruments = ['violin','viola','cello','bass','piano']
 
 const voiceFieldReference = {
     violin: 'violin clef=treble',
     viola: 'viola clef=alto',
     cello: 'cello clef=bass octave=-1',
-    bass: 'bass clef=bass octave=-1'
+    bass: 'bass clef=bass octave=-1',
+    piano: 'RH clef=treble'
 }
 
 // \u2193 = down arrow
@@ -101,6 +102,7 @@ $(function(){
     const viola_divs = $('#tunes-viola div').toArray()
     const cello_divs = $('#tunes-cello div').toArray()
     const bass_divs = $('#tunes-bass div').toArray()
+    const piano_divs = $('#tune-piano div').toArray()
 
     //Initialize Editors
     let editor_violin = new abcjs.Editor("editor-violin",{
@@ -132,6 +134,14 @@ $(function(){
     let editor_bass = new abcjs.Editor("editor-bass",{
         canvas_id: bass_divs,
         warnings_id: "abc-warnings-bass",
+        clickListener: function(abcElem, tuneNumber, classes) {},
+        indicate_changed: true,
+        onchange: function(editorInstance) {},
+        abcjsParams: abcOpts
+    })
+    let editor_piano = new abcjs.Editor("editor-piano",{
+        canvas_id: piano_divs,
+        warnings_id: "abc-warnings-piano",
         clickListener: function(abcElem, tuneNumber, classes) {},
         indicate_changed: true,
         onchange: function(editorInstance) {},
@@ -175,6 +185,8 @@ $(function(){
      */
     function addStringClassesToNoteHeads(abcContainer){
         $(abcContainer).find('.abcjs-note path[data-name]').each(function(i,pathel){
+            const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
+
             // skip if its not a notehead
             const isNotehead = $(pathel).attr('data-name').length <= 2
             if (!isNotehead) return
@@ -196,10 +208,14 @@ $(function(){
             if (flatsInKey.includes(noteName.toLowerCase())) noteName = '_'+noteName
 
             //check string reference and add the correct string class
-            const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
-            const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
+            const noteString = instrument === 'piano' ? 
+                'piano' 
+                : 
+                Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
+            
+            const name_of_string_class = instrument === 'piano' ? 'piano' : `${noteString}String`
 
-            $(pathel).addClass(`${noteString}String`)
+            $(pathel).addClass(name_of_string_class)
 
             //add data-attrs to note
             $(pathel).closest('.abcjs-note').attr({
@@ -232,7 +248,10 @@ $(function(){
             const noteString = $(note).attr('data-string')
 
             const noteNameIndex = stringReference[instrument][noteString]?.indexOf(noteName)
-            const finger = noteNameIndex !== undefined ? stringReference[instrument][noteString+'Fingers'][noteNameIndex] : ''
+            const finger = instrument==='piano' ? '' :
+                noteNameIndex !== undefined ? 
+                    stringReference[instrument][noteString+'Fingers'][noteNameIndex] 
+                    : ''
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
             let noteIsAboveStaff = false
@@ -467,6 +486,9 @@ $(function(){
             break;
         case "printBass":
             printInstruments = "bass";
+            break;
+        case "printPiano":
+            printInstruments = "piano";
             break;
         case "printAll":
             printInstruments = instruments.join(',');

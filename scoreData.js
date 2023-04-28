@@ -105,6 +105,20 @@ const scoreData = [
                 "_title": "Star Spangled Banner"
             }
         ]
+    },
+    {
+        type:"section",
+        heading:"Piano",
+        bookmarks:[
+            {
+                "abc-violin":"",
+                "abc-viola":"",
+                "abc-cello":"",
+                "abc-bass":"",
+                "abc-piano":"X: 1\\nT:Piano Example\\nC:Nah\\nM:4/4\\nL:1/4\\nK:C\\n%staves={RH,LH}\\nV: RH clef=treble\\nV: LH clef=bass\\n%1\\n[V:RH] E2  D2   | C2  z2 | E2  D2   | C2  z2 | \\n[V:LH] C,2 G,,2 | C,2 z2 | C,2 G,,2 | C,2 z2 |\\n%5\\n[V:RH] C  C  C  C  | D  D  D  D  | E2  D2   | C2   z2 |]\\n[V:LH] C, E, D, C, | D, F, E, D, | C,2 G,,2 | C,,4    |]",
+                "_title":"Hot Cross Buns"
+            }
+        ]
     }
 ]
 
