@@ -102,7 +102,7 @@ $(function(){
     const viola_divs = $('#tunes-viola div').toArray()
     const cello_divs = $('#tunes-cello div').toArray()
     const bass_divs = $('#tunes-bass div').toArray()
-    const piano_divs = $('#tune-piano div').toArray()
+    const piano_divs = $('#tunes-piano div').toArray()
 
     //Initialize Editors
     let editor_violin = new abcjs.Editor("editor-violin",{
