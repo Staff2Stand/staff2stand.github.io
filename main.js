@@ -247,13 +247,15 @@ $(function(){
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
 
-            const noteNameIndex = instrument==='piano' ?
-                'piano'
-                : stringReference[instrument][noteString]?.indexOf(noteName)
-            const finger = instrument==='piano' ? '' :
-                noteNameIndex !== undefined ? 
-                    stringReference[instrument][noteString+'Fingers'][noteNameIndex] 
-                    : ''
+            const noteNameIndex = (function(){
+                if (instrument === 'piano') return 'piano'
+                return stringReference[instrument][noteString]?.indexOf(noteName)
+            })()
+            
+            const finger = (function(){
+                if (instrument === 'piano' || noteNameIndex === undefined) return ''
+                return stringReference[instrument][noteString+'Fingers'][noteNameIndex]
+            })()
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
             let noteIsAboveStaff = false
