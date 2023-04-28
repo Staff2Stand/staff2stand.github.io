@@ -247,7 +247,9 @@ $(function(){
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
 
-            const noteNameIndex = stringReference[instrument][noteString]?.indexOf(noteName)
+            const noteNameIndex = instrument==='piano' ?
+                'piano'
+                : stringReference[instrument][noteString]?.indexOf(noteName)
             const finger = instrument==='piano' ? '' :
                 noteNameIndex !== undefined ? 
                     stringReference[instrument][noteString+'Fingers'][noteNameIndex] 
