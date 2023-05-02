@@ -248,13 +248,6 @@ header {
 .bkmk-util:hover{
   fill: #ccc;
 }
-/* delete bkmk util */
-.bkmk-util.deleteBkmk.confirm{
-  fill:red;
-}
-.bkmk-util.deleteBkmk.confirm:hover{
-  fill:red;
-}
 
 /* sidebar buttons */
 #sidebar_buttons {
