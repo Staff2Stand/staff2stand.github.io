@@ -781,11 +781,11 @@ $(function(){
      * MAKE MY SCORES SORTABLE
      */
     $('#myScores').sortable({
-        stop: function(event, ui) {
-            //Prevent click event after dragging the bkmk
-                //This works because "one-listeners" are fired before "normal" listeners. So if a one-listener stops propagation, it will never reach your previously set listeners.
-            $( event.originalEvent.target ).one('click', function(e){ e.stopImmediatePropagation(); } );
-        },
+        // stop: function(event, ui) {
+        //     //Prevent click event after dragging the bkmk
+        //         //This works because "one-listeners" are fired before "normal" listeners. So if a one-listener stops propagation, it will never reach your previously set listeners.
+        //     $( event.originalEvent.target ).one('click', function(e){ e.stopImmediatePropagation(); } );
+        // },
         items: '> li', //only allow li children to be sortable (so, not the h1 section title),
         scrollSensitivity: 10,
         cursor: 'move'
