@@ -526,7 +526,7 @@ $(function(){
             .html(partUtilsTemplate)
             //HIDE PART BUTTON / TOGGLE PART
             .find('.hide').click(function(){
-                $(this).closest('.part-utils').siblings('.instrument_tunes, .extra_html').toggle()
+                $(this).closest('.part').toggleClass('hidden')
             })
     })
 

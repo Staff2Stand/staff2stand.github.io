@@ -424,6 +424,7 @@ header {
 .part .part-top-bg{
   width: 100%;
   height: 2em;
+  margin-bottom: -2em;
   background: #fff;
   position: sticky;
   top: var(--header_height);
@@ -508,6 +509,16 @@ header {
   position: relative;
 }
 
+/* hidden part */
+.part.hidden :is(.extra_html, .instrument_tunes, .abc-warnings, .abcEditor, .abcEditor-utils){
+  display: none !important;
+}
+.part.hidden h1{
+  font-size: 20px;
+}
+.part.hidden .part-utils{
+  font-size: 12px;
+}
 
 /* HIGHLIGHTING */
 #tunes_container {
