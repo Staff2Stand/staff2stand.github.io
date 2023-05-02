@@ -230,23 +230,10 @@ header {
   color: #999;
 }
 
-/* bookmark utils */
-.bkmk-utils {
-  height: 0;
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 4px;
-}
-.bkmk-util {
-  fill: #fff;
-  display: inline-block;
-  width: 16px;
-  position: relative;
-  top: -1.5em;
-  cursor: pointer;
-}
-.bkmk-util:hover{
-  fill: #ccc;
+#myScores .score_bookmark::before{
+  content: "\2630";
+  float: right;
+  color: #888;
 }
 
 /* sidebar buttons */
