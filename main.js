@@ -781,11 +781,6 @@ $(function(){
      * MAKE MY SCORES SORTABLE
      */
     $('#myScores').sortable({
-        // stop: function(event, ui) {
-        //     //Prevent click event after dragging the bkmk
-        //         //This works because "one-listeners" are fired before "normal" listeners. So if a one-listener stops propagation, it will never reach your previously set listeners.
-        //     $( event.originalEvent.target ).one('click', function(e){ e.stopImmediatePropagation(); } );
-        // },
         items: '> li', //only allow li children to be sortable (so, not the h1 section title),
         scrollSensitivity: 10,
         cursor: 'move'
@@ -1158,6 +1153,60 @@ $(function(){
     $(document).on('click','#header_buttons_toggle',function(){
         $('#header_buttons').toggleClass('hidden')
     })
+
+
+    /**
+     * CUSTOM CONTEXT MENU
+     */
+    function createCustomContextMenu(){
+        
+        //Menu HTML
+        const contextMenuHTML = `<ul class='custom-menu'>
+            <li data-action="first">First thing</li>
+            <li data-action="second">Second thing</li>
+            <li data-action="third">Third thing</li>
+        </ul>`
+
+
+        // Trigger action when the contexmenu is about to be shown
+        $(document).bind("contextmenu", function (event) {
+            // Avoid the real one
+            event.preventDefault()
+
+            // Show contextmenu
+            $(".custom-menu").finish().toggle(100).
+
+            // In the right position (the mouse)
+            css({
+                top: event.pageY + "px",
+                left: event.pageX + "px"
+            })
+        })
+
+        // If the document is clicked somewhere
+        $(document).bind("mousedown", function (e) {
+            // If the clicked element is not the menu
+            if (!$(e.target).parents(".custom-menu").length > 0) {
+                
+                // Hide it
+                $(".custom-menu").hide(100)
+            }
+        })
+
+        // If the menu element is clicked
+        $(".custom-menu li").click(function(){
+            // This is the triggered action name
+            switch($(this).attr("data-action")) {
+                // A case for each action. Your actions here
+                case "first": alert("first"); break;
+                case "second": alert("second"); break;
+                case "third": alert("third"); break;
+            }
+
+            // Hide it AFTER the action was triggered
+            $(".custom-menu").hide(100)
+        })
+    }
 
 
 
