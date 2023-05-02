@@ -630,6 +630,12 @@ $(function(){
 
         const contents = JSON.stringify(contentsArray)
         saveFile(filename,contents)
+
+        //create score bkmk in my scores
+        const bkmkAlreadyExists = $('#myScores').find(`[_title="${filename}"]`).length
+        if (bkmkAlreadyExists) return
+        createMyScoreBkmk(contentsObj)
+
     })
 
     /**
@@ -699,20 +705,26 @@ $(function(){
 
         //append each score in the contents array to the My Scores section
         const $myScores = $('#myScores')
-        contents.forEach((scoreData)=>{
-            let bkmkHTML = `<li class="score_bookmark"`
-            for (const prop in scoreData){
-                bkmkHTML += ` ${prop}="${scoreData[prop]}"`
-            }
-            bkmkHTML += `></li>`
-            $myScores.append(bkmkHTML)
-        })
+        contents.forEach(scoreData => createMyScoreBkmk(scoreData))
 
         //if the contents array only contains 1 score, render the score
         if (contents.length === 1) {
             renderScoreFromBkmk($myScores.find('.score_bookmark').last())
             setAllNotDirty()
         }
+    }
+
+    /**
+     * CREATE MY SCORES BOOKMARK
+     * @param {Object} scoreData Key is bookmark html attr. Value is the attr's value.
+     */
+    function createMyScoreBkmk(scoreData){
+        let bkmkHTML = `<li class="score_bookmark"`
+        for (const prop in scoreData){
+            bkmkHTML += ` ${prop}="${scoreData[prop]}"`
+        }
+        bkmkHTML += `></li>`
+        $myScores.append(bkmkHTML)
     }
 
     // FILE INPUT CHANGE
