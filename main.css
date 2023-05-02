@@ -59,7 +59,7 @@ header {
   cursor: pointer;
   outline: 2px solid;
   border-radius: 4px;
-  padding: 1px 6px;
+  padding: 4px 6px;
   margin: 0 10px;
   transition: all 50ms;
 }
@@ -75,6 +75,62 @@ header {
 
 #fileName{
   width: 150px;
+  background: none;
+  border: none;
+  border-bottom: 2px dashed;
+  color: #fff;
+}
+#fileName::placeholder{
+  color: #aaa
+}
+#fileName:focus {
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid;
+}
+
+#header_buttons_toggle{
+  display: none;
+}
+@media only screen and (max-width:900px) {
+  /* 
+    show header buttons toggler
+    hide header buttons on hidden class (toggler click event)
+    header buttons into a drop-down menu
+   */
+  #header_buttons.hidden{
+    display: none !important;
+  }
+  #header_buttons_toggle{
+    display: inline;
+    position: absolute;
+    right: 8px;
+  }
+
+  #header_buttons{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 8px;
+    height: max-content;
+    position: absolute;
+    right: 0;
+    top: var(--header_height);
+    background: #333;
+    padding-bottom: 8px;
+    border-radius: 0 0 8px 8px;
+  }
+  #header_buttons:before {
+    width: 100%;
+    content: '';
+    height: calc(100% + 8px);
+    box-shadow: -4px 4px 4px black;
+    display: block;
+    position: absolute;
+    border-radius: 0 0 8px 8px;
+    top: -9px;
+  }
 }
 
 /* DIALOG */
