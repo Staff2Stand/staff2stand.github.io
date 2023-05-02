@@ -1109,6 +1109,11 @@ $(function(){
     function unescapeABC(abc,fromHTML=true){
         if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
 
+        if (!abc) {
+            console.warn('||S2S||  abc string is undefined, returning an empty string')
+            return ''
+        }
+
         return abc.replace(/\\n/g,'\r\n').replace('&quot;','"').replace('&apos;',"'")
     }
 
