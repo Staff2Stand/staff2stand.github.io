@@ -1033,6 +1033,7 @@ $(function(){
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
             const newAbc = unescapeABC($bkmk.attr(`abc-${instrument}`))
+            const isEmptyPart = newAbc === ''
             //define current instrument editor and its value
             const $instrEditor = $(`#editor-${instrument}`)
             const currentEditorVal = $instrEditor.val()
@@ -1055,8 +1056,9 @@ $(function(){
                 $('#fileName').val( $bkmk.attr('_title') )
             }
 
-            //set editor to new abc string
             $instrEditor.val(newAbc).change()
+
+            if (isEmptyPart) $(`.part[instrument="${instrument}"]`).addClass('hidden')
         })
 
         //set extra html
