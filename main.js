@@ -1157,54 +1157,49 @@ $(function(){
 
     /**
      * CUSTOM CONTEXT MENU
+     * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function(){...}, anotherItemName: function(){...} }
      */
-    function createCustomContextMenu(){
-        
-        //Menu HTML
-        const contextMenuHTML = `<ul class='custom-menu'>
-            <li data-action="first">First thing</li>
-            <li data-action="second">Second thing</li>
-            <li data-action="third">Third thing</li>
-        </ul>`
+    function createCustomContextMenu(menuItems){
+        //Create context menu
+        const $customMenu = $(`<ul class='custom-menu'></ul>`)
+        for (const itemName in menuItems){
+            const itemNameSpacified = itemName.replace('_',' ')
+            const $item = $(`<li data-name='${itemName}'>${itemNameSpacified}</li>`)
+            $customMenu.append($item)
+        }
+        $('body').append($customMenu)
 
-
-        // Trigger action when the contexmenu is about to be shown
+        // Trigger action when the context menu is about to be shown
         $(document).bind("contextmenu", function (event) {
             // Avoid the real one
             event.preventDefault()
 
             // Show contextmenu
-            $(".custom-menu").finish().toggle(100).
-
-            // In the right position (the mouse)
-            css({
-                top: event.pageY + "px",
-                left: event.pageX + "px"
-            })
+            $(".custom-menu").finish().toggle(100)
+                .css({
+                    top: event.pageY + "px",
+                    left: event.pageX + "px"
+                })
         })
 
         // If the document is clicked somewhere
         $(document).bind("mousedown", function (e) {
             // If the clicked element is not the menu
             if (!$(e.target).parents(".custom-menu").length > 0) {
-                
                 // Hide it
                 $(".custom-menu").hide(100)
             }
         })
 
-        // If the menu element is clicked
+        // If a menu element is clicked
         $(".custom-menu li").click(function(){
-            // This is the triggered action name
-            switch($(this).attr("data-action")) {
-                // A case for each action. Your actions here
-                case "first": alert("first"); break;
-                case "second": alert("second"); break;
-                case "third": alert("third"); break;
-            }
+            const itemName = $(this).attr("data-name")
 
-            // Hide it AFTER the action was triggered
-            $(".custom-menu").hide(100)
+            //execute the function from the menuitems object arg
+            menuItems[itemName]()
+
+            // Hide and remove it AFTER the action was triggered
+            $(".custom-menu").hide(100).remove()
         })
     }
 
