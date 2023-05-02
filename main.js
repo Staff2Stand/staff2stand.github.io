@@ -724,7 +724,7 @@ $(function(){
             bkmkHTML += ` ${prop}="${scoreData[prop]}"`
         }
         bkmkHTML += `></li>`
-        $myScores.append(bkmkHTML)
+        $('#myScores').append(bkmkHTML)
     }
 
     // FILE INPUT CHANGE
