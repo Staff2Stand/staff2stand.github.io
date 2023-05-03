@@ -379,19 +379,20 @@ header {
   align-content: flex-start;
   justify-content: flex-start;
   position: relative;
+  overflow: hidden;
 }
 #sidebar_buttons #notenames_toggle svg{
   font-size: 1.5em;
 }
-#sidebar_buttons #notenames_toggle:after{
+#sidebar_buttons #notenames_toggle:after {
   content: '\2669';
   position: absolute;
   border-radius: 50%;
   z-index: -1;
-  font-size: 3.5em;
-  line-height: 0.7;
-  bottom: 0;
-  right: 0;
+  font-size: 46px;
+  bottom: -9px;
+  right: -4px;
+  width: calc(100% + 4px);
 }
 /* edit toggle */
 #sidebar_buttons #show_editors {
