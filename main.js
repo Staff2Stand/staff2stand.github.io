@@ -1173,8 +1173,15 @@ $(function(){
         const $customMenu = $(`<ul class='custom-menu'></ul>`)
         for (const itemName in menuItems){
             const itemNameSpacified = itemName.replace('_',' ')
-            const $item = $(`<li data-name='${itemName}'>${itemNameSpacified}</li>`)
-            $customMenu.append($item)
+            const $item = $(`<li>${itemNameSpacified}</li>`)
+            $item
+                .click(function(){
+                    //execute the function from the menuitems object arg
+                    menuItems[itemName]($item)
+                    // Hide and remove the context menu
+                    $customMenu.hide(100).remove()
+                })
+                .appendTo($customMenu)
         }
 
         // Trigger action when the context menu is about to be shown
@@ -1199,18 +1206,18 @@ $(function(){
             }
         })
 
-        // If a menu element is clicked
-        $(".custom-menu li").click(function(){
-            const $thisLi = $(this)
-            const itemName = $thisLi.attr("data-name")
+        // // If a menu element is clicked
+        // $customMenu.find('li').click(function(){
+        //     const $thisLi = $(this)
+        //     const itemName = $thisLi.attr("data-name")
 
-            //execute the function from the menuitems object arg
-            console.log(menuItems[itemName])
-            menuItems[itemName]($thisLi)
+        //     //execute the function from the menuitems object arg
+        //     console.log(menuItems[itemName])
+        //     menuItems[itemName]($thisLi)
 
-            // Hide and remove it AFTER the action was triggered
-            $customMenu.hide(100).remove()
-        })
+        //     // Hide and remove it AFTER the action was triggered
+        //     $customMenu.hide(100).remove()
+        // })
     }
 
 
