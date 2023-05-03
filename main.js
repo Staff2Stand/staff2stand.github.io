@@ -1200,11 +1200,12 @@ $(function(){
         })
 
         // If a menu element is clicked
-        $(".custom-menu li").off('click').click(function(){
+        $(".custom-menu li").click(function(){
             const $thisLi = $(this)
             const itemName = $thisLi.attr("data-name")
 
             //execute the function from the menuitems object arg
+            console.log(menuItems[itemName])
             menuItems[itemName]($thisLi)
 
             // Hide and remove it AFTER the action was triggered
