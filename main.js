@@ -777,7 +777,10 @@ $(function(){
         $myScores.sortable('refresh') //refresh sortable so the bkmk is recognized
 
         createCustomContextMenu($bkmkEl, {
-            "Delete": function($selectedLi){  $selectedLi.remove()  }
+            "Delete": function($selectedLi){  
+                console.log('deleting ',$selectedLi)
+                $selectedLi.remove()
+            }
         })
     }
 
@@ -1173,7 +1176,6 @@ $(function(){
             const $item = $(`<li data-name='${itemName}'>${itemNameSpacified}</li>`)
             $customMenu.append($item)
         }
-        $('body').append($customMenu)
 
         // Trigger action when the context menu is about to be shown
         $(bindTo).bind("contextmenu", function (event) {
@@ -1181,7 +1183,7 @@ $(function(){
             event.preventDefault()
 
             // Show contextmenu
-            $(".custom-menu").finish().toggle(100)
+            $customMenu.appendTo('body').finish().toggle(100)
                 .css({
                     top: event.pageY + "px",
                     left: event.pageX + "px"
@@ -1193,7 +1195,7 @@ $(function(){
             // If the clicked element is not the menu
             if (!$(e.target).parents(".custom-menu").length > 0) {
                 // Hide it
-                $(".custom-menu").hide(100)
+                $customMenu.hide(100)
             }
         })
 
@@ -1206,7 +1208,7 @@ $(function(){
             menuItems[itemName]($thisLi)
 
             // Hide and remove it AFTER the action was triggered
-            $(".custom-menu").hide(100).remove()
+            $customMenu.hide(100).remove()
         })
     }
 
