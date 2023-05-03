@@ -775,14 +775,11 @@ $(function(){
         const $bkmkEl = $(bkmkHTML)
         $myScores.append($bkmkEl)
         $myScores.sortable('refresh') //refresh sortable so the bkmk is recognized
-    }
 
-    /**
-     * MY SCORES CONTEXT MENU
-     */
-    createCustomContextMenu('#myScores',{
-        "Delete": function($selectedLi){  $selectedLi.remove()  }
-    })
+        createCustomContextMenu($bkmkEl, {
+            "Delete": function($selectedLi){  $selectedLi.remove()  }
+        })
+    }
 
     /**
      * MAKE MY SCORES SORTABLE
