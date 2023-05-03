@@ -778,6 +778,13 @@ $(function(){
     }
 
     /**
+     * MY SCORES CONTEXT MENU
+     */
+    createCustomContextMenu('#myScores',{
+        "Delete": function($selectedLi){  $selectedLi.remove()  }
+    })
+
+    /**
      * MAKE MY SCORES SORTABLE
      */
     $('#myScores').sortable({
@@ -910,6 +917,7 @@ $(function(){
         editor_viola.setNotDirty()
         editor_cello.setNotDirty()
         editor_bass.setNotDirty()
+        editor_piano.setNotDirty()
     }
     function areAnyDirty(){
         return $('.abcEditor.abc_textarea_dirty').length > 0
@@ -1157,9 +1165,10 @@ $(function(){
 
     /**
      * CUSTOM CONTEXT MENU
-     * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function(){...}, anotherItemName: function(){...} }
+     * @param {String} bindTo selector to bind the context menu to.
+     * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($selectedLi){...}, anotherItemName: function($selectedLi){...} }.  The first arg in the functions is the selected menu item
      */
-    function createCustomContextMenu(menuItems){
+    function createCustomContextMenu(bindTo, menuItems){
         //Create context menu
         const $customMenu = $(`<ul class='custom-menu'></ul>`)
         for (const itemName in menuItems){
@@ -1170,7 +1179,7 @@ $(function(){
         $('body').append($customMenu)
 
         // Trigger action when the context menu is about to be shown
-        $(document).bind("contextmenu", function (event) {
+        $(bindTo).bind("contextmenu", function (event) {
             // Avoid the real one
             event.preventDefault()
 
@@ -1192,11 +1201,12 @@ $(function(){
         })
 
         // If a menu element is clicked
-        $(".custom-menu li").click(function(){
-            const itemName = $(this).attr("data-name")
+        $(".custom-menu li").off('click').click(function(){
+            const $thisLi = $(this)
+            const itemName = $thisLi.attr("data-name")
 
             //execute the function from the menuitems object arg
-            menuItems[itemName]()
+            menuItems[itemName]($thisLi)
 
             // Hide and remove it AFTER the action was triggered
             $(".custom-menu").hide(100).remove()
