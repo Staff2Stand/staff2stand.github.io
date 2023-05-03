@@ -1176,8 +1176,9 @@ $(function(){
             const $item = $(`<li>${itemNameSpacified}</li>`)
             $item
                 .click(function(){
+                    const $menuTarget = $( $customMenu.data('target') )
                     //execute the function from the menuitems object arg
-                    menuItems[itemName]($item)
+                    menuItems[itemName]($menuTarget)
                     // Hide and remove the context menu
                     $customMenu.hide(100).remove()
                 })
@@ -1195,6 +1196,7 @@ $(function(){
                     top: event.pageY + "px",
                     left: event.pageX + "px"
                 })
+                .data('target', $(event.target)) //use jquery data() method to save the triggering bkmk to the ul
         })
 
         // If the document is clicked somewhere
@@ -1205,19 +1207,6 @@ $(function(){
                 $customMenu.hide(100)
             }
         })
-
-        // // If a menu element is clicked
-        // $customMenu.find('li').click(function(){
-        //     const $thisLi = $(this)
-        //     const itemName = $thisLi.attr("data-name")
-
-        //     //execute the function from the menuitems object arg
-        //     console.log(menuItems[itemName])
-        //     menuItems[itemName]($thisLi)
-
-        //     // Hide and remove it AFTER the action was triggered
-        //     $customMenu.hide(100).remove()
-        // })
     }
 
 
