@@ -117,8 +117,16 @@ $(function(){
                 },
                 indicate_changed: true,
                 onchange: function(editorInstance) {
-                    console.log(editorInstance)
-                    
+                    //set bkmk's attr to the changed value
+                    const changedInstrument = $(editorInstance.editarea.textarea).closest('part').attr('instrument')
+                    const newAbc = editorInstance.currentAbc
+                    const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
+                    newAbc.match(reg_eachBkmk).forEach(newVal=>{
+                        const reg_title = /T:\s?(.*)$/gm
+                        const title = newVal.match(reg_title)[0]
+                        const $bkmk = $(`.score_bookmark.active[_title="${title}"]`)
+                        $bkmk.attr(`abc-${changedInstrument}`,newVal)
+                    })
                 },
                 abcjsParams: abcOpts
             }
