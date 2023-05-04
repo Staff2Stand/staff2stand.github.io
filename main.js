@@ -75,12 +75,7 @@ $(function(){
     /**
      * INITIALIZE EDITOR for each instrument
      */
-    const abcOpts = {
-        add_classes: true,
-        responsive: 'resize'
-    }
-
-    //create max number of tune divs that could be necessary
+    //Create max number of tune divs that could be necessary
         // count how many Xs are present in each abc-${instrument} attribute
         // the highest of that is how many divs we need to create
     instruments.forEach(function(instrument){
@@ -97,57 +92,37 @@ $(function(){
         }
     })
 
-    //define array of tune divs
-    const violin_divs = $('#tunes-violin div').toArray()
-    const viola_divs = $('#tunes-viola div').toArray()
-    const cello_divs = $('#tunes-cello div').toArray()
-    const bass_divs = $('#tunes-bass div').toArray()
-    const piano_divs = $('#tunes-piano div').toArray()
+    //Define array of tune divs
+    const tuneDivs = (function(){
+        const temp = {}
+        instruments.forEach(instrument=>{
+            temp[instrument] = $(`#tunes-${instrument} div`).toArray()
+        })
+        return temp
+    })()
 
     //Initialize Editors
-    let editor_violin = new abcjs.Editor("editor-violin",{
-        canvas_id: violin_divs,
-        warnings_id: "abc-warnings-violin",
-        clickListener: function(abcElem, tuneNumber, classes) {
-            //the presence of this function is enough to add the functionality
-        },
-        indicate_changed: true,
-        onchange: function(editorInstance) {},
-        abcjsParams: abcOpts
-    })
-    let editor_viola = new abcjs.Editor("editor-viola",{
-        canvas_id: viola_divs,
-        warnings_id: "abc-warnings-viola",
-        clickListener: function(abcElem, tuneNumber, classes) {},
-        indicate_changed: true,
-        onchange: function(editorInstance) {},
-        abcjsParams: abcOpts
-    })
-    let editor_cello = new abcjs.Editor("editor-cello",{
-        canvas_id: cello_divs,
-        warnings_id: "abc-warnings-cello",
-        clickListener: function(abcElem, tuneNumber, classes) {},
-        indicate_changed: true,
-        onchange: function(editorInstance) {},
-        abcjsParams: abcOpts
-    })
-    let editor_bass = new abcjs.Editor("editor-bass",{
-        canvas_id: bass_divs,
-        warnings_id: "abc-warnings-bass",
-        clickListener: function(abcElem, tuneNumber, classes) {},
-        indicate_changed: true,
-        onchange: function(editorInstance) {},
-        abcjsParams: abcOpts
-    })
-    let editor_piano = new abcjs.Editor("editor-piano",{
-        canvas_id: piano_divs,
-        warnings_id: "abc-warnings-piano",
-        clickListener: function(abcElem, tuneNumber, classes) {},
-        indicate_changed: true,
-        onchange: function(editorInstance) {},
-        abcjsParams: abcOpts
-    })
-
+    const abcOpts = {
+        add_classes: true,
+        responsive: 'resize'
+    }
+    const editorInstances = (function(){
+        const temp = {}
+        instruments.forEach(instrument=>{
+            const abcEditorOpts = {
+                canvas_id: tuneDivs[instrument],
+                warnings_id: `abc-warnings-${instrument}`,
+                clickListener: function(abcElem, tuneNumber, classes) {
+                    //the presence of this function is enough to add the functionality
+                },
+                indicate_changed: true,
+                onchange: function(editorInstance) {},
+                abcjsParams: abcOpts
+            }
+            temp[instrument] = new abcjs.Editor(`editor-${instrument}`, abcEditorOpts)
+        })
+        return temp
+    })()
 
     /**
      * TUNES (RE)RENDER OBSERVER
@@ -171,7 +146,7 @@ $(function(){
 
         //fade out notey
         $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
-    });
+    })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
         //impliment observer on each individual instrument's tunes container
@@ -913,11 +888,9 @@ $(function(){
      *  DIRTY flag
      */
     function setAllNotDirty(){
-        editor_violin.setNotDirty()
-        editor_viola.setNotDirty()
-        editor_cello.setNotDirty()
-        editor_bass.setNotDirty()
-        editor_piano.setNotDirty()
+        for (const editor in editorInstances){
+            editorInstances[editor].setNotDirty()
+        }
     }
     function areAnyDirty(){
         return $('.abcEditor.abc_textarea_dirty').length > 0
