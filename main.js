@@ -116,7 +116,10 @@ $(function(){
                     //the presence of this function is enough to add the functionality
                 },
                 indicate_changed: true,
-                onchange: function(editorInstance) {},
+                onchange: function(editorInstance) {
+                    console.log(editorInstance)
+                    
+                },
                 abcjsParams: abcOpts
             }
             temp[instrument] = new abcjs.Editor(`editor-${instrument}`, abcEditorOpts)
