@@ -123,7 +123,7 @@ $(function(){
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     newAbc.match(reg_eachBkmk).forEach(newBkmkVal=>{
                         const reg_title = /T:\s?(.*)$/gm
-                        const title = newBkmkVal.match(reg_title)[0]
+                        const title = reg_title.exec(newBkmkVal)[1]
                         const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
                         console.log(editorInstance,'Changed instrument = ',changedInstrument,'.  Title= ',title,'.  Bookmark = ',$bkmk)
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
