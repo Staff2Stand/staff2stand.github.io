@@ -131,10 +131,11 @@ $(function(){
                         return
                     }
                     eachBkmkAbc.forEach(newBkmkVal=>{
-                        const reg_title = /T:\s?(.*)$/gm
-                        const title = reg_title.exec(newBkmkVal)[1]
-                        const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
-                        console.log(editorInstance,'Changed instrument = ',changedInstrument,'.  Title= ',title,'.  Bookmark = ',$bkmk)
+                        // const reg_title = /T:\s?(.*)$/gm
+                        // const title = reg_title.exec(newBkmkVal)[1]
+                        // const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
+                        const oldBkmkVal = editorInstance.editarea.initialText
+                        const $bkmk = findBkmkByAbcVal(oldBkmkVal,instrument)
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
                     })
                 },
@@ -144,6 +145,16 @@ $(function(){
         })
         return temp
     })()
+
+    /**
+     * 
+     * @param {String} abc the abc text
+     * @param {String} instrument which abc-{instrument} attr to search for
+     * @returns 
+     */
+    function findBkmkByAbcVal(abc,instrument){
+        return $(`#myScores .score_bookmark[abc-${instrument}="${escapeABC(abc)}"]`)
+    }
 
     /**
      * TUNES (RE)RENDER OBSERVER
@@ -1076,6 +1087,7 @@ $(function(){
             $instrEditor.val(newAbc).change()
 
             if (isEmptyPart) $(`.part[instrument="${instrument}"]`).addClass('hidden')
+            if (!isEmptyPart) $(`.part[instrument="${instrument}"]`).removeClass('hidden')
         })
 
         //set extra html
