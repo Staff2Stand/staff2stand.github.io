@@ -123,7 +123,7 @@ $(function(){
                     const oldAbc = escapeABC(editorInstance.editarea.initialText)
                     const newAbc = escapeABC(editorInstance.currentAbc)
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
-                    const eachBkmkAbc = newAbc.match(reg_eachBkmk)
+                    const eachNewBkmkAbc = newAbc.match(reg_eachBkmk)
                     const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
                     if (!oldAbc) {
                         //This means the old editor val is ''.
@@ -139,11 +139,16 @@ $(function(){
                         $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
                         return
                     }
-                    eachBkmkAbc.forEach((newBkmkVal,i)=>{
-                        const oldBkmkVal = eachOldBkmkAbc[i]
-                        const $bkmk = findBkmkByAbcVal(oldBkmkVal,instrument)
+                    eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
+                        const oldBkmkAbc = eachOldBkmkAbc[i]
+                        if (!oldBkmkAbc) {
+                            //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk.
+                            return
+                        }
+                        const ValToSearchFor = oldBkmkAbc
+                        const $bkmk = findBkmkByAbcVal(oldBkmkAbc,instrument)
                         console.log('$bkmk:',$bkmk)
-                        $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
+                        $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
                     })
                 },
                 abcjsParams: abcOpts
