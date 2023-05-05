@@ -136,6 +136,7 @@ $(function(){
                         // const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
                         const oldBkmkVal = editorInstance.editarea.initialText
                         const $bkmk = findBkmkByAbcVal(oldBkmkVal,instrument)
+                        console.log('$bkmk:',$bkmk)
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
                     })
                 },
@@ -153,7 +154,11 @@ $(function(){
      * @returns 
      */
     function findBkmkByAbcVal(abc,instrument){
-        return $(`#myScores .score_bookmark[abc-${instrument}="${escapeABC(abc)}"]`)
+        let $foundBkmk
+        $(`#myScores .score_bookmark`).each((i,$bkmk)=>{
+            if ($bkmk.attr(`abc-${instrument}`) == escapeABC(abc)) $foundBkmk = $bkmk
+        })
+        return $foundBkmk
     }
 
     /**
