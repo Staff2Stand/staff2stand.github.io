@@ -120,10 +120,17 @@ $(function(){
                     //set bkmk's attr to the changed value
                     const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
                     const newAbc = escapeABC(editorInstance.currentAbc)
-                    const noAbcInstrumentAttr = !!newAbc
-                    if (noAbcInstrumentAttr) return
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
-                    newAbc.match(reg_eachBkmk).forEach(newBkmkVal=>{
+                    const eachBkmkAbc = newAbc.match(reg_eachBkmk)
+                    if (!eachBkmkAbc) {
+                        //This means the current editor val is ''.
+                        //  This could be bc the user deleted all the text 
+                        //   or bc the bkmk didn't have an abc attr for this instrument.
+                        //  Either way we need to set this instrument attr on the bkmk(s) to ''
+                        $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
+                        return
+                    }
+                    eachBkmkAbc.forEach(newBkmkVal=>{
                         const reg_title = /T:\s?(.*)$/gm
                         const title = reg_title.exec(newBkmkVal)[1]
                         const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
