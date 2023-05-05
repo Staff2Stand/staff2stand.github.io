@@ -117,7 +117,7 @@ $(function(){
                 },
                 indicate_changed: true,
                 onchange: function(editorInstance) {
-                    console.log('editor instance',editorInstance)
+                    console.log(`||S2S||  ${instrument} editor instance:`,editorInstance)
                     //set bkmk's attr to the changed value
                     const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
                     const oldAbc = escapeABC(editorInstance.editarea.initialText)
@@ -125,6 +125,12 @@ $(function(){
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     const eachBkmkAbc = newAbc.match(reg_eachBkmk)
                     const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
+                    if (!eachOldBkmkAbc) {
+                        //This means the old editor val is ''.
+                        //  This occurs when a bkmk is clicked (not shift-clicked)
+                        //      - ie, the renderScoreFromBkmk function clears all of the editors first
+                        return
+                    }
                     if (!eachBkmkAbc) {
                         //This means the current editor val is ''.
                         //  This could be bc the user deleted all the text 
