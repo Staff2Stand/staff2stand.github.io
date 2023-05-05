@@ -117,11 +117,14 @@ $(function(){
                 },
                 indicate_changed: true,
                 onchange: function(editorInstance) {
+                    console.log('editor instance',editorInstance)
                     //set bkmk's attr to the changed value
                     const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
+                    const oldAbc = escapeABC(editorInstance.editarea.initialText)
                     const newAbc = escapeABC(editorInstance.currentAbc)
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     const eachBkmkAbc = newAbc.match(reg_eachBkmk)
+                    const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
                     if (!eachBkmkAbc) {
                         //This means the current editor val is ''.
                         //  This could be bc the user deleted all the text 
@@ -130,11 +133,8 @@ $(function(){
                         $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
                         return
                     }
-                    eachBkmkAbc.forEach(newBkmkVal=>{
-                        // const reg_title = /T:\s?(.*)$/gm
-                        // const title = reg_title.exec(newBkmkVal)[1]
-                        // const $bkmk = $(`#myScores .score_bookmark[_title="${title}"]`)
-                        const oldBkmkVal = editorInstance.editarea.initialText
+                    eachBkmkAbc.forEach((newBkmkVal,i)=>{
+                        const oldBkmkVal = eachOldBkmkAbc[i]
                         const $bkmk = findBkmkByAbcVal(oldBkmkVal,instrument)
                         console.log('$bkmk:',$bkmk)
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
@@ -148,7 +148,7 @@ $(function(){
     })()
 
     /**
-     * 
+     * FIND BKMK BY ABC
      * @param {String} abc the abc text
      * @param {String} instrument which abc-{instrument} attr to search for
      * @returns 
@@ -159,7 +159,7 @@ $(function(){
             if (!$bkmk) return
             if ($($bkmk).attr(`abc-${instrument}`) == escapeABC(abc)) $foundBkmk = $bkmk
         })
-        return $foundBkmk
+        return $($foundBkmk)
     }
 
     /**
