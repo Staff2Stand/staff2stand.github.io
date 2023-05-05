@@ -118,14 +118,22 @@ $(function(){
                 indicate_changed: true,
                 onchange: function(editorInstance) {
                     //set bkmk's attr to the changed value
+                    const $activeBkmks = $('.score_bookmark.active')
                     const changedInstrument = $(editorInstance.editarea.textarea).closest('part').attr('instrument')
                     const newAbc = editorInstance.currentAbc
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
-                    newAbc.match(reg_eachBkmk).forEach(newVal=>{
+                    newAbc.match(reg_eachBkmk).forEach(newBkmkVal=>{
                         const reg_title = /T:\s?(.*)$/gm
-                        const title = newVal.match(reg_title)[0]
-                        const $bkmk = $(`.score_bookmark.active[_title="${title}"]`)
-                        $bkmk.attr(`abc-${changedInstrument}`,newVal)
+                        const title = newBkmkVal.match(reg_title)[0]
+                        const $bkmk = (function(){
+                            let temp
+                            $activeBkmks.each((i,$bkmk)=>{
+                                if ($bkmk.attr('_title') == title) temp = $bkmk
+                            })
+                            return temp
+                        })()
+                        console.log('Changed instrument = ',changedInstrument,'.  Title= ',title,'.  Bookmark = ',$bkmk)
+                        $bkmk.attr(`abc-${changedInstrument}`, newBkmkVal)
                     })
                 },
                 abcjsParams: abcOpts
