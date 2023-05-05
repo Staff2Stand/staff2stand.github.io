@@ -125,13 +125,13 @@ $(function(){
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     const eachBkmkAbc = newAbc.match(reg_eachBkmk)
                     const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
-                    if (!eachOldBkmkAbc) {
+                    if (!oldAbc) {
                         //This means the old editor val is ''.
                         //  This occurs when a bkmk is clicked (not shift-clicked)
                         //      - ie, the renderScoreFromBkmk function clears all of the editors first
                         return
                     }
-                    if (!eachBkmkAbc) {
+                    if (!newAbc) {
                         //This means the current editor val is ''.
                         //  This could be bc the user deleted all the text 
                         //   or bc the bkmk didn't have an abc attr for this instrument.
