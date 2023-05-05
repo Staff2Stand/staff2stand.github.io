@@ -119,7 +119,9 @@ $(function(){
                 onchange: function(editorInstance) {
                     //set bkmk's attr to the changed value
                     const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
-                    const newAbc = editorInstance.currentAbc
+                    const newAbc = escapeABC(editorInstance.currentAbc)
+                    const noAbcInstrumentAttr = !!newAbc
+                    if (noAbcInstrumentAttr) return
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     newAbc.match(reg_eachBkmk).forEach(newBkmkVal=>{
                         const reg_title = /T:\s?(.*)$/gm
