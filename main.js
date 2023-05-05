@@ -157,7 +157,7 @@ $(function(){
         let $foundBkmk
         $(`#myScores .score_bookmark`).each((i,$bkmk)=>{
             if (!$bkmk) return
-            if ($bkmk.attr(`abc-${instrument}`) == escapeABC(abc)) $foundBkmk = $bkmk
+            if ($($bkmk).attr(`abc-${instrument}`) == escapeABC(abc)) $foundBkmk = $bkmk
         })
         return $foundBkmk
     }
