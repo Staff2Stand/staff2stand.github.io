@@ -222,18 +222,13 @@ header {
   color: #888;
 }
 
+/* MY SCORES */
 /* if my scores is empty */
 #myScores:not(:has(li)) h1:after {
   content: 'Your saved scores will appear here.';
   display: block;
   font-weight: normal;
   color: #999;
-}
-
-#myScores .score_bookmark::before{
-  content: "\2630";
-  float: right;
-  color: #888;
 }
 
 .bkmkUtils {
@@ -259,7 +254,6 @@ header {
 }
 
 /* CUSTOM MENU */
-/* The whole thing */
 .custom-menu {
   display: none;
   z-index: 1000;
@@ -273,8 +267,6 @@ header {
   border-radius: 5px;
   padding: 0;
 }
-
-/* Each of the items in the list */
 .custom-menu li {
   padding: 8px 12px;
   cursor: pointer;
@@ -282,7 +274,6 @@ header {
   transition: all .3s ease;
   user-select: none;
 }
-
 .custom-menu li:hover {
   background-color: #DEF;
 }
