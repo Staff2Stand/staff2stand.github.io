@@ -152,8 +152,18 @@ $(function(){
                         }
                         const ValToSearchFor = oldBkmkAbc
                         const $bkmk = findBkmkByAbcVal(oldBkmkAbc,instrument)
-                        console.log('$bkmk:',$bkmk)
+                        const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
+                        const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
+
+                        $bkmkSaved.hide()
+                        $bkmkSaving.show()
+
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
+
+                        setTimeout(() => {
+                            $bkmkSaving.hide()
+                            $bkmkSaved.show()
+                        }, 1000);
                     })
                 },
                 abcjsParams: abcOpts
@@ -794,12 +804,22 @@ $(function(){
      */
     function createMyScoreBkmk(scoreData){
         const $myScores = $('#myScores')
+
         const faDeleteSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>`
         const faMoveSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>`
+        const faVEllipse = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/></svg>`
+        const dragSvg = `<svg class="svg-icon" style="transform: rotateZ(90deg); width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M426.666667 256a42.666667 42.666667 0 0 0-42.666667 42.666667v170.666666H230.826667l34.133333-33.706666a42.666667 42.666667 0 0 0-60.586667-60.586667l-106.666666 106.666667a42.666667 42.666667 0 0 0-8.96 14.08 42.666667 42.666667 0 0 0 0 32.426666 42.666667 42.666667 0 0 0 8.96 14.08l106.666666 106.666667a42.666667 42.666667 0 0 0 60.586667 0 42.666667 42.666667 0 0 0 0-60.586667l-34.133333-33.706666H384v170.666666a42.666667 42.666667 0 0 0 85.333333 0V298.666667a42.666667 42.666667 0 0 0-42.666666-42.666667z m508.586666 239.786667a42.666667 42.666667 0 0 0-8.96-14.08l-106.666666-106.666667a42.666667 42.666667 0 0 0-60.586667 60.586667l34.133333 33.706666H640V298.666667a42.666667 42.666667 0 0 0-85.333333 0v426.666666a42.666667 42.666667 0 0 0 85.333333 0v-170.666666h153.173333l-34.133333 33.706666a42.666667 42.666667 0 0 0 0 60.586667 42.666667 42.666667 0 0 0 60.586667 0l106.666666-106.666667a42.666667 42.666667 0 0 0 8.96-14.08 42.666667 42.666667 0 0 0 0-32.426666z"  /></svg>`
+        const faSpinnerSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>`
+        const faCircleCheckSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>`
 
         let bkmkHTML = `<li class="score_bookmark"`
-            for (const prop in scoreData){  bkmkHTML += ` ${prop}="${scoreData[prop]}"`  }
-        bkmkHTML += `></li>`
+        for (const prop in scoreData){  bkmkHTML += ` ${prop}="${scoreData[prop]}"`  }
+        bkmkHTML += `><div class="bkmkUtils">`
+        bkmkHTML +=     `<span class="saving fa-spin">${faSpinnerSVG}</span>`
+        bkmkHTML +=     `<span class="saved">${faCircleCheckSVG}</span>`
+        bkmkHTML +=     `<span class="dragHandleCourtesy">${faMoveSVG}</span>`
+        bkmkHTML +=     `<span class="contextMenuTrigger">${faVEllipse}</span>`
+        bkmkHTML += `</div> </li>`
 
         const $bkmkEl = $(bkmkHTML)
         $myScores.append($bkmkEl)

@@ -236,6 +236,28 @@ header {
   color: #888;
 }
 
+.bkmkUtils {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  height: 20px;
+  display: flex;
+  color: #ccc;
+  fill: #ccc;
+  align-items: center;
+}
+.bkmkUtils .contextMenuTrigger {
+  width: 5px;
+  padding: 0 6px;
+}
+.bkmkUtils :is(.dragHandleCourtesy, .saving, .saved) {
+  width: 18px;
+}
+.bkmkUtils :is(.saving, .saved) {
+  display: none;
+  margin-right: 6px;
+}
+
 /* CUSTOM MENU */
 /* The whole thing */
 .custom-menu {
