@@ -147,6 +147,8 @@ $(function(){
                         console.log('newAbc is false')
                         return
                     }
+                    let saveSuccessful = false
+
                     eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
                         const oldBkmkAbc = eachOldBkmkAbc[i]
                         if (!oldBkmkAbc) {
@@ -164,16 +166,21 @@ $(function(){
 
                         $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
 
-                        setTimeout(() => {
-                            $bkmkSaving.hide()
-                            $bkmkSaved.show()
-                        }, 1000);
+                        saveSuccessful = true
+                        if (saveSuccessful){
+                            editorInstance.setNotDirty()
+                            setTimeout(() => {
+                                $bkmkSaving.hide()
+                                $bkmkSaved.show()
+                            }, 1000);
+                        }
                     })
                 },
                 abcjsParams: abcOpts
             }
             temp[instrument] = new abcjs.Editor(`editor-${instrument}`, abcEditorOpts)
         })
+
         return temp
     })()
 
