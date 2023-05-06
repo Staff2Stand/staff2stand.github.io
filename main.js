@@ -131,6 +131,11 @@ $(function(){
                         //      - ie, the renderScoreFromBkmk function clears all of the editors first
                         return
                     }
+                    if (!eachOldBkmkAbc){
+                        //This means there was a value in the editor, but it wasn't abc notation
+                        //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
+                        return
+                    }
                     if (!newAbc) {
                         //This means the current editor val is ''.
                         //  This could be bc the user deleted all the text 

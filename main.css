@@ -391,7 +391,7 @@ header {
   z-index: -1;
   font-size: 46px;
   bottom: -9px;
-  right: -4px;
+  /* right: -4px; */
   width: calc(100% - 8px);
 }
 /* edit toggle */
