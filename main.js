@@ -810,7 +810,7 @@ $(function(){
 
 
     /**
-     * CREATE MY SCORES BOOKMARK
+     * CREATE BOOKMARK IN MY SCORES
      * @param {Object} scoreData Key is bookmark html attr. Value is the attr's value.
      */
     function createMyScoreBkmk(scoreData){
@@ -826,8 +826,8 @@ $(function(){
         let bkmkHTML = `<li class="score_bookmark"`
         for (const prop in scoreData){  bkmkHTML += ` ${prop}="${scoreData[prop]}"`  }
         bkmkHTML += `><div class="bkmkUtils">`
-        bkmkHTML +=     `<span class="saving fa-spin">${faSpinnerSVG}</span>`
-        bkmkHTML +=     `<span class="saved">${faCircleCheckSVG}</span>`
+        bkmkHTML +=     `<span class="saving fa-spin" title="...saving">${faSpinnerSVG}</span>`
+        bkmkHTML +=     `<span class="saved" title="&#10003; saved">${faCircleCheckSVG}</span>`
         bkmkHTML +=     `<span class="dragHandleCourtesy">${faMoveSVG}</span>`
         bkmkHTML +=     `<span class="contextMenuTrigger">${faVEllipse}</span>`
         bkmkHTML += `</div> </li>`
