@@ -129,11 +129,13 @@ $(function(){
                         //This means the old editor val is ''.
                         //  This occurs when a bkmk is clicked (not shift-clicked)
                         //      - ie, the renderScoreFromBkmk function clears all of the editors first
+                        console.log('oldAbc is false')
                         return
                     }
                     if (!eachOldBkmkAbc){
                         //This means there was a value in the editor, but it wasn't abc notation
                         //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
+                        console.log('eachOldBkmkAbc is false')
                         return
                     }
                     if (!newAbc) {
@@ -142,12 +144,14 @@ $(function(){
                         //   or bc the bkmk didn't have an abc attr for this instrument.
                         //  Either way we need to set this instrument attr on the bkmk(s) to ''
                         $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
+                        console.log('newAbc is false')
                         return
                     }
                     eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
                         const oldBkmkAbc = eachOldBkmkAbc[i]
                         if (!oldBkmkAbc) {
                             //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk.
+                            console.log('oldBkmkAbc is false')
                             return
                         }
                         const ValToSearchFor = oldBkmkAbc
