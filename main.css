@@ -226,6 +226,8 @@ header {
   left: 0;
   fill: #ccc;
   gap: 4px;
+  width: calc(100% - 8px);
+  padding: 4px;
 }
 #myScoresUtils span {
   width: 1em;
@@ -242,6 +244,9 @@ header {
 input#loadScores {
   width: 0;
   position: absolute;
+}
+#newScore{
+  margin-right: auto;
 }
 
 /* CUSTOM MENU */
