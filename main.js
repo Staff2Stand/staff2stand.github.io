@@ -836,12 +836,14 @@ $(function(){
         $myScores.append($bkmkEl)
         $myScores.sortable('refresh') //refresh sortable so the bkmk is recognized
 
-        createCustomContextMenu($bkmkEl, {
+        const $contextMenuTrigger = $bkmkEl.find('.contextMenuTrigger')
+
+        const contextMenuMenuItems = {
             "Delete": function($selectedLi){  
-                console.log('deleting ',$selectedLi)
                 $selectedLi.remove()
             }
-        })
+        }
+        createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
     }
 
     /**
@@ -1226,8 +1228,10 @@ $(function(){
      * CUSTOM CONTEXT MENU
      * @param {String} bindTo selector to bind the context menu to.
      * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($selectedLi){...}, anotherItemName: function($selectedLi){...} }.  The first arg in the functions is the selected menu item
-     */
-    function createCustomContextMenu(bindTo, menuItems){
+     * @param {Element|Selector} alternateTrigger when clicked, triggers contextmenu event on bindTo
+    */
+    function createCustomContextMenu(bindTo, menuItems, alternateTrigger){
+        const $altTrigger = $(alternateTrigger)
         //Create context menu
         const $customMenu = $(`<ul class='custom-menu'></ul>`)
         for (const itemName in menuItems){
@@ -1244,19 +1248,17 @@ $(function(){
                 .appendTo($customMenu)
         }
 
-        // Trigger action when the context menu is about to be shown
-        $(bindTo).bind("contextmenu", function (event) {
-            // Avoid the real one
-            event.preventDefault()
-
-            // Show contextmenu
+        // Prevent default context menu and show ours instead
+        $(bindTo).bind("contextmenu", function (e) {
+            e.preventDefault()
             $customMenu.appendTo('body').finish().toggle(100)
                 .css({
                     top: event.pageY + "px",
                     left: event.pageX + "px"
                 })
-                .data('target', $(event.target)) //use jquery data() method to save the triggering bkmk to the ul
+                .data('target',$(e.target))
         })
+        if ($altTrigger) $altTrigger.click(()=> $(bindTo).trigger('contextmenu'))
 
         // If the document is clicked somewhere
         $(document).bind("mousedown", function (e) {
