@@ -948,6 +948,12 @@ $(function(){
         const $contextMenuTrigger = $bkmkEl.find('.contextMenuTrigger')
 
         const contextMenuMenuItems = {
+            "Rename":function($selectedLi){
+                
+            },
+            "Download Score Data":function($selectedLi){
+
+            },
             "Delete": function($selectedLi){  
                 $selectedLi.remove()
             }
