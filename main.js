@@ -631,6 +631,75 @@ $(function(){
     })
 
     /**
+     * INITIALIZE DIALOG
+     */
+    //default options
+    const header_height = $('#top_bar').height()
+    const dialogTop = header_height + 10
+    $('#dialog').dialog({
+        autoOpen: false,
+        position:{
+            my:'center top',
+            at:'center top+'+dialogTop+'px',
+            of: window
+        },
+        modal:true,
+        buttons: [
+            {
+              text: "Ok",
+              click: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+        ],
+        resizable: false,
+        //hide the close button and disable close on escape
+        //  all dialogs have an ok button by default that closes the dialog
+        closeOnEscape: false,
+        open: function(e, ui) {
+            $(".ui-dialog-titlebar-close").hide();
+        }
+    })
+
+
+    const openDialogOptsDefault = {
+        addClass: 'myDialog',               //any custom classes to add to dialog
+        title: 'Staff To Stand',            //heading of the dialog
+        titleIcon: 'exclamation',           //ex: flag, exclamation
+        buttons: [{                         //array of jqui button objs
+            text: 'OK',
+            click: function(){ $(this).dialog('close') }
+        }],
+        modal: true,                        //whether the dialog should be a modal
+        fixedPos: true                      //whether dialog should be fixed
+    }
+    /**
+     * OPEN DIALOG
+     * @param {String} html the html (content) of the dialog
+     * @param {Object} opts addClass (string as 'classA classB etc')(alert,warn), title (string), titleIcon (FA icon name), buttons (array of jqui button objs), modal (def true), fixedPos (def true)
+     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
+     */
+    function openDialog(html, opts){
+        opts = {...openDialogOptsDefault, ...opts}
+
+        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
+
+        $('#dialog')
+            .dialog('option','title',opts.title)
+            .html(html)
+            .dialog('option','buttons',opts.buttons)
+            .dialog('option','modal',opts.modal)
+            .dialog('option','classes.ui-dialog',addClasses)
+            .on( "dialogopen", function( event, ui ) {
+                //add titleIcon if it doesn't already exist
+                const $dialogWidget = $(this).dialog('widget')
+                const hasTitleIcon = $dialogWidget.find('[data-fa-i2svg]').length > 0
+                if (!hasTitleIcon) $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
+            } )
+            .dialog('open')
+    }
+
+    /**
      * TOP BAR
      */
     //PAGE SIZE SLIDER
@@ -874,75 +943,6 @@ $(function(){
         cursor: 'move'
     })
 
-
-    /**
-     * INITIALIZE DIALOG
-     */
-    //default options
-    const header_height = $('#top_bar').height()
-    const dialogTop = header_height + 10
-    $('#dialog').dialog({
-        autoOpen: false,
-        position:{
-            my:'center top',
-            at:'center top+'+dialogTop+'px',
-            of: window
-        },
-        modal:true,
-        buttons: [
-            {
-              text: "Ok",
-              click: function() {
-                $( this ).dialog( "close" );
-              }
-            }
-        ],
-        resizable: false,
-        //hide the close button and disable close on escape
-        //  all dialogs have an ok button by default that closes the dialog
-        closeOnEscape: false,
-        open: function(e, ui) {
-            $(".ui-dialog-titlebar-close").hide();
-        }
-    })
-
-
-    const openDialogOptsDefault = {
-        addClass: 'myDialog',               //any custom classes to add to dialog
-        title: 'Staff To Stand',            //heading of the dialog
-        titleIcon: 'exclamation',           //ex: flag, exclamation
-        buttons: [{                         //array of jqui button objs
-            text: 'OK',
-            click: function(){ $(this).dialog('close') }
-        }],
-        modal: true,                        //whether the dialog should be a modal
-        fixedPos: true                      //whether dialog should be fixed
-    }
-    /**
-     * OPEN DIALOG
-     * @param {String} html the html (content) of the dialog
-     * @param {Object} opts addClass (string as 'classA classB etc')(alert,warn), title (string), titleIcon (FA icon name), buttons (array of jqui button objs), modal (def true), fixedPos (def true)
-     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
-     */
-    function openDialog(html, opts){
-        opts = {...openDialogOptsDefault, ...opts}
-
-        const addClasses = opts.addClass + (opts.fixedPos?' fixed-dialog':'')
-
-        $('#dialog')
-            .dialog('option','title',opts.title)
-            .html(html)
-            .dialog('option','buttons',opts.buttons)
-            .dialog('option','modal',opts.modal)
-            .dialog('option','classes.ui-dialog',addClasses)
-            .on( "dialogopen", function( event, ui ) {
-                //add titleIcon if it doesn't already exist
-                const $dialogWidget = $(this).dialog('widget')
-                const hasTitleIcon = $dialogWidget.find('[data-fa-i2svg]').length > 0
-                if (!hasTitleIcon) $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
-            } )
-            .dialog('open')
-    }
 
     /**
      * UNSAVED CHANGES
