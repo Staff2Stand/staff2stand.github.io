@@ -736,7 +736,7 @@ $(function(){
                                     </span>`)
     const $newScore = $(`<span id="newScore" title="New Score">${newScoreSVG}</span>`)
     
-    $downloadMyScores.click(downloadMyScoresData())
+    $downloadMyScores.click(downloadMyScoresData)
     //( load scores is handled below in LOAD SCORE(S) )
     $newScore.click(()=>{
         checkForUnsavedChanges(()=>{
@@ -748,6 +748,7 @@ $(function(){
     })
 
     $myScoresUtils.append($newScore, $downloadMyScores, $loadScoresContainer).prependTo('#myScores')
+    $('#newScores').after('#myScores h1') //move the "My Scores" text into the utils div
     
 
     /**

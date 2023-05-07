@@ -189,7 +189,7 @@ header {
 
 /* MY SCORES */
 /* if my scores is empty */
-#myScores:not(:has(li)) h1:after {
+#myScores:not(:has(li)):after {
   content: 'Your saved scores will appear here.';
   display: block;
   font-weight: normal;
@@ -226,8 +226,7 @@ header {
   left: 0;
   fill: #ccc;
   gap: 4px;
-  width: calc(100% - 8px);
-  padding: 4px;
+  width: 100%;
 }
 #myScoresUtils span {
   width: 1em;
@@ -247,6 +246,10 @@ input#loadScores {
 }
 #newScore{
   margin-right: auto;
+}
+
+#myScoresUtils h1 {
+  padding: 0;
 }
 
 /* CUSTOM MENU */
