@@ -482,17 +482,6 @@ $(function(){
     $('#highlights_toggle').click(function(){
         $('#main_container').toggleClass('highlight_notes')
     })
-    //new score
-    $("#new_score").click(function () {
-        checkForUnsavedChanges(()=>newScore())
-
-        function newScore(){
-            $('.abcEditor').each((i,editor) => $(editor).val('').change())
-            $('.extra_html').html('')
-            $(".score_bookmark.active").removeClass("active")
-            setAllNotDirty()
-        }
-    })
     //toggle editors (Edit Button)
     $('#show_editors').click(function(){
         //show all hidden parts
@@ -662,37 +651,41 @@ $(function(){
 
 
     /**
-     * SAVE CURRENT
-     * save the current value of the abc editors as an object as json
+     * MY SCORES UTILS
      */
-    $('#saveCurrent').click(()=>{
-        //get the abcstring for each instrument
-        const contentsObj = {}
-        instruments.forEach(function(instrument){
-            contentsObj['abc-'+instrument] = escapeABC($('#editor-'+instrument).val())
+    const downloadSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`
+    const uploadSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>`
+    const newScoreSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 64C0 28.7 28.7 0 64 0H224V128c0 17.7 14.3 32 32 32H384V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0L384 128z"/></svg>`
+
+    const $myScoresUtils = $(`<div id="myScoresUtils"></div>`)
+    const $downloadMyScores = $(`<span id="downloadMyScores" title="Download My Scores Data">${downloadSVG}</span>`)
+    const $loadScoresContainer = $(`<span id="loadScoresContainer" title="Load Score(s)">
+                                        <label for="loadScores">
+                                            <input id="loadScores" type="file" accept=".s2s">
+                                            ${uploadSVG}
+                                        </label>
+                                    </span>`)
+    const $newScore = $(`<span id="newScore" title="New Score">${newScoreSVG}</span>`)
+    
+    $downloadMyScores.click(downloadMyScoresData())
+    //( load scores is handled below in LOAD SCORE(S) )
+    $newScore.click(()=>{
+        checkForUnsavedChanges(()=>{
+            $('.abcEditor').each((i,editor) => $(editor).val('').change())
+            $('.extra_html').html('')
+            $(".score_bookmark.active").removeClass("active")
+            setAllNotDirty()
         })
-
-        //ask user for a filename
-        const filename = $('#fileName').val() || 'MyScore'
-        contentsObj['_title'] = filename
-
-        const contentsArray = [contentsObj]
-
-        const contents = JSON.stringify(contentsArray)
-        saveFile(filename,contents)
-
-        //create score bkmk in my scores
-        const bkmkAlreadyExists = $('#myScores').find(`[_title="${filename}"]`).length
-        if (bkmkAlreadyExists) return
-        createMyScoreBkmk(contentsObj)
-
     })
 
+    $myScoresUtils.append($downloadMyScores, $loadScoresContainer, $newScore).prependTo('#myScores')
+    
+
     /**
-     * SAVE ALL
-     * save all the scores in the My Scores section
+     * DOWNLOAD MY SCORES DATA
+     * download all the scores in the My Scores section
      */
-    $('#saveAll').click(()=>{
+    function downloadMyScoresData(){
         const $myScores = $('#myScores li.score_bookmark')
 
         if ($myScores.length === 0) {
@@ -719,12 +712,12 @@ $(function(){
             contentsArray.push(contentsObj)
         })
 
-        const filename = $('#fileName').val() || 'MyScores'
+        const filename = 'Staff-To-Stand-MyScores'
 
-        //stringify and save
+        //stringify and download
         const contents = JSON.stringify(contentsArray)
-        saveFile(filename,contents)
-    })
+        downloadScoreData(filename,contents)
+    }
 
     /**
      * LOAD SCORE(S)
@@ -734,7 +727,7 @@ $(function(){
     //FILE INPUT LOAD
     // when the file has finished reading
     fileReader.onload = function( ev ) {
-        //validate the file extension
+        //(validate the file extension)
 
         //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
@@ -764,7 +757,7 @@ $(function(){
         }
     }
 
-    // FILE INPUT CHANGE
+    // LOAD SCORES FILE INPUT CHANGE
     //when the file input changes (ie: user selects a file)
     $('#loadScores').on("change", function() {
         // get the file item from the input field
@@ -789,10 +782,10 @@ $(function(){
         fileReader.readAsText( file )// then then the fileReader's load event will trigger (see above)
 
         //reset the file input's value so that the user can upload the same file twice in a row if wanted
-        $('loadScores').val('')
+        $('#loadScores').val('')
     })
 
-    // FILE INPUT CLICK
+    // LOAD SCORES FILE INPUT CLICK
     //if there are unsaved changes, prompt user asking if its okay to continue
     $('#loadScores').on('click',function(e){
         if ( $('#loadScores').hasClass('disabled') ){
@@ -809,6 +802,30 @@ $(function(){
             })
         }
     })
+
+
+    /**
+     * DOWNLOAD SCORE DATA
+     * @param {string} filename
+     * @param {JSON} stringified_contents
+     */
+    function downloadScoreData(filename,stringified_contents){
+        // create a link DOM fragment
+        var $link = $("<a />");
+        // encode any special characters in the JSON
+        var text = encodeURIComponent( stringified_contents );
+        //create link and click to initiate download
+        $link
+            .attr( "download", filename+".s2s" )
+            .attr( "href", "data:application/octet-stream," + text )
+            .appendTo( "body" )
+            .get(0)
+            .click()
+
+        console.log('||S2S||  FILE SAVED',filename)
+        //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
+        console.log('||S2S||  ',stringified_contents.substring(1,stringified_contents.length-1))
+    }
 
 
     /**
@@ -1075,31 +1092,6 @@ $(function(){
         }
     });
 
-    /**
-     * SAVE
-     * @param {string} filename
-     * @param {JSON} stringified_contents
-     */
-    function saveFile(filename,stringified_contents){
-        // create a link DOM fragment
-        var $link = $("<a />");
-        // encode any special characters in the JSON
-        var text = encodeURIComponent( stringified_contents );
-        //create link and click to initiate download
-        $link
-            .attr( "download", filename+".s2s" )
-            .attr( "href", "data:application/octet-stream," + text )
-            .appendTo( "body" )
-            .get(0)
-            .click()
-
-        console.log('||S2S||  FILE SAVED',filename)
-        //log the stringified object without the opening and closing brackets, for easier copy-pasting to master json file
-        console.log(stringified_contents.substring(1,stringified_contents.length-1))
-
-        setAllNotDirty()
-    }
-
 
     /**
      * RENDER SCORE FROM BOOKMARK
@@ -1190,6 +1182,7 @@ $(function(){
      * MAKE NOTEY DRAGGABLE
      */
     $('#notey .notey').draggable()
+
 
     /**
      * ESCAPE AND UNESCAPE ABC STRINGS

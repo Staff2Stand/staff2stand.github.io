@@ -55,41 +55,6 @@ header {
   display: flex;
   justify-content: space-between;
 }
-#header_buttons span{
-  cursor: pointer;
-  outline: 2px solid;
-  border-radius: 4px;
-  padding: 4px 6px;
-  margin: 0 10px;
-  transition: all 50ms;
-}
-#header_buttons span:hover{
-  outline: 4px solid;
-}
-#loadScores{
-  width: 0;
-}
-#loadScoresContainer label{
-  cursor: pointer;
-}
-
-#fileName{
-  width: 150px;
-  background: none;
-  border: none;
-  border-bottom: 2px dashed;
-  color: #fff;
-}
-#fileName::placeholder{
-  color: #aaa
-}
-#fileName:focus {
-  outline: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid;
-}
 
 #header_buttons_toggle{
   display: none;
@@ -253,6 +218,32 @@ header {
   margin-right: 6px;
 }
 
+/* my score utils */
+#myScoresUtils {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #ccc;
+  gap: 4px;
+}
+#myScoresUtils span {
+  width: 1em;
+  cursor: pointer;
+}
+#myScoresUtils span:hover{
+  fill: #fff;
+}
+#loadScoresContainer label {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+input#loadScores {
+  width: 0;
+  position: absolute;
+}
+
 /* CUSTOM MENU */
 .custom-menu {
   display: none;
@@ -359,14 +350,6 @@ header {
 #printMenu span:hover {
   cursor: pointer;
   color: #fff;
-}
-
-/* new scores */
-#sidebar_buttons #new_score {
-  color: #ff8100;
-}
-#sidebar_buttons #new_score:hover {
-  color: #ffa54a;
 }
 
 /* fingerings toggle */
