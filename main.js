@@ -678,7 +678,7 @@ $(function(){
         })
     })
 
-    $myScoresUtils.append($downloadMyScores, $loadScoresContainer, $newScore).prependTo('#myScores')
+    $myScoresUtils.append($newScore, $downloadMyScores, $loadScoresContainer).prependTo('#myScores')
     
 
     /**
