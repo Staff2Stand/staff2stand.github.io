@@ -721,6 +721,7 @@ $(function(){
 
     /**
      * MY SCORES UTILS
+     * new score, load score, download my scores
      */
     const downloadSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>`
     const uploadSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"/></svg>`
@@ -738,19 +739,34 @@ $(function(){
     
     //Download Scores button
     $downloadMyScores.click(downloadMyScoresData)
+
     //( load scores button is handled below in LOAD SCORE(S) )
+    
     //New Score button
-    $newScore.click(()=>{//new score
+    $newScore.click(()=>{
         checkForUnsavedChanges(()=>{
-            $('.abcEditor').each((i,editor) => $(editor).val('').change())
-            $('.extra_html').html('')
-            $(".score_bookmark.active").removeClass("active")
-            setAllNotDirty()
+            const scoreData = {'_title':'My New Score'}
+            instruments.forEach(instrument=>{
+                const abc = `X:1
+                T: My New Score
+                C: You or Someone Else, Arranged by You or Someone Else
+                M: 4/4
+                L: 1/8
+                K: C
+                V: ${voiceFieldReference[instrument]}
+                C2 z2 C2 CC | D4 D3 D | Z | Z3 ||
+                EE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]`
+                
+                scoreData[instrument] = escapeABC(abc)
+            })
+            const $newBkmk = createMyScoreBkmk(scoreData)
+            $newBkmk.click()
+            $('#show_editors').click()
         })
     })
 
     $myScoresUtils.append($newScore, $downloadMyScores, $loadScoresContainer).prependTo('#myScores')
-    $('#newScore').after('#myScores h1') //move the "My Scores" text into the utils div
+    $('#newScore').after($('#myScores h1')) //move the "My Scores" text into the utils div
     
 
     /**
@@ -935,6 +951,8 @@ $(function(){
             }
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
+
+        return $bkmkEl
     }
 
     /**
