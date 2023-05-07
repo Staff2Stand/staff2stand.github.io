@@ -221,9 +221,6 @@ header {
 /* my score utils */
 #myScoresUtils {
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
   fill: #ccc;
   gap: 4px;
   width: 100%;

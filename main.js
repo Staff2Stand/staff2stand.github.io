@@ -748,7 +748,7 @@ $(function(){
     })
 
     $myScoresUtils.append($newScore, $downloadMyScores, $loadScoresContainer).prependTo('#myScores')
-    $('#newScores').after('#myScores h1') //move the "My Scores" text into the utils div
+    $('#newScore').after('#myScores h1') //move the "My Scores" text into the utils div
     
 
     /**
