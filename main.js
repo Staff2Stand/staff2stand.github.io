@@ -971,7 +971,7 @@ $(function(){
             "Rename":function($selectedLi){
                 
             },
-            "Download Score Data": $selectedLi => processScoreData($selectedLi),
+            "Download_Score_Data": $selectedLi => processScoreData($selectedLi),
             "Delete": $selectedLi => $selectedLi.remove()
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
