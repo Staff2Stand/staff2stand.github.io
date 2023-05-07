@@ -210,6 +210,12 @@ header {
   width: 5px;
   padding: 0 6px;
 }
+.bkmkUtils .contextMenuTrigger:hover{
+  fill: #fff;
+}
+.bkmkUtils .dragHandleCourtesy{
+  cursor: move;
+}
 .bkmkUtils :is(.dragHandleCourtesy, .saving, .saved) {
   width: 18px;
 }

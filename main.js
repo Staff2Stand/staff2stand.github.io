@@ -747,15 +747,17 @@ $(function(){
         checkForUnsavedChanges(()=>{
             const scoreData = {'_title':'My New Score'}
             instruments.forEach(instrument=>{
-                const abc = `X:1
-                T: My New Score
-                C: You or Someone Else, Arranged by You or Someone Else
-                M: 4/4
-                L: 1/8
-                K: C
-                V: ${voiceFieldReference[instrument]}
-                C2 z2 C2 CC | D4 D3 D | Z | Z3 ||
-                EE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]`
+                const abc = [
+                    `X:1`,
+                    `T: My New Score`,
+                    `C: You or Someone Else, Arranged by You or Someone Else`,
+                    `M: 4/4`,
+                    `L: 1/8`,
+                    `K: C`,
+                    `V: ${voiceFieldReference[instrument]}`,
+                    `C2 z2 C2 CC | D4 D3 D | Z | Z3 ||`,
+                    `EE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]`
+                ].join('\n')
                 
                 scoreData[`abc-${instrument}`] = escapeABC(abc)
             })
