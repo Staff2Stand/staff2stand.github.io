@@ -736,9 +736,11 @@ $(function(){
                                     </span>`)
     const $newScore = $(`<span id="newScore" title="New Score">${newScoreSVG}</span>`)
     
+    //Download Scores button
     $downloadMyScores.click(downloadMyScoresData)
-    //( load scores is handled below in LOAD SCORE(S) )
-    $newScore.click(()=>{
+    //( load scores button is handled below in LOAD SCORE(S) )
+    //New Score button
+    $newScore.click(()=>{//new score
         checkForUnsavedChanges(()=>{
             $('.abcEditor').each((i,editor) => $(editor).val('').change())
             $('.extra_html').html('')
@@ -761,7 +763,7 @@ $(function(){
         if ($myScores.length === 0) {
             console.warn('||S2S||  my scores section is empty')
             openDialog(
-                'Click the "Save" button to save the current score to the My Scores section.',
+                'You have no scores in the My Scores section. Click the New Score Button or load your Scores.',
                 {
                     addClass: 'warn',
                     title: 'My Scores Section is Empty',
