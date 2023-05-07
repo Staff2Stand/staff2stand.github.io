@@ -917,6 +917,26 @@ $(function(){
         console.log('||S2S||  ',stringified_contents.substring(1,stringified_contents.length-1))
     }
 
+    /**
+     * Process Score Data For Download
+     * @param {Element} $bkmk 
+     */
+    function processScoreData($bkmk){
+        $bkmk = $($bkmk)
+        //get the abcstring for each instrument
+        const contentsObj = {}
+        instruments.forEach(function(instrument){
+            const abc = $bkmk.attr('abc-'+instrument)
+            contentsObj['abc-'+instrument] = escapeABC(abc)
+        })
+        contentsObj['_title'] = $bkmk.attr('_title')
+        const filename = $bkmk.attr('_title')
+
+        const contentsArray = [contentsObj]
+        const contents = JSON.stringify(contentsArray)
+        downloadScoreData(filename,contents)
+    }
+
 
     /**
      * CREATE BOOKMARK IN MY SCORES
@@ -951,12 +971,8 @@ $(function(){
             "Rename":function($selectedLi){
                 
             },
-            "Download Score Data":function($selectedLi){
-
-            },
-            "Delete": function($selectedLi){  
-                $selectedLi.remove()
-            }
+            "Download Score Data": $selectedLi => processScoreData($selectedLi),
+            "Delete": $selectedLi => $selectedLi.remove()
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
 
