@@ -741,7 +741,7 @@ $(function(){
     $downloadMyScores.click(downloadMyScoresData)
 
     //( load scores button is handled below in LOAD SCORE(S) )
-    
+
     //New Score button
     $newScore.click(()=>{
         checkForUnsavedChanges(()=>{
@@ -757,7 +757,7 @@ $(function(){
                 C2 z2 C2 CC | D4 D3 D | Z | Z3 ||
                 EE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]`
                 
-                scoreData[instrument] = escapeABC(abc)
+                scoreData[`abc-${instrument}`] = escapeABC(abc)
             })
             const $newBkmk = createMyScoreBkmk(scoreData)
             $newBkmk.click()
