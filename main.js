@@ -786,8 +786,10 @@ $(function(){
         }
 
         // read the file as text
-        fileReader.readAsText( file )
-        // and then then the fileReader's load event will trigger (see above)
+        fileReader.readAsText( file )// then then the fileReader's load event will trigger (see above)
+
+        //reset the file input's value so that the user can upload the same file twice in a row if wanted
+        $('loadScores').val('')
     })
 
     // FILE INPUT CLICK
