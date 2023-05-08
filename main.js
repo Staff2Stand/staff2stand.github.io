@@ -677,7 +677,6 @@ $(function(){
      * OPEN DIALOG
      * @param {String} html the html (content) of the dialog
      * @param {Object} opts addClass (string as 'classA classB etc')(alert,warn), title (string), titleIcon (FA icon name), buttons (array of jqui button objs), modal (def true), fixedPos (def true)
-     * @param {...Function} buttonFunctions an array of functions to call on dialog buttons (must be in same order as buttons array in opts)
      */
     function openDialog(html, opts){
         opts = {...openDialogOptsDefault, ...opts}
@@ -968,7 +967,43 @@ $(function(){
         const $contextMenuTrigger = $bkmkEl.find('.contextMenuTrigger')
 
         const contextMenuMenuItems = {
-            "Rename":function($selectedLi){  },
+            "Rename":function($selectedLi){ 
+                openDialog(
+                    `<p>Note: This won't change the "T:" field in the abc notation.</p>
+                     <div><input type="text" id="bkmkRenameInput" style="width:80%;"></div>`,
+                    {
+                        title:'Rename Score',
+                        buttons: [
+                            {
+                                text: 'Cancel',
+                                click: function(){
+                                    $(this).dialog('close')
+                                }
+                            },
+                            {
+                                text: 'OK',
+                                click: function(){
+                                    $(this).dialog('close')
+                                    const newTitle = $('#bkmkRenameInput').val()
+                                    $selectedLi.attr('_title',newTitle)
+                                }
+                            }
+                        ]
+                    }
+                )
+
+                //
+                $selectedLi.one('click',(e)=>{
+                    $selectedLi.on('keypress',(e)=>{
+                        if (![13,27].includes(e.keyCode)) return //13=ENTER  27=ESCAPE
+                        
+                        $selectedLi.contentEditable = false
+                        const newTitle = $selectedLi.text()
+                        $selectedLi.attr('_title', newTitle)
+                    })
+                })
+                //
+             },
             "Download Score Data": function($selectedLi) { processScoreData($selectedLi) },
             "Delete": function($selectedLi) { $selectedLi.remove() }
         }
