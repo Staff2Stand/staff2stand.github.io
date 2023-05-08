@@ -398,27 +398,27 @@ $(function(){
 
         const $section = $(`<ul class="score_bookmark_section" id="${id}"></ul>`)
         const $heading = $(`<h1>${heading}</h1>`)
-        const $li = $(`<li class="bookmark_section"></li>`)
+        $section.append($heading)
 
         sectionData.bookmarks.forEach(bkmkData=>{
+            const $li = $(`<li class="bookmark_section"></li>`)
             for (const prop in bkmkData){
                 const abc = escapeABC(bkmkData[prop])
                 $li.attr(prop,abc)
+                createCustomContextMenu($li, {
+                    "Copy To My Scores":function($selectedLi){
+                        const scoreData = (function(){
+                            const temp = {'_title':$selectedLi.attr('_title')}
+                            instruments.forEach(instrument=> 
+                                temp[`abc-${instrument}`] = $selectedLi.attr(`abc-${instrument}`))
+                            return temp
+                        })()
+                        createMyScoreBkmk(scoreData)
+                    },
+                    "Download Score Data":function($selectedLi){ processScoreData($selectedLi) }
+                })
             }
-        })
-
-        $section.append($heading, $li)
-        createCustomContextMenu($section, {
-            "Copy To My Scores":function($selectedLi){
-                const scoreData = (function(){
-                    const temp = {'_title':$selectedLi.attr('_title')}
-                    instruments.forEach(instrument=> 
-                        temp[`abc-${instrument}`] = $selectedLi.attr(`abc-${instrument}`))
-                    return temp
-                })()
-                createMyScoreBkmk(scoreData)
-            },
-            "Download Score Data":function($selectedLi){ processScoreData($selectedLi) }
+            $section.append($li)
         })
 
         //append this section to the sidebar
