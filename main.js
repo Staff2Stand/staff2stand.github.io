@@ -926,7 +926,7 @@ $(function(){
         //get the abcstring for each instrument
         const contentsObj = {}
         instruments.forEach(function(instrument){
-            const abc = $bkmk.attr('abc-'+instrument)
+            const abc = $bkmk.attr('abc-'+instrument) || ''
             contentsObj['abc-'+instrument] = escapeABC(abc)
         })
         contentsObj['_title'] = $bkmk.attr('_title')
