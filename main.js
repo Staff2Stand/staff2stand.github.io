@@ -968,11 +968,9 @@ $(function(){
         const $contextMenuTrigger = $bkmkEl.find('.contextMenuTrigger')
 
         const contextMenuMenuItems = {
-            "Rename":function($selectedLi){
-                
-            },
-            "Download_Score_Data": $selectedLi => processScoreData($selectedLi),
-            "Delete": $selectedLi => $selectedLi.remove()
+            "Rename":function($selectedLi){  },
+            "Download_Score_Data": function($selectedLi) { processScoreData($selectedLi) },
+            "Delete": function($selectedLi) { $selectedLi.remove() }
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
 
