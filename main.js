@@ -392,26 +392,25 @@ $(function(){
     const scoreData = JSON.parse(S2S.scoreData)
     console.log('||S2S||  SCORE BOOKMARKS DATA',scoreData)
     //Load Bookmarks From Json File and append each bookmark to the sidebar
-    scoreData.forEach(section=>{
-        const heading = section.heading
-        const id = section.id || ''
+    scoreData.forEach(sectionData=>{
+        const heading = sectionData.heading
+        const id = sectionData.id || ''
 
-        let html = `<ul class="score_bookmark_section" id="${id}">`
-        html += `<h1>${heading}</h1>`
-        //each bookmark is an li
-        section.bookmarks.forEach(bkmk=>{
-            html += '<li class="score_bookmark"'
-            //each bookmark gets attributes ...  key = value
-            for (const prop in bkmk) {
-                const abcHtmlString = escapeABC(bkmk[prop])
-                html += ` ${prop}="${abcHtmlString}"`
+        const $section = $(`<ul class="score_bookmark_section" id="${id}"></ul>`)
+        const $heading = $(`<h1>${heading}</h1>`)
+        const $li = $(`<li class="bookmark_section"></li>`)
+
+        sectionData.bookmarks.forEach(bkmkData=>{
+            for (const prop in bkmkData){
+                const abc = escapeABC(bkmkData[prop])
+                $li.attr(prop,abc)
             }
-            html += '</li>'
         })
-        html += '</ul>'
+
+        $section.append($heading, $li)
 
         //append this section to the sidebar
-        $('#sidebar').append(html)
+        $('#sidebar').append($section)
     })
 
 
