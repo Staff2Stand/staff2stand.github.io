@@ -408,6 +408,18 @@ $(function(){
         })
 
         $section.append($heading, $li)
+        createCustomContextMenu($section, {
+            "Copy To My Scores":function($selectedLi){
+                const scoreData = (function(){
+                    const temp = {'_title':$selectedLi.attr('_title')}
+                    instruments.forEach(instrument=> 
+                        temp[`abc-${instrument}`] = $selectedLi.attr(`abc-${instrument}`))
+                    return temp
+                })()
+                createMyScoreBkmk(scoreData)
+            },
+            "Download Score Data":function($selectedLi){ processScoreData($selectedLi) }
+        })
 
         //append this section to the sidebar
         $('#sidebar').append($section)
