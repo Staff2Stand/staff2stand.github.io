@@ -1273,8 +1273,7 @@ $(function(){
         //Create context menu
         const $customMenu = $(`<ul class='custom-menu'></ul>`)
         for (const itemName in menuItems){
-            const itemNameSpacified = itemName.replace('_',' ')
-            const $item = $(`<li>${itemNameSpacified}</li>`)
+            const $item = $(`<li>${itemName}</li>`)
             $item
                 .click(function(){
                     const $menuTarget = $( $customMenu.data('target') )
