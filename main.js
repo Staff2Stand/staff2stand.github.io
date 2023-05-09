@@ -443,9 +443,6 @@ $(function(){
     $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
 
-        const clicked_contextMenu_altTrigger = $(e.target).closest('.contextMenuTrigger').length
-        if (clicked_contextMenu_altTrigger) return
-
         //if they clicked (not shift-click) the same score, return
         const scoreAlreadyLoaded = $bkmk.hasClass('active')
         if (!e.shiftKey && scoreAlreadyLoaded) return
