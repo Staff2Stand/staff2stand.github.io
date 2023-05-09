@@ -1311,7 +1311,7 @@ $(function(){
             $item
                 .click(function(){
                     const $menuTarget = $( $customMenu.data('target') )
-                    console.log(`Calling ${menuItems[itemName]}() on:`,$menuTarget)
+                    console.log(`Calling ${itemName}() on:`,$menuTarget)
                     //execute the function from the menuitems object arg
                     menuItems[itemName]($menuTarget)
                     // Hide and remove the context menu
