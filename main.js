@@ -401,7 +401,7 @@ $(function(){
         $section.append($heading)
 
         sectionData.bookmarks.forEach(bkmkData=>{
-            const $li = $(`<li class="bookmark_section"></li>`)
+            const $li = $(`<li class="score_bookmark"></li>`)
             for (const prop in bkmkData){
                 const abc = escapeABC(bkmkData[prop])
                 $li.attr(prop,abc)
