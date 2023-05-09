@@ -1359,6 +1359,7 @@ $(function(){
         
         if ($altTrigger) $altTrigger.click(e=>{
             e.preventDefault()
+            e.stopPropagation()
             $(bindTo).trigger('contextmenu')
         })
 
