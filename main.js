@@ -1335,8 +1335,8 @@ $(function(){
                     .appendTo($customMenu)
             }
 
-            console.log('toggling context menu')
-            $customMenu.finish().toggle(100)
+            console.log('showing context menu')
+            $customMenu.hide().finish().show(100)
                 .css({
                     top: event.pageY + "px",
                     left: event.pageX + "px"
