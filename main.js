@@ -392,7 +392,6 @@ $(function(){
     /**
      * SCORE BOOKMARKS
      */
-
     //READ SCORE DATA JSON from window.scoreData (see scoreData.js)
     const scoreData = JSON.parse(S2S.scoreData)
     console.log('||S2S||  SCORE BOOKMARKS DATA',scoreData)
@@ -411,18 +410,27 @@ $(function(){
                 const abc = escapeABC(bkmkData[prop])
                 $li.attr(prop,abc)
             }
-            createCustomContextMenu($li, {
-                "Copy To My Scores":function($targetBkmkLi){
-                    const scoreData = (function(){
-                        const temp = {'_title':$targetBkmkLi.attr('_title')}
-                        instruments.forEach(instrument=> 
-                            temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
-                        return temp
-                    })()
-                    createMyScoreBkmk(scoreData)
+            const faVEllipse = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/></svg>`
+            const $vEllipse = $(`<span class="contextMenuTrigger">${faVEllipse}</span>`)
+            const $bkmkUtils = $(`<ul class="bkmkUtils"></ul>`).append($vEllipse)
+            $li.append($bkmkUtils)
+
+            createCustomContextMenu(
+                $li, 
+                {
+                    "Copy To My Scores":function($targetBkmkLi){
+                        const scoreData = (function(){
+                            const temp = {'_title':$targetBkmkLi.attr('_title')}
+                            instruments.forEach(instrument=> 
+                                temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
+                            return temp
+                        })()
+                        createMyScoreBkmk(scoreData)
+                    },
+                    "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) }
                 },
-                "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) }
-            })
+                $vEllipse
+            )
             $section.append($li)
         })
 
