@@ -1261,7 +1261,7 @@ $(function(){
 
         //hide custom context menu
         const clickedMenu = $target.closest(".custom-menu").length
-        if (!clickedMenu) console.log('toggling context menu')
+        if (!clickedMenu) console.log('hiding context menu')
         if (!clickedMenu) $customMenu.hide(100)
     })
 
