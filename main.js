@@ -57,6 +57,10 @@ const stringReference = {
     }
 }
 
+//DEFINE CUSTOM MENU ELEMENT
+const $customMenu = $(`<ul class='custom-menu'></ul>`)
+
+//ON PAGE LOAD
 $(function(){
     /**
      * CHECK S2S GLOBAL OBJ
@@ -1302,10 +1306,9 @@ $(function(){
      * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($targetBkmkLi){...}, anotherItemName: function($targetBkmkLi){...} }.  The first arg in the functions is the selected menu item
      * @param {Element|Selector} alternateTrigger when clicked, triggers contextmenu event on bindTo
     */
-    const $customMenu = $(`<ul class='custom-menu'></ul>`)
     function createCustomContextMenu(bindTo, menuItems, alternateTrigger){
         const $altTrigger = $(alternateTrigger)
-
+        //$customMenu is defined at beginning
         $customMenu.html('')
         for (const itemName in menuItems){
             const $item = $(`<li>${itemName}</li>`)
