@@ -269,8 +269,10 @@ input#loadScores {
   font-family: sans-serif;
   background: #FFF;
   color: #333;
-  border-radius: 5px;
+  border-radius: 0 5px;
   padding: 0;
+  margin: 0;
+  filter: drop-shadow(2px 2px 2px #333);
 }
 .custom-menu li {
   padding: 8px 12px;
