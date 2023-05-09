@@ -407,16 +407,16 @@ $(function(){
                 $li.attr(prop,abc)
             }
             createCustomContextMenu($li, {
-                "Copy To My Scores":function($selectedLi){
+                "Copy To My Scores":function($targetBkmkLi){
                     const scoreData = (function(){
-                        const temp = {'_title':$selectedLi.attr('_title')}
+                        const temp = {'_title':$targetBkmkLi.attr('_title')}
                         instruments.forEach(instrument=> 
-                            temp[`abc-${instrument}`] = $selectedLi.attr(`abc-${instrument}`))
+                            temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
                         return temp
                     })()
                     createMyScoreBkmk(scoreData)
                 },
-                "Download Score Data":function($selectedLi){ processScoreData($selectedLi) }
+                "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) }
             })
             $section.append($li)
         })
@@ -978,7 +978,7 @@ $(function(){
         const $contextMenuTrigger = $bkmkEl.find('.contextMenuTrigger')
 
         const contextMenuMenuItems = {
-            "Rename":function($selectedLi){ 
+            "Rename":function($targetBkmkLi){ 
                 openDialog(
                     `<p>Note: This won't change the "T:" field in the abc notation.</p>
                      <div><input type="text" id="bkmkRenameInput" style="width:80%;"></div>`,
@@ -996,15 +996,15 @@ $(function(){
                                 click: function(){
                                     $(this).dialog('close')
                                     const newTitle = $('#bkmkRenameInput').val()
-                                    $selectedLi.attr('_title',newTitle)
+                                    $targetBkmkLi.attr('_title',newTitle)
                                 }
                             }
                         ]
                     }
                 )
             },
-            "Download Score Data": function($selectedLi) { processScoreData($selectedLi) },
-            "Delete": function($selectedLi) { $selectedLi.remove() }
+            "Download Score Data": function($targetBkmkLi) { processScoreData($targetBkmkLi) },
+            "Delete": function($targetBkmkLi) { $targetBkmkLi.remove() }
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
 
@@ -1299,31 +1299,32 @@ $(function(){
     /**
      * CUSTOM CONTEXT MENU
      * @param {String} bindTo selector to bind the context menu to.
-     * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($selectedLi){...}, anotherItemName: function($selectedLi){...} }.  The first arg in the functions is the selected menu item
+     * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($targetBkmkLi){...}, anotherItemName: function($targetBkmkLi){...} }.  The first arg in the functions is the selected menu item
      * @param {Element|Selector} alternateTrigger when clicked, triggers contextmenu event on bindTo
     */
+    const $customMenu = $(`<ul class='custom-menu'></ul>`)
     function createCustomContextMenu(bindTo, menuItems, alternateTrigger){
         const $altTrigger = $(alternateTrigger)
-        //Create context menu
-        const $customMenu = $(`<ul class='custom-menu'></ul>`)
+
+        $customMenu.html('')
         for (const itemName in menuItems){
             const $item = $(`<li>${itemName}</li>`)
             $item
                 .click(function(){
-                    const $menuTarget = $( $customMenu.data('target') )
-                    console.log(`Calling ${itemName}() on:`,$menuTarget)
+                    const $targetBkmkLi = $( $customMenu.data('target') )
+                    console.log(`Calling ${itemName}() on:`,$targetBkmkLi)
                     //execute the function from the menuitems object arg
-                    menuItems[itemName]($menuTarget)
+                    menuItems[itemName]($targetBkmkLi)
                     // Hide and remove the context menu
-                    $customMenu.hide(100).remove()
+                    $customMenu.hide(100)
                 })
                 .appendTo($customMenu)
         }
 
         // Prevent default context menu and show ours instead
-        $(bindTo).bind("contextmenu", function (e) {
+        $(bindTo).on("contextmenu", function (e) {
             e.preventDefault()
-            $customMenu.appendTo('body').finish().toggle(100)
+            $customMenu.finish().toggle(100)
                 .css({
                     top: event.pageY + "px",
                     left: event.pageX + "px"
@@ -1333,12 +1334,9 @@ $(function(){
         if ($altTrigger) $altTrigger.click(()=> $(bindTo).trigger('contextmenu'))
 
         // If the document is clicked somewhere
-        $(document).bind("mousedown", function (e) {
-            // If the clicked element is not the menu
-            if (!$(e.target).parents(".custom-menu").length > 0) {
-                // Hide it
-                $customMenu.hide(100)
-            }
+        $(document).on("click", function (e) {
+            const clickedMenu = $(e.target).parents(".custom-menu").length > 0
+            if (!clickedMenu) $customMenu.hide(100)
         })
     }
 
