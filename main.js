@@ -73,7 +73,7 @@ $(function(){
         window.S2S = {}
     }
 
-    //CREATE CUSTOM MENU ELEMENT
+    //CREATE CUSTOM CONTEXT MENU ELEMENT
     const $customMenu = $(`<ul class='custom-menu'></ul>`)
     $customMenu.appendTo('body')
 
@@ -1258,6 +1258,10 @@ $(function(){
         const clicked_header_toggler = $target.closest('#header_buttons_toggle').length
         const clicked_either_header_buttons_or_menu = !!(clicked_header_buttons || clicked_header_toggler)
         if(!clicked_either_header_buttons_or_menu) $header_btns.addClass('hidden')
+
+        //hide custom context menu
+        const clickedMenu = $target.closest(".custom-menu").length
+        if (!clickedMenu) $customMenu.hide(100)
     })
 
     /**
@@ -1337,11 +1341,7 @@ $(function(){
         })
         if ($altTrigger) $altTrigger.click(()=> $(bindTo).trigger('contextmenu'))
 
-        // If the document is clicked somewhere
-        $(document).on("click", function (e) {
-            const clickedMenu = $(e.target).parents(".custom-menu").length > 0
-            if (!clickedMenu) $customMenu.hide(100)
-        })
+        // menu hiding is under CLICK ANYWHERE ON DOCUMENT
     }
 
 
