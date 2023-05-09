@@ -1002,19 +1002,7 @@ $(function(){
                         ]
                     }
                 )
-
-                //
-                $selectedLi.one('click',(e)=>{
-                    $selectedLi.on('keypress',(e)=>{
-                        if (![13,27].includes(e.keyCode)) return //13=ENTER  27=ESCAPE
-                        
-                        $selectedLi.contentEditable = false
-                        const newTitle = $selectedLi.text()
-                        $selectedLi.attr('_title', newTitle)
-                    })
-                })
-                //
-             },
+            },
             "Download Score Data": function($selectedLi) { processScoreData($selectedLi) },
             "Delete": function($selectedLi) { $selectedLi.remove() }
         }
@@ -1323,6 +1311,7 @@ $(function(){
             $item
                 .click(function(){
                     const $menuTarget = $( $customMenu.data('target') )
+                    console.log(`Calling ${menuItems[itemName]}() on:`,$menuTarget)
                     //execute the function from the menuitems object arg
                     menuItems[itemName]($menuTarget)
                     // Hide and remove the context menu
