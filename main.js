@@ -1332,7 +1332,7 @@ $(function(){
         const $altTrigger = $(alternateTrigger)
 
         // Prevent default context menu and show ours instead
-        $(bindTo).on("contextmenu", function (e) {
+        $(bindTo).on("contextmenu", e=>{
             e.preventDefault()
 
             //$customMenu is defined at beginning
@@ -1344,7 +1344,6 @@ $(function(){
                         const $targetBkmkLi = $( $customMenu.data('target') )
                         //execute the function from the menuitems object arg
                         menuItems[itemName]($targetBkmkLi)
-                        // Hide and remove the context menu
                         $customMenu.hide(100)
                     })
                     .appendTo($customMenu)
@@ -1357,7 +1356,11 @@ $(function(){
                 })
                 .data('target',$(e.target))
         })
-        if ($altTrigger) $altTrigger.click(()=> $(bindTo).trigger('contextmenu'))
+        
+        if ($altTrigger) $altTrigger.click(e=>{
+            e.preventDefault()
+            $(bindTo).trigger('contextmenu')
+        })
 
         // menu hiding is under CLICK ANYWHERE ON DOCUMENT
     }
