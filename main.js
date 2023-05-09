@@ -1313,25 +1313,27 @@ $(function(){
     */
     function createCustomContextMenu(bindTo, menuItems, alternateTrigger){
         const $altTrigger = $(alternateTrigger)
-        //$customMenu is defined at beginning
-        $customMenu.html('')
-        for (const itemName in menuItems){
-            const $item = $(`<li>${itemName}</li>`)
-            $item
-                .click(function(){
-                    const $targetBkmkLi = $( $customMenu.data('target') )
-                    console.log(`Calling ${itemName}() on:`,$targetBkmkLi)
-                    //execute the function from the menuitems object arg
-                    menuItems[itemName]($targetBkmkLi)
-                    // Hide and remove the context menu
-                    $customMenu.hide(100)
-                })
-                .appendTo($customMenu)
-        }
 
         // Prevent default context menu and show ours instead
         $(bindTo).on("contextmenu", function (e) {
             e.preventDefault()
+
+            //$customMenu is defined at beginning
+            $customMenu.html('')
+            for (const itemName in menuItems){
+                const $item = $(`<li>${itemName}</li>`)
+                $item
+                    .click(function(){
+                        const $targetBkmkLi = $( $customMenu.data('target') )
+                        console.log(`Calling ${itemName}() on:`,$targetBkmkLi)
+                        //execute the function from the menuitems object arg
+                        menuItems[itemName]($targetBkmkLi)
+                        // Hide and remove the context menu
+                        $customMenu.hide(100)
+                    })
+                    .appendTo($customMenu)
+            }
+
             $customMenu.finish().toggle(100)
                 .css({
                     top: event.pageY + "px",
