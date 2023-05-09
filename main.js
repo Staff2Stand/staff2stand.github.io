@@ -1232,6 +1232,13 @@ $(function(){
 
         //remove disabled class from file input
         $('#loadScores').removeClass('disabled')
+
+        const active_score_is_in_my_scores = $('.score_bookmark.active').closest('#myScores').length
+        if (active_score_is_in_my_scores) {
+            $('.abcEditor').attr('disabled',false)
+        } else{
+            $('.abcEditor').attr('disabled',true)
+        }
     }
 
     /**
