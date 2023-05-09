@@ -1270,7 +1270,6 @@ $(function(){
 
         //hide custom context menu
         const clickedMenu = $target.closest(".custom-menu").length
-        if (!clickedMenu) console.log('hiding context menu')
         if (!clickedMenu) $customMenu.hide(100)
     })
 
@@ -1335,7 +1334,6 @@ $(function(){
                 $item
                     .click(function(){
                         const $targetBkmkLi = $( $customMenu.data('target') )
-                        console.log(`Calling ${itemName}() on:`,$targetBkmkLi)
                         //execute the function from the menuitems object arg
                         menuItems[itemName]($targetBkmkLi)
                         // Hide and remove the context menu
@@ -1344,7 +1342,6 @@ $(function(){
                     .appendTo($customMenu)
             }
 
-            console.log('showing context menu')
             $customMenu.hide().finish().show(100)
                 .css({
                     top: event.pageY + "px",
