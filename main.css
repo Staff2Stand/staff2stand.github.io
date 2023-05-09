@@ -173,6 +173,7 @@ header {
 #sidebar .score_bookmark {
   cursor: pointer;
   padding: 6px 0;
+  position: relative;
 }
 #sidebar .score_bookmark::after {
   content: attr(_title);

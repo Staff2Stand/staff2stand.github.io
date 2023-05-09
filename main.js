@@ -1261,6 +1261,7 @@ $(function(){
 
         //hide custom context menu
         const clickedMenu = $target.closest(".custom-menu").length
+        if (!clickedMenu) console.log('toggling context menu')
         if (!clickedMenu) $customMenu.hide(100)
     })
 
@@ -1334,6 +1335,7 @@ $(function(){
                     .appendTo($customMenu)
             }
 
+            console.log('toggling context menu')
             $customMenu.finish().toggle(100)
                 .css({
                     top: event.pageY + "px",
