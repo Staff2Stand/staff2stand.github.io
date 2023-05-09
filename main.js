@@ -778,7 +778,9 @@ $(function(){
             })
             const $newBkmk = createMyScoreBkmk(scoreData)
             $newBkmk.click()
-            $('#show_editors').click()
+
+            const editorsAreShown = $('.abcEditors:visible').length
+            if (!editorsAreShown) $('#show_editors').click()
         })
     })
 
