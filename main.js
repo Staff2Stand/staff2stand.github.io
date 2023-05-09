@@ -57,9 +57,6 @@ const stringReference = {
     }
 }
 
-//DEFINE CUSTOM MENU ELEMENT
-const $customMenu = $(`<ul class='custom-menu'></ul>`)
-
 //ON PAGE LOAD
 $(function(){
     /**
@@ -75,6 +72,10 @@ $(function(){
         )
         window.S2S = {}
     }
+
+    //CREATE CUSTOM MENU ELEMENT
+    const $customMenu = $(`<ul class='custom-menu'></ul>`)
+    $customMenu.appendTo('body')
 
     /**
      * INITIALIZE EDITOR for each instrument
