@@ -508,6 +508,11 @@ input#loadScores {
   filter: drop-shadow(0px 0px 1px black);
 }
 
+.part:has(.abcEditor[disabled]) .abcEditor-utils {
+  /* hide editor utils if the textarea is disabled */
+  display: none !important;
+}
+
 .ui-icon-caret-1-e{
   background-position-y: 7px !important;
 }
