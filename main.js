@@ -173,8 +173,6 @@ $(function(){
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
 
-                        console.log('$bkmk=',$bkmk)
-
                         $bkmkSaved.hide()
                         $bkmkSaving.show()
 
