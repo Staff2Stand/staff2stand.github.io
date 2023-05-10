@@ -133,7 +133,7 @@ $(function(){
 
                     console.log('oldAbc=',oldAbc)
                     console.log('newAbc-',newAbc)
-                    
+
                     if (!oldAbc) {
                         //This means the old editor val is ''.
                         //  This occurs when a bkmk is clicked (not shift-clicked)
@@ -197,13 +197,16 @@ $(function(){
      * FIND BKMK BY ABC
      * @param {String} abc the abc text
      * @param {String} instrument which abc-{instrument} attr to search for
-     * @returns 
+     * @returns the found bkmk as jquery object
      */
     function findBkmkByAbcVal(abc,instrument){
         let $foundBkmk
         $(`#myScores .score_bookmark`).each((i,$bkmk)=>{
             if (!$bkmk) return
-            if ($($bkmk).attr(`abc-${instrument}`) == escapeABC(abc)) $foundBkmk = $bkmk
+            if ($($bkmk).attr(`abc-${instrument}`) == escapeABC(abc)) {
+                $foundBkmk = $bkmk
+                return
+            }
         })
         return $($foundBkmk)
     }
