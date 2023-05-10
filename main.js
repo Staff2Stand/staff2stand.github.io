@@ -166,7 +166,6 @@ $(function(){
                             //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
                             //  (bc there are now more newBkmkAbc than oldBkmkAbc).
                             //  We return so that the new abc val isn't saved to t he old bkmk
-                            console.log('oldBkmkAbc is false')
                             return
                         }
                         const $bkmk = S2S.activeScores[i]
