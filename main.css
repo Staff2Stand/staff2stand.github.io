@@ -669,22 +669,33 @@ text.abcjs-annotation[text-anchor="start"] {
 }
 /* Above Staff */
 /* 0 ledger lines */
-.part[instrument="viola"] path[data-name="A"] ~ .abcjs-fingering {
+.part[instrument="violin"] path[data-name="e"] ~ .abcjs-fingering,
+.part[instrument="viola"] path[data-name="A"] ~ .abcjs-fingering,
+.part[instrument="cello"] path[data-name="B"] ~ .abcjs-fingering,
+.part[instrument="bass"] path[data-name="B"] ~ .abcjs-fingering {
   transform: translate(0px, calc(var(--notehead_height) * -1));
 }
 /* 1st ledger line */
-.part[instrument="viola"] path[data-name="B"] ~ .abcjs-fingering {
+.part[instrument="violin"] path[data-name="f"] ~ .abcjs-fingering,
+.part[instrument="viola"] path[data-name="B"] ~ .abcjs-fingering,
+.part[instrument="cello"] path[data-name="c"] ~ .abcjs-fingering,
+.part[instrument="bass"] path[data-name="c"] ~ .abcjs-fingering {
   transform: translate(0px, calc(var(--notehead_height) * -2));
 }
 /* 1st ledger space */
-.part[instrument="viola"] path[data-name="c"] ~ .abcjs-fingering {
+.part[instrument="violin"] path[data-name="g"] ~ .abcjs-fingering,
+.part[instrument="viola"] path[data-name="c"] ~ .abcjs-fingering,
+.part[instrument="cello"] path[data-name="d"] ~ .abcjs-fingering,
+.part[instrument="cello"] path[data-name="d"] ~ .abcjs-fingering {
   transform: translate(0px, calc(var(--notehead_height) * -3));
 }
 /* 2nd ledger line */
+.part[instrument="violin"] path[data-name="a"] ~ .abcjs-fingering,
 .part[instrument="viola"] path[data-name="d"] ~ .abcjs-fingering {
   transform: translate(0px, calc(var(--notehead_height) * -4));
 }
 /* 2nd ledger space */
+.part[instrument="violin"] path[data-name="b"] ~ .abcjs-fingering,
 .part[instrument="viola"] path[data-name="e"] ~ .abcjs-fingering {
   transform: translate(0px, calc(var(--notehead_height) * -5));
 }
