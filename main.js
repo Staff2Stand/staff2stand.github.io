@@ -67,11 +67,16 @@ $(function(){
             `<p>Please report this error. You may still be able to create and edit a new score.</p>`,
             {
                 addClass: 'alert',
-                title: 'Error Loading Score Data'
+                title: 'Error Loading Data'
             }
         )
-        window.S2S = {}
+        window.S2S = { scoreData:{} }
     }
+
+    /**
+     * INITIALIZE GLOBAL ACTIVE SCORES ARRAY
+     */
+    S2S.activeScores = []
 
     //CREATE CUSTOM CONTEXT MENU ELEMENT
     const $customMenu = $(`<ul class='custom-menu'></ul>`)
@@ -159,11 +164,12 @@ $(function(){
                         const oldBkmkAbc = eachOldBkmkAbc[i]
                         if (!oldBkmkAbc) {
                             //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk.
+                            //  bc there are now more newBkmkAbc than oldBkmkAbc
                             console.log('oldBkmkAbc is false')
                             return
                         }
                         const valToSearchFor = oldBkmkAbc
-                        const $bkmk = findBkmkByAbcVal(oldBkmkAbc,instrument)
+                        const $bkmk = S2S.activeScores[i]
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
 
@@ -1228,15 +1234,12 @@ $(function(){
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
-
-                //change val of file name input to bkmk title
-                $('#fileName').val( $bkmk.attr('_title') )
             }
 
             $instrEditor.val(newAbc).change()
 
-            if (isEmptyPart) $(`.part[instrument="${instrument}"]`).addClass('hidden')
-            if (!isEmptyPart) $(`.part[instrument="${instrument}"]`).removeClass('hidden')
+            if (isEmptyPart)  $(`.part[instrument="${instrument}"]`).addClass('hidden') 
+            else  $(`.part[instrument="${instrument}"]`).removeClass('hidden') 
         })
 
         //set extra html
@@ -1248,15 +1251,16 @@ $(function(){
         //Add active class to bkmk to indicate its already loaded
         $bkmk.addClass('active')
 
+        //Set/push to activeScores
+        if (appendScore) S2S.activeScores.push($bkmk)
+        else S2S.activeScores = [$bkmk]
+
         //remove disabled class from file input
         $('#loadScores').removeClass('disabled')
 
         const active_score_is_in_my_scores = $('.score_bookmark.active').closest('#myScores').length
-        if (active_score_is_in_my_scores) {
-            $('.abcEditor').attr('disabled',false)
-        } else{
-            $('.abcEditor').attr('disabled',true)
-        }
+        if (active_score_is_in_my_scores)  $('.abcEditor').attr('disabled',false) 
+        else $('.abcEditor').attr('disabled',true) 
     }
 
     /**
