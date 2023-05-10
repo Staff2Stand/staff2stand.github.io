@@ -1319,7 +1319,7 @@ $(function(){
             return ''
         }
 
-        return abc.replace(/\\n/g,'\r\n').replace('&quot;','"').replace('&apos;',"'")
+        return abc.replace(/\\n/g,'\r\n').replace(/&quot;/g,'"').replace(/&apos;/g,"'")
     }
 
 
