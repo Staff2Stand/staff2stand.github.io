@@ -173,8 +173,6 @@ $(function(){
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
 
-                        console.log('oldAbc=',oldBkmkAbc)
-                        console.log('newAbc=',newBkmkAbc)
                         console.log('$bkmk=',$bkmk)
 
                         $bkmkSaved.hide()
