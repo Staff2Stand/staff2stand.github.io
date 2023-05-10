@@ -130,6 +130,10 @@ $(function(){
                     const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
                     const eachNewBkmkAbc = newAbc.match(reg_eachBkmk)
                     const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
+
+                    console.log('oldAbc=',oldAbc)
+                    console.log('newAbc-',newAbc)
+                    
                     if (!oldAbc) {
                         //This means the old editor val is ''.
                         //  This occurs when a bkmk is clicked (not shift-clicked)
@@ -161,7 +165,7 @@ $(function(){
                             console.log('oldBkmkAbc is false')
                             return
                         }
-                        const ValToSearchFor = oldBkmkAbc
+                        const valToSearchFor = oldBkmkAbc
                         const $bkmk = findBkmkByAbcVal(oldBkmkAbc,instrument)
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
