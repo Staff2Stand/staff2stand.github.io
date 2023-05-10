@@ -662,6 +662,34 @@ text.abcjs-annotation[text-anchor="start"] {
   opacity: 100%;
 }
 
+/* FINGERING POSITIONING */
+/* svg elements can be translated via the transform property */
+.part{
+  --notehead_height: 5px;
+}
+/* Above Staff */
+/* 0 ledger lines */
+.part[instrument="viola"] path[data-name="A"] ~ .abcjs-fingering {
+  transform: translate(0px, calc(var(--notehead_height) * -1));
+}
+/* 1st ledger line */
+.part[instrument="viola"] path[data-name="B"] ~ .abcjs-fingering {
+  transform: translate(0px, calc(var(--notehead_height) * -2));
+}
+/* 1st ledger space */
+.part[instrument="viola"] path[data-name="c"] ~ .abcjs-fingering {
+  transform: translate(0px, calc(var(--notehead_height) * -3));
+}
+/* 2nd ledger line */
+.part[instrument="viola"] path[data-name="d"] ~ .abcjs-fingering {
+  transform: translate(0px, calc(var(--notehead_height) * -4));
+}
+/* 2nd ledger space */
+.part[instrument="viola"] path[data-name="e"] ~ .abcjs-fingering {
+  transform: translate(0px, calc(var(--notehead_height) * -5));
+}
+
+
 /* EXTRA HTML */
 .extra_html{
   padding: 0 12px;
