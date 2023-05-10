@@ -155,7 +155,6 @@ $(function(){
                         //   or bc the bkmk didn't have an abc attr for this instrument.
                         //  Either way we need to set this instrument attr on the bkmk(s) to ''
                         $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
-                        console.log('newAbc is false')
                         return
                     }
                     let saveSuccessful = false
