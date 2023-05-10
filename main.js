@@ -140,13 +140,11 @@ $(function(){
                         //This means the old editor val is ''.
                         //  This occurs when a bkmk is clicked (not shift-clicked)
                         //      - ie, the renderScoreFromBkmk function clears all of the editors first
-                        console.log('oldAbc is false')
                         return
                     }
                     if (!eachOldBkmkAbc){
                         //This means there was a value in the editor, but it wasn't abc notation
                         //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
-                        console.log('eachOldBkmkAbc is false')
                         return
                     }
                     if (!newAbc) {
