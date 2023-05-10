@@ -163,12 +163,12 @@ $(function(){
                     eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
                         const oldBkmkAbc = eachOldBkmkAbc[i]
                         if (!oldBkmkAbc) {
-                            //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk.
-                            //  bc there are now more newBkmkAbc than oldBkmkAbc
+                            //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
+                            //  (bc there are now more newBkmkAbc than oldBkmkAbc).
+                            //  We return so that the new abc val isn't saved to t he old bkmk
                             console.log('oldBkmkAbc is false')
                             return
                         }
-                        const valToSearchFor = oldBkmkAbc
                         const $bkmk = S2S.activeScores[i]
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
