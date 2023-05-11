@@ -394,17 +394,11 @@ input#loadScores {
   overflow: hidden;
 }
 #sidebar_buttons #notenames_toggle svg{
-  font-size: 1.5em;
+  transform: scale(0.4) translate(0px, -112px);
 }
-/* #sidebar_buttons #notenames_toggle:after {
-  content: '\2669';
-  position: absolute;
-  border-radius: 50%;
-  z-index: -1;
-  font-size: 46px;
-  bottom: -9px;
-  width: calc(100% - 8px);
-} */
+#sidebar_buttons #notenames_toggle:hover svg {
+  filter: brightness(1.5);
+}
 /* edit toggle */
 #sidebar_buttons #show_editors {
   --h:300deg;
