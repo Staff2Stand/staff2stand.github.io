@@ -396,16 +396,15 @@ input#loadScores {
 #sidebar_buttons #notenames_toggle svg{
   font-size: 1.5em;
 }
-#sidebar_buttons #notenames_toggle:after {
+/* #sidebar_buttons #notenames_toggle:after {
   content: '\2669';
   position: absolute;
   border-radius: 50%;
   z-index: -1;
   font-size: 46px;
   bottom: -9px;
-  /* right: -4px; */
   width: calc(100% - 8px);
-}
+} */
 /* edit toggle */
 #sidebar_buttons #show_editors {
   --h:300deg;
