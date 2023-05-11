@@ -660,6 +660,9 @@ text.abcjs-annotation[text-anchor="start"] {
 .part{
   --notehead_height: 5px;
 }
+.part[instrument="violin"]{
+  --notehead_height: 4px;
+}
 /* Above Staff */
 /* 0 ledger lines */
 .part[instrument="violin"] path[data-name="e"] ~ .abcjs-fingering,
