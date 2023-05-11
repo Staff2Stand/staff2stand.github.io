@@ -162,10 +162,18 @@ $(function(){
                         if (!oldBkmkAbc) {
                             //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
                             //  (bc there are now more newBkmkAbc than oldBkmkAbc).
-                            //  We return so that the new abc val isn't saved to t he old bkmk
+                            //  We return so that the new abc val isn't saved to the old bkmk
                             return
                         }
                         const $bkmk = S2S.activeScores[i]
+                        const numChanges = $bkmk.attr('numChanges')
+                        if (numChanges == 0){
+                            //It was just clicked. Return so the old abc val isn't saved to the new bkmk
+                            return
+                        } else {
+                            $bkmk.attr('numChanges', numChanges+1)
+                        }
+
                         const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
                         const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
 
@@ -1221,8 +1229,8 @@ $(function(){
 
             //do only once (rather than for each instrument)
             if (i===0) {
-                //remove active class from all bkmks
-                $('.score_bookmark.active').removeClass('active')
+                //remove active class from all bkmks and clear numChanges attr
+                $('.score_bookmark.active').removeClass('active').attr('numChanges','')
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
@@ -1241,7 +1249,8 @@ $(function(){
         setAllNotDirty()
 
         //Add active class to bkmk to indicate its already loaded
-        $bkmk.addClass('active')
+        //and set numChanges attr to 0, to indicated it is freshly loaded
+        $bkmk.addClass('active').attr('numChanges',0)
 
         //Set/push to activeScores
         if (appendScore) S2S.activeScores.push($bkmk)
