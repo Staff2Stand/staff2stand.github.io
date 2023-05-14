@@ -672,7 +672,8 @@ text.abcjs-annotation[text-anchor="start"] {
 /*    Notes whose beams go above (2nd line) */
 .part[instrument="violin"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="G"] ~ .abcjs-fingering,
 .part[instrument="viola"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="A,"] ~ .abcjs-fingering,
-.part:is([instrument="cello"],[instrument="bass"]) :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="B,"] ~ .abcjs-fingering {
+.part:is([instrument="cello"],[instrument="bass"]) :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="B,"] ~ .abcjs-fingering
+ {
   transform: translate(0px, calc(var(--notehead_height) * -1));
 }
 /* 2 notehead heights above (1 ledger lines) */

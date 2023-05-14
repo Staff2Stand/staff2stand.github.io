@@ -304,9 +304,17 @@ $(function(){
      * after the tune is rendered, loop through notes and append text and tspan elements to svg
      */
     function addFingeringsAndNoteNames(abcContainer){
+        //util func to create svg element
         function SVG(tag) {
             return document.createElementNS('http://www.w3.org/2000/svg', tag);
         }
+
+        //detect collision
+        function detectCollision(el1, el2){
+            const box1 = el1.getBoundingClientRect()
+            const box2 = el2.getBoundingClientRect()
+        }
+
 
         //loop through all the notes and add svg text element child with class fingering
         $(abcContainer).find('.abcjs-note').each(function(i,note){
@@ -340,11 +348,11 @@ $(function(){
             const chord_inStaff = hasChordTxtEl && !noteIsAboveStaff
             const noChord_aboveStaff = !hasChordTxtEl && noteIsAboveStaff
             const chord_aboveStaff = hasChordTxtEl && noteIsAboveStaff
-            const fingeringTxtY =   noChord_inStaff ? staffY - 16 :
+            let fingeringTxtY =   noChord_inStaff ? staffY - 16 :
                                     noChord_aboveStaff ? noteY - 16 :
                                     chord_inStaff ? staffY - 6 :
                                     chord_aboveStaff ? noteY - 6 :
-                                    staffY - 16
+                                    staffY - 16            
 
             const xAdjustmentForChord = hasChordTxtEl ? -6 : 0
             const fingeringTxtX = noteX + xAdjustmentForChord
@@ -369,6 +377,7 @@ $(function(){
                 .text(finger)
                 .appendTo( $(note).find('text.abcjs-fingering') )
 
+            //Note Name Text
             let noteNameTxtY = staffY + staffHeight + 16
             if (noteY + noteHeight + 6 > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
 
