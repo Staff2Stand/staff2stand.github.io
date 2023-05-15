@@ -309,13 +309,6 @@ $(function(){
             return document.createElementNS('http://www.w3.org/2000/svg', tag);
         }
 
-        //detect collision
-        function detectCollision(el1, el2){
-            const box1 = el1.getBoundingClientRect()
-            const box2 = el2.getBoundingClientRect()
-        }
-
-
         //loop through all the notes and add svg text element child with class fingering
         $(abcContainer).find('.abcjs-note').each(function(i,note){
             const noteX = note.getBBox().x
