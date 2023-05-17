@@ -57,7 +57,7 @@ const stringReference = {
     }
 }
 
-//OVERLAPS UTILITY FUNCTION
+//UTILITY FUNCTIONS
 function isOverlapping(div1, div2){
     const div1 = div1.getBoundingClientRect();
     const div2 = div2.getBoundingClientRect();
@@ -65,6 +65,9 @@ function isOverlapping(div1, div2){
             div1.left < div2.right && 
             div1.bottom > div2.top && 
             div1.top < div2.bottom)
+}
+function hasOnly1Letter(string){
+    return (string.match(/[A-Za-z]/g) || []).length === 1
 }
 
 //ON PAGE LOAD
@@ -267,9 +270,6 @@ $(function(){
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
 
             // skip if its not a notehead
-            function hasOnly1Letter(string){
-                return (string.match(/[A-Za-z]/g) || []).length === 1
-            }
             const isNotehead = hasOnly1Letter( $(pathel).attr('data-name') )
             if (!isNotehead) return
 
@@ -321,6 +321,7 @@ $(function(){
 
         //loop through all the notes and add svg text element child with class fingering
         $(abcContainer).find('.abcjs-note').each(function(i,note){
+            const $note = $(note)
             const noteX = note.getBBox().x
             const noteY = note.getBBox().y
             const noteHeight = note.getBBox().height
@@ -360,9 +361,9 @@ $(function(){
             const xAdjustmentForChord = hasChordTxtEl ? -6 : 0
             const fingeringTxtX = noteX + xAdjustmentForChord
 
-
-            $(SVG('text'))
-                .attr({
+            //Fingering Text
+            const $fingering = $(SVG('text'))
+            $fingering.attr({
                     stroke: 'none',
                     fontSize: '16',
                     fontStyle: 'normal',
@@ -378,15 +379,7 @@ $(function(){
             $(SVG('tspan'))
                 .attr('x',noteX)
                 .text(finger)
-                .appendTo( $(note).find('text.abcjs-fingering') )
-            
-            const fingeringOverlapsWithBeam = (function(){
-                const $fingering = $(note).find('.abcjs-fingering')
-                let foundOverlappingBeam = false
-                $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=>foundOverlappingBeam = isOverlapping(beam,$fingering))
-                return foundOverlappingBeam
-            })()
-            //... if fingeringOverlapsWithBeam, move the fingering up
+                .appendTo( $fingering )
 
             //Note Name Text
             let noteNameTxtY = staffY + staffHeight + 16
@@ -400,8 +393,8 @@ $(function(){
                 .replace("=", "\u266E")
                 .toUpperCase()
 
-            $(SVG('text'))
-                .attr({
+            const $notename = $(SVG('text'))
+            $notename.attr({
                     stroke: 'none',
                     fontSize: '16',
                     fontStyle: 'normal',
@@ -417,8 +410,42 @@ $(function(){
             $(SVG('tspan'))
                 .attr('x',noteX)
                 .text(standardNoteName)
-                .appendTo( $(note).find('text.abcjs-noteName') )
+                .appendTo( $notename )
+            
+            //Check for overlaps
+            function overlapsWithBeam(element){
+                const $element = $(element)
+                let foundOverlappingBeam = false
+                $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
+                    foundOverlappingBeam = isOverlapping(beam,$element)
+                })
+                return foundOverlappingBeam
+            }
+            const translateDist = {
+                fingering: {
+                    x: 0,
+                    y: 0
+                },
+                notename: {
+                    x: 0,
+                    y: 0
+                }
+            }
+            const $notehead = $(note).find('path[data-name]').filter(function(i){
+                const $thisPath = $(this)
+                const dataName = $thisPath.attr('data-name')
+                return (dataName.match(/[A-Za-z]/g) || []).length === 1
+            })
+            //notehead height.  $notehead.height and outerheight return 0
 
+            if (overlapsWithBeam($fingering)) translateDist.fingering.y -= noteHeight
+
+            $fingering.css({
+                transform: `translate(${translateDist.fingering.x}px,${translateDist.fingering.y}px)`
+            })
+            $notename.css({
+                transform: `translate(${translateDist.notename.x}px,${translateDist.notename.y}px)`
+            })
         })
     }
 
