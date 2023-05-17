@@ -57,6 +57,16 @@ const stringReference = {
     }
 }
 
+//OVERLAPS UTILITY FUNCTION
+function isOverlapping(div1, div2){
+    const div1 = div1.getBoundingClientRect();
+    const div2 = div2.getBoundingClientRect();
+    return (div1.right > div2.left && 
+            div1.left < div2.right && 
+            div1.bottom > div2.top && 
+            div1.top < div2.bottom)
+}
+
 //ON PAGE LOAD
 $(function(){
     /**
@@ -369,6 +379,14 @@ $(function(){
                 .attr('x',noteX)
                 .text(finger)
                 .appendTo( $(note).find('text.abcjs-fingering') )
+            
+            const fingeringOverlapsWithBeam = (function(){
+                const $fingering = $(note).find('.abcjs-fingering')
+                let foundOverlappingBeam = false
+                $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=>foundOverlappingBeam = isOverlapping(beam,$fingering))
+                return foundOverlappingBeam
+            })()
+            //... if fingeringOverlapsWithBeam, move the fingering up
 
             //Note Name Text
             let noteNameTxtY = staffY + staffHeight + 16
