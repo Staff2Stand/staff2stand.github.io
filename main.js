@@ -443,12 +443,12 @@ $(function(){
             const fingering_translate_mult = [
                 isOverlapping($notehead.get(0),$fingering.get(0)),
                 overlapsWithBeam($fingering)
-            ].length || 1
+            ].filter(i=>i===true).length || 1
             translateDist.fingering.y = noteheadHeight * -1 * fingering_translate_mult
 
             const notename_translate_mult = [
                 overlapsWithBeam($notename)
-            ].length || 1
+            ].filter(i=>i===true).length || 1
             translateDist.notename.y = noteheadHeight * notename_translate_mult
 
             //set css to actually move the svg text element
