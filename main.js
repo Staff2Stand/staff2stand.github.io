@@ -431,6 +431,7 @@ $(function(){
                     y: 0
                 }
             }
+            //define notehead
             const $notehead = $(note).find('path[data-name]').filter(function(i){
                 const $thisPath = $(this)
                 const dataName = $thisPath.attr('data-name')
@@ -438,9 +439,19 @@ $(function(){
             })
             const noteheadHeight = $notehead.get(0).getBBox().height
 
-            if (overlapsWithBeam($fingering)) translateDist.fingering.y -= noteheadHeight
-            if (overlapsWithBeam($notename)) translateDist.notename.y += noteheadHeight
+            //test various conditions to define translation multipliers
+            const fingering_translate_mult = [
+                isOverlapping($notehead.get(0),$fingering.get(0)),
+                overlapsWithBeam($fingering)
+            ].length || 1
+            translateDist.fingering.y = noteheadHeight * -1 * fingering_translate_mult
 
+            const notename_translate_mult = [
+                overlapsWithBeam($notename)
+            ].length || 1
+            translateDist.notename.y = noteheadHeight * notename_translate_mult
+
+            //set css to actually move the svg text element
             $fingering.css({
                 transform: `translate(${translateDist.fingering.x}px,${translateDist.fingering.y}px)`
             })
