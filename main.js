@@ -436,7 +436,7 @@ $(function(){
                 const dataName = $thisPath.attr('data-name')
                 return (dataName.match(/[A-Za-z]/g) || []).length === 1
             })
-            const noteheadHeight = notehead.get(0).getBBox().height
+            const noteheadHeight = $notehead.get(0).getBBox().height
 
             if (overlapsWithBeam($fingering)) translateDist.fingering.y -= noteheadHeight
             if (overlapsWithBeam($notename)) translateDist.notename.y += noteheadHeight
