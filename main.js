@@ -416,8 +416,8 @@ $(function(){
             function overlapsWithBeam(element){
                 const $element = $(element)
                 let foundOverlappingBeam = false
-                $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
-                    foundOverlappingBeam = isOverlapping(beam,$element.get(0))
+                $(abcContainer).find('.abcjs-beam-elem').each((i,$beam)=> {
+                    foundOverlappingBeam = isOverlapping($beam.get(0),$element.get(0))
                 })
                 return foundOverlappingBeam
             }
