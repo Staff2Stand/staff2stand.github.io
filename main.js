@@ -412,7 +412,7 @@ $(function(){
                 .text(standardNoteName)
                 .appendTo( $notename )
             
-            //Check for overlaps
+            //Check For Overlaps
             function overlapsWithBeam(element){
                 const $element = $(element)
                 let foundOverlappingBeam = false
