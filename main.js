@@ -448,7 +448,7 @@ $(function(){
 
             const notename_translate_mult = [
                 overlapsWithBeam($notename)
-            ].filter(i=>i===true).length || 1
+            ].filter(i=>i===true).length
             translateDist.notename.y = noteheadHeight * notename_translate_mult
 
             //set css to actually move the svg text element
