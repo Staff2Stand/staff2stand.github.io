@@ -447,15 +447,15 @@ $(function(){
             //Check For Overlaps
             function overlapWithBeamAmount(element){
                 const $element = $(element)
-                let $overlappingBeam = false
+                let overlappingBeam = false
                 $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
                     const foundOverlappingBeam = isOverlapping(beam,$element)
                     if (foundOverlappingBeam) {
-                        $overlappingBeam = $(beam)
+                        overlappingBeam = $(beam)
                         return
                     }
                 })
-                return overlapAmount($element,$overlappingBeam)
+                return overlappingBeam ? overlapAmount($element,overlappingBeam) : 0
             }
 
             const $notehead = $(note).find('path[data-name]').filter(function(i){
