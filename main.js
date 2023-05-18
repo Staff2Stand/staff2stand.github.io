@@ -465,22 +465,27 @@ $(function(){
             })
             const noteheadHeight = $notehead.get(0).getBBox().height
 
-            const fingeringNoteheadOverlap = overlapAmount($fingering,$notehead)
-            const fingeringBeamOverlap = overlapWithBeamAmount($fingering)
-
-            const notenameNoteheadOverlap = overlapAmount($notename,$notehead)
-            const notenameBeamOverlap = overlapWithBeamAmount($notename)
+            const overlaps = {
+                fingering: {
+                    notehead: overlapAmount($fingering,$notehead),
+                    beam: overlapWithBeamAmount($fingering)
+                },
+                notename: {
+                    notehead: overlapAmount($notename,$notehead),
+                    beam: overlapWithBeamAmount($notename)
+                }
+            }
 
             const translateDist = {
                 fingering: {
                     x:  0,
-                    y:  fingeringNoteheadOverlap.y +
-                        fingeringBeamOverlap.y
+                    y:  overlaps.fingering.notehead.y +
+                        overlaps.fingering.beam.y
                 },
                 notename: {
                     x:  0,
-                    y:  notenameNoteheadOverlap.y +
-                        notenameBeamOverlap.y
+                    y:  overlaps.notename.notehead.y +
+                        overlaps.notename.beam.y
                 }
             }
 
