@@ -655,60 +655,6 @@ text.abcjs-annotation[text-anchor="start"] {
   opacity: 100%;
 }
 
-/* FINGERING POSITIONING */
-/* svg elements can be translated via the transform property */
-.part{
-  --notehead_height: 5px;
-}
-.part[instrument="violin"]{
-  --notehead_height: 4px;
-}
-/* Above Staff */
-/* 1 notehead height above (0 ledger lines) */
-.part[instrument="violin"] path[data-name="e"] ~ .abcjs-fingering,
-.part[instrument="viola"] path[data-name="A"] ~ .abcjs-fingering,
-.part[instrument="cello"] path[data-name="B"] ~ .abcjs-fingering,
-.part[instrument="bass"] path[data-name="B"] ~ .abcjs-fingering,
-/*    Notes whose beams go above (2nd line) */
-.part[instrument="violin"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="G"] ~ .abcjs-fingering,
-.part[instrument="viola"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="A,"] ~ .abcjs-fingering,
-.part:is([instrument="cello"],[instrument="bass"]) :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="B,"] ~ .abcjs-fingering
- {
-  transform: translate(0px, calc(var(--notehead_height) * -1));
-}
-/* 2 notehead heights above (1 ledger lines) */
-.part[instrument="violin"] path[data-name="f"] ~ .abcjs-fingering,
-.part[instrument="viola"] path[data-name="B"] ~ .abcjs-fingering,
-.part[instrument="cello"] path[data-name="c"] ~ .abcjs-fingering,
-.part[instrument="bass"] path[data-name="c"] ~ .abcjs-fingering,
-/*    Notes whose beams go above (2nd space) */
-.part[instrument="violin"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="A"] ~ .abcjs-fingering,
-.part[instrument="viola"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="B,"] ~ .abcjs-fingering,
-.part:is([instrument="cello"],[instrument="bass"]) :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="C"] ~ .abcjs-fingering{
-  transform: translate(0px, calc(var(--notehead_height) * -2));
-}
-/* 3 notehead heights above (2 ledger lines) */
-.part[instrument="violin"] path[data-name="g"] ~ .abcjs-fingering,
-.part[instrument="viola"] path[data-name="c"] ~ .abcjs-fingering,
-.part[instrument="cello"] path[data-name="d"] ~ .abcjs-fingering,
-.part[instrument="cello"] path[data-name="d"] ~ .abcjs-fingering,
-/*    Notes whose beams go above (middle line) */
-.part[instrument="violin"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="B"] ~ .abcjs-fingering,
-.part[instrument="viola"] :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="C"] ~ .abcjs-fingering,
-.part:is([instrument="cello"],[instrument="bass"]) :is(.abcjs-d0-125, .abcjs-d0-063, .abcjs-d0-031, .abcjs-d0-016) path[data-name="D"] ~ .abcjs-fingering {
-  transform: translate(0px, calc(var(--notehead_height) * -3));
-}
-/* 4 notehead heights above (3 ledger lines) */
-.part[instrument="violin"] path[data-name="a"] ~ .abcjs-fingering,
-.part[instrument="viola"] path[data-name="d"] ~ .abcjs-fingering {
-  transform: translate(0px, calc(var(--notehead_height) * -4));
-}
-/* 5 notehead heights above (4 ledger lines) */
-.part[instrument="violin"] path[data-name="b"] ~ .abcjs-fingering,
-.part[instrument="viola"] path[data-name="e"] ~ .abcjs-fingering {
-  transform: translate(0px, calc(var(--notehead_height) * -5));
-}
-
 /* EXTRA HTML */
 .extra_html{
   padding: 0 12px;

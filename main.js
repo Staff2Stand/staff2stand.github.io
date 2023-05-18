@@ -58,14 +58,46 @@ const stringReference = {
 }
 
 //UTILITY FUNCTIONS
+/**
+ * Is Overlapping
+ * @param {*} div1 
+ * @param {*} div2 
+ * @returns Bool
+ */
 function isOverlapping(div1, div2){
-    div1 = div1.getBoundingClientRect();
-    div2 = div2.getBoundingClientRect();
+    div1 = $(div1).get(0).getBoundingClientRect();
+    div2 = $(div2).get(0).getBoundingClientRect();
     return (div1.right > div2.left && 
             div1.left < div2.right && 
             div1.bottom > div2.top && 
             div1.top < div2.bottom)
 }
+/**
+ * Overlap Amount
+ * @param {*} el1 
+ * @param {*} el2 
+ * @param {*} units option for custom units. Default, 1, is px.
+ * @returns {object} { x:number , y:number } These values represent the distance & direction el1 needs to move in order to not be overlapping. Value will be 0 if not overlapping in that direction. x moves right, -x moves left, y moves down, -y moves up
+ */
+function overlapAmount(el1,el2,units=1){
+    el1 = $(el1).get(0).getBoundingClientRect()
+    el2 = $(el2).get(0).getBoundingClientRect()
+
+    const overlapRL = el1.right > el2.left
+    const overlapLR = el1.left < el2.right
+    const overlapBT = el1.bottom > el2.top
+    const overlapTB = el1.top < el2.bottom
+
+    return {
+        x: (overlapRL ? el1.left - el2.right : overlapLR ? el1.right - el2.left : 0)/units,
+        y: (overlapBT ? el1.top - el2.bottom : overlapTB ? el1.bottom - el2.top : 0)/units
+    }
+}
+/**
+ * Has Only 1 Letter
+ * @param {*} string 
+ * @returns Bool
+ */
 function hasOnly1Letter(string){
     return (string.match(/[A-Za-z]/g) || []).length === 1
 }
@@ -413,25 +445,19 @@ $(function(){
                 .appendTo( $notename )
             
             //Check For Overlaps
-            function overlapsWithBeam(element){
+            function overlapWithBeamAmount(element){
                 const $element = $(element)
-                let foundOverlappingBeam = false
+                let $overlappingBeam = false
                 $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
-                    foundOverlappingBeam = isOverlapping($(beam).get(0),$element.get(0))
+                    const foundOverlappingBeam = isOverlapping(beam,$element)
+                    if (foundOverlappingBeam) {
+                        $overlappingBeam = $(beam)
+                        return
+                    }
                 })
-                return foundOverlappingBeam
+                return overlapAmount($element,$overlappingBeam)
             }
-            const translateDist = {
-                fingering: {
-                    x: 0,
-                    y: 0
-                },
-                notename: {
-                    x: 0,
-                    y: 0
-                }
-            }
-            //define notehead
+
             const $notehead = $(note).find('path[data-name]').filter(function(i){
                 const $thisPath = $(this)
                 const dataName = $thisPath.attr('data-name')
@@ -439,17 +465,24 @@ $(function(){
             })
             const noteheadHeight = $notehead.get(0).getBBox().height
 
-            //test various conditions to define translation multipliers
-            const fingering_translate_mult = [
-                isOverlapping($notehead.get(0),$fingering.get(0)),
-                overlapsWithBeam($fingering)
-            ].filter(i=>i===true).length
-            translateDist.fingering.y = noteheadHeight * -1 * fingering_translate_mult
+            const fingeringNoteheadOverlap = overlapAmount($fingering,$notehead)
+            const fingeringBeamOverlap = overlapWithBeamAmount($fingering)
 
-            const notename_translate_mult = [
-                overlapsWithBeam($notename)
-            ].filter(i=>i===true).length
-            translateDist.notename.y = noteheadHeight * notename_translate_mult
+            const notenameNoteheadOverlap = overlapAmount($notename,$notehead)
+            const notenameBeamOverlap = overlapWithBeamAmount($notename)
+
+            const translateDist = {
+                fingering: {
+                    x:  0,
+                    y:  fingeringNoteheadOverlap.y +
+                        fingeringBeamOverlap.y
+                },
+                notename: {
+                    x:  0,
+                    y:  notenameNoteheadOverlap.y +
+                        notenameBeamOverlap.y
+                }
+            }
 
             //set css to actually move the svg text element
             $fingering.css({
