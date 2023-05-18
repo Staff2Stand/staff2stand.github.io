@@ -443,7 +443,7 @@ $(function(){
             const fingering_translate_mult = [
                 isOverlapping($notehead.get(0),$fingering.get(0)),
                 overlapsWithBeam($fingering)
-            ].filter(i=>i===true).length || 1
+            ].filter(i=>i===true).length
             translateDist.fingering.y = noteheadHeight * -1 * fingering_translate_mult
 
             const notename_translate_mult = [
