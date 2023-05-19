@@ -486,13 +486,11 @@ $(function(){
                 }
             }
 
-            //set css to actually move the svg text element
-            $fingering.css({
-                transform: `translate(${translateDist.fingering.x}px,${translateDist.fingering.y}px)`
-            })
-            $notename.css({
-                transform: `translate(${translateDist.notename.x}px,${translateDist.notename.y}px)`
-            })
+            //Set css to actually move the svg text element
+            //note: we need to use setAttribute bc svg elements are annoying
+            $fingering.get(0).setAttribute('transform',`translate(${translateDist.fingering.x}px,${translateDist.fingering.y}px)`)
+
+            $notename.get(0).setAttribute('transform',`translate(${translateDist.notename.x}px,${translateDist.notename.y}px)`)
         })
     }
 
