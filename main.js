@@ -442,6 +442,12 @@ $(function(){
                 .appendTo( $notename )
             
             //Check For Overlaps
+            /**
+             * Distance To Separate From Beam
+             * @param {*} element 
+             * @param {*} testDirection the direction from the element we expect the beam to be
+             * @returns {object} result of distanceToSeperate, or { left:0, right:0, up:0, down:0 } if the note doesn't have a beam
+             */
             function distToSeparateFromBeam(element,testDirection){
                 const $element = $(element)
                 let result = { left:0, right:0, up:0, down:0 }
