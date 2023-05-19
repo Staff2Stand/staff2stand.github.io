@@ -468,7 +468,7 @@ $(function(){
                     beam: distToSeparateFromBeam($fingering).up
                 },
                 notename: {
-                    notehead: overlapAmount($notename,$notehead).down,
+                    notehead: distanceToSeparate($notename,$notehead).down,
                     beam: distToSeparateFromBeam($notename).down
                 }
             }
