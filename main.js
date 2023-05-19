@@ -79,7 +79,7 @@ function isOverlapping(div1, div2){
  * @param {*} units option for custom units. Default, 1, is px.
  * @returns {object} { x:number , y:number } These values represent the distance & direction el1 needs to move in order to not be overlapping. Value will be 0 if not overlapping in that direction. x moves right, -x moves left, y moves down, -y moves up
  */
-function overlapAmount(el1,el2,units=1){
+function overlapAmount(el1,el2){
     el1 = $(el1).get(0).getBoundingClientRect()
     el2 = $(el2).get(0).getBoundingClientRect()
 
@@ -89,8 +89,8 @@ function overlapAmount(el1,el2,units=1){
     const overlapTB = el1.top < el2.bottom
 
     return {
-        x: (overlapRL ? el1.left - el2.right : overlapLR ? el1.right - el2.left : 0)/units,
-        y: (overlapBT ? el1.top - el2.bottom : overlapTB ? el1.bottom - el2.top : 0)/units
+        x: (overlapRL ? el1.left - el2.right : overlapLR ? el1.right - el2.left : 0),
+        y: (overlapBT ? el1.top - el2.bottom : overlapTB ? el1.bottom - el2.top : 0)
     }
 }
 /**
