@@ -476,13 +476,13 @@ $(function(){
             const translateDist = {
                 fingering: {
                     x:  0,
-                    y:  overlaps.fingering.notehead.y +
-                        overlaps.fingering.beam.y
+                    y:  overlaps.fingering.notehead +
+                        overlaps.fingering.beam
                 },
                 notename: {
                     x:  0,
-                    y:  overlaps.notename.notehead.y +
-                        overlaps.notename.beam.y
+                    y:  overlaps.notename.notehead +
+                        overlaps.notename.beam
                 }
             }
 
