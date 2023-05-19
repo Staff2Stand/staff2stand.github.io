@@ -84,10 +84,10 @@ function distanceToSeparate(el1,el2){
 
     //Max and Min checks which side of el2 its on, and changes that direction val to 0, since el1 is already on that side. For example, left should have a max val of 0 to ensure we don't move el1 to the right.
     return {
-        left:   Math.min(el1.right - el2.left, 0) * -1,
-        right:  Math.max(el1.left - el2.right, 0) * -1,
-        up:     Math.min(el1.bottom - el2.top, 0) * -1,
-        down:   Math.max(el1.top - el2.bottom, 0) * -1
+        left:   Math.min(el1.right - el2.left, 0),
+        right:  Math.max(el1.left - el2.right, 0),
+        up:     Math.min(el1.bottom - el2.top, 0),
+        down:   Math.max(el1.top - el2.bottom, 0)
     }
 }
 /**
