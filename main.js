@@ -84,10 +84,10 @@ function distanceToSeparate(el1,el2){
 
     //Max and Min checks which side of el2 its on, and changes that direction val to 0, since el1 is already on that side. For example, left should have a max val of 0 to ensure we don't move el1 to the right.
     return {
-        left:   Math.max(el1.right - el2.left, 0) * -1,
-        right:  Math.min(el1.left - el2.right, 0) * -1,
-        up:     Math.max(el1.bottom - el2.top, 0) * -1,
-        down:   Math.min(el1.top - el2.bottom, 0) * -1
+        left:   Math.min(el1.right - el2.left, 0) * -1,
+        right:  Math.max(el1.left - el2.right, 0) * -1,
+        up:     Math.min(el1.bottom - el2.top, 0) * -1,
+        down:   Math.max(el1.top - el2.bottom, 0) * -1
     }
 }
 /**
@@ -442,17 +442,20 @@ $(function(){
                 .appendTo( $notename )
             
             //Check For Overlaps
-            function distToSeparateFromBeam(element){
+            function distToSeparateFromBeam(element,testDirection){
                 const $element = $(element)
-                let overlappingBeam = false
+                let result = { left:0, right:0, up:0, down:0 }
                 $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
-                    const foundOverlappingBeam = isOverlapping(beam,$element)
-                    if (foundOverlappingBeam) {
-                        overlappingBeam = $(beam)
+                    const distances = distanceToSeparate($element,beam)
+                    const dist = distances[testDirection]
+                    const positivifiedDist = dist<0 ? dist*-1 : dist
+                    if (positivifiedDist <= staffHeight) {
+                        //the beam is within a staffHeight of the element, in the direction of testDirection
+                        result = distances
                         return
                     }
                 })
-                return overlappingBeam ? distanceToSeparate($element,overlappingBeam) : 0
+                return result
             }
 
             const $notehead = $(note).find('path[data-name]').filter(function(i){
@@ -465,11 +468,11 @@ $(function(){
             const overlaps = {
                 fingering: {
                     notehead: distanceToSeparate($fingering,$notehead).up,
-                    beam: distToSeparateFromBeam($fingering).up
+                    beam: distToSeparateFromBeam($fingering,'up').up
                 },
                 notename: {
                     notehead: distanceToSeparate($notename,$notehead).down,
-                    beam: distToSeparateFromBeam($notename).down
+                    beam: distToSeparateFromBeam($notename,'down').down
                 }
             }
 
