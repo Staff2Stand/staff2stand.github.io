@@ -76,7 +76,6 @@ function isOverlapping(div1, div2){
  * Overlap Amount
  * @param {*} el1 
  * @param {*} el2 
- * @param {*} units option for custom units. Default, 1, is px.
  * @returns {object} { x:number , y:number } These values represent the distance & direction el1 needs to move in order to not be overlapping. Value will be 0 if not overlapping in that direction. x moves right, -x moves left, y moves down, -y moves up
  */
 function overlapAmount(el1,el2){
@@ -91,6 +90,23 @@ function overlapAmount(el1,el2){
     return {
         x: (overlapRL ? el1.left - el2.right : overlapLR ? el1.right - el2.left : 0),
         y: (overlapBT ? el1.top - el2.bottom : overlapTB ? el1.bottom - el2.top : 0)
+    }
+}
+/**
+ * Distance To Separate
+ * @param {*} el1 
+ * @param {*} el2 
+ * @returns {object} object with props left, right, up, down. Value of each is the distance(px) el1 needs to move, as in xy coordinates, to be directly adjacent to that side of el2.
+ */
+function distanceToSeparate(el1,el2){
+    el1 = $(el1).get(0).getBoundingClientRect()
+    el2 = $(el2).get(0).getBoundingClientRect()
+
+    return {
+        left: el1.right - el2.left,
+        right: el1.left - el2.right,
+        up: el1.bottom - el2.top,
+        down: el1.top - el2.bottom
     }
 }
 /**
@@ -445,7 +461,7 @@ $(function(){
                 .appendTo( $notename )
             
             //Check For Overlaps
-            function overlapWithBeamAmount(element){
+            function distToSeparateFromBeam(element){
                 const $element = $(element)
                 let overlappingBeam = false
                 $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
@@ -455,7 +471,7 @@ $(function(){
                         return
                     }
                 })
-                return overlappingBeam ? overlapAmount($element,overlappingBeam) : 0
+                return overlappingBeam ? distanceToSeparate($element,overlappingBeam) : 0
             }
 
             const $notehead = $(note).find('path[data-name]').filter(function(i){
@@ -467,12 +483,12 @@ $(function(){
 
             const overlaps = {
                 fingering: {
-                    notehead: overlapAmount($fingering,$notehead),
-                    beam: overlapWithBeamAmount($fingering)
+                    notehead: distanceToSeparate($fingering,$notehead).up,
+                    beam: distToSeparateFromBeam($fingering).up
                 },
                 notename: {
-                    notehead: overlapAmount($notename,$notehead),
-                    beam: overlapWithBeamAmount($notename)
+                    notehead: overlapAmount($notename,$notehead).down,
+                    beam: distToSeparateFromBeam($notename).down
                 }
             }
 
