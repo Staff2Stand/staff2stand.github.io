@@ -462,8 +462,8 @@ $(function(){
                     const distances = distanceToSeparate($element,beam)
 
                     const beam_is_on_same_line_as_note = (function(){
-                        const beamLine = beam.get(0).getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
-                        const noteLine = $note.get(0).getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
+                        const beamLine = beam.getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
+                        const noteLine = note.getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
                         return beamLine === noteLine
                     })()
 
