@@ -460,11 +460,24 @@ $(function(){
                 let result = { left:0, right:0, up:0, down:0 }
                 $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
                     const distances = distanceToSeparate($element,beam)
-                    const dist = distances[testDirection]
-                    const positivifiedDist = dist<0 ? dist*-1 : dist
-                    if (positivifiedDist <= noteheadHeight) {
-                        //the beam is within a notehead height of the element, in the direction of testDirection
-                        console.log('found the beam',beam,'for the note',note)
+
+                    const beam_is_on_same_line_as_note = (function(){
+                        const beamLine = beam.get(0).getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
+                        const noteLine = $note.get(0).getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
+                        return beamLine === noteLine
+                    })()
+
+                    const beam_covers_same_x_as_element = distances.left < 0 && distances.right > 0
+
+                    const element_needs_to_move = {
+                        up:     distances.up < 0 ,
+                        down:   distances.down > 0 
+                    }[testDirection]
+
+                    if (    beam_is_on_same_line_as_note &&
+                            beam_covers_same_x_as_element &&
+                            element_needs_to_move
+                        ) {
                         result = distances
                         return
                     }
