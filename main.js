@@ -448,7 +448,7 @@ $(function(){
                 return (dataName.match(/[A-Za-z]/g) || []).length === 1
             })
             const noteheadHeight = $notehead.get(0).getBBox().height
-            
+
             /**
              * Distance To Separate From Beam
              * @param {*} element 
