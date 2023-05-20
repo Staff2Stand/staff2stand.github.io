@@ -442,6 +442,13 @@ $(function(){
                 .appendTo( $notename )
             
             //Check For Overlaps
+            const $notehead = $(note).find('path[data-name]').filter(function(i){
+                const $thisPath = $(this)
+                const dataName = $thisPath.attr('data-name')
+                return (dataName.match(/[A-Za-z]/g) || []).length === 1
+            })
+            const noteheadHeight = $notehead.get(0).getBBox().height
+            
             /**
              * Distance To Separate From Beam
              * @param {*} element 
@@ -455,22 +462,14 @@ $(function(){
                     const distances = distanceToSeparate($element,beam)
                     const dist = distances[testDirection]
                     const positivifiedDist = dist<0 ? dist*-1 : dist
-                    if (positivifiedDist <= staffHeight) {
+                    if (positivifiedDist <= noteheadHeight) {
                         //the beam is within a staffHeight of the element, in the direction of testDirection
-                        console.log('found intersecting beam')
                         result = distances
                         return
                     }
                 })
                 return result
             }
-
-            const $notehead = $(note).find('path[data-name]').filter(function(i){
-                const $thisPath = $(this)
-                const dataName = $thisPath.attr('data-name')
-                return (dataName.match(/[A-Za-z]/g) || []).length === 1
-            })
-            const noteheadHeight = $notehead.get(0).getBBox().height
 
             const overlaps = {
                 fingering: {
