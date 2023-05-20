@@ -445,7 +445,7 @@ $(function(){
             /**
              * Distance To Separate From Beam
              * @param {*} element 
-             * @param {*} testDirection the direction from the element we expect the beam to be
+             * @param {*} testDirection the direction we expect to have to move the element
              * @returns {object} result of distanceToSeperate, or { left:0, right:0, up:0, down:0 } if the note doesn't have a beam
              */
             function distToSeparateFromBeam(element,testDirection){
@@ -457,6 +457,7 @@ $(function(){
                     const positivifiedDist = dist<0 ? dist*-1 : dist
                     if (positivifiedDist <= staffHeight) {
                         //the beam is within a staffHeight of the element, in the direction of testDirection
+                        console.log('found intersecting beam')
                         result = distances
                         return
                     }
