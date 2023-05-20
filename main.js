@@ -463,7 +463,8 @@ $(function(){
                     const dist = distances[testDirection]
                     const positivifiedDist = dist<0 ? dist*-1 : dist
                     if (positivifiedDist <= noteheadHeight) {
-                        //the beam is within a staffHeight of the element, in the direction of testDirection
+                        //the beam is within a notehead height of the element, in the direction of testDirection
+                        console.log('found the beam',beam,'for the note',note)
                         result = distances
                         return
                     }
