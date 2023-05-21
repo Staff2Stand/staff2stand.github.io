@@ -532,7 +532,7 @@ $(function(){
         const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat);
         const $lastLine = $svg.children('g').last()
         const lastLine = $lastLine.get(0)
-        const lastLineRect = element.getBBox();
+        const lastLineRect = lastLine.getBBox();
 
         const bottomOverlap = Math.max(lastLineRect.y + lastLineRect.height - viewBox[1] - viewBox[3], 0)
         if (bottomOverlap === 0) return
