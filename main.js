@@ -518,7 +518,7 @@ $(function(){
 
         //Separate the lines of music if they're overlapping
         //  each line is a <g>
-        const $svg = abcContainer.children('svg')
+        const $svg = $(abcContainer).children('svg')
         $svg.children('g').each((i,g)=>{
             const nextG = $(g).next()
             if (!nextG.length) return
