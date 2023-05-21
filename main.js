@@ -520,13 +520,16 @@ $(function(){
         //  each line is a <g>
         const $svg = $(abcContainer).children('svg')
         let totalTranslationDist = 0
+
         $svg.children('g').each((i,g)=>{
             const nextG = $(g).next()
             if (!nextG.length) return
 
             const distances = distanceToSeparate(nextG,g)
             if (distances.down <= 0) return
+
             nextG.get(0).setAttribute('transform',`translate(0,${distances.down})`)
+            
             totalTranslationDist += distances.down
         })
 
