@@ -526,6 +526,26 @@ $(function(){
             const distances = distanceToSeparate(nextG,g)
             if (distances.down > 0) nextG.get(0).setAttribute('transform',`translate(0,${distances.down})`)
         })
+
+        //Check if there are elements outside the view of the svg
+        const svg = $svg.get(0)
+        const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat);
+        const $lastLine = $svg.children('g').last()
+        const lastLine = $lastLine.get(0)
+        const lastLineRect = element.getBBox();
+
+        const bottomOverlap = Math.max(lastLineRect.y + lastLineRect.height - viewBox[1] - viewBox[3], 0)
+        if (bottomOverlap === 0) return
+
+        //if so, we need to increase the last number in the <svg> viewBox attribute 
+        //  AND the size of the abcContainer <div> by that same amount
+        viewBox[3] += bottomOverlap
+        const newViewBox = viewBox.join(' ')
+        svg.setAttribute('viewBox',newViewBox)
+
+        abcContainer.height(`+=${bottomOverlap}`)
+
+
     }
 
 
