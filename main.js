@@ -515,6 +515,17 @@ $(function(){
 
             $notename.get(0).setAttribute('transform',`translate(${translateDist.notename.x},${translateDist.notename.y})`)
         })
+
+        //Separate the lines of music if they're overlapping
+        //  each line is a <g>
+        const $svg = abcContainer.children('svg')
+        $svg.children('g').each((i,g)=>{
+            const nextG = $(g).next()
+            if (!nextG.length) return
+
+            const distances = distanceToSeparate(nextG,g)
+            if (distances.down > 0) nextG.get(0).setAttribute('transform',`translate(0,${distances.down})`)
+        })
     }
 
 
