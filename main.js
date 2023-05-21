@@ -545,11 +545,13 @@ $(function(){
 
         //if so, we need to increase the last number in the <svg> viewBox attribute 
         //  AND the size of the abcContainer <div> by that same amount
-        viewBox[3] += bottomOverlap
+        const distToIncrease = bottomOverlap + totalTranslationDist
+
+        viewBox[3] += distToIncrease
         const newViewBox = viewBox.join(' ')
         svg.setAttribute('viewBox',newViewBox)
 
-        $(abcContainer).height(`+=${bottomOverlap + totalTranslationDist}`)
+        $(abcContainer).height(`+=${distToIncrease}`)
 
 
     }
