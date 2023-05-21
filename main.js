@@ -519,7 +519,7 @@ $(function(){
         //Separate the lines of music if they're overlapping
         //  each line is a <g>
         const $svg = $(abcContainer).children('svg')
-        let translationDist = 0
+        let totalTranslationDist = 0
         $svg.children('g').each((i,g)=>{
             const nextG = $(g).next()
             if (!nextG.length) return
@@ -527,7 +527,7 @@ $(function(){
             const distances = distanceToSeparate(nextG,g)
             if (distances.down <= 0) return
             nextG.get(0).setAttribute('transform',`translate(0,${distances.down})`)
-            translationDist += distances.down
+            totalTranslationDist += distances.down
         })
 
         //Check if there are elements outside the view of the svg
@@ -546,7 +546,7 @@ $(function(){
         const newViewBox = viewBox.join(' ')
         svg.setAttribute('viewBox',newViewBox)
 
-        $(abcContainer).height(`+=${bottomOverlap + translationDist}`)
+        $(abcContainer).height(`+=${bottomOverlap + totalTranslationDist}`)
 
 
     }
