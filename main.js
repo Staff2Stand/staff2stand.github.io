@@ -543,7 +543,7 @@ $(function(){
         const newViewBox = viewBox.join(' ')
         svg.setAttribute('viewBox',newViewBox)
 
-        abcContainer.height(`+=${bottomOverlap}`)
+        $(abcContainer).height(`+=${bottomOverlap}`)
 
 
     }
