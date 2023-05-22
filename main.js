@@ -519,42 +519,24 @@ $(function(){
 
         //Separate the lines of music if they're overlapping
         //  each line is a <g>
-        const $svg = $(abcContainer).children('svg')
-        let totalTranslationDist = 0
+        const $lineDivs = $(abcContainer).children('div')
+        const $lineSVGs = $lineDivs.children('svg')
 
-        $svg.children('g').each((i,g)=>{
-            const $nextG = $(g).next()
-            if (!$nextG.length) return
+        //Check for elements outside view of each line
+        $lineSVGs.each((i,svg)=>{
+            const svg = $(svg).get(0)
+            const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
+            const svgRect = svg.getBBox()
+            const bottomOverlap = Math.max(svgRect.y + svgRect.height - viewBox[1] - viewBox[3], 0)
+            const topOverlap = Math.min(svgRect.y - viewBox[1],0)
+            
+            if (!topOverlap && !bottomOverlap) return
+            
+            if(topOverlap) viewBox[1] += topOverlap
+            if(bottomOverlap) viewBox[3] += bottomOverlap
 
-            const distances = distanceToSeparate($nextG,g)
-            if (distances.down <= 0) return
-
-            $nextG.get(0).setAttribute('transform',`translate(0,${distances.down})`)
-
-            totalTranslationDist += distances.down
+            svg.setAttribute('viewBox',viewBox)
         })
-
-        //Check if there are elements outside the view of the svg
-        const svg = $svg.get(0)
-        const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat);
-        const $lastLine = $svg.children('g').last()
-        const lastLine = $lastLine.get(0)
-        const lastLineRect = lastLine.getBBox();
-
-        const bottomOverlap = Math.max(lastLineRect.y + lastLineRect.height - viewBox[1] - viewBox[3], 0)
-        if (bottomOverlap === 0) return
-
-        //if so, we need to increase the last number in the <svg> viewBox attribute 
-        //  AND the size of the abcContainer <div> by that same amount
-        const distToIncrease = bottomOverlap + totalTranslationDist
-
-        viewBox[3] += distToIncrease
-        const newViewBox = viewBox.join(' ')
-        svg.setAttribute('viewBox',newViewBox)
-
-        $(abcContainer).height(`+=${distToIncrease}`)
-
-
     }
 
 
