@@ -524,7 +524,7 @@ $(function(){
 
         //Check for elements outside view of each line
         $lineSVGs.each((i,$svg)=>{
-            const svg = $(svg).get(0)
+            const svg = $($svg).get(0)
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBoundingClientRect()
             const gRect = $svg.children('g').last().get(0).getBoundingClientRect()
