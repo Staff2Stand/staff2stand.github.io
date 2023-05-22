@@ -524,7 +524,7 @@ $(function(){
 
         //Check for elements outside view of each line
         $lineSVGs.each((i,svg)=>{
-            const svg = $(svg).get(0)
+            svg = $(svg).get(0)
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBBox()
             const bottomOverlap = Math.max(svgRect.y + svgRect.height - viewBox[1] - viewBox[3], 0)
