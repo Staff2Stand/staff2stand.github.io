@@ -529,7 +529,7 @@ $(function(){
             const svgRect = svg.getBoundingClientRect()
             const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
 
-            const g_height_is_stupid_large = gRect.height > staffHeight * 2.5
+            const g_height_is_stupid_large = gRect.height > staffHeight * 3
 
             const topDif =  g_height_is_stupid_large ? 
                             0 : //0 bc in this case all the fingerings should already be showing
