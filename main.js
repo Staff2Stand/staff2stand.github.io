@@ -526,11 +526,11 @@ $(function(){
             const svgRect = svg.getBoundingClientRect()
             const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
             
-            const topDif = gRect.top - svgRect.top
-            const bottomDif = gRect.bottom - svgRect.bottom
+            // const topDif = gRect.top - svgRect.top
+            // const bottomDif = gRect.bottom - svgRect.bottom
 
-            viewBox[1] -= topDif
-            viewBox[3] += bottomDif + topDif
+            viewBox[1] -= gRect.top
+            viewBox[3] += gRect.bottom
 
             svg.setAttribute('viewBox',viewBox)
         })
