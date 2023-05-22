@@ -517,17 +517,14 @@ $(function(){
             $notename.get(0).setAttribute('transform',`translate(${translateDist.notename.x},${translateDist.notename.y})`)
         })
 
-        //Separate the lines of music if they're overlapping
-        //  each line is a <g>
+        //Adjust viewBox of each line's svg to show notenames and fingerings
         const $lineDivs = $(abcContainer).children('div')
         const $lineSVGs = $lineDivs.children('svg')
 
-        //Check for elements outside view of each line
-        $lineSVGs.each((i,$svg)=>{
-            const svg = $($svg).get(0)
+        $lineSVGs.each((i,svg)=>{
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBoundingClientRect()
-            const gRect = $svg.children('g').last().get(0).getBoundingClientRect()
+            const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
             
             const topDif = gRect.top - svgRect.top
             const bottomDif = gRect.bottom - svgRect.bottom
