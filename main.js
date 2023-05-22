@@ -525,6 +525,9 @@ $(function(){
 
         const $lineDivs = $(abcContainer).children('div')
         const $lineSVGs = $lineDivs.children('svg')
+
+        if (!$lineSVGs.length) return //since its an empty part
+
         $lineSVGs.each((i,svg)=>{
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBoundingClientRect()
