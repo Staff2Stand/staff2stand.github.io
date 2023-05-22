@@ -520,7 +520,6 @@ $(function(){
         //Adjust viewBox of each line's svg to show notenames and fingerings
         const $lineDivs = $(abcContainer).children('div')
         const $lineSVGs = $lineDivs.children('svg')
-
         $lineSVGs.each((i,svg)=>{
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBoundingClientRect()
@@ -529,8 +528,8 @@ $(function(){
             // const topDif = gRect.top - svgRect.top
             // const bottomDif = gRect.bottom - svgRect.bottom
 
-            viewBox[1] -= gRect.top
-            viewBox[3] += gRect.bottom
+            viewBox[1] = gRect.top
+            viewBox[3] = gRect.bottom
 
             svg.setAttribute('viewBox',viewBox)
         })
