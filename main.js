@@ -156,7 +156,8 @@ $(function(){
     //Initialize Editors
     const abcOpts = {
         add_classes: true,
-        responsive: 'resize'
+        responsive: 'resize',
+        oneSvgPerLine: true
     }
     const editorInstances = (function(){
         const temp = {}
