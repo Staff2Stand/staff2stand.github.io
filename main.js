@@ -523,17 +523,17 @@ $(function(){
         const $lineSVGs = $lineDivs.children('svg')
 
         //Check for elements outside view of each line
-        $lineSVGs.each((i,svg)=>{
-            svg = $(svg).get(0)
+        $lineSVGs.each((i,$svg)=>{
+            const svg = $(svg).get(0)
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
-            const svgRect = svg.getBBox()
-            const bottomOverlap = Math.max(svgRect.y + svgRect.height - viewBox[1] - viewBox[3], 0)
-            const topOverlap = Math.min(svgRect.y - viewBox[1],0)
+            const svgRect = svg.getBoundingClientRect()
+            const gRect = $svg.children('g').last().get(0).getBoundingClientRect()
             
-            if (!topOverlap && !bottomOverlap) return
-            
-            if(topOverlap) viewBox[1] += topOverlap
-            if(bottomOverlap) viewBox[3] += bottomOverlap
+            const topDif = gRect.top - svgRect.top
+            const bottomDif = gRect.bottom - svgRect.bottom
+
+            viewBox[1] -= topDif
+            viewBox[3] += bottomDif + topDif
 
             svg.setAttribute('viewBox',viewBox)
         })
