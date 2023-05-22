@@ -525,14 +525,18 @@ $(function(){
             const svgRect = svg.getBoundingClientRect()
             const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
 
-            const topDif = svgRect.top - gRect.top
+            const g_height_is_stupid_large = gRect.height > staffHeight * 2.5
+
+            const topDif =  g_height_is_stupid_large ? 
+                            0 : //0 bc in this case all the fingerings should already be showing
+                            svgRect.top - gRect.top
             const bottomDif = gRect.bottom - svgRect.bottom
             
             viewBox[1] -= topDif
             viewBox[3] += topDif + bottomDif
 
             //testing for Bass
-            if ($(abcContainer).parent().attr('instrument') === 'bass'){
+            /* if ($(abcContainer).parent().attr('instrument') === 'bass'){
                 console.log('Bass line\'s viewbox stuff',{
                     svgRect: svgRect,
                     gRect: gRect,
@@ -541,7 +545,7 @@ $(function(){
                     viewbox: viewBox
                 })
                 return 
-            }
+            } */
 
             svg.setAttribute('viewBox',viewBox)
         })
