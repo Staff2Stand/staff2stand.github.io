@@ -531,6 +531,18 @@ $(function(){
             viewBox[1] -= topDif
             viewBox[3] += topDif + bottomDif
 
+            //testing for Bass
+            if ($(abcContainer).parent().attr('instrument') === 'bass'){
+                console.log('Bass line\'s viewbox stuff',{
+                    svgRect: svgRect,
+                    gRect: gRect,
+                    topDif: topDif,
+                    bottomDif: bottomDif,
+                    viewbox: viewBox
+                })
+                return 
+            }
+
             svg.setAttribute('viewBox',viewBox)
         })
     }
