@@ -520,7 +520,8 @@ $(function(){
         //Adjust viewBox of each line's svg to show notenames and fingerings
         console.log('adjusting line height for ',$(abcContainer).closest('.part').attr('instrument') )
 
-        const staffHeight = $(abcContainer).find('.abcjs-staff').get(0).getBBox().height
+        let staffHeight = $(abcContainer).find('.abcjs-staff').get(0)?.getBBox().height
+        if (!staffHeight) staffHeight = 32
 
         const $lineDivs = $(abcContainer).children('div')
         const $lineSVGs = $lineDivs.children('svg')
