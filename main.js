@@ -851,7 +851,7 @@ $(function(){
             window.print();
             $("#print").removeClass("active");
         }
-    })
+    }).appendTo($printMenu)
 
     /**
      * INITIALIZE TOOLTIPS
