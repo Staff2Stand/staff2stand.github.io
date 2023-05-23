@@ -204,6 +204,7 @@ $(function(){
                                         text: instrument.toUpperCase()
                                     }).appendTo($menuItem)
                             })
+                $editorUtilMenu.menu('refresh') //need to refresh to apply menu to appended items
                 
             const $editor = $('<textarea/>',{
                 'id': `editor-${instrument}`,
