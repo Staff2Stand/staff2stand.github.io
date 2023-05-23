@@ -59,6 +59,15 @@ const stringReference = {
 
 //UTILITY FUNCTIONS
 /**
+ * Capitalized first letter
+ * @param {*} str 
+ * @returns the string with the first letter capitalized
+ */
+function capitalize1stLetter(str){
+    return str.substring(0,1).toUpperCase() + str.substring(1,str.length)
+}
+
+/**
  * Is Overlapping
  * @param {*} div1 
  * @param {*} div2 
@@ -134,7 +143,7 @@ $(function(){
             }).appendTo($part)
 
             const $instrument_heading = $('<h1/>',{
-                text:instrument.toUpperCase()
+                text:capitalize1stLetter(instrument)
             }).appendTo($part)
 
             //PART UTILS
@@ -201,7 +210,7 @@ $(function(){
                                     const $menuItemContent = $('<div/>',{
                                         'style': 'text-transform:capitalize;',
                                         'instrument': instrument,
-                                        text: instrument.toUpperCase()
+                                        text: capitalize1stLetter(instrument)
                                     }).appendTo($menuItem)
                             })
                 $editorUtilMenu.menu('refresh') //need to refresh to apply menu to appended items
@@ -824,8 +833,8 @@ $(function(){
     const $printMenu = $('#printMenu')
     instruments.forEach(instrument=>{
         $('<span/>',{
-            'id': `print${instrument.toUpperCase()}`,
-            text: instrument.toUpperCase(),
+            'id': `print${ capitalize1stLetter(instrument) }`,
+            text: capitalize1stLetter(instrument),
             click: function(){
                 $("#tunes_container").attr("printInstruments", instrument);
                 window.print();
