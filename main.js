@@ -120,7 +120,116 @@ $(function(){
      */
     S2S.activeScores = []
 
-    //CREATE CUSTOM CONTEXT MENU ELEMENT
+    /**
+     * CREATE HTML FOR EACH INSTRUMENT
+     */
+    instruments.forEach(instrument=>{
+        const $part = $(`<div/>`,{
+            'class': 'part',
+            'instrument': instrument
+        }).appendTo('#tunes_container')
+
+            const $part_top_bg = $('<div/>',{
+                'class':'part-top-bg'
+            }).appendTo($part)
+
+            const $instrument_heading = $('<h1/>',{
+                text:instrument.toUpperCase()
+            }).appendTo($part)
+
+            //PART UTILS
+            const $part_utils = $('<div/>',{
+                'class':'part-utils'
+            }).appendTo($part)
+
+                const $hidePart = $('<span/>',{
+                    'class': 'hide util',
+                    'title': 'Hide Part',
+                    click: function(){ $part.toggleClass('hidden') }
+                }).appendTo($part_utils)
+
+                    $('<i class="fa-solid fa-eye-slash fa-xl"></i>').appendTo($hidePart)
+            
+            //EDITOR UTILS
+            const $editor_utils = $('<div/>',{
+                'class':'abcEditor-utils hidden'
+            }).appendTo($part)
+
+                const $editorUtils_menuToggle = $('<span/>',{
+                    'class':'editorUtilMenuToggle',
+                    text: 'Tools',
+                    click: function(){
+                        const $menu = $(this).closest('.editorUtilMenuToggle').next('.editorUtilMenu')
+                        $menu.toggle()
+                    }
+                }).appendTo($editor_utils)
+                
+                const $editorUtilMenu = $('<ul/>',{
+                    'class': 'editorUtilMenu'
+                }).appendTo($editor_utils)
+                .menu({
+                    //EDITOR UTILS MENU SELECTION
+                    //initialize menu and add event listener for menu item selection
+                    select: function(e,activeMenuItem){
+                        const $activeMenuItem = $(activeMenuItem.item[0])
+                        if ($activeMenuItem.hasClass('submenu_parent')) return
+                        //COPY FROM
+                        if ($activeMenuItem.closest('.editorUtils_copyFromMenu').length){
+                            let editorVal = $(`#editor-${instrument}`).val()
+                            const correctVoiceField = voiceFieldReference[instrument]
+                            //replace all instances of the voice field with the appropriate voice field
+                            editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
+                            //set this instrument's editor to that val and trigger change
+                            $(`#editor-${instrument}`).val(editorVal).change()
+                        }
+                    }
+                })
+
+                    const $submenu = $('<li/>',{ 
+                        'class':'submenu_parent' 
+                    }).appendTo($editorUtilMenu)
+
+                        $('<div>Copy From</div>').appendTo($submenu)
+
+                        const $copyFromMenu = $('<ul/>',{
+                            'class':'editorUtils_copyFromMenu'
+                        }).appendTo($submenu)
+                            //append menu item for each other instrument
+                            instruments.forEach(otherInstrument=>{
+                                if (otherInstrument == instrument) return
+                                const $menuItem = $('<li/>').appendTo($copyFromMenu)
+                                    const $menuItemContent = $('<div/>',{
+                                        'style': 'text-transform:capitalize;',
+                                        'instrument': instrument,
+                                        text: instrument.toUpperCase()
+                                    }).appendTo($menuItem)
+                            })
+                
+            const $editor = $('<textarea/>',{
+                'id': `editor-${instrument}`,
+                'class': 'abcEditor'
+            }).appendTo($part)
+
+            const $abcWarnings = $('<div/>',{
+                'id': `abc-warnings-${instrument}`,
+                'class': 'abc-warnings'
+            }).appendTo($part)
+
+            const $tunes = $('<div/>',{
+                'id': `tunes-${instrument}`,
+                'class': 'instrument_tunes',
+                'instrument': instrument
+            }).appendTo($part)
+
+            const $extraHtml = $('<div/>',{
+                'class': 'extra_html'
+            }).appendTo($part)
+    })
+
+
+    /**
+     * CREATE CUSTOM CONTEXT MENU ELEMENT
+     */
     const $customMenu = $(`<ul class='custom-menu'></ul>`)
     $customMenu.appendTo('body')
 
@@ -711,106 +820,37 @@ $(function(){
     /**
      * PRINTING
      */
-    // Print instrument buttons
-    $("#printMenu span").click(function () {
-        let printInstruments = "";
-
-        switch ($(this).attr("id")) {
-        case "printViolin":
-            printInstruments = "violin";
-            break;
-        case "printViola":
-            printInstruments = "viola";
-            break;
-        case "printCello":
-            printInstruments = "cello";
-            break;
-        case "printBass":
-            printInstruments = "bass";
-            break;
-        case "printPiano":
-            printInstruments = "piano";
-            break;
-        case "printAll":
-            printInstruments = instruments.join(',');
-            break;
-        case "printAllVisible":
-            printInstruments = "allVisible";
-            break;
-        default:
-            console.error("||S2S||  print instrument error");
-        }
-
-        $("#tunes_container").attr("printInstruments", printInstruments);
-        window.print();
-        $("#print").removeClass("active");
-    });
-
-
-    /**
-     *  PART UTILITIES
-    */
-    //copy part utils template html to each part util div
-    const partUtilsTemplate = $('#part-utils-template').html()
-    $('.part-utils').each((i,partUtils) => {
-        $(partUtils)
-            //copy content from template
-            .html(partUtilsTemplate)
-            //HIDE PART BUTTON / TOGGLE PART
-            .find('.hide').click(function(){
-                $(this).closest('.part').toggleClass('hidden')
-            })
-    })
-
-    /**
-     *  EDITOR UTILITIES
-     */
-    const $abcEditorUtilsTemplate = $('#abcEditor-utils-template')
-    //copy editor utils template html to each editor util div
-    $('.abcEditor-utils').each((i,thisEditorUtils) => {
-        const thisInstrument = $(thisEditorUtils).closest('.part').attr('instrument')
-
-        $(thisEditorUtils)
-            //copy content from template
-            .html($abcEditorUtilsTemplate.html())
-            //populate editorUtils_copyFromMenu with each instrument
-            .find('.editorUtils_copyFromMenu').each(function(i,menu){
-                //clear html first so that the template's menu items aren't copied over as well
-                $(menu).html('')
-                //append menu item for each other instrument
-                instruments.forEach(function(instrument){
-                    if (instrument == thisInstrument) return
-                    $(menu).append(`<li><div style="text-transform:capitalize;" instrument="${instrument}">${instrument}</div></li>`)
-
-                })
-            })
-        //EDITOR UTILS MENU SELECTION
-        //initialize menu and add event listener for menu item selection
-        $(thisEditorUtils).closest('.part').find('.editorUtilMenu').menu({
-            select: function(e,activeMenuItem){
-                const $activeMenuItem = $(activeMenuItem.item[0])
-                if ($activeMenuItem.hasClass('submenu_parent')) return
-
-                //COPY FROM
-                if ($activeMenuItem.closest('.editorUtils_copyFromMenu').length){
-                    const selectedInstrument = $activeMenuItem.find('div').attr('instrument')
-                    let editorVal = $(`#editor-${selectedInstrument}`).val()
-                    const correctVoiceField = voiceFieldReference[thisInstrument]
-                    //replace all instances of the voice field with the appropriate voice field
-                    editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
-                    //set this instrument's editor to that val and trigger change
-                    $(`#editor-${thisInstrument}`).val(editorVal).change()
-                }
-                
+    const $printMenu = $('#printMenu')
+    instruments.forEach(instrument=>{
+        $('<span/>',{
+            'id': `print${instrument.toUpperCase()}`,
+            text: instrument.toUpperCase(),
+            click: function(){
+                $("#tunes_container").attr("printInstruments", instrument);
+                window.print();
+                $("#print").removeClass("active");
             }
-        })
+        }).appendTo($printMenu)
     })
-    /**
-     * EDITOR UTIL MENU TOGGLE
-     */
-    $('.editorUtilMenuToggle').click(function(){
-        const $menu = $(this).closest('.editorUtilMenuToggle')
-        $menu.next('.editorUtilMenu').toggle()
+
+    const printAll = $('<span/>',{
+        'id':'printAll',
+        text: 'All',
+        click: function(){
+            $("#tunes_container").attr("printInstruments", instruments.join(','));
+            window.print();
+            $("#print").removeClass("active");
+        }
+    }).appendTo($printMenu)
+
+    const printAllVisible = $('<span/>',{
+        'id':'printAllVisible',
+        text: 'All Visible',
+        click: function(){
+            $("#tunes_container").attr("printInstruments", 'allVisible');
+            window.print();
+            $("#print").removeClass("active");
+        }
     })
 
     /**
