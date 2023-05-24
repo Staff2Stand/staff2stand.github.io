@@ -231,9 +231,6 @@ $(function(){
                 'id': `editor-${instrument}`,
                 'class': 'abcEditor'
             }).appendTo($part)
-            //Initialize Editor
-            const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
 
             const $abcWarnings = $('<div/>',{
                 'id': `abc-warnings-${instrument}`,
@@ -259,6 +256,10 @@ $(function(){
             const $extraHtml = $('<div/>',{
                 'class': 'extra_html'
             }).appendTo($part)
+
+            //Initialize Editor
+            const abcEditorOpts = createAbcEditorOpts(instrument, $tuneDivs)
+            abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
     })
 
     /**
@@ -287,10 +288,11 @@ $(function(){
 
     /**
      * ABC EDITOR OPTIONS
-     * @param {*} instrument 
+     * @param {string} instrument 
+     * @param {object} tuneDivs
      * @returns abc editor options object
      */
-    function createAbcEditorOpts (instrument){
+    function createAbcEditorOpts (instrument, tuneDivs){
         return {
             canvas_id: tuneDivs[instrument],
             warnings_id: `abc-warnings-${instrument}`,
