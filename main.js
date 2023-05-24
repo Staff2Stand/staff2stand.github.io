@@ -290,7 +290,7 @@ $(function(){
     /**
      * ABC EDITOR OPTIONS
      * @param {string} instrument 
-     * @param {object} tuneDivs
+     * @param {object} tuneDivs an array of DOM elements
      * @returns abc editor options object
      */
     function createAbcEditorOpts (instrument, tuneDivs){
