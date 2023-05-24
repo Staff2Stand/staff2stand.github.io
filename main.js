@@ -782,7 +782,10 @@ $(function(){
             if ($score.get(0) === $bkmk.get(0)) {
                 S2S.activeScores.splice(i,1)
 
-                if (no_other_active_scores) $allAbcEditors.change()
+                if (no_other_active_scores) {
+                    $allAbcEditors.change()
+                    setAllNotDirty()
+                }
 
                 return
             }
