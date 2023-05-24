@@ -754,6 +754,7 @@ $(function(){
 
             console.log('violin',{
                 'bkmkAbc':bkmkAbc,
+                'editor val': editorVal,
                 'new val': newEditorVal,
                 'editor': $editor
             })
