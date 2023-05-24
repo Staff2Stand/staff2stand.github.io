@@ -723,7 +723,8 @@ $(function(){
                         })()
                         createMyScoreBkmk(scoreData)
                     },
-                    "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) }
+                    "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) },
+                    "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
                 },
                 $vEllipse
             )
@@ -733,6 +734,27 @@ $(function(){
         //append this section to the sidebar
         $('#sidebar').append($section)
     })
+
+    /**
+     * Remove Score From Editors
+     * @param {*} $bkmk 
+     */
+    function removeScoreFromEditors($bkmk){
+        instruments.forEach(instrument=>{
+            let bkmkAbc = $bkmk.attr(`abc-${instrument}`)
+            if (!bkmkAbc) return
+
+            bkmkAbc = unescapeABC(bkmkAbc)
+
+            const $editor = $(`#editor-${instrument}`)
+
+            let editorVal = $editor.val()
+
+            const newEditorVal = editorVal.replace(bkmkAbc,'')
+
+            $editor.val(newEditorVal).change()
+        })
+    }
 
 
     //On Bookmark Click
