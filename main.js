@@ -69,6 +69,32 @@ const abcOpts = {
 const abcEditorInstances = {}
 
 //UTILITY FUNCTIONS
+
+/**
+ * ESCAPE AND UNESCAPE ABC STRINGS
+ * @param {String} abc
+ * @param {Boolean} toHTML default true
+ */
+function escapeABC(abc,toHTML=true){
+    if (!toHTML) return abc.replace(/[\n"']/gm,'\$&')
+
+    return abc.replace(/\n/gm,'\\n').replace(/"/gm,'&quot;').replace(/'/gm,'&apos;')
+}
+/**
+ * @param {String} abc
+ * @param {Boolean} fromHTML default true
+ */
+function unescapeABC(abc,fromHTML=true){
+    if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
+
+    if (!abc) {
+        console.warn('||S2S||  abc string is undefined, returning an empty string')
+        return ''
+    }
+
+    return abc.replace(/\\n/g,'\r\n').replace(/&quot;/g,'"').replace(/&apos;/g,"'")
+}
+
 /**
  * Capitalized first letter
  * @param {*} str 
@@ -760,6 +786,11 @@ $(function(){
             })
 
             $editor.val(newEditorVal).change()
+        })
+        //remove the bkmk from active scores global adn remove active class
+        $bkmk.removeClass('active')
+        S2S.activeScores.forEach(($score,i)=>{
+            if ($score.get(0) === $bkmk.get(0)) S2S.activeScores.splice(i,1)
         })
     }
 
@@ -1541,33 +1572,6 @@ $(function(){
      * MAKE NOTEY DRAGGABLE
      */
     $('#notey .notey').draggable()
-
-
-    /**
-     * ESCAPE AND UNESCAPE ABC STRINGS
-     * @param {String} abc
-     * @param {Boolean} toHTML default true
-     */
-    function escapeABC(abc,toHTML=true){
-        if (!toHTML) return abc.replace(/[\n"']/gm,'\$&')
-
-        return abc.replace(/\n/gm,'\\n').replace(/"/gm,'&quot;').replace(/'/gm,'&apos;')
-    }
-    /**
-     * @param {String} abc
-     * @param {Boolean} fromHTML default true
-     */
-    function unescapeABC(abc,fromHTML=true){
-        if (!fromHTML) return abc.replace(/\\n/g,'\r\n').replace(/\"/g,'"').replace(/'/g,"'")
-
-        if (!abc) {
-            console.warn('||S2S||  abc string is undefined, returning an empty string')
-            return ''
-        }
-
-        return abc.replace(/\\n/g,'\r\n').replace(/&quot;/g,'"').replace(/&apos;/g,"'")
-    }
-
 
 
     /**
