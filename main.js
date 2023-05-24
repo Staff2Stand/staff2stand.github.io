@@ -748,7 +748,7 @@ $(function(){
 
             const $editor = $(`#editor-${instrument}`)
 
-            let editorVal = unescapeABC($editor.val())
+            let editorVal = unescapeABC($editor.val(),false)
 
             const newEditorVal = editorVal.replace(bkmkAbc,'')
 
