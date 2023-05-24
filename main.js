@@ -671,8 +671,6 @@ $(function(){
         })
 
         //Adjust viewBox of each line's svg to show notenames and fingerings
-        console.log('adjusting line height for ',$(abcContainer).closest('.part').attr('instrument') )
-
         let staffHeight = $(abcContainer).find('.abcjs-staff').get(0)?.getBBox().height
         if (!staffHeight) staffHeight = 32
 
@@ -693,18 +691,6 @@ $(function(){
             
             viewBox[1] -= topDif
             viewBox[3] += topDif + bottomDif
-
-            //testing for Bass
-            /* if ($(abcContainer).parent().attr('instrument') === 'bass'){
-                console.log('Bass line\'s viewbox stuff',{
-                    svgRect: svgRect,
-                    gRect: gRect,
-                    topDif: topDif,
-                    bottomDif: bottomDif,
-                    viewbox: viewBox
-                })
-                return 
-            } */
 
             svg.setAttribute('viewBox',viewBox)
         })
