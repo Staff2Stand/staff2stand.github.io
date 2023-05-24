@@ -260,7 +260,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
+            abcEditorInstances[instrument] = new abcjs.Editor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
