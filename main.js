@@ -787,7 +787,7 @@ $(function(){
                 return
             }
 
-            renderScoreFromBkmk($bkmk,true,true)
+            renderScoreFromBkmk($bkmk,true)
         })
     }
 
