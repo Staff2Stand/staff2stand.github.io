@@ -245,7 +245,7 @@ $(function(){
                 //append num of divs in == count+10
                 //  +10 for in case the user adds more tunes via the editor
                 const $tuneDivs = (function(){
-                    const divsHtml = ``
+                    let divsHtml = ``
                     for(let j=0; j < getHighestXsInScoreBkmks()+10; j++){ 
                         divsHtml += `<div></div>`
                     }
