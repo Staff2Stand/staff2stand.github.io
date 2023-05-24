@@ -790,8 +790,10 @@ $(function(){
                 return
             }
 
-            renderScoreFromBkmk($score,true)
+            renderScoreFromBkmk($score,true,true)
         })
+
+        console.log('active scores:',S2S.activeScores)
     }
 
 
