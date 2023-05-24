@@ -289,7 +289,7 @@ $(function(){
      */
     function createAbcEditorOpts (instrument, tuneDivs){
         return {
-            canvas_id: tuneDivs[instrument],
+            canvas_id: tuneDivs,
             warnings_id: `abc-warnings-${instrument}`,
             clickListener: function(abcElem, tuneNumber, classes) {
                 //the presence of this function is enough to add the functionality
