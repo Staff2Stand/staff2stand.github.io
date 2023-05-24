@@ -753,6 +753,7 @@ $(function(){
             const newEditorVal = editorVal.replace(bkmkAbc,'')
 
             console.log('violin',{
+                'bkmkAbc':bkmkAbc,
                 'new val': newEditorVal,
                 'editor': $editor
             })
