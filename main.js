@@ -776,22 +776,26 @@ $(function(){
 
         const no_other_active_scores = S2S.activeScores.length === 1
 
+        let index_to_splice
+
         //render all other active scores
         S2S.activeScores.forEach(($score,i)=>{
             //remove the bkmk from active scores global
             if ($score.get(0) === $bkmk.get(0)) {
-                S2S.activeScores.splice(i,1)
-
-                if (no_other_active_scores) {
-                    $allAbcEditors.change()
-                    setAllNotDirty()
-                }
-
+                index_to_splice = i
                 return
             }
+            if (no_other_active_scores) return
 
             renderScoreFromBkmk($score,true,true)
         })
+
+        S2S.activeScores.splice(index_to_splice, 1)
+
+        if (no_other_active_scores) {
+            $allAbcEditors.change()
+            setAllNotDirty()
+        }
 
         console.log('active scores:',S2S.activeScores)
     }
