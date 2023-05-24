@@ -282,12 +282,6 @@ $(function(){
     }
 
     /**
-     * CREATE CUSTOM CONTEXT MENU ELEMENT
-     */
-    const $customMenu = $(`<ul class='custom-menu'></ul>`)
-    $customMenu.appendTo('body')
-
-    /**
      * ABC EDITOR OPTIONS
      * @param {string} instrument 
      * @param {object} tuneDivs an array of DOM elements
@@ -370,6 +364,12 @@ $(function(){
             abcjsParams: abcOpts
         }
     }
+
+    /**
+     * CREATE CUSTOM CONTEXT MENU ELEMENT
+     */
+    const $customMenu = $(`<ul class='custom-menu'></ul>`)
+    $customMenu.appendTo('body')
 
     /**
      * FIND BKMK BY ABC
