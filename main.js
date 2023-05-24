@@ -752,6 +752,11 @@ $(function(){
 
             const newEditorVal = editorVal.replace(bkmkAbc,'')
 
+            console.log('violin',{
+                'new val': newEditorVal,
+                'editor': $editor
+            })
+
             $editor.val(newEditorVal).change()
         })
     }
@@ -1268,7 +1273,8 @@ $(function(){
                 )
             },
             "Download Score Data": function($targetBkmkLi) { processScoreData($targetBkmkLi) },
-            "Delete": function($targetBkmkLi) { $targetBkmkLi.remove() }
+            "Delete": function($targetBkmkLi) { $targetBkmkLi.remove() },
+            "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
         }
         createCustomContextMenu($bkmkEl, contextMenuMenuItems, $contextMenuTrigger)
 
