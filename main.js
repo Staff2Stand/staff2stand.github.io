@@ -787,7 +787,7 @@ $(function(){
                     setAllNotDirty()
                 }
 
-                return
+                continue
             }
 
             renderScoreFromBkmk($score,true,true)
