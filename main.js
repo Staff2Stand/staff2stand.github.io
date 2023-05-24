@@ -763,34 +763,31 @@ $(function(){
 
     /**
      * Remove Score From Editors
+     * @description remove $bkmk from active scores, clear all editors, render all other active bookmarks.
      * @param {*} $bkmk 
      */
     function removeScoreFromEditors($bkmk){
-        instruments.forEach(instrument=>{
-            let bkmkAbc = $bkmk.attr(`abc-${instrument}`)
-            if (!bkmkAbc) return
-
-            bkmkAbc = unescapeABC(bkmkAbc)
-
-            const $editor = $(`#editor-${instrument}`)
-
-            let editorVal = unescapeABC($editor.val(),false)
-
-            const newEditorVal = editorVal.replace(bkmkAbc,'')
-
-            console.log('violin',{
-                'bkmkAbc':bkmkAbc,
-                'editor val': editorVal,
-                'new val': newEditorVal,
-                'editor': $editor
-            })
-
-            $editor.val(newEditorVal).change()
-        })
-        //remove the bkmk from active scores global adn remove active class
+        //remove active class
         $bkmk.removeClass('active')
+        
+        //clear abcEditors
+        const $allAbcEditors = $('.abcEditor')
+        $allAbcEditors.val('')
+
+        const no_other_active_scores = S2S.activeScores.length === 1
+
+        //render all other active scores
         S2S.activeScores.forEach(($score,i)=>{
-            if ($score.get(0) === $bkmk.get(0)) S2S.activeScores.splice(i,1)
+            //remove the bkmk from active scores global
+            if ($score.get(0) === $bkmk.get(0)) {
+                S2S.activeScores.splice(i,1)
+
+                if (no_other_active_scores) $allAbcEditors.change()
+
+                return
+            }
+
+            renderScoreFromBkmk($bkmk,true,true)
         })
     }
 
@@ -1478,7 +1475,7 @@ $(function(){
      * @param {jquery element} $bkmk jquery element: score bookmark to render
      * @param {boolean} appendScore if true, appends abc text to editors as another tune rather than replacing the editors' value
      */
-    function renderScoreFromBkmk($bkmk,appendScore=false){
+    function renderScoreFromBkmk($bkmk,appendScore=false, bkmk_was_already_active=false){
         console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
         //show notey playing violin
@@ -1521,6 +1518,8 @@ $(function(){
         $('.extra_html').html(extra_html)
 
         setAllNotDirty()
+
+        if (bkmk_was_already_active) return 
 
         //Add active class to bkmk to indicate its already loaded
         //and set numChanges attr to 0, to indicated it is freshly loaded
