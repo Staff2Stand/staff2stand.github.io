@@ -141,6 +141,7 @@ $(function(){
     S2S.activeScores = []
 
     /**
+     * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
      * CREATE HTML FOR EACH INSTRUMENT
      */
     instruments.forEach(instrument=>{
