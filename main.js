@@ -259,7 +259,7 @@ $(function(){
             }).appendTo($part)
 
             //Initialize Editor
-            const abcEditorOpts = createAbcEditorOpts(instrument, $tuneDivs.toArray())
+            const abcEditorOpts = createAbcEditorOpts(instrument)
             abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
     })
 
@@ -284,12 +284,11 @@ $(function(){
     /**
      * ABC EDITOR OPTIONS
      * @param {string} instrument 
-     * @param {object} tuneDivs an array of DOM elements
      * @returns abc editor options object
      */
-    function createAbcEditorOpts (instrument, tuneDivs){
+    function createAbcEditorOpts (instrument){
         return {
-            canvas_id: tuneDivs,
+            canvas_id: $(`#tunes-${instrument} div`).toArray(),
             warnings_id: `abc-warnings-${instrument}`,
             clickListener: function(abcElem, tuneNumber, classes) {
                 //the presence of this function is enough to add the functionality
