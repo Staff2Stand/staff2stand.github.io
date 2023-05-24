@@ -57,6 +57,17 @@ const stringReference = {
     }
 }
 
+//ABC OPTIONS for editor instances
+const abcOpts = {
+    add_classes: true,
+    responsive: 'resize',
+    oneSvgPerLine: true
+}
+
+//Abc Editor Instances object
+//  contains each editor instance
+const abcEditorInstances = {}
+
 //UTILITY FUNCTIONS
 /**
  * Capitalized first letter
@@ -209,8 +220,8 @@ $(function(){
                                 const $menuItem = $('<li/>').appendTo($copyFromMenu)
                                     const $menuItemContent = $('<div/>',{
                                         'style': 'text-transform:capitalize;',
-                                        'instrument': instrument,
-                                        text: capitalize1stLetter(instrument)
+                                        'instrument': otherInstrument,
+                                        text: capitalize1stLetter(otherInstrument)
                                     }).appendTo($menuItem)
                             })
                 $editorUtilMenu.menu('refresh') //need to refresh to apply menu to appended items
@@ -219,6 +230,9 @@ $(function(){
                 'id': `editor-${instrument}`,
                 'class': 'abcEditor'
             }).appendTo($part)
+            //Initialize Editor
+            const abcEditorOpts = createAbcEditorOpts(instrument)
+            abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
 
             const $abcWarnings = $('<div/>',{
                 'id': `abc-warnings-${instrument}`,
@@ -230,12 +244,39 @@ $(function(){
                 'class': 'instrument_tunes',
                 'instrument': instrument
             }).appendTo($part)
+                //append num of divs in == count+10
+                //  +10 for in case the user adds more tunes via the editor
+                const $tuneDivs = (function(){
+                    const divs = []
+                    for(let j=0; j < getHighestXsInScoreBkmks()+10; j++){ 
+                        divs.push( $('<div/>') )
+                    }
+                    $(divs).appendTo($tunes)
+                    return $(divs)
+                })()
 
             const $extraHtml = $('<div/>',{
                 'class': 'extra_html'
             }).appendTo($part)
     })
 
+    /**
+     * Get Highest Number of Tunes
+     * @returns the highest amount of tunes (X fields) present in any one abc attr in score bkmks
+     */
+    function getHighestXsInScoreBkmks(){
+        //Create max number of tune divs that could be necessary
+        // count how many Xs are present in each abc-${instrument} attribute
+        // the highest of that is how many divs we need to create
+        let count = 0
+        instruments.forEach(function(instrument){
+            $(`.score_bookmark[abc-${instrument}]`).each(function(i,bkmk){
+                const numXsInString = $(bkmk).attr(`abc-${instrument}`).match(/X:\s?\d+/gm).length
+                if (numXsInString > count) count = numXsInString
+            })
+        })
+        return count
+    }
 
     /**
      * CREATE CUSTOM CONTEXT MENU ELEMENT
@@ -244,123 +285,87 @@ $(function(){
     $customMenu.appendTo('body')
 
     /**
-     * INITIALIZE EDITOR for each instrument
+     * ABC EDITOR OPTIONS
+     * @param {*} instrument 
+     * @returns abc editor options object
      */
-    //Create max number of tune divs that could be necessary
-        // count how many Xs are present in each abc-${instrument} attribute
-        // the highest of that is how many divs we need to create
-    instruments.forEach(function(instrument){
-        let count = 0
-        $(`.score_bookmark[abc-${instrument}]`).each(function(i,bkmk){
-            const numXsInString = $(bkmk).attr(`abc-${instrument}`).match(/X:\s?\d+/gm).length
-            if (numXsInString > count) count = numXsInString
-        })
-        //create num of divs in instrument tunes == count+5
-        //  +5 for in case the user adds more scores via the editor
-        let j = 0
-        for(j; j < count+5; j++){
-            $(`#tunes-${instrument}`).append('<div></div>')
+    function createAbcEditorOpts (instrument){
+        return {
+            canvas_id: tuneDivs[instrument],
+            warnings_id: `abc-warnings-${instrument}`,
+            clickListener: function(abcElem, tuneNumber, classes) {
+                //the presence of this function is enough to add the functionality
+            },
+            indicate_changed: true,
+            onchange: function(editorInstance) {
+                console.log(`||S2S||  ${instrument} editor instance:`,editorInstance)
+                //set bkmk's attr to the changed value
+                const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
+                const oldAbc = escapeABC(editorInstance.editarea.initialText)
+                const newAbc = escapeABC(editorInstance.currentAbc)
+                const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
+                const eachNewBkmkAbc = newAbc.match(reg_eachBkmk)
+                const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
+
+                if (!oldAbc) {
+                    //This means the old editor val is ''.
+                    //  This occurs when a bkmk is clicked (not shift-clicked)
+                    //      - ie, the renderScoreFromBkmk function clears all of the editors first
+                    return
+                }
+                if (!eachOldBkmkAbc){
+                    //This means there was a value in the editor, but it wasn't abc notation
+                    //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
+                    return
+                }
+                if (!newAbc) {
+                    //This means the current editor val is ''.
+                    //  This could be bc the user deleted all the text 
+                    //   or bc the bkmk didn't have an abc attr for this instrument.
+                    //  Either way we need to set this instrument attr on the bkmk(s) to ''
+                    $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
+                    return
+                }
+                let saveSuccessful = false
+
+                eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
+                    const oldBkmkAbc = eachOldBkmkAbc[i]
+                    if (!oldBkmkAbc) {
+                        //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
+                        //  (bc there are now more newBkmkAbc than oldBkmkAbc).
+                        //  We return so that the new abc val isn't saved to the old bkmk
+                        return
+                    }
+                    const $bkmk = S2S.activeScores[i]
+                    const numChanges = $bkmk.attr('numChanges')
+                    if (numChanges == 0){
+                        //It was just clicked. Return so the old abc val isn't saved to the new bkmk
+                        return
+                    } else {
+                        $bkmk.attr('numChanges', numChanges+1)
+                    }
+
+                    const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
+                    const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
+
+                    $bkmkSaved.hide()
+                    $bkmkSaving.show()
+
+                    $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
+
+                    saveSuccessful = true
+                    if (saveSuccessful){
+                        editorInstance.setNotDirty()
+                        setTimeout(() => {
+                            $bkmkSaving.hide()
+                            $bkmkSaved.show()
+                        }, 1000);
+                    }
+                })
+            },
+            abcjsParams: abcOpts
         }
-    })
-
-    //Define array of tune divs
-    const tuneDivs = (function(){
-        const temp = {}
-        instruments.forEach(instrument=>{
-            temp[instrument] = $(`#tunes-${instrument} div`).toArray()
-        })
-        return temp
-    })()
-
-    //Initialize Editors
-    const abcOpts = {
-        add_classes: true,
-        responsive: 'resize',
-        oneSvgPerLine: true
     }
-    const editorInstances = (function(){
-        const temp = {}
-        instruments.forEach(instrument=>{
-            const abcEditorOpts = {
-                canvas_id: tuneDivs[instrument],
-                warnings_id: `abc-warnings-${instrument}`,
-                clickListener: function(abcElem, tuneNumber, classes) {
-                    //the presence of this function is enough to add the functionality
-                },
-                indicate_changed: true,
-                onchange: function(editorInstance) {
-                    console.log(`||S2S||  ${instrument} editor instance:`,editorInstance)
-                    //set bkmk's attr to the changed value
-                    const changedInstrument = $(editorInstance.editarea.textarea).closest('.part').attr('instrument')
-                    const oldAbc = escapeABC(editorInstance.editarea.initialText)
-                    const newAbc = escapeABC(editorInstance.currentAbc)
-                    const reg_eachBkmk = /(X:\s?1.*?)(?=(?:X:\s?1)|$)/sg
-                    const eachNewBkmkAbc = newAbc.match(reg_eachBkmk)
-                    const eachOldBkmkAbc = oldAbc.match(reg_eachBkmk)
-
-                    if (!oldAbc) {
-                        //This means the old editor val is ''.
-                        //  This occurs when a bkmk is clicked (not shift-clicked)
-                        //      - ie, the renderScoreFromBkmk function clears all of the editors first
-                        return
-                    }
-                    if (!eachOldBkmkAbc){
-                        //This means there was a value in the editor, but it wasn't abc notation
-                        //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
-                        return
-                    }
-                    if (!newAbc) {
-                        //This means the current editor val is ''.
-                        //  This could be bc the user deleted all the text 
-                        //   or bc the bkmk didn't have an abc attr for this instrument.
-                        //  Either way we need to set this instrument attr on the bkmk(s) to ''
-                        $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
-                        return
-                    }
-                    let saveSuccessful = false
-
-                    eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
-                        const oldBkmkAbc = eachOldBkmkAbc[i]
-                        if (!oldBkmkAbc) {
-                            //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
-                            //  (bc there are now more newBkmkAbc than oldBkmkAbc).
-                            //  We return so that the new abc val isn't saved to the old bkmk
-                            return
-                        }
-                        const $bkmk = S2S.activeScores[i]
-                        const numChanges = $bkmk.attr('numChanges')
-                        if (numChanges == 0){
-                            //It was just clicked. Return so the old abc val isn't saved to the new bkmk
-                            return
-                        } else {
-                            $bkmk.attr('numChanges', numChanges+1)
-                        }
-
-                        const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
-                        const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
-
-                        $bkmkSaved.hide()
-                        $bkmkSaving.show()
-
-                        $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
-
-                        saveSuccessful = true
-                        if (saveSuccessful){
-                            editorInstance.setNotDirty()
-                            setTimeout(() => {
-                                $bkmkSaving.hide()
-                                $bkmkSaved.show()
-                            }, 1000);
-                        }
-                    })
-                },
-                abcjsParams: abcOpts
-            }
-            temp[instrument] = new abcjs.Editor(`editor-${instrument}`, abcEditorOpts)
-        })
-
-        return temp
-    })()
 
     /**
      * FIND BKMK BY ABC
@@ -1305,8 +1310,8 @@ $(function(){
      *  DIRTY flag
      */
     function setAllNotDirty(){
-        for (const editor in editorInstances){
-            editorInstances[editor].setNotDirty()
+        for (const editor in abcEditorInstances){
+            abcEditorInstances[editor].setNotDirty()
         }
     }
     function areAnyDirty(){
