@@ -258,7 +258,7 @@ $(function(){
             }).appendTo($part)
 
             //Initialize Editor
-            const abcEditorOpts = createAbcEditorOpts(instrument, $tuneDivs)
+            const abcEditorOpts = createAbcEditorOpts(instrument, $tuneDivs.toArray())
             abcEditorInstances[instrument] = new abcjs.Editor($editor.get(0), abcEditorOpts)
     })
 
