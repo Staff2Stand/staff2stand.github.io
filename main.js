@@ -383,12 +383,11 @@ $(function(){
                         return
                     }
                     const $bkmk = S2S.activeScores[i]
-                    const bkmk_is_freshly_rendered = $bkmk.hasClass('active prevActive')
+                    const bkmk_is_freshly_rendered = $bkmk.hasClass('fresh')
 
                     if (bkmk_is_freshly_rendered){
-                        //Remove prevActive class because we've made a change to the bkmk and it is now fully active and edited.
                         //Return so the old abc val isn't saved to the new bkmk.
-                        $bkmk.removeClass('prevActive')
+                        $bkmk.removeClass('fresh')
                         return
                     } 
 
@@ -1536,7 +1535,7 @@ $(function(){
         if (bkmk_was_already_active) return 
 
         //Add active class to bkmk to indicate its loaded
-        $bkmk.addClass('active')
+        $bkmk.addClass('active fresh').removeClass('prevActive')
 
         //Set/push to activeScores
         if (appendScore) S2S.activeScores.push($bkmk)
