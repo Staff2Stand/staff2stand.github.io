@@ -383,12 +383,12 @@ $(function(){
                         return
                     }
                     const $bkmk = S2S.activeScores[i]
-                    const numChanges = parseFloat($bkmk.attr('numChanges'))
-                    $bkmk.attr('numChanges', numChanges+1)
+                    const bkmk_is_freshly_rendered = $bkmk.hasClass('active prevActive')
 
-                    if (numChanges === 0){
-                        //It was just clicked, or clicked off of. 
+                    if (bkmk_is_freshly_rendered){
+                        //Remove prevActive class because we've made a change to the bkmk and it is now fully active and edited.
                         //Return so the old abc val isn't saved to the new bkmk.
+                        $bkmk.removeClass('prevActive')
                         return
                     } 
 
@@ -810,7 +810,7 @@ $(function(){
     }
 
 
-    //On Bookmark Click
+    //On Score Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         const $bkmk = $(this)
 
@@ -1514,8 +1514,8 @@ $(function(){
 
             //do only once (rather than for each instrument)
             if (i===0) {
-                //remove active class from all bkmks and reset numChanges attr
-                $('.score_bookmark.active').removeClass('active').attr('numChanges','0')
+                //remove active class from all bkmks and give them prevActive class
+                $('.score_bookmark.active').removeClass('active').addClass('prevActive')
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
@@ -1535,9 +1535,8 @@ $(function(){
 
         if (bkmk_was_already_active) return 
 
-        //Add active class to bkmk to indicate its already loaded
-        //and set numChanges attr to 0, to indicated it is freshly loaded
-        $bkmk.addClass('active').attr('numChanges',0)
+        //Add active class to bkmk to indicate its loaded
+        $bkmk.addClass('active')
 
         //Set/push to activeScores
         if (appendScore) S2S.activeScores.push($bkmk)
