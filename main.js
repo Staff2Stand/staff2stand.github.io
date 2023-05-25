@@ -387,7 +387,9 @@ $(function(){
                     $bkmk.attr('numChanges', numChanges+1)
 
                     if (numChanges === 0){
-                        //It was just clicked, or clicked off of. Return so the old abc val isn't saved to the new bkmk.
+                        //It was just clicked, or clicked off of. 
+                        //Reset numChanges and return so the old abc val isn't saved to the new bkmk.
+                        $bkmk.attr('numChanges', 0)
                         return
                     } 
 
