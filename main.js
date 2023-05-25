@@ -388,8 +388,7 @@ $(function(){
 
                     if (numChanges === 0){
                         //It was just clicked, or clicked off of. 
-                        //Reset numChanges and return so the old abc val isn't saved to the new bkmk.
-                        $bkmk.attr('numChanges', 0)
+                        //Return so the old abc val isn't saved to the new bkmk.
                         return
                     } 
 
