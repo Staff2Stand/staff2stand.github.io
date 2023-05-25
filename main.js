@@ -357,13 +357,11 @@ $(function(){
                     //This means the old editor val is ''.
                     //  This occurs when a bkmk is clicked (not shift-clicked)
                     //      - ie, the renderScoreFromBkmk function clears all of the editors first
-                    console.log('not saved')
                     return
                 }
                 if (!eachOldBkmkAbc){
                     //This means there was a value in the editor, but it wasn't abc notation
                     //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
-                    console.log('not saved')
                     return
                 }
                 if (!newAbc) {
@@ -372,7 +370,6 @@ $(function(){
                     //   or bc the bkmk didn't have an abc attr for this instrument.
                     //  Either way we need to set this instrument attr on the bkmk(s) to ''
                     $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
-                    console.log('not saved')
                     return
                 }
                 let saveSuccessful = false
@@ -383,7 +380,6 @@ $(function(){
                         //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
                         //  (bc there are now more newBkmkAbc than oldBkmkAbc).
                         //  We return so that the new abc val isn't saved to the old bkmk
-                        console.log('not saved')
                         return
                     }
                     const $bkmk = S2S.activeScores[i]
@@ -391,8 +387,7 @@ $(function(){
                     $bkmk.attr('numChanges', numChanges+1)
 
                     if (numChanges === 0){
-                        //It was just clicked. Return so the old abc val isn't saved to the new bkmk.
-                        console.log('not saved')
+                        //It was just clicked, or clicked off of. Return so the old abc val isn't saved to the new bkmk.
                         return
                     } 
 
@@ -1518,8 +1513,8 @@ $(function(){
 
             //do only once (rather than for each instrument)
             if (i===0) {
-                //remove active class from all bkmks and clear numChanges attr
-                $('.score_bookmark.active').removeClass('active').attr('numChanges','')
+                //remove active class from all bkmks and reset numChanges attr
+                $('.score_bookmark.active').removeClass('active').attr('numChanges','0')
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
