@@ -293,15 +293,12 @@ $(function(){
             }).appendTo($part)
                 //append num of divs in == count+10
                 //  +10 for in case the user adds more tunes via the editor
-                const $tuneDivs = (function(){
-                    let divsHtml = ``
-                    for(let j=0; j < getHighestXsInScoreBkmks()+10; j++){ 
-                        divsHtml += `<div></div>`
-                    }
-                    const $divs = $(divsHtml)
+                const $tuneDivs = (() => {
+                    const $divs = $(`<div></div>`.repeat(getHighestXsInScoreBkmks() + 10))
                     $divs.appendTo($tunes)
                     return $divs
                 })()
+                  
 
             const $extraHtml = $('<div/>',{
                 'class': 'extra_html'
@@ -537,15 +534,11 @@ $(function(){
             const instrument = $(note).attr('data-instrument')
             const noteString = $(note).attr('data-string')
 
-            const noteNameIndex = (function(){
-                if (instrument === 'piano') return 'piano'
-                return stringReference[instrument][noteString]?.indexOf(noteName)
-            })()
+            const noteNameIndex = instrument === 'piano' ? 'piano' : 
+                stringReference[instrument]?.[noteString]?.indexOf(noteName)
 
-            const finger = (function(){
-                if (instrument === 'piano' || noteNameIndex === undefined) return ''
-                return stringReference[instrument][noteString+'Fingers'][noteNameIndex]
-            })()
+            const finger = instrument === 'piano' ? 'piano' :
+                stringReference[instrument]?.[noteString+'Fingers']?.[noteNameIndex]
 
             const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
             const noteIsAboveStaff = (function(){
