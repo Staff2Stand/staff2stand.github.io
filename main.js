@@ -384,10 +384,12 @@ $(function(){
                     }
                     const $bkmk = S2S.activeScores[i]
                     const bkmk_is_freshly_rendered = $bkmk.hasClass('fresh')
+                    console.log('bkmk has class fresh')
 
                     if (bkmk_is_freshly_rendered){
                         //Return so the old abc val isn't saved to the new bkmk.
                         $bkmk.removeClass('fresh')
+                        console.log('removed fresh class from bkmk')
                         return
                     } 
 
@@ -1519,6 +1521,7 @@ $(function(){
 
                 //Add active class to bkmk to indicate its loaded
                 $bkmk.addClass('active fresh').removeClass('prevActive')
+                console.log('added fresh class to bkmk')
             }
 
             $instrEditor.val(newAbc).change()
