@@ -804,8 +804,6 @@ $(function(){
             $allAbcEditors.change()
             setAllNotDirty()
         }
-
-        console.log('active scores:',S2S.activeScores)
     }
 
 
@@ -1518,6 +1516,9 @@ $(function(){
 
                 //show all parts (ignore editors)
                 $('.part').children('div:not(.abc-warnings)').show()
+
+                //Add active class to bkmk to indicate its loaded
+                $bkmk.addClass('active fresh').removeClass('prevActive')
             }
 
             $instrEditor.val(newAbc).change()
@@ -1534,12 +1535,12 @@ $(function(){
 
         if (bkmk_was_already_active) return 
 
-        //Add active class to bkmk to indicate its loaded
-        $bkmk.addClass('active fresh').removeClass('prevActive')
-
         //Set/push to activeScores
         if (appendScore) S2S.activeScores.push($bkmk)
-        else S2S.activeScores = [$bkmk]
+        else {
+            S2S.prevActiveScores = S2S.activeScores
+            S2S.activeScores = [$bkmk]
+        }
 
         //remove disabled class from file input
         $('#loadScores').removeClass('disabled')
