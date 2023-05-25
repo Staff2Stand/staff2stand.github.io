@@ -456,8 +456,6 @@ $(function(){
 
         //Add/Remove disabled class on file input
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
-
-        fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
