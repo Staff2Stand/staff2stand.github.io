@@ -387,10 +387,10 @@ $(function(){
                         return
                     }
                     const $bkmk = S2S.activeScores[i]
-                    const numChanges = $bkmk.attr('numChanges')
+                    const numChanges = parseFloat($bkmk.attr('numChanges'))
                     $bkmk.attr('numChanges', numChanges+1)
-                    
-                    if (numChanges == 1){
+
+                    if (numChanges === 0){
                         //It was just clicked. Return so the old abc val isn't saved to the new bkmk.
                         console.log('not saved')
                         return
