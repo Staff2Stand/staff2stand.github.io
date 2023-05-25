@@ -71,6 +71,29 @@ const abcEditorInstances = {}
 //UTILITY FUNCTIONS
 
 /**
+ * FADE OUT NOTEY
+ * @description fades out notey, removes all classes starting with "playing-", and adds classToAdd
+ * @param {string} classToAdd 'class1' or 'class1 class2 etc'
+ */
+function fadeOutNotey(classToAdd='holding-violin'){
+    //fade out notey if they're still visible
+    if ( $('#notey:visible').length ) $('#notey').fadeOut()
+}
+/**
+ * FADE IN NOTEY
+ * @description removes all classes, adds "eyes-blinking", classToAdd, then fades in notey
+ * @param {string} classToAdd 'class1' or 'class1 class2 etc'
+ */
+function fadeInNotey(classToAdd='playing-violin'){
+    if ($('#notey:visible').length) return
+
+    $('#notey')
+    .attr('class','')
+    .addClass(`eyes-blinking ${classToAdd}`)
+    .fadeIn()
+}
+
+/**
  * ESCAPE AND UNESCAPE ABC STRINGS
  * @param {String} abc
  * @param {Boolean} toHTML default true
@@ -434,8 +457,7 @@ $(function(){
         //Add/Remove disabled class on file input
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
 
-        //fade out notey
-        $('#notey').fadeOut().removeClass("playing-violin").addClass("holding-violin")
+        fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
@@ -694,6 +716,8 @@ $(function(){
 
             svg.setAttribute('viewBox',viewBox)
         })
+
+        fadeOutNotey()
     }
 
 
@@ -1473,11 +1497,7 @@ $(function(){
     function renderScoreFromBkmk($bkmk,appendScore=false, bkmk_was_already_active=false){
         console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
-        //show notey playing violin
-        $("#notey")
-        .attr("class", "")
-        .addClass("eyes-blinking looking-at-left-hand playing-violin")
-        .fadeIn()
+        fadeInNotey('looking-at-left-hand playing-violin')
 
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
