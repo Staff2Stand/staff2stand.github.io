@@ -238,15 +238,16 @@ $(function(){
                     'class': 'editorUtilMenu'
                 }).appendTo($editor_utils)
                 .menu({
-                    //EDITOR UTILS MENU SELECTION
+                    //EDITOR UTILS MENU SELECTION FUNCTION
                     //initialize menu and add event listener for menu item selection
                     select: function(e,activeMenuItem){
                         const $activeMenuItem = $(activeMenuItem.item[0])
                         if ($activeMenuItem.hasClass('submenu_parent')) return
                         //COPY FROM
                         if ($activeMenuItem.closest('.editorUtils_copyFromMenu').length){
-                            let editorVal = $(`#editor-${instrument}`).val()
-                            const correctVoiceField = voiceFieldReference[instrument]
+                            const chosenInstrument = $activeMenuItem.text().toLowerCase()
+                            let editorVal = $(`#editor-${chosenInstrument}`).val()
+                            const correctVoiceField = voiceFieldReference[chosenInstrument]
                             //replace all instances of the voice field with the appropriate voice field
                             editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
                             //set this instrument's editor to that val and trigger change
@@ -393,7 +394,6 @@ $(function(){
                         return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     }) || S2S.activeScores[i].get(0)
                     // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
-                    console.log('bkmkOf_newAbc',bkmkOf_newAbc,'bkmkOf_oldAbc',bkmkOf_oldAbc)
 
                     if (bkmkOf_oldAbc !== bkmkOf_newAbc) return
 
