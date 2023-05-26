@@ -380,11 +380,18 @@ $(function(){
                         return
                     }
                     
-                    const all_prevActive_and_active_scores = [...S2S.activeScores, ...S2S.prevActiveScores]
-                    const $bkmkOf_oldAbc = all_prevActive_and_active_scores.find($score=>{
+                    const all_bkmks = $.unique([
+                        //create an array of all the bookmarks
+                        //active and prevActive scores are more likely to be matches so we put them first
+                        ...S2S.activeScores.map( $score => $score.get(0) ), 
+                        ...S2S.prevActiveScores.map( $score => $score.get(0) ),
+                        ...$('.score_bookmark')
+                    ])
+
+                    const $bkmkOf_oldAbc = all_bkmks.find($score=>{
                         return escapeABC(oldBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
                     })
-                    const $bkmkOf_newAbc = all_prevActive_and_active_scores.find($score=>{
+                    const $bkmkOf_newAbc = all_bkmks.find($score=>{
                         return escapeABC(newBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
                     })
 
