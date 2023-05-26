@@ -380,13 +380,13 @@ $(function(){
                         return
                     }
                     
-                    const all_bkmks = $.unique([
+                    const all_bkmks = Array.from(new Set([
                         //create an array of all the bookmarks
                         //active and prevActive scores are more likely to be matches so we put them first
                         ...S2S.activeScores.map( $score => $score.get(0) ), 
                         ...S2S.prevActiveScores.map( $score => $score.get(0) ),
                         ...$('.score_bookmark')
-                    ])
+                    ]))
 
                     const $bkmkOf_oldAbc = all_bkmks.find(score=>{
                         return escapeABC(oldBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
