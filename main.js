@@ -399,7 +399,10 @@ $(function(){
                     // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
 
                     console.log('old:',bkmkOf_oldAbc,'new:',bkmkOf_newAbc)
-                    if (bkmkOf_oldAbc !== bkmkOf_newAbc) {console.log('returned');return;} //return
+
+                    const oldbkmk_exists_but_doesnt_match_newbkmk = bkmkOf_oldAbc && bkmkOf_oldAbc !== bkmkOf_newAbc
+
+                    if (oldbkmk_exists_but_doesnt_match_newbkmk) {console.log('returned');return;} //return
 
                     const $bkmkSaving = $(bkmkOf_newAbc).find('.bkmkUtils .saving')
                     const $bkmkSaved = $(bkmkOf_newAbc).find('.bkmkUtils .saved')
