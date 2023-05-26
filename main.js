@@ -388,11 +388,11 @@ $(function(){
                         ...$('.score_bookmark')
                     ])
 
-                    const $bkmkOf_oldAbc = all_bkmks.find($score=>{
-                        return escapeABC(oldBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
+                    const $bkmkOf_oldAbc = all_bkmks.find(score=>{
+                        return escapeABC(oldBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     })
-                    const $bkmkOf_newAbc = all_bkmks.find($score=>{
-                        return escapeABC(newBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
+                    const $bkmkOf_newAbc = all_bkmks.find(score=>{
+                        return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     })
 
                     const oldAbc_is_diff_bkmk = $bkmkOf_oldAbc.get(0) !== $bkmkOf_newAbc.get(0)
