@@ -398,6 +398,7 @@ $(function(){
                     }) || S2S.activeScores[i].get(0)
                     // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
 
+                    console.log('old:',bkmkOf_oldAbc,'new:',bkmkOf_newAbc)
                     if (bkmkOf_oldAbc !== bkmkOf_newAbc) {console.log('returned');return;} //return
 
                     const $bkmkSaving = $(bkmkOf_newAbc).find('.bkmkUtils .saving')
