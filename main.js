@@ -394,8 +394,7 @@ $(function(){
                     const bkmkOf_newAbc = all_bkmks.find(score=>{
                         return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     }) || S2S.activeScores[i]
-
-                    //when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activebkmk[i]
+                    // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
 
                     if (bkmkOf_oldAbc !== bkmkOf_newAbc) return
 
