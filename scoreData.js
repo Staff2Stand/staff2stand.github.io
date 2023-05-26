@@ -125,7 +125,12 @@ const scoreData = [
         heading:"NYSSMA",
         bookmarks:[
             {   //The Clown
-                "_title":"The Clown","abc-violin":"X:1\\nT: My New Score\\nC: You or Someone Else, Arranged by You or Someone Else\\nM: 4/4\\nL: 1/8\\nK: C\\nV: violin clef=treble\\nC2 z2 C2 CC | D4 D3 D | Z | Z3 ||\\nEE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]","abc-viola":"X:1\\nT: My New Score\\nC: You or Someone Else, Arranged by You or Someone Else\\nM: 4/4\\nL: 1/8\\nK: C\\nV: viola clef=alto\\nC2 z2 C2 CC | D4 D3 D | Z | Z3 ||\\nEE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]","abc-cello":"X:1\\nT: My New Score\\nC: You or Someone Else, Arranged by You or Someone Else\\nM: 4/4\\nL: 1/8\\nK: C\\nV: cello clef=bass octave=-1\\nC2 z2 C2 CC | D4 D3 D | Z | Z3 ||\\nEE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]","abc-bass":"X:1\\nT: My New Score\\nC: You or Someone Else, Arranged by You or Someone Else\\nM: 4/4\\nL: 1/8\\nK: C\\nV: bass clef=bass octave=-1\\nC2 z2 C2 CC | D4 D3 D | Z | Z3 ||\\nEE EE DD DD | FF FF F/E/F/G/ F/G/F/E//D// | C4 g'4 | c''8 |]","abc-piano":""
+                "_title":"The Clown",
+                "abc-violin":"",
+                "abc-viola":"",
+                "abc-cello":"",
+                "abc-bass":"",
+                "abc-piano":""
             }
         ]
     }
