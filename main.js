@@ -1508,6 +1508,7 @@ $(function(){
             //if appending txt to editors (user shift-clicked a bkmk), then return
             if (appendScore){
                 $instrEditor.val(currentEditorVal+'\n'+newAbc).change()
+                $bkmk.addClass('active').removeClass('prevActive')
                 return
             }
 
