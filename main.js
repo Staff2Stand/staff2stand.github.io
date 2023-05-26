@@ -388,23 +388,23 @@ $(function(){
                         ...$('.score_bookmark')
                     ]))
 
-                    const $bkmkOf_oldAbc = all_bkmks.find(score=>{
+                    const bkmkOf_oldAbc = all_bkmks.find(score=>{
                         return escapeABC(oldBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     })
-                    const $bkmkOf_newAbc = all_bkmks.find(score=>{
+                    const bkmkOf_newAbc = all_bkmks.find(score=>{
                         return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     })
 
-                    const oldAbc_is_diff_bkmk = $bkmkOf_oldAbc.get(0) !== $bkmkOf_newAbc.get(0)
+                    const oldAbc_is_diff_bkmk = bkmkOf_oldAbc !== bkmkOf_newAbc
                     if (oldAbc_is_diff_bkmk) return
 
-                    const $bkmkSaving = $bkmkOf_newAbc.find('.bkmkUtils .saving')
-                    const $bkmkSaved = $bkmkOf_newAbc.find('.bkmkUtils .saved')
+                    const $bkmkSaving = $(bkmkOf_newAbc).find('.bkmkUtils .saving')
+                    const $bkmkSaved = $(bkmkOf_newAbc).find('.bkmkUtils .saved')
 
                     $bkmkSaved.hide()
                     $bkmkSaving.show()
 
-                    $bkmkOf_newAbc.attr(`abc-${changedInstrument}`, newBkmkAbc)
+                    $(bkmkOf_newAbc).attr(`abc-${changedInstrument}`, newBkmkAbc)
 
                     saveSuccessful = true
                     if (saveSuccessful){
