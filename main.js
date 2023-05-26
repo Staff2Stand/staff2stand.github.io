@@ -355,11 +355,13 @@ $(function(){
                     //This means the old editor val is ''.
                     //  This occurs when a bkmk is clicked (not shift-clicked)
                     //      - ie, the renderScoreFromBkmk function clears all of the editors first
+                    console.log('returned')
                     return
                 }
                 if (!eachOldBkmkAbc){
                     //This means there was a value in the editor, but it wasn't abc notation
                     //  When the user shift-clicks to append a score, editors with no value will have '\n' appended
+                    console.log('returned')
                     return
                 }
                 if (!newAbc) {
@@ -368,6 +370,7 @@ $(function(){
                     //   or bc the bkmk didn't have an abc attr for this instrument.
                     //  Either way we need to set this instrument attr on the bkmk(s) to ''
                     $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
+                    console.log('returned')
                     return
                 }
 
@@ -377,7 +380,7 @@ $(function(){
                     const oldBkmkAbc = eachOldBkmkAbc[i]
                     const user_appended_score = !oldBkmkAbc //(bc there are more newBkmkAbc than oldBkmkAbc).
                     //  We return so that the new abc val isn't saved to the old bkmk
-                    if (user_appended_score) return
+                    if (user_appended_score) {console.log('returned');return;} //return
                     
                     const all_bkmks = Array.from(new Set([
                         //create an array of all the bookmarks
@@ -395,7 +398,7 @@ $(function(){
                     }) || S2S.activeScores[i].get(0)
                     // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
 
-                    if (bkmkOf_oldAbc !== bkmkOf_newAbc) return
+                    if (bkmkOf_oldAbc !== bkmkOf_newAbc) {console.log('returned');return;} //return
 
                     const $bkmkSaving = $(bkmkOf_newAbc).find('.bkmkUtils .saving')
                     const $bkmkSaved = $(bkmkOf_newAbc).find('.bkmkUtils .saved')
