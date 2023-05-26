@@ -369,16 +369,14 @@ $(function(){
                     $(`#myScores .score_bookmark.active`).attr(`abc-${instrument}`,'')
                     return
                 }
+
                 let saveSuccessful = false
 
                 eachNewBkmkAbc.forEach((newBkmkAbc,i)=>{
                     const oldBkmkAbc = eachOldBkmkAbc[i]
-                    if (!oldBkmkAbc) {
-                        //If oldBkmkAbc is undefined, the user shift-clicked to append a bkmk
-                        //  (bc there are now more newBkmkAbc than oldBkmkAbc).
-                        //  We return so that the new abc val isn't saved to the old bkmk
-                        return
-                    }
+                    const user_appended_score = !oldBkmkAbc //(bc there are more newBkmkAbc than oldBkmkAbc).
+                    //  We return so that the new abc val isn't saved to the old bkmk
+                    if (user_appended_score) return
                     
                     const all_bkmks = Array.from(new Set([
                         //create an array of all the bookmarks
@@ -395,6 +393,7 @@ $(function(){
                         return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     }) || S2S.activeScores[i]
                     // ^ when user edits a my score bkmk, bkmkOf_newAbc will be undefined, bc that abc doesn't exist in any bkmk.  In this case, set it to the activeScores[i]
+                    console.log('bkmkOf_newAbc',bkmkOf_newAbc,'bkmkOf_oldAbc',bkmkOf_oldAbc)
 
                     if (bkmkOf_oldAbc !== bkmkOf_newAbc) return
 
