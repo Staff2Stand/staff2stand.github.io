@@ -380,24 +380,24 @@ $(function(){
                         return
                     }
                     
-                    const bkmk_is_freshly_rendered = S2S.prevActiveScores.some(score => {
-                        const abcAttrVal = $(score).attr(`abc-${changedInstrument}`)
-                        return escapeABC(oldBkmkAbc) === abcAttrVal
+                    const all_prevActive_and_active_scores = [...S2S.activeScores, ...S2S.prevActiveScores]
+                    const $bkmkOf_oldAbc = all_prevActive_and_active_scores.find($score=>{
+                        return escapeABC(oldBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
+                    })
+                    const $bkmkOf_newAbc = all_prevActive_and_active_scores.find($score=>{
+                        return escapeABC(newBkmkAbc) === $score.attr(`abc-${changedInstrument}`)
                     })
 
-                    if (bkmk_is_freshly_rendered){
-                        //Return so the old abc val isn't saved to the new bkmk.
-                        return
-                    } 
+                    const oldAbc_is_diff_bkmk = $bkmkOf_oldAbc.get(0) !== $bkmkOf_newAbc.get(0)
+                    if (oldAbc_is_diff_bkmk) return
 
-                    const $bkmk = S2S.activeScores[i]
-                    const $bkmkSaving = $bkmk.find('.bkmkUtils .saving')
-                    const $bkmkSaved = $bkmk.find('.bkmkUtils .saved')
+                    const $bkmkSaving = $bkmkOf_newAbc.find('.bkmkUtils .saving')
+                    const $bkmkSaved = $bkmkOf_newAbc.find('.bkmkUtils .saved')
 
                     $bkmkSaved.hide()
                     $bkmkSaving.show()
 
-                    $bkmk.attr(`abc-${changedInstrument}`, newBkmkAbc)
+                    $bkmkOf_newAbc.attr(`abc-${changedInstrument}`, newBkmkAbc)
 
                     saveSuccessful = true
                     if (saveSuccessful){
