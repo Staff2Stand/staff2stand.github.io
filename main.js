@@ -395,8 +395,7 @@ $(function(){
                         return escapeABC(newBkmkAbc) === score.getAttribute(`abc-${changedInstrument}`)
                     })
 
-                    const oldAbc_is_diff_bkmk = bkmkOf_oldAbc !== bkmkOf_newAbc
-                    if (oldAbc_is_diff_bkmk) return
+                    if (bkmkOf_oldAbc !== bkmkOf_newAbc) return
 
                     const $bkmkSaving = $(bkmkOf_newAbc).find('.bkmkUtils .saving')
                     const $bkmkSaved = $(bkmkOf_newAbc).find('.bkmkUtils .saved')
