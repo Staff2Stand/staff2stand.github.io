@@ -178,7 +178,7 @@ $(function(){
             `<p>Please report this error. You may still be able to create and edit a new score.</p>`,
             {
                 addClass: 'alert',
-                title: '<span class="ui-icon ui-icon-alert"></span> Error Loading Data'
+                title: '<i class="fa-solid fa-triangle-exclamation"></i> Error Loading Data'
             }
         )
         window.S2S = { scoreData:{} }
@@ -1001,7 +1001,7 @@ $(function(){
 
     const openDialogOptsDefault = {
         addClass: 'myDialog',               //any custom classes to add to dialog
-        title: '<span class="ui-icon ui-icon-info"></span> Staff To Stand', //heading of the dialog
+        title: '<i class="fa-solid fa-circle-info"></i> Staff To Stand', //heading of the dialog
         buttons: [{                         //array of jqui button objs
             text: 'OK',
             click: function(){ $(this).dialog('close') }
@@ -1126,7 +1126,7 @@ $(function(){
                 'You have no scores in the My Scores section. Click the New Score Button or load your Scores.',
                 {
                     addClass: 'warn',
-                    title: '<span class="ui-icon ui-icon-info"></span> My Scores Section is Empty',
+                    title: '<i class="fa-solid fa-circle-info"></i> My Scores Section is Empty',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1171,7 +1171,7 @@ $(function(){
                 'There was an error with the file contents.',
                 {
                     addClass: 'warn',
-                    title: '<span class="ui-icon ui-icon-alert"></span> File Contents Error',
+                    title: '<i class="fa-solid fa-triangle-exclamation"></i> File Contents Error',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1203,7 +1203,7 @@ $(function(){
                 'Please upload a .s2s (staff to string) file',
                 {
                     addClass: 'warn',
-                    title: '<span class="ui-icon ui-icon-alert"></span> Invalid File Extension',
+                    title: '<i class="fa-solid fa-triangle-exclamation"></i> Invalid File Extension',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1315,7 +1315,7 @@ $(function(){
                     `<p>Note: This won't change the "T:" field in the abc notation.</p>
                      <div><input type="text" id="bkmkRenameInput" style="width:100%;"></div>`,
                     {
-                        title:'<span class="ui-icon ui-icon-pencil"></span> Rename Score',
+                        title:'<i class="fa-solid fa-pen"></i> Rename Score',
                         buttons: [
                             {
                                 text: 'Cancel',
@@ -1364,7 +1364,7 @@ $(function(){
             'You have unsaved changes. Do you wish to continue?',
             {
                 addClass: 'alert',
-                title: '<span class="ui-icon ui-icon-alert"></span> Unsaved Changes',
+                title: '<i class="fa-solid fa-triangle-exclamation"></i> Unsaved Changes',
                 titleIcon: 'flag',
                 buttons: [
                     {
