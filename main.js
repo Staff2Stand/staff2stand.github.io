@@ -767,6 +767,7 @@ $(function(){
                         createMyScoreBkmk(scoreData)
                     },
                     "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) },
+                    "Copy Score Data": function($targetBkmkLi){ processScoreData($targetBkmkLi,true) },
                     "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
                 },
                 $vEllipse
@@ -777,6 +778,14 @@ $(function(){
         //append this section to the sidebar
         $('#sidebar').append($section)
     })
+
+    /**
+     * Copy Score Data
+     * @param {*} $bkmk 
+     */
+    function copyScoreData($bkmk){
+
+    }
 
     /**
      * Remove Score From Editors
@@ -1262,8 +1271,9 @@ $(function(){
     /**
      * Process Score Data For Download
      * @param {Element} $bkmk 
+     * @param {Boolean} copyToClipboard if true, rather than downloading as a json file, copies the js object to clipboard
      */
-    function processScoreData($bkmk){
+    function processScoreData($bkmk,copyToClipboard=false){
         $bkmk = $($bkmk)
         //get the abcstring for each instrument
         const contentsObj = {}
@@ -1336,6 +1346,7 @@ $(function(){
                 )
             },
             "Download Score Data": function($targetBkmkLi) { processScoreData($targetBkmkLi) },
+            "Copy Score Data": function($targetBkmkLi){ processScoreData($targetBkmkLi,true) },
             "Delete": function($targetBkmkLi) { $targetBkmkLi.remove() },
             "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
         }
