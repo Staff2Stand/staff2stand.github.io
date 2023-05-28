@@ -992,6 +992,10 @@ $(function(){
             $(".ui-dialog-titlebar-close").hide();
         }
     })
+    //Override the _title function so that html in the title option isn't escaped
+    dialog.data( "uiDialog" )._title = function(title) {
+        title.html( this.options.title );
+    };
 
 
     const openDialogOptsDefault = {
