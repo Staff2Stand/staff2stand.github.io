@@ -1022,10 +1022,19 @@ $(function(){
             .dialog('option','modal',opts.modal)
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
-                //add titleIcon if it doesn't already exist
                 const $dialogWidget = $(this).dialog('widget')
-                const hasTitleIcon = $dialogWidget.find('[data-fa-i2svg]').length > 0
+
+                //add titleIcon if it doesn't already exist
+                const hasTitleIcon = $dialogWidget.find('svg.svg-inline--fa').length
                 if (!hasTitleIcon) $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
+
+                //pressing enter on the last text input in the dialog clicks the OK button
+                $dialogWidget.find('input[type="text"]').last().on('keydown',e=>{
+                    const enterWasPressed = e.keyCode === 13
+                    if (!enterWasPressed) return
+                    const $button = $dialogWidget.find('button.ui-button:contains("OK")')
+                    $button.click()
+                })
             } )
             .dialog('open')
     }
