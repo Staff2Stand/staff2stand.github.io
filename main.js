@@ -178,7 +178,7 @@ $(function(){
             `<p>Please report this error. You may still be able to create and edit a new score.</p>`,
             {
                 addClass: 'alert',
-                title: 'Error Loading Data'
+                title: '<span class="ui-icon ui-icon-alert"></span> Error Loading Data'
             }
         )
         window.S2S = { scoreData:{} }
@@ -996,8 +996,7 @@ $(function(){
 
     const openDialogOptsDefault = {
         addClass: 'myDialog',               //any custom classes to add to dialog
-        title: 'Staff To Stand',            //heading of the dialog
-        titleIcon: 'exclamation',           //ex: flag, exclamation
+        title: '<span class="ui-icon ui-icon-info"></span> Staff To Stand', //heading of the dialog
         buttons: [{                         //array of jqui button objs
             text: 'OK',
             click: function(){ $(this).dialog('close') }
@@ -1023,13 +1022,6 @@ $(function(){
             .dialog('option','classes.ui-dialog',addClasses)
             .on( "dialogopen", function( event, ui ) {
                 const $dialogWidget = $(this).dialog('widget')
-
-                //remove any existing title icons and add the new one
-                const $title = $dialogWidget.find('.ui-dialog-title')
-                const $titleIcons = $title.find('svg.svg-inline--fa')
-                console.log('title',$title,'title icons',$titleIcons)
-                $titleIcons.remove()
-                $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($title)
 
                 //pressing enter on the last text input in the dialog clicks the OK button
                 $dialogWidget.find('input[type="text"]').last().on('keydown',e=>{
@@ -1129,7 +1121,7 @@ $(function(){
                 'You have no scores in the My Scores section. Click the New Score Button or load your Scores.',
                 {
                     addClass: 'warn',
-                    title: 'My Scores Section is Empty',
+                    title: '<span class="ui-icon ui-icon-info"></span> My Scores Section is Empty',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1174,7 +1166,7 @@ $(function(){
                 'There was an error with the file contents.',
                 {
                     addClass: 'warn',
-                    title: 'File Contents Error',
+                    title: '<span class="ui-icon ui-icon-alert"></span> File Contents Error',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1206,7 +1198,7 @@ $(function(){
                 'Please upload a .s2s (staff to string) file',
                 {
                     addClass: 'warn',
-                    title: 'Invalid File Extension',
+                    title: '<span class="ui-icon ui-icon-alert"></span> Invalid File Extension',
                     titleIcon: 'exclamation'
                 }
             )
@@ -1318,7 +1310,7 @@ $(function(){
                     `<p>Note: This won't change the "T:" field in the abc notation.</p>
                      <div><input type="text" id="bkmkRenameInput" style="width:100%;"></div>`,
                     {
-                        title:'Rename Score',
+                        title:'<span class="ui-icon ui-icon-pencil"></span> Rename Score',
                         buttons: [
                             {
                                 text: 'Cancel',
@@ -1367,7 +1359,7 @@ $(function(){
             'You have unsaved changes. Do you wish to continue?',
             {
                 addClass: 'alert',
-                title: 'Unsaved Changes',
+                title: '<span class="ui-icon ui-icon-alert"></span> Unsaved Changes',
                 titleIcon: 'flag',
                 buttons: [
                     {
