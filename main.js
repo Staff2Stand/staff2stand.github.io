@@ -968,7 +968,8 @@ $(function(){
     //default options
     const header_height = $('#top_bar').height()
     const dialogTop = header_height + 10
-    $('#dialog').dialog({
+    $('#dialog')
+    .dialog({
         autoOpen: false,
         position:{
             my:'center top',
@@ -993,7 +994,7 @@ $(function(){
         }
     })
     //Override the _title function so that html in the title option isn't escaped
-    dialog.data( "uiDialog" )._title = function(title) {
+    .data( "uiDialog" )._title = function(title) {
         title.html( this.options.title );
     };
 
