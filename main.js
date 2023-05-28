@@ -1025,9 +1025,11 @@ $(function(){
                 const $dialogWidget = $(this).dialog('widget')
 
                 //remove any existing title icons and add the new one
-                const $titleIcons = $dialogWidget.find('svg.svg-inline--fa')
+                const $title = $dialogWidget.find('.ui-dialog-title')
+                const $titleIcons = $title.find('svg.svg-inline--fa')
+                console.log('title',$title,'title icons',$titleIcons)
                 $titleIcons.remove()
-                $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($dialogWidget.find('.ui-dialog-title'))
+                $('<i class="fas fa-'+opts.titleIcon+'"></i> ').prependTo($title)
 
                 //pressing enter on the last text input in the dialog clicks the OK button
                 $dialogWidget.find('input[type="text"]').last().on('keydown',e=>{
@@ -1314,7 +1316,7 @@ $(function(){
             "Rename":function($targetBkmkLi){ 
                 openDialog(
                     `<p>Note: This won't change the "T:" field in the abc notation.</p>
-                     <div><input type="text" id="bkmkRenameInput" style="width:80%;"></div>`,
+                     <div><input type="text" id="bkmkRenameInput" style="width:100%;"></div>`,
                     {
                         title:'Rename Score',
                         buttons: [
