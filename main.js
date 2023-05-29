@@ -1285,7 +1285,23 @@ $(function(){
         const filename = $bkmk.attr('_title')
 
         if (copyToClipboard){
-            copyTextToClipboard( JSON.stringify(contentsObj) )
+            const $tempTxtArea = $('<textarea/>').css({
+                position:'fixed',
+                top:'0',
+                left:'0',
+                zIndex:'0'
+            })
+            $tempTxtArea
+            .val( JSON.stringify(contentsObj) )
+            .appendTo( $('body') )
+            .get(0).select()
+
+            document.execCommand('copy')
+
+            $tempTxtArea.remove()
+
+            console.log('S2S || copied score data')
+
             return
         }
 
