@@ -1284,6 +1284,11 @@ $(function(){
         contentsObj['_title'] = $bkmk.attr('_title')
         const filename = $bkmk.attr('_title')
 
+        if (copyToClipboard){
+            copyTextToClipboard( JSON.stringify(contentsObj) )
+            return
+        }
+
         const contentsArray = [contentsObj]
         const contents = JSON.stringify(contentsArray)
         downloadScoreData(filename,contents)
