@@ -684,11 +684,12 @@ footer {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #aaa; /* Color of the scrollbar handle */
+  border-radius: 16px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #d6d6d6; /* Color of the scrollbar handle on hover */
+  background: #8d8d8d; /* Color of the scrollbar handle on hover */
 }
 
 
