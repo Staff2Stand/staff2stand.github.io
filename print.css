@@ -68,7 +68,7 @@
 
   /* footer */
   body:after {
-    content: 'Staff To Stand';
+    content: 'StaffToStand.com';
     display: block;
     width: 200px;
     height: fit-content;
