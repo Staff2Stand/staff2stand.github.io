@@ -119,20 +119,6 @@ const scoreData = [
                 "_title":"Hot Cross Buns"
             }
         ]
-    },
-    {
-        type:"section",
-        heading:"NYSSMA",
-        bookmarks:[
-            {   //The Clown
-                "_title":"The Clown",
-                "abc-violin":"",
-                "abc-viola":"",
-                "abc-cello":"",
-                "abc-bass":"",
-                "abc-piano":""
-            }
-        ]
     }
 ]
 

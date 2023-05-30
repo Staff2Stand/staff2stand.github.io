@@ -1269,7 +1269,7 @@ $(function(){
     }
 
     /**
-     * Process Score Data For Download
+     * Process Score Data For Download/Copying
      * @param {Element} $bkmk 
      * @param {Boolean} copyToClipboard if true, rather than downloading as a json file, copies the js object to clipboard
      */
@@ -1289,7 +1289,8 @@ $(function(){
                 position:'fixed',
                 top:'0',
                 left:'0',
-                zIndex:'0'
+                zIndex:'0',
+                opacity:'0'
             })
             $tempTxtArea
             .val( JSON.stringify(contentsObj) )
@@ -1300,7 +1301,7 @@ $(function(){
 
             $tempTxtArea.remove()
 
-            console.log('S2S || copied score data')
+            console.log('S2S || copied score data',contentsObj)
 
             return
         }
