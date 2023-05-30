@@ -673,7 +673,7 @@ footer {
 /* SCROLLBAR */
 /* Track */
 ::-webkit-scrollbar {
-  width: 4px; /* Adjust the width of the scrollbar */
+  width: 6px; /* Adjust the width of the scrollbar */
 }
 
 /* Track */
