@@ -1285,6 +1285,7 @@ $(function(){
         const filename = $bkmk.attr('_title')
 
         if (copyToClipboard){
+            //Copy Score Data
             const $tempTxtArea = $('<textarea/>').css({
                 position:'fixed',
                 top:'0',
