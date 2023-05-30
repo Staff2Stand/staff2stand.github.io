@@ -674,22 +674,21 @@ footer {
 /* Track */
 ::-webkit-scrollbar {
   width: 4px; /* Adjust the width of the scrollbar */
-  border-radius: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f138; /* Background color of the track */
+  background: #333; /* Background color of the track */
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #424242; /* Color of the scrollbar handle */
+  background: #aaa; /* Color of the scrollbar handle */
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b6b6b; /* Color of the scrollbar handle on hover */
+  background: #d6d6d6; /* Color of the scrollbar handle on hover */
 }
 
 
