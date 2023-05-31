@@ -467,7 +467,7 @@ $(function(){
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
 
         //Fade Out Notey
-        const last_part_to_change = $('.part.hidden').last().attr('instrument') || instruments[instruments.length-1]
+        const last_part_to_change = $('.part:not(.hidden)').last().attr('instrument') || instruments[instruments.length-1]
         const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
 
         if (instrument_of_target === last_part_to_change) fadeOutNotey()
