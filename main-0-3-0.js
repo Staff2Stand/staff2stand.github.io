@@ -76,7 +76,6 @@ const abcEditorInstances = {}
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
  */
 function fadeOutNotey(classToAdd='holding-violin'){
-    //fade out notey if they're still visible
     if ( $('#notey:visible').length ) $('#notey .notey').addClass('hide')
 }
 /**
