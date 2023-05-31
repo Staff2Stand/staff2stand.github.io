@@ -467,8 +467,10 @@ $(function(){
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
 
         //Fade Out Notey
-        const target_is_in_last_instrument = $(targets[0]).closest('.part').attr('instrument') === instruments[instruments.length-1]
-        if (target_is_in_last_instrument) fadeOutNotey()
+        const last_part_to_change = $('.part.hidden').last().attr('instrument') || instruments[instruments.length-1]
+        const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
+
+        if (instrument_of_target === last_part_to_change) fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
