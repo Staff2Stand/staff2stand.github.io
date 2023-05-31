@@ -77,7 +77,7 @@ const abcEditorInstances = {}
  */
 function fadeOutNotey(classToAdd='holding-violin'){
     //fade out notey if they're still visible
-    if ( $('#notey:visible').length ) $('#notey').fadeOut()
+    if ( $('#notey:visible').length ) $('#notey .notey').addClass('hide')
 }
 /**
  * FADE IN NOTEY
@@ -87,10 +87,7 @@ function fadeOutNotey(classToAdd='holding-violin'){
 function fadeInNotey(classToAdd='playing-violin'){
     if ($('#notey:visible').length) return
 
-    $('#notey')
-    .attr('class','')
-    .addClass(`eyes-blinking ${classToAdd}`)
-    .fadeIn()
+    $('#notey').attr('class','eyes-blinking ${classToAdd}')
 }
 
 /**
