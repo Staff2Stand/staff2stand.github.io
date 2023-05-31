@@ -87,8 +87,9 @@ function fadeOutNotey(classToAdd='holding-violin'){
 function fadeInNotey(classToAdd='playing-violin'){
     if ($('#notey:visible').length) return
 
-    $('#notey')
-    .attr('class',`eyes-blinking ${classToAdd}`)
+    $('#notey').attr('class',`eyes-blinking ${classToAdd}`)
+
+    $('#notey .notey').removeClass('hide')
 }
 
 /**
