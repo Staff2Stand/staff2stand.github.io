@@ -85,7 +85,7 @@ function fadeOutNotey(classToAdd='holding-violin'){
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
  */
 function fadeInNotey(classToAdd='playing-violin'){
-    if ($('#notey:visible').length) return
+    if ($('#notey .notey.hide').length === 0) return
 
     $('#notey').attr('class',`eyes-blinking ${classToAdd}`)
 
