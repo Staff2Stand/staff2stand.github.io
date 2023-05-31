@@ -451,6 +451,8 @@ $(function(){
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
 
+        console.log('targets',targets)
+
         //add highlights and such to each target
         targets.forEach(function(target){
             addStringClassesToNoteHeads(target)
@@ -465,7 +467,7 @@ $(function(){
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
 
         //Fade Out Notey
-        const target_is_in_last_instrument = $(target).closest('.part').attr('instrument') === instruments[instruments.length-1]
+        const target_is_in_last_instrument = $(targets[0]).closest('.part').attr('instrument') === instruments[instruments.length-1]
         if (target_is_in_last_instrument) fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
