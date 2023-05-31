@@ -445,7 +445,7 @@ $(function(){
     }
 
     /**
-     * TUNES (RE)RENDER OBSERVER
+     * TUNES (RE)RENDER MUTATION OBSERVER
      */
     var observer = new MutationObserver(function(mutationsList, observer) {
         //create an array of unique targets from the mutations list
@@ -463,6 +463,10 @@ $(function(){
 
         //Add/Remove disabled class on file input
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
+
+        //Fade Out Notey
+        const target_is_in_last_instrument = $(target).closest('.part').attr('instrument') === instruments[instruments.length-1]
+        if (target_is_in_last_instrument) fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
@@ -717,8 +721,6 @@ $(function(){
 
             svg.setAttribute('viewBox',viewBox)
         })
-
-        fadeOutNotey()
     }
 
 
