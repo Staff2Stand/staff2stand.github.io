@@ -522,9 +522,10 @@ input#loadScores {
   border-bottom: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  margin: 0 6px;
+  margin: 0 6px -1px 6px;
   padding: 0 6px;
   top: calc(var(--header_height) + 26px) !important;
+  background: #fff;
 }
 .abcEditor-utils.hidden{
   display: none !important;
