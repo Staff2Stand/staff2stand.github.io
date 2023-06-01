@@ -188,6 +188,38 @@ header {
   color: #888;
 }
 
+/* search and sort */
+#searchAndSort_container {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0 0 4px;
+  width: calc(100% - 34px - 6px);
+  align-items: center;
+  justify-content: center;
+}
+#sortScores {
+  padding: 2px;
+  cursor: pointer;
+  filter: brightness(0.8);
+}
+  #sortScores:hover {
+    filter: brightness(1);
+  }
+#searchScores {
+  width: 100%;
+  position: relative;
+}
+  #searchScores .fa-magnifying-glass {
+    color: black;
+    position: absolute;
+    font-size: 18px;
+    top: 2px;
+    right: 2px;
+  }
+#searchScores input {
+  width: 100%;
+}
+
 /* MY SCORES */
 /* if my scores is empty */
 #myScores:not(:has(li)):after {
