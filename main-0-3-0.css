@@ -55,41 +55,6 @@ header {
   display: flex;
   justify-content: space-between;
 }
-#header_buttons span{
-  cursor: pointer;
-  outline: 2px solid;
-  border-radius: 4px;
-  padding: 4px 6px;
-  margin: 0 10px;
-  transition: all 50ms;
-}
-#header_buttons span:hover{
-  outline: 4px solid;
-}
-#loadScores{
-  width: 0;
-}
-#loadScoresContainer label{
-  cursor: pointer;
-}
-
-#fileName{
-  width: 150px;
-  background: none;
-  border: none;
-  border-bottom: 2px dashed;
-  color: #fff;
-}
-#fileName::placeholder{
-  color: #aaa
-}
-#fileName:focus {
-  outline: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  border-bottom: 2px solid;
-}
 
 #header_buttons_toggle{
   display: none;
@@ -195,7 +160,6 @@ header {
   margin: 0;
   margin-top: 12px;
   padding: 4px;
-  padding-right: 0;
   position: relative;
   border: 3px solid;
   border-radius: 3px;
@@ -209,6 +173,7 @@ header {
 #sidebar .score_bookmark {
   cursor: pointer;
   padding: 6px 0;
+  position: relative;
 }
 #sidebar .score_bookmark::after {
   content: attr(_title);
@@ -223,14 +188,105 @@ header {
   color: #888;
 }
 
+/* MY SCORES */
 /* if my scores is empty */
-#myScores:not(:has(li)) h1:after {
+#myScores:not(:has(li)):after {
   content: 'Your saved scores will appear here.';
   display: block;
   font-weight: normal;
   color: #999;
 }
 
+.bkmkUtils {
+  position: absolute;
+  right: 0;
+  bottom: 9px;
+  height: 20px;
+  display: flex;
+  color: #ccc;
+  fill: #ccc;
+  align-items: center;
+}
+.bkmkUtils .contextMenuTrigger {
+  width: 5px;
+  padding: 0 6px;
+}
+.bkmkUtils .contextMenuTrigger:hover{
+  fill: #fff;
+}
+.bkmkUtils .dragHandleCourtesy{
+  cursor: move;
+}
+.bkmkUtils :is(.dragHandleCourtesy, .saving, .saved) {
+  width: 18px;
+}
+.bkmkUtils :is(.saving, .saved) {
+  display: none;
+  margin-right: 6px;
+}
+
+/* my score utils */
+#myScoresUtils {
+  display: flex;
+  fill: #ccc;
+  gap: 4px;
+  width: 100%;
+}
+#myScoresUtils span {
+  width: 1em;
+  cursor: pointer;
+}
+#myScoresUtils span:hover{
+  fill: #fff;
+}
+#loadScoresContainer label {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+input#loadScores {
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute;
+  appearance: none;
+  -webkit-appearance: none;
+}
+#newScore{
+  margin-right: auto;
+}
+
+#myScoresUtils h1 {
+  padding: 0;
+  margin-right: auto;
+}
+
+/* CUSTOM MENU */
+.custom-menu {
+  display: none;
+  z-index: 1000;
+  position: absolute;
+  overflow: hidden;
+  border: 1px solid #CCC;
+  white-space: nowrap;
+  font-family: sans-serif;
+  background: #FFF;
+  color: #333;
+  border-radius: 0 5px;
+  padding: 0;
+  margin: 0;
+  filter: drop-shadow(2px 2px 2px #333);
+}
+.custom-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+  list-style-type: none;
+  transition: all .3s ease;
+  user-select: none;
+}
+.custom-menu li:hover {
+  background-color: #DEF;
+}
 
 /* sidebar buttons */
 #sidebar_buttons {
@@ -249,6 +305,9 @@ header {
   margin-left: 2px;
   height: 40px;
   display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 #sidebar_buttons .spaceAbove {
   margin-top: 1em;
@@ -312,14 +371,6 @@ header {
   color: #fff;
 }
 
-/* new scores */
-#sidebar_buttons #new_score {
-  color: #ff8100;
-}
-#sidebar_buttons #new_score:hover {
-  color: #ffa54a;
-}
-
 /* fingerings toggle */
 #sidebar_buttons #fingerings_toggle {
   --h: 182deg;
@@ -340,6 +391,16 @@ header {
 }
 #sidebar_buttons #notenames_toggle  {
   color: hsl(var(--h) var(--s) var(--l));
+  align-content: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+#sidebar_buttons #notenames_toggle svg{
+  transform: scale(0.4) translate(0px, -112px);
+}
+#sidebar_buttons #notenames_toggle:hover svg {
+  filter: brightness(1.5);
 }
 /* edit toggle */
 #sidebar_buttons #show_editors {
@@ -367,13 +428,28 @@ header {
 }
 /* active span */
 #sidebar_buttons span.active {
-  /* outline: 2px solid blue; */
-  border-radius: 50%;
-  background: radial-gradient(
-    hsla(var(--h) var(--s) calc(var(--l) - 25%) / 1),
-    hsla(var(--h) var(--s) var(--l) / 0) 80%
-  );
+  filter: drop-shadow(0px 0px 4px hsla(var(--h) var(--s) calc(var(--l) - 25%) / 1));
 }
+
+/* CUSTOM TOOLTIP STYLES */
+/* Dark Theme */
+.darkTheme.ui-widget.ui-widget-content {
+  border: 1px solid #b3b3b3 !important;
+}
+.darkTheme.ui-widget-content {
+  border: 1px solid #aaaaaa !important;
+  background: #333 !important;
+  color: #eee !important;
+}
+.darkTheme.ui-widget {
+  font-family: Verdana,Arial,sans-serif !important;
+  font-size: 1em !important;
+}
+.darkTheme.ui-widget-shadow {
+  -webkit-box-shadow: -4px 4px 4px #7e7e7e !important;
+  box-shadow: -4px 4px 4px #7e7e7e !important;
+}
+
 
 /* PARTS */
 .abcEditor{
@@ -410,6 +486,7 @@ header {
 .part .part-top-bg{
   width: 100%;
   height: 2em;
+  margin-bottom: -2em;
   background: #fff;
   position: sticky;
   top: var(--header_height);
@@ -447,6 +524,11 @@ header {
   filter: drop-shadow(0px 0px 1px black);
 }
 
+.part:has(.abcEditor[disabled]) .abcEditor-utils {
+  /* hide editor utils if the textarea is disabled */
+  display: none !important;
+}
+
 .ui-icon-caret-1-e{
   background-position-y: 7px !important;
 }
@@ -463,9 +545,10 @@ header {
   border-bottom: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  margin: 0 6px;
+  margin: 0 6px -1px 6px;
   padding: 0 6px;
   top: calc(var(--header_height) + 26px) !important;
+  background: #fff;
 }
 .abcEditor-utils.hidden{
   display: none !important;
@@ -494,6 +577,16 @@ header {
   position: relative;
 }
 
+/* hidden part */
+.part.hidden :is(.extra_html, .instrument_tunes, .abc-warnings, .abcEditor, .abcEditor-utils){
+  display: none !important;
+}
+.part.hidden h1{
+  font-size: 20px;
+}
+.part.hidden .part-utils{
+  font-size: 12px;
+}
 
 /* HIGHLIGHTING */
 #tunes_container {
@@ -601,6 +694,30 @@ footer {
   padding: var(--header_content_padding);
 }
 
+/* SCROLLBAR */
+/* Track */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust the width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #333; /* Background color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fff; /* Color of the scrollbar handle */
+  border-radius: 16px;
+  box-shadow: inset 0 0 2px 1px #000;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #eee; /* Color of the scrollbar handle on hover */
+}
+
+
 
 /* NOTEY */
 /* Create Notey */
@@ -620,6 +737,13 @@ footer {
   isolation: isolate;
   position: relative;
   filter: drop-shadow(2px 4px 2px rgba(0 0 0 / 0.7));
+
+  transform: scale(1);
+  transition: all 1s;
+}
+
+.notey.hide{
+  transform: scale(0);
 }
 
 .notey-body {
