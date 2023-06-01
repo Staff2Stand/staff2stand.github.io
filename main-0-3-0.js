@@ -968,7 +968,8 @@ $(function(){
         track: true,
         my: "left center",
         show: 200,
-        hide: 100
+        hide: 100,
+        classes: 'darkTheme'
     })
 
     /**
