@@ -219,7 +219,7 @@ header {
   width: 100%;
 }
 
-#searchAndSortResults {
+#searchAndSort_results {
   display: none;
   height: calc(100% - 30px);
   width: calc(100% - 42px);
