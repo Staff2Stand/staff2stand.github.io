@@ -732,6 +732,12 @@ $(function(){
 
 
     /**
+     * SEARCH AND SORT
+     */
+    
+
+
+    /**
      * SCORE BOOKMARKS
      */
     //READ SCORE DATA JSON from window.scoreData (see scoreData.js)

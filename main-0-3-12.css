@@ -219,7 +219,9 @@ header {
 #searchScores input {
   width: 100%;
 }
+
 #searchAndSortResults {
+  display: none;
   height: calc(100% - 28px);
   width: calc(100% - 42px);
   border: 4px solid #333;
@@ -229,6 +231,25 @@ header {
   top: 24px;
   z-index: 1;
 }
+.hideResults {
+  --color: hsl(0 0% 20% / 1);
+  width: 100%;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(90deg, var(--color) 0 49%, transparent 49% 51%, var(--color) 51% 100%);
+  cursor: pointer;
+}
+.hideResults .fa-circle-arrow-up {
+  font-size: 24px;
+  position: absolute;
+  left: calc(50% - .5em);
+  top: -0.5em;
+  color: var(--color);
+}
+  .hideResults:hover{
+    --color: hsl(0 0% 50% / 1);
+  }
 
 /* MY SCORES */
 /* if my scores is empty */
