@@ -119,6 +119,15 @@ const scoreData = [
                 "_title":"Hot Cross Buns"
             }
         ]
+    },
+    {
+        type:"section",
+        heading:"NYSSMA",
+        bookmarks:[
+            {   //French Folk Song (the clown)
+                "abc-violin":"X:1\\nT: French Folk Song\\nC: Traditional\\nM: 3/4\\nL: 1/4\\nK: D\\nV: violin clef=treble\\nddd | ccc | Bcd | A2 z | GGG| FFF | \\nEEE | D2 z | DEF | DEF | DEF | G3 | EFG |\\nEFG | EFG | A2 z | dcB | AGF | EDE | D3 ||\\n%%text Variation\\nddd/d/ | ccc/c/ | B/B/ c/c/ d | A2 z | G G G/G/| F F/F/ F | \\nE/E/ E/E/ E/E/ | D2 z | D/D/ E F | D E/E/ F | D E F/F/ | G3 | E/E/ F G |\\nE F/F/ G | E F G/G/ | A2 z | dcB/B/ | A/A/GF | E/E/ D/D/ E/E/ | D3 ||","abc-viola":"X:1\\nT: French Folk Song\\nC: Traditional\\nM: 3/4\\nL: 1/4\\nK: D\\nV: viola clef=alto\\nddd | ccc | Bcd | A2 z | GGG| FFF | \\nEEE | D2 z | DEF | DEF | DEF | G3 | EFG |\\nEFG | EFG | A2 z | dcB | AGF | EDE | D3 ||\\n%%text Variation\\nddd/d/ | ccc/c/ | B/B/ c/c/ d | A2 z | G G G/G/| F F/F/ F | \\nE/E/ E/E/ E/E/ | D2 z | D/D/ E F | D E/E/ F | D E F/F/ | G3 | E/E/ F G |\\nE F/F/ G | E F G/G/ | A2 z | dcB/B/ | A/A/GF | E/E/ D/D/ E/E/ | D3 ||","abc-cello":"X:1\\nT: French Folk Song\\nC: Traditional\\nM: 3/4\\nL: 1/4\\nK: D\\nV: cello cleff=bass octave=-1\\nddd | ccc | Bcd | A2 z | GGG| FFF | \\nEEE | D2 z | DEF | DEF | DEF | G3 | EFG |\\nEFG | EFG | A2 z | dcB | AGF | EDE | D3 ||\\n%%text Variation\\nddd/d/ | ccc/c/ | B/B/ c/c/ d | A2 z | G G G/G/| F F/F/ F | \\nE/E/ E/E/ E/E/ | D2 z | D/D/ E F | D E/E/ F | D E F/F/ | G3 | E/E/ F G |\\nE F/F/ G | E F G/G/ | A2 z | dcB/B/ | A/A/GF | E/E/ D/D/ E/E/ | D3 ||","abc-bass":"X:1\\nT: French Folk Song\\nT:Bass Line\\nC: Traditional, Arr. By A. Tilles\\nM: 3/4\\nL: 1/4\\nK: D\\nV: bass clef=bass octave=-1\\nDDD | DDD | GGG | A2 z | GGG| DDD | \\nAAA | D2 z | DDD | BBB | AAA | G3 | EEE |\\nDDD | BBB | A2 z | DDD | AAA | A,A,A, | D3 ||","abc-piano":"","_title":"French Folk Song"
+            }
+        ]
     }
 ]
 

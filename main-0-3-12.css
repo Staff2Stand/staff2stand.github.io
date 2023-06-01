@@ -431,6 +431,26 @@ input#loadScores {
   filter: drop-shadow(0px 0px 4px hsla(var(--h) var(--s) calc(var(--l) - 25%) / 1));
 }
 
+/* CUSTOM TOOLTIP STYLES */
+/* Dark Theme */
+.darkTheme.ui-widget.ui-widget-content {
+  border: 1px solid #b3b3b3 !important;
+}
+.darkTheme.ui-widget-content {
+  border: 1px solid #aaaaaa !important;
+  background: #333 !important;
+  color: #eee !important;
+}
+.darkTheme.ui-widget {
+  font-family: Verdana,Arial,sans-serif !important;
+  font-size: 1em !important;
+}
+.darkTheme.ui-widget-shadow {
+  -webkit-box-shadow: -4px 4px 4px #7e7e7e !important;
+  box-shadow: -4px 4px 4px #7e7e7e !important;
+}
+
+
 /* PARTS */
 .abcEditor{
   width: calc(100% - 12px);
