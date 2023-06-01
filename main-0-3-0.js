@@ -76,8 +76,7 @@ const abcEditorInstances = {}
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
  */
 function fadeOutNotey(classToAdd='holding-violin'){
-    //fade out notey if they're still visible
-    if ( $('#notey:visible').length ) $('#notey').fadeOut()
+    if ( $('#notey:visible').length ) $('#notey .notey').addClass('hide')
 }
 /**
  * FADE IN NOTEY
@@ -85,12 +84,11 @@ function fadeOutNotey(classToAdd='holding-violin'){
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
  */
 function fadeInNotey(classToAdd='playing-violin'){
-    if ($('#notey:visible').length) return
+    if ($('#notey .notey.hide').length === 0) return
 
-    $('#notey')
-    .attr('class','')
-    .addClass(`eyes-blinking ${classToAdd}`)
-    .fadeIn()
+    $('#notey').attr('class',`eyes-blinking ${classToAdd}`)
+
+    $('#notey .notey').removeClass('hide')
 }
 
 /**
@@ -447,11 +445,13 @@ $(function(){
     }
 
     /**
-     * TUNES (RE)RENDER OBSERVER
+     * TUNES (RE)RENDER MUTATION OBSERVER
      */
     var observer = new MutationObserver(function(mutationsList, observer) {
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
+
+        console.log('targets',targets)
 
         //add highlights and such to each target
         targets.forEach(function(target){
@@ -465,6 +465,12 @@ $(function(){
 
         //Add/Remove disabled class on file input
         areAnyDirty() ? $('#loadScores').addClass('disabled') : $('#loadScores').removeClass('disabled')
+
+        //Fade Out Notey
+        const last_part_to_change = $('.part:not(.hidden)').last().attr('instrument')
+        const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
+
+        if (instrument_of_target === last_part_to_change) fadeOutNotey()
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
@@ -719,8 +725,6 @@ $(function(){
 
             svg.setAttribute('viewBox',viewBox)
         })
-
-        fadeOutNotey()
     }
 
 

@@ -246,8 +246,11 @@ header {
   cursor: pointer;
 }
 input#loadScores {
-  width: 0;
+  width: 0 !important;
+  height: 0 !important;
   position: absolute;
+  appearance: none;
+  -webkit-appearance: none;
 }
 #newScore{
   margin-right: auto;
@@ -522,9 +525,10 @@ input#loadScores {
   border-bottom: none;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  margin: 0 6px;
+  margin: 0 6px -1px 6px;
   padding: 0 6px;
   top: calc(var(--header_height) + 26px) !important;
+  background: #fff;
 }
 .abcEditor-utils.hidden{
   display: none !important;
@@ -713,6 +717,13 @@ footer {
   isolation: isolate;
   position: relative;
   filter: drop-shadow(2px 4px 2px rgba(0 0 0 / 0.7));
+
+  transform: scale(1);
+  transition: all 1s;
+}
+
+.notey.hide{
+  transform: scale(0);
 }
 
 .notey-body {
