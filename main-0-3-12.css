@@ -191,14 +191,13 @@ header {
 /* search and sort */
 #searchAndSort_container {
   display: flex;
-  gap: 4px;
   padding: 4px 0 0 3px;
   width: calc(100% - 34px - 6px);
   align-items: center;
   justify-content: center;
 }
 #sortScores {
-  padding: 2px;
+  padding: 2px 4px;
   cursor: pointer;
   filter: brightness(0.8);
 }
@@ -222,13 +221,13 @@ header {
 
 #searchAndSortResults {
   display: none;
-  height: calc(100% - 28px);
+  height: calc(100% - 30px);
   width: calc(100% - 42px);
   border: 4px solid #333;
   border-top: none;
   background: #fff;
   position: absolute;
-  top: 24px;
+  top: 26px;
   z-index: 1;
 }
 .hideResults {
