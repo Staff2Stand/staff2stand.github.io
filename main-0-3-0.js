@@ -969,7 +969,9 @@ $(function(){
         my: "left center",
         show: 200,
         hide: 100,
-        classes: 'darkTheme'
+        classes: {
+            "ui-tooltip": "darkTheme"
+          }
     })
 
     /**
