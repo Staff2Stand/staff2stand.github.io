@@ -709,6 +709,9 @@ $(function(){
         const $lineSVGs = $lineDivs.children('svg')
 
         $lineSVGs.each((i,svg)=>{
+            const no_notes_in_line = $(svg).find('.abcjs-note').length === 0
+            if (no_notes_in_line) return //ie meta top, text lines, blank staff lines
+
             const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
             const svgRect = svg.getBoundingClientRect()
             const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
