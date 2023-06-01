@@ -192,7 +192,7 @@ header {
 #searchAndSort_container {
   display: flex;
   gap: 4px;
-  padding: 4px 0 0 4px;
+  padding: 4px 0 0 3px;
   width: calc(100% - 34px - 6px);
   align-items: center;
   justify-content: center;
@@ -218,6 +218,16 @@ header {
   }
 #searchScores input {
   width: 100%;
+}
+#searchAndSortResults {
+  height: calc(100% - 28px);
+  width: calc(100% - 42px);
+  border: 4px solid #333;
+  border-top: none;
+  background: #fff;
+  position: absolute;
+  top: 24px;
+  z-index: 1;
 }
 
 /* MY SCORES */
