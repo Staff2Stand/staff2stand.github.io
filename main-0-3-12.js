@@ -71,24 +71,24 @@ const abcEditorInstances = {}
 //UTILITY FUNCTIONS
 
 /**
- * FADE OUT NOTEY
- * @description fades out notey, removes all classes starting with "playing-", and adds classToAdd
+ * FADE NOTEY
+ * @param {string | 'in', 'out', 'toggle'} mode whether to fade notey in, fade out, or toggle
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
+ * @returns 
  */
-function fadeOutNotey(classToAdd='holding-violin'){
-    if ( $('#notey:visible').length ) $('#notey .notey').addClass('hide')
-}
-/**
- * FADE IN NOTEY
- * @description removes all classes, adds "eyes-blinking", classToAdd, then fades in notey
- * @param {string} classToAdd 'class1' or 'class1 class2 etc'
- */
-function fadeInNotey(classToAdd='playing-violin'){
-    if ($('#notey .notey.hide').length === 0) return
+function fadeNotey(mode,classToAdd='playing-violin'){
+    if (mode === 'toggle'){
+        const notey_is_visible = $('#notey:visible').length
+        mode = notey_is_visible ? 'out' : 'in'
+    }
 
-    $('#notey').attr('class',`eyes-blinking ${classToAdd}`)
+    if (mode === 'in') {
+        $('#notey').attr('class',`eyes-blinking ${classToAdd}`)
+        $('#notey .notey').removeClass('hide')
+        return
+    }
 
-    $('#notey .notey').removeClass('hide')
+    if (mode === 'out') $('#notey .notey').addClass('hide')
 }
 
 /**
@@ -470,7 +470,7 @@ $(function(){
         const last_part_to_change = $('.part:not(.hidden)').last().attr('instrument')
         const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
 
-        if (instrument_of_target === last_part_to_change) fadeOutNotey()
+        if (instrument_of_target === last_part_to_change) fadeNotey('out')
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
@@ -930,7 +930,7 @@ $(function(){
     )
     // notey toggler
     $('#noteyToggle').click(function(){
-        $('#notey').fadeToggle()
+        fadeNotey('toggle')
     })
 
 
@@ -1557,7 +1557,7 @@ $(function(){
     function renderScoreFromBkmk($bkmk,appendScore=false, bkmk_was_already_active=false){
         console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
-        fadeInNotey('looking-at-left-hand playing-violin')
+        fadeNotey('in','looking-at-left-hand playing-violin')
 
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
