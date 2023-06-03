@@ -78,7 +78,7 @@ const abcEditorInstances = {}
  */
 function fadeNotey(mode,classToAdd='playing-violin'){
     if (mode === 'toggle'){
-        const notey_is_visible = $('#notey .notey:visible').length
+        const notey_is_visible = !($('#notey .notey').hasClass('hide'))
         mode = notey_is_visible ? 'out' : 'in'
     }
 
