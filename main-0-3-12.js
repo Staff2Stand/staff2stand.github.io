@@ -769,6 +769,28 @@ $(function(){
         }
 
         $matchingScores.clone().appendTo($resultsDiv)
+
+        //create context menu
+        $matchingScores.each((i,score)=>{
+            createCustomContextMenu(
+                $(score),
+                {
+                    "Copy To My Scores":function($targetBkmkLi){
+                        const scoreData = (function(){
+                            const temp = {'_title':$targetBkmkLi.attr('_title')}
+                            instruments.forEach(instrument=> 
+                                temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
+                            return temp
+                        })()
+                        createMyScoreBkmk(scoreData)
+                    },
+                    "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) },
+                    "Copy Score Data": function($targetBkmkLi){ processScoreData($targetBkmkLi,true) },
+                    "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
+                },
+                $(score).find('.contextMenuTrigger')
+            )
+        })
     })
 
 
