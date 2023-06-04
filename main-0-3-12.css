@@ -190,8 +190,10 @@ header {
 
 /* search and sort */
 #searchAndSort_container {
-  padding: 4px 0 0 3px;
+  padding: 4px 3px 0 3px;
   width: calc(100% - 34px - 6px);
+  display: flex;
+  align-items: center;
 }
 #searchScores {
   width: 100%;
@@ -207,9 +209,14 @@ header {
 #searchScores input {
   width: 100%;
 }
-#expand_results .fa-circle-down{
-  font-size: 24px;
+#searchAndSort_container .expand_results {
+  padding: 0 4px;
+  font-size: 20px;
+  cursor: pointer;
   transition: all 1s;
+}
+#searchAndSort_container .expand_results:hover {
+  color: #ddd;
 }
 
 #searchAndSort_results {

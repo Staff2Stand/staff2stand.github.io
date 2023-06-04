@@ -734,7 +734,7 @@ $(function(){
     /**
      * SEARCH AND SORT
      */
-    const $expandResults = $('#expand_results')
+    const $expandResults = $('#searchAndSort_container .expand_results')
     const $resultsDiv = $('#searchAndSort_results')
 
     $expandResults.click(()=>{
