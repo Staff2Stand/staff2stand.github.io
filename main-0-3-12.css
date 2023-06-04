@@ -235,13 +235,12 @@ header {
   z-index: 1;
 }
 #sortScores {
-  padding: 2px 4px;
+  padding: 4px;
   cursor: pointer;
-  filter: brightness(0.8);
+  color: #222;
+  display: inline-block;
+  font-size: 20px;
 }
-  #sortScores:hover {
-    filter: brightness(1);
-  }
 
 /* MY SCORES */
 /* if my scores is empty */
