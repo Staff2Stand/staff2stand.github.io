@@ -736,7 +736,7 @@ $(function(){
      */
     const $expandResults = $('#searchAndSort_container .expand_results')
     const $results_container = $('#searchAndSort_results')
-    const $searchInput = $('#searchScores')
+    const $searchInput = $('#searchScores input')
     const $sortBtn = $('#sortScores')
     const $filters_container = $('#sortFilters')
     const $resultsDiv = $('#results')
