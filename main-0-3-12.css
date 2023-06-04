@@ -241,16 +241,16 @@ header {
   display: inline-block;
   font-size: 20px;
 }
+#sortScores.active {
+  background: #222;
+  color: #fff;
+  border-radius: 40% 40% 0 0;
+}
 #sortFilters {
   display: none;
   min-height: 24px;
   border: 4px solid #222;
   border-radius: 0 8px;
-}
-#sortFilters.active {
-  background: #222;
-  color: #fff;
-  border-radius: 40% 40% 0 0;
 }
 
 #sidebar #searchAndSort_results .score_bookmark {
