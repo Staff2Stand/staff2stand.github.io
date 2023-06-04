@@ -190,20 +190,9 @@ header {
 
 /* search and sort */
 #searchAndSort_container {
-  display: flex;
   padding: 4px 0 0 3px;
   width: calc(100% - 34px - 6px);
-  align-items: center;
-  justify-content: center;
 }
-#sortScores {
-  padding: 2px 4px;
-  cursor: pointer;
-  filter: brightness(0.8);
-}
-  #sortScores:hover {
-    filter: brightness(1);
-  }
 #searchScores {
   width: 100%;
   position: relative;
@@ -218,6 +207,10 @@ header {
 #searchScores input {
   width: 100%;
 }
+#expand_results .fa-circle-down{
+  font-size: 24px;
+  transition: all 1s;
+}
 
 #searchAndSort_results {
   display: none;
@@ -230,24 +223,13 @@ header {
   top: 26px;
   z-index: 1;
 }
-.hideResults {
-  --color: hsl(0 0% 20% / 1);
-  width: 100%;
-  height: 10px;
-  position: absolute;
-  bottom: 0;
-  background: linear-gradient(90deg, var(--color) 0 49%, transparent 49% 51%, var(--color) 51% 100%);
+#sortScores {
+  padding: 2px 4px;
   cursor: pointer;
+  filter: brightness(0.8);
 }
-.hideResults .fa-circle-arrow-up {
-  font-size: 24px;
-  position: absolute;
-  left: calc(50% - .5em);
-  top: -0.5em;
-  color: var(--color);
-}
-  .hideResults:hover{
-    --color: hsl(0 0% 50% / 1);
+  #sortScores:hover {
+    filter: brightness(1);
   }
 
 /* MY SCORES */
