@@ -260,7 +260,7 @@ header {
   bottom: -10px;
   fill: #666;
 }
-#sidebar #searchAndSort_results .score_bookmark .bkmkUtils:hover{
+#sidebar #searchAndSort_results .score_bookmark .bkmkUtils .contextMenuTrigger:hover{
   fill: #222;
 }
 
