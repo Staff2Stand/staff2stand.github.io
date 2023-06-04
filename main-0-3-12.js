@@ -735,11 +735,32 @@ $(function(){
      * SEARCH AND SORT
      */
     const $expandResults = $('#searchAndSort_container .expand_results')
-    const $resultsDiv = $('#searchAndSort_results')
+    const $results_container = $('#searchAndSort_results')
+    const $searchInput = $('#searchScores')
+    const $sortBtn = $('#sortScores')
+    const $filters_container = $('#sortFilters')
+    const $resultsDiv = $('#results')
 
     $expandResults.click(()=>{
         $expandResults.toggleClass('fa-rotate-180')
-        $resultsDiv.slideToggle()
+        $results_container.slideToggle()
+    })
+
+    $searchInput.on('input',function(){
+        $resultsDiv.children().remove()
+
+        const query = $(this).val()
+        const $matchingScores = $(`.score_bookmark[_title*="${query}"]`)
+
+        const no_matching_scores = $matchingScores.length === 0
+        if (no_matching_scores){
+            $('<p/>',{
+                text:'No Scores Found. Make sure there are no typos. Your search should match the title as it appears in the sidebar, not as it appears in the music.'
+            }).appendTo($resultsDiv)
+            return
+        }
+
+        $matchingScores.clone().appendTo($resultsDiv)
     })
 
 
