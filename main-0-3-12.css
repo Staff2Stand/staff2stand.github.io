@@ -253,6 +253,17 @@ header {
   border-radius: 40% 40% 0 0;
 }
 
+#sidebar #searchAndSort_results .score_bookmark {
+  color: #222;
+}
+#sidebar #searchAndSort_results .score_bookmark .bkmkUtils {
+  bottom: -10px;
+  fill: #666;
+}
+#sidebar #searchAndSort_results .score_bookmark .bkmkUtils:hover{
+  fill: #222;
+}
+
 /* MY SCORES */
 /* if my scores is empty */
 #myScores:not(:has(li)):after {
