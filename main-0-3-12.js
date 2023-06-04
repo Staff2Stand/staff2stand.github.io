@@ -754,6 +754,9 @@ $(function(){
     $searchInput.on('input',function(){
         $resultsDiv.children().remove()
 
+        const resultsContainer_not_shown = !$results_container.is(':visible')
+        if (resultsContainer_not_shown) $expandResults.click()
+
         const query = $(this).val()
         const $matchingScores = $(`.score_bookmark[_title*="${query}"]`)
 
