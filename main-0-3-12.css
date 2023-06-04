@@ -241,6 +241,17 @@ header {
   display: inline-block;
   font-size: 20px;
 }
+#sortFilters {
+  display: none;
+  min-height: 24px;
+  border: 4px solid #222;
+  border-radius: 0 8px;
+}
+#sortFilters.active {
+  background: #222;
+  color: #fff;
+  border-radius: 40% 40% 0 0;
+}
 
 /* MY SCORES */
 /* if my scores is empty */

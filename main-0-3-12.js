@@ -746,6 +746,11 @@ $(function(){
         $results_container.slideToggle()
     })
 
+    $sortBtn.click(function(){
+        $(this).toggleClass('active')
+        $filters_container.toggle()
+    })
+
     $searchInput.on('input',function(){
         $resultsDiv.children().remove()
 
