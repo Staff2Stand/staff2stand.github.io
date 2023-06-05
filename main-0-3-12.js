@@ -753,7 +753,7 @@ $(function(){
         }).get()
         const uniqueTagsArray = [...new Set(tagsArray)].filter(function(value) {
             return value !== "" //filter out empty strings
-        })
+        }).sort()//alphabetize
 
         const $checkboxList = $('<ul>').appendTo($filters_container)
 
@@ -775,6 +775,12 @@ $(function(){
             const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
                 return $(this).val()
             }).get()
+
+            if (!selectedTags.length) {
+                //no filters are checked, so show all and return
+                $resultsDiv.find('.score_bookmark').show()
+                return
+            }
 
             const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"]:not([tags*="') + '"])')
             const $wantedScores = $resultsDiv.find('.score_bookmark[tags*="' + selectedTags.join('"][tags*="') + '"]')
