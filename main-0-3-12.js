@@ -806,7 +806,8 @@ $(function(){
         if (resultsContainer_not_shown) $expandResults.click()
 
         const query = $(this).val()
-        const $matchingScores = $(`.score_bookmark[_title*="${query}"]`)
+        //get scores whose _title or tags contain the query
+        const $matchingScores = $(`.score_bookmark:is([_title*="${query}"],[tags*=${query}])`)
 
         const no_matching_scores = $matchingScores.length === 0
         if (no_matching_scores){
