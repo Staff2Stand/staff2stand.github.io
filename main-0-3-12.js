@@ -747,6 +747,33 @@ $(function(){
     })
 
     $sortBtn.click(function(){
+        //Create Tags Checkboxes
+        const tagsArray = $('.score_bookmark').map(function() {
+            return $(this).attr('tags').replace(/,\s+/g,',').split(',')
+        }).get()
+        const uniqueTagsArray = [...new Set(tagsArray)]
+
+        const $checkboxList = $('<ul>').appendTo($filters_container)
+
+        uniqueTagsArray.forEach((tag,i)=>{
+            const $listItem = $('<li>')
+            const $checkbox = $('<input>').attr({
+                type: 'checkbox',
+                id: 'checkbox_' + i,
+                value: tag
+            })
+            const $label = $('<label>').attr('for', 'checkbox_' + i).text(tag);
+            
+            $listItem.append($checkbox, $label)
+            $checkboxList.append($listItem)
+        })
+
+        //Listen for changes to checkboxes
+        $filters_container.on('change','input[type="checkbox"]',function(){
+            //get vals of all checked checkboxes and filter the bkmks based on those
+        })
+
+        //Toggle the filters
         $(this).toggleClass('active')
         $filters_container.toggle()
     })
