@@ -739,6 +739,7 @@ $(function(){
     const $searchInput = $('#searchScores input')
     const $sortBtn = $('#sortScores')
     const $filters_container = $('#sortFilters')
+    const $activeFilters = $('#activeFilters')
     const $resultsDiv = $('#results')
 
     $expandResults.click(()=>{
@@ -771,6 +772,16 @@ $(function(){
             
             $listItem.append($checkbox, $label)
             $checkboxList.append($listItem)
+
+            const $activeFilterMarker = $('<span/>',{
+                'for':'checkbox_'+i,
+                text: tag,
+                click:function(){
+                    $(this).hide()
+                    const $correspondingFilter = $filters_container.find(`#${$(this).attr('for')}`)
+                    $correspondingFilter.click()
+                }
+            }).appendTo($activeFilters)
         })
 
         //Toggle the filters
