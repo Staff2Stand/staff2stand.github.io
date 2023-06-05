@@ -751,7 +751,9 @@ $(function(){
         const tagsArray = $('.score_bookmark').map(function() {
             return $(this).attr('tags').replace(/,\s+/g,',').split(',')
         }).get()
-        const uniqueTagsArray = [...new Set(tagsArray)]
+        const uniqueTagsArray = [...new Set(tagsArray)].filter(function(value) {
+            return value !== "" //filter out empty strings
+        })
 
         const $checkboxList = $('<ul>').appendTo($filters_container)
 
