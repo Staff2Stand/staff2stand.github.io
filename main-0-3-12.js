@@ -768,10 +768,12 @@ $(function(){
             return
         }
 
-        $matchingScores.clone().appendTo($resultsDiv)
+        const $clonedScores = $matchingScores.clone()
+
+        $clonedScores.appendTo($resultsDiv)
 
         //create context menu
-        $matchingScores.each((i,score)=>{
+        $clonedScores.each((i,score)=>{
             createCustomContextMenu(
                 $(score),
                 {
