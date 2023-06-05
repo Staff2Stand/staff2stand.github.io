@@ -768,9 +768,14 @@ $(function(){
             $checkboxList.append($listItem)
         })
 
-        //Listen for changes to checkboxes
+        //Listen for changes to checkboxes and remove unwanted results
         $filters_container.on('change','input[type="checkbox"]',function(){
-            //get vals of all checked checkboxes and filter the bkmks based on those
+            const selectedTags = $filters_container.find('input[type="checkbox"]:not(:checked)').map(function(){
+                return $(this).val()
+            })
+            const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"]:not([tags*="') + '"])')
+
+            $unwantedScores.remove()
         })
 
         //Toggle the filters
