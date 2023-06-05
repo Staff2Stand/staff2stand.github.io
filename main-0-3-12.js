@@ -817,10 +817,7 @@ $(function(){
             return
         }
 
-        $matchingScores.clone().appendTo($resultsDiv)
-
-        //create context menu
-        $clonedScores.each((i,score)=>{
+        $matchingScores.clone().appendTo($resultsDiv).each((i,score)=>{
             createCustomContextMenu(
                 $(score),
                 {
