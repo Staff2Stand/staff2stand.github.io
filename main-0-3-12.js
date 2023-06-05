@@ -742,6 +742,9 @@ $(function(){
     const $resultsDiv = $('#results')
 
     $expandResults.click(()=>{
+        const searchInputIsEmpty = $searchInput.val() === ''
+        if (searchInputIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv)
+
         $expandResults.toggleClass('fa-rotate-180')
         $results_container.slideToggle()
     })
@@ -813,9 +816,7 @@ $(function(){
             return
         }
 
-        const $clonedScores = $matchingScores.clone()
-
-        $clonedScores.appendTo($resultsDiv)
+        $matchingScores.clone().appendTo($resultsDiv)
 
         //create context menu
         $clonedScores.each((i,score)=>{
