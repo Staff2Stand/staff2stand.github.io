@@ -775,9 +775,12 @@ $(function(){
             const selectedTags = $filters_container.find('input[type="checkbox"]:not(:checked)').map(function(){
                 return $(this).val()
             }).get()
+            
             const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"]:not([tags*="') + '"])')
+            const $wantedScores = $resultsDiv.find('.score_bookmark[tags*="' + selectedTags.join('"][tags*="') + '"]')
 
-            $unwantedScores.remove()
+            $wantedScores.show()
+            $unwantedScores.hide()
         })
 
         //Toggle the filters
