@@ -773,30 +773,30 @@ $(function(){
             $checkboxList.append($listItem)
         })
 
-        //Listen for changes to checkboxes and remove unwanted results
-        $filters_container.on('change','input[type="checkbox"]',function(){
-            const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
-                return $(this).val()
-            }).get()
-
-            if (!selectedTags.length) {
-                //no filters are checked, so show all and return
-                $resultsDiv.find('.score_bookmark').show()
-                return
-            }
-
-            const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"]:not([tags*="') + '"])')
-            const $wantedScores = $resultsDiv.find('.score_bookmark[tags*="' + selectedTags.join('"][tags*="') + '"]')
-
-            console.log(selectedTags, $unwantedScores, $wantedScores)
-
-            $wantedScores.show()
-            $unwantedScores.hide()
-        })
-
         //Toggle the filters
         $(this).toggleClass('active')
         $filters_container.toggle()
+    })
+
+    //Listen for changes to checkboxes and remove unwanted results
+    $filters_container.on('change','input[type="checkbox"]',function(){
+        const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
+            return $(this).val()
+        }).get()
+
+        if (!selectedTags.length) {
+            //no filters are checked, so show all and return
+            $resultsDiv.find('.score_bookmark').show()
+            return
+        }
+
+        const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"],[tags*="') + '"])')
+        const $wantedScores = $resultsDiv.find('.score_bookmark:is([tags*="' + selectedTags.join('"],[tags*="') + '"])')
+
+        console.log(selectedTags, $unwantedScores, $wantedScores)
+
+        $wantedScores.show()
+        $unwantedScores.hide()
     })
 
     $searchInput.on('input',function(){
