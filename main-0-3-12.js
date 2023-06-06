@@ -857,7 +857,7 @@ $(function(){
         const no_matching_scores = $matchingScores.length === 0
         if (no_matching_scores){
             $('<p/>',{
-                classes:'noMatch',
+                'class':'noMatch',
                 text:'No Scores Found. Make sure there are no typos. Your search should match the title as it appears in the sidebar, not as it appears in the music.'
             }).appendTo($resultsDiv)
             return
