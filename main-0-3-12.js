@@ -790,8 +790,7 @@ $(function(){
     })
 
     //Listen for changes to checkboxes and remove unwanted results
-    $filters_container.on('change','input[type="checkbox"]',function(e){
-        console.log($(this),this,e.target)
+    $filters_container.on('change','input[type="checkbox"]',function(){
         const clickedCheckbox = this
         const clickedCheckbox_isBeingUnchecked = $(this).is(':checked')
 
@@ -799,6 +798,7 @@ $(function(){
             if ( this === clickedCheckbox && clickedCheckbox_isBeingUnchecked ) return false
             return $(this).val()
         }).get()
+        .filter(Boolean) //remove any false vals
 
         if (!selectedTags.length) {
             //no filters are checked, so show all and return
