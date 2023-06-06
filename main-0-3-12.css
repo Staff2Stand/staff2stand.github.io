@@ -227,7 +227,7 @@ header {
   display: none;
   height: calc(100% - 30px);
   width: calc(100% - 42px);
-  border: 4px solid #333;
+  border: 4px solid #222;
   border-top: none;
   background: #fff;
   position: absolute;
@@ -235,6 +235,11 @@ header {
   z-index: 1;
   overflow-y: scroll;
 }
+/* the results scrollbar */
+div#searchAndSort_results::-webkit-scrollbar-track {
+  background: #222;
+}
+
 #sortScores {
   padding: 4px;
   cursor: pointer;
