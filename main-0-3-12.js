@@ -742,6 +742,27 @@ $(function(){
     const $activeFilters = $('#activeFilters')
     const $resultsDiv = $('#results')
 
+    function createScoreResultContextMenu(i,score){
+        createCustomContextMenu(
+            $(score),
+            {
+                "Copy To My Scores":function($targetBkmkLi){
+                    const scoreData = (function(){
+                        const temp = {'_title':$targetBkmkLi.attr('_title')}
+                        instruments.forEach(instrument=> 
+                            temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
+                        return temp
+                    })()
+                    createMyScoreBkmk(scoreData)
+                },
+                "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) },
+                "Copy Score Data": function($targetBkmkLi){ processScoreData($targetBkmkLi,true) },
+                "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
+            },
+            $(score).find('.contextMenuTrigger')
+        )
+    }
+
     $expandResults.click(()=>{
         const resultsDivIsEmpty = $resultsDiv.children().length === 0
         if (resultsDivIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv).each((i,score)=>createScoreResultContextMenu(i,score))
@@ -843,27 +864,6 @@ $(function(){
         }
 
         $matchingScores.clone().appendTo($resultsDiv).each((i,score)=> createScoreResultContextMenu(i,score))
-
-        function createScoreResultContextMenu(i,score){
-            createCustomContextMenu(
-                $(score),
-                {
-                    "Copy To My Scores":function($targetBkmkLi){
-                        const scoreData = (function(){
-                            const temp = {'_title':$targetBkmkLi.attr('_title')}
-                            instruments.forEach(instrument=> 
-                                temp[`abc-${instrument}`] = $targetBkmkLi.attr(`abc-${instrument}`))
-                            return temp
-                        })()
-                        createMyScoreBkmk(scoreData)
-                    },
-                    "Download Score Data":function($targetBkmkLi){ processScoreData($targetBkmkLi) },
-                    "Copy Score Data": function($targetBkmkLi){ processScoreData($targetBkmkLi,true) },
-                    "Remove Score From Page":function($targetBkmkLi){ removeScoreFromEditors($targetBkmkLi) }
-                },
-                $(score).find('.contextMenuTrigger')
-            )
-        }
     })
 
 
