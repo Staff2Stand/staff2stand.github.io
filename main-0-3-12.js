@@ -765,6 +765,9 @@ $(function(){
             $('<ul/>').appendTo($filters_container)
 
         uniqueTagsArray.forEach((tag,i)=>{
+            const tag_is_already_in_list = $checkboxList.find(`li:contains("${tag}")`).length
+            if (tag_is_already_in_list) return
+
             const $listItem = $('<li/>')
             const $checkbox = $('<input/>').attr({
                 type: 'checkbox',
