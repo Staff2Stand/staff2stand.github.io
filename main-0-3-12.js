@@ -796,8 +796,9 @@ $(function(){
         }).get()
 
         if (!selectedTags.length) {
-            //no filters are checked, so show all and return
+            //no filters are checked, so show all filters, hide all markers, and return
             $resultsDiv.find('.score_bookmark').show()
+            $filters_container.find('span').hide()
             return
         }
 
