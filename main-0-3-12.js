@@ -832,11 +832,13 @@ $(function(){
         if (no_matching_scores){
             $('<p/>',{
                 text:'No Scores Found. Make sure there are no typos. Your search should match the title as it appears in the sidebar, not as it appears in the music.'
-            }).appendTo($resultsDiv)
+            }).appendTo($resultsDiv).each((i,score)=>createScoreResultContextMenu(i,score))
             return
         }
 
-        $matchingScores.clone().appendTo($resultsDiv).each((i,score)=>{
+        $matchingScores.clone().appendTo($resultsDiv).each((i,score)=> createScoreResultContextMenu(i,score))
+
+        function createScoreResultContextMenu(i,score){
             createCustomContextMenu(
                 $(score),
                 {
@@ -855,7 +857,7 @@ $(function(){
                 },
                 $(score).find('.contextMenuTrigger')
             )
-        })
+        }
     })
 
 
