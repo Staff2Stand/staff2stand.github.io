@@ -191,7 +191,7 @@ header {
 /* search and sort */
 #searchAndSort_container {
   padding: 4px 3px 0 3px;
-  width: calc(100% - 34px - 6px);
+  width: calc(100% - 34px - 11px);
   display: flex;
   align-items: center;
 }
@@ -220,7 +220,16 @@ header {
   z-index: 2;
 }
 #searchAndSort_container .expand_results.fa-rotate-180 {
-  bottom: -0.5em;
+  /* bottom: -0.5em; */
+}
+#searchAndSort_container .expand_results.fa-rotate-180:before {
+  content: '';
+  width: 1em;
+  height: 1.5em;
+  background: #fff;
+  position: absolute;
+  bottom: 0em;
+  border-radius: 0 0 1em 1em;
 }
 
 #searchAndSort_results {
