@@ -264,6 +264,9 @@ header {
   #sortFilters ul li:hover{
     color: #222;
   }
+  #activeFilters span {
+    display: none;
+  }
 
 #sidebar #searchAndSort_results .score_bookmark {
   color: #222;

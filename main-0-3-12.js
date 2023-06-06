@@ -759,16 +759,16 @@ $(function(){
             return value !== "" //filter out empty strings
         }).sort()//alphabetize
 
-        const $checkboxList = $('<ul>').appendTo($filters_container)
+        const $checkboxList = $('<ul/>').appendTo($filters_container)
 
         uniqueTagsArray.forEach((tag,i)=>{
-            const $listItem = $('<li>')
-            const $checkbox = $('<input>').attr({
+            const $listItem = $('<li/>')
+            const $checkbox = $('<input/>').attr({
                 type: 'checkbox',
                 id: 'checkbox_' + i,
                 value: tag
             })
-            const $label = $('<label>').attr('for', 'checkbox_' + i).text(tag);
+            const $label = $('<label/>').attr('for', 'checkbox_' + i).text(tag)
             
             $listItem.append($checkbox, $label)
             $checkboxList.append($listItem)
@@ -800,6 +800,12 @@ $(function(){
             $resultsDiv.find('.score_bookmark').show()
             return
         }
+
+        const $filterMarkers_to_show = $filters_container.find(`input[type="checkbox"]:is([value="${selectedTags.join('"],[value="')}"])`)
+        const $filterMarkers_to_hide = $filters_container.find(`input[type="checkbox"]:not([value="${selectedTags.join('"],[value="')}"])`)
+
+        $filterMarkers_to_show.show()
+        $filterMarkers_to_hide.hide()
 
         const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"],[tags*="') + '"])')
         const $wantedScores = $resultsDiv.find('.score_bookmark:is([tags*="' + selectedTags.join('"],[tags*="') + '"])')
