@@ -744,7 +744,7 @@ $(function(){
 
     $expandResults.click(()=>{
         const resultsDivIsEmpty = $resultsDiv.children().length === 0
-        if (resultsDivIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv)
+        if (resultsDivIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv).each((i,score)=>createScoreResultContextMenu(i,score))
 
         $expandResults.toggleClass('fa-rotate-180')
         $results_container.slideToggle()
@@ -829,13 +829,16 @@ $(function(){
 
         const query = $(this).val()
         //get scores whose _title or tags contain the query
-        const $matchingScores = $(`.score_bookmark:is([_title*="${query}"],[tags*=${query}])`)
+        //  if there's no query, set to all scores
+        const $matchingScores = query ? $(`.score_bookmark:is([_title*="${query}"],[tags*=${query}])`) :
+            $('.score_bookmark')
 
         const no_matching_scores = $matchingScores.length === 0
         if (no_matching_scores){
             $('<p/>',{
+                classes:'noMatch',
                 text:'No Scores Found. Make sure there are no typos. Your search should match the title as it appears in the sidebar, not as it appears in the music.'
-            }).appendTo($resultsDiv).each((i,score)=>createScoreResultContextMenu(i,score))
+            }).appendTo($resultsDiv)
             return
         }
 

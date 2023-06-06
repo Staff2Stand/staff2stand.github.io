@@ -313,6 +313,10 @@ header {
   list-style-type: none;
   padding: 0 4px;
 }
+#results p.noMatch {
+  color: #cd5c5c;
+  font-style: italic;
+}
 
 /* MY SCORES */
 /* if my scores is empty */
