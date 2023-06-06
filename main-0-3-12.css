@@ -190,8 +190,8 @@ header {
 
 /* search and sort */
 #searchAndSort_container {
-  padding: 4px 3px 0 3px;
-  width: calc(100% - 34px - 8px);
+  padding: 4px 0 0 3px;
+  width: calc(100% - 34px - 4px);
   display: flex;
   align-items: center;
 }
