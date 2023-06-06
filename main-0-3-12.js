@@ -793,12 +793,15 @@ $(function(){
     $filters_container.on('change','input[type="checkbox"]',function(){
         const clickedCheckbox = this
         const clickedCheckbox_isBeingUnchecked = $(this).is(':checked')
+        console.log('is being unchecked? ',clickedCheckbox_isBeingUnchecked)
 
         const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
-            if ( this === clickedCheckbox && clickedCheckbox_isBeingUnchecked ) return false
+            // if ( this === clickedCheckbox && clickedCheckbox_isBeingUnchecked ) return false
             return $(this).val()
         }).get()
-        .filter(Boolean) //remove any false vals
+        // .filter(Boolean) //remove any false vals
+
+        if (clickedCheckbox_isBeingUnchecked) selectedTags.splice( selectedTags.indexOf( $(clickedCheckbox).val() ) )
 
         if (!selectedTags.length) {
             //no filters are checked, so show all and return
