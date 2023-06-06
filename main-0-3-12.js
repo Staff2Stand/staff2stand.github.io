@@ -802,7 +802,7 @@ $(function(){
         }
 
         const $filterMarkers_to_show = $filters_container.find(`span:contains("${selectedTags.join('","')}")`)
-        const $filterMarkers_to_hide = $filters_container.find(`span:not:contains("${selectedTags.join('","')}"))`)
+        const $filterMarkers_to_hide = $filters_container.find(`span:not(:contains("${selectedTags.join('","')}"))`)
 
         $filterMarkers_to_show.show()
         $filterMarkers_to_hide.hide()
