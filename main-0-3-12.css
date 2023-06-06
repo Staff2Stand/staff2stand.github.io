@@ -219,9 +219,6 @@ header {
   background: radial-gradient(black 0 50%, transparent 50%);
   z-index: 2;
 }
-#searchAndSort_container .expand_results.fa-rotate-180 {
-  /* bottom: -0.5em; */
-}
 #searchAndSort_container .expand_results.fa-rotate-180:before {
   content: '';
   width: 1em;
