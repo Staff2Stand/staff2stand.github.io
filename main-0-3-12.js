@@ -790,8 +790,13 @@ $(function(){
     })
 
     //Listen for changes to checkboxes and remove unwanted results
-    $filters_container.on('change','input[type="checkbox"]',function(){
+    $filters_container.on('change','input[type="checkbox"]',function(e){
+        console.log($(this),this,e.target)
+        const clickedCheckbox = this
+        const clickedCheckbox_isBeingUnchecked = $(this).is(':checked')
+
         const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
+            if ( this === clickedCheckbox && clickedCheckbox_isBeingUnchecked ) return false
             return $(this).val()
         }).get()
 
@@ -809,8 +814,6 @@ $(function(){
 
         const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"],[tags*="') + '"])')
         const $wantedScores = $resultsDiv.find('.score_bookmark:is([tags*="' + selectedTags.join('"],[tags*="') + '"])')
-
-        console.log(selectedTags, $unwantedScores, $wantedScores)
 
         $wantedScores.show()
         $unwantedScores.hide()
