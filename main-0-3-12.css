@@ -215,18 +215,12 @@ header {
   cursor: pointer;
   transition: all 0.5s;
   position: relative;
-  background: #222;
-  background: radial-gradient(black 0 50%, transparent 50%);
   z-index: 2;
+  filter: invert(0);
 }
-#searchAndSort_container .expand_results.fa-rotate-180:before {
-  content: '';
-  width: 1em;
-  height: 1.5em;
-  background: #fff;
-  position: absolute;
-  bottom: 0em;
-  border-radius: 0 0 1em 1em;
+#searchAndSort_container .expand_results.flip{
+  transform: rotatex(180deg) translate(-0.25em, -1.25em);
+  filter: invert(1);
 }
 
 #searchAndSort_results {

@@ -767,7 +767,7 @@ $(function(){
         const resultsDivIsEmpty = $resultsDiv.children().length === 0
         if (resultsDivIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv).each((i,score)=>createScoreResultContextMenu(i,score))
 
-        $expandResults.toggleClass('fa-rotate-180')
+        $expandResults.toggleClass('flip')
         $results_container.slideToggle()
     })
 
