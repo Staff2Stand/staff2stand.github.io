@@ -791,17 +791,9 @@ $(function(){
 
     //Listen for changes to checkboxes and remove unwanted results
     $filters_container.on('change','input[type="checkbox"]',function(){
-        const clickedCheckbox = this
-        // const clickedCheckbox_isBeingUnchecked = $(this).is(':checked')
-        // console.log('is being unchecked? ',clickedCheckbox_isBeingUnchecked)
-
         const selectedTags = $filters_container.find('input[type="checkbox"]:checked').map(function(){
-            // if ( this === clickedCheckbox && clickedCheckbox_isBeingUnchecked ) return false
             return $(this).val()
         }).get()
-        // .filter(Boolean) //remove any false vals
-
-        // if (clickedCheckbox_isBeingUnchecked) selectedTags.splice( selectedTags.indexOf( $(clickedCheckbox).val() ) )
 
         if (!selectedTags.length) {
             //no filters are checked, so show all and return
@@ -811,13 +803,13 @@ $(function(){
 
         const $filterMarkers_to_show = $filters_container.find(`span:contains("${selectedTags.join('"),span:contains("')}")`)
         const $filterMarkers_to_hide = $filters_container.find(`span:not(:contains("${selectedTags.join('")):not(:contains("')}"))`)
-
         $filterMarkers_to_show.show()
         $filterMarkers_to_hide.hide()
 
+        console.log($filterMarkers_to_hide)
+
         const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"],[tags*="') + '"])')
         const $wantedScores = $resultsDiv.find('.score_bookmark:is([tags*="' + selectedTags.join('"],[tags*="') + '"])')
-
         $wantedScores.show()
         $unwantedScores.hide()
     })
