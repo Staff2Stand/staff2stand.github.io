@@ -303,6 +303,11 @@ header {
   fill: #222;
 }
 
+#results{
+  list-style-type: none;
+  padding: 0 4px;
+}
+
 /* MY SCORES */
 /* if my scores is empty */
 #myScores:not(:has(li)):after {
