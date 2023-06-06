@@ -743,8 +743,8 @@ $(function(){
     const $resultsDiv = $('#results')
 
     $expandResults.click(()=>{
-        const searchInputIsEmpty = $searchInput.val() === ''
-        if (searchInputIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv)
+        const resultsDivIsEmpty = $resultsDiv.children().length === 0
+        if (resultsDivIsEmpty) $('.score_bookmark').clone().appendTo($resultsDiv)
 
         $expandResults.toggleClass('fa-rotate-180')
         $results_container.slideToggle()
@@ -759,7 +759,10 @@ $(function(){
             return value !== "" //filter out empty strings
         }).sort()//alphabetize
 
-        const $checkboxList = $('<ul/>').appendTo($filters_container)
+        const checkboxList_exists = $filters_container.find('ul').length
+        const $checkboxList = checkboxList_exists ? 
+            $filters_container.find('ul') :
+            $('<ul/>').appendTo($filters_container)
 
         uniqueTagsArray.forEach((tag,i)=>{
             const $listItem = $('<li/>')
