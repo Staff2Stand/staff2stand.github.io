@@ -191,7 +191,7 @@ header {
 /* search and sort */
 #searchAndSort_container {
   padding: 4px 3px 0 3px;
-  width: calc(100% - 34px - 11px);
+  width: calc(100% - 34px - 8px);
   display: flex;
   align-items: center;
 }
