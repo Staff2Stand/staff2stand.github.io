@@ -233,6 +233,7 @@ header {
   position: absolute;
   top: 26px;
   z-index: 1;
+  overflow-y: scroll;
 }
 #sortScores {
   padding: 4px;
@@ -240,6 +241,9 @@ header {
   color: #222;
   display: inline-block;
   font-size: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 #sortScores.active {
   background: #222;
@@ -252,13 +256,15 @@ header {
   border: 4px solid #222;
   border-radius: 0 8px 8px 8px;
   color: #666;
+  position: sticky;
+  top: 28px;
+  background: #fff;
+  z-index: 1;
 }
   #sortFilters ul{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    height: calc(20px * 8);
-    overflow-y: scroll;
   }
   #sortFilters ul li{
     cursor: pointer;
