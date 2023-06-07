@@ -139,7 +139,7 @@ function createAbcEditorOpts (instrument){
             })
         },
         abcjsParams: abcOpts,
-        parser: ExtendedAbcjs
+        //parser: ExtendedAbcjs
     }
 }
 
