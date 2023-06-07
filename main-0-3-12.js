@@ -33,13 +33,15 @@ class CustomParser {
 }
 
 // Override the original `renderAbc` method to use our custom parser
-// const abcjs_original_render = abcjs.renderAbc
-// abcjs.renderAbc = function(abcString, paperId, renderParams) {
-//     const parsedAbc = new CustomParser().parse(abcString)
+//  The abcjs.Editor parser option controls what parser it uses (normaly its abcjs.parseOnly)
+//  To use our custom parse with abcjs.renderAbc, we need to override it
+const abcjs_original_render = abcjs.renderAbc
+abcjs.renderAbc = function(abcString, paperId, renderParams) {
+    const parsedAbc = new CustomParser().parse(abcString)
 
-//     // Call the original `renderAbc` method with the parsed result
-//     abcjs_original_render(parsedAbc, paperId, renderParams)
-// }
+    // Call the original `renderAbc` method with the parsed result
+    abcjs_original_render(parsedAbc, paperId, renderParams)
+}
 
 
 //ABC OPTIONS for editor instances
