@@ -445,7 +445,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new window.ABCJS.Editor($editor.attr('id'), abcEditorOpts)
+            abcEditorInstances[instrument] = new ExtendedAbcjs.Editor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
