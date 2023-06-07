@@ -136,7 +136,8 @@ function createAbcEditorOpts (instrument){
                 }
             })
         },
-        abcjsParams: abcOpts
+        abcjsParams: abcOpts,
+        parser: CustomParser()
     }
 }
 
