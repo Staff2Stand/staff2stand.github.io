@@ -245,7 +245,7 @@ $(function(){
                         if ($activeMenuItem.closest('.editorUtils_copyFromMenu').length){
                             const chosenInstrument = $activeMenuItem.text().toLowerCase()
                             let editorVal = $(`#editor-${chosenInstrument}`).val()
-                            const correctVoiceField = voiceFieldReference[chosenInstrument]
+                            const correctVoiceField = voiceFieldReference[instrument]
                             //replace all instances of the voice field with the appropriate voice field
                             editorVal = editorVal.replace(/(V:[\s]?)(.*)/gm,`$1${correctVoiceField}`)
                             //set this instrument's editor to that val and trigger change
