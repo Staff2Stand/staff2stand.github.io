@@ -1,5 +1,6 @@
 // READ ABCJS
 const abcjs = window.ABCJS
+console.log('abcjs:',window.ABCJS)
 
 //CUSTOM ABCJS PARSER
 class CustomParser {
@@ -454,7 +455,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new abcjs.Editor($editor.attr('id'), abcEditorOpts)
+            abcEditorInstances[instrument] = new window.ABCJS.Editor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
