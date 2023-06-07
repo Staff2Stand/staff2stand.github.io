@@ -29,17 +29,16 @@ class CustomParser {
   
 // Create the ExtendedAbcjs object with the desired properties and methods
 //      It can't extend window.ABCJS bc window.ABCJS is an object not a function
-const ExtendedAbcjs = {
-    ...window.ABCJS,
+const ExtendedAbcjs = Object.assign({}, window.ABCJS, {
     renderAbc: function (abcString, paperId, renderParams) {
-        const parsedAbc = this.customParser.parse(abcString);
-
+        const parsedAbc = this.customParser.parse(abcString)
+    
         // Call the original `renderAbc` method with the parsed result
-        this.originalRenderAbc(parsedAbc, paperId, renderParams);
+        this.originalRenderAbc(parsedAbc, paperId, renderParams)
     },
     customParser: new CustomParser(),
     originalRenderAbc: window.ABCJS.renderAbc
-}
+})
 // Use the extended Abcjs object with the abcjs.Editor
 //const editor = new window.ABCJS.Editor("paper", { parser: ExtendedAbcjs });
     
