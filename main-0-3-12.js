@@ -849,10 +849,17 @@ $(function(){
         if (resultsContainer_not_shown) $expandResults.click()
 
         const query = $(this).val()
-        //get scores whose _title or tags contain the query
+        //get scores whose _title or tags contain the query (using filter for case-insensitive search)
         //  if there's no query, set to all scores
-        const $matchingScores = query ? $(`.score_bookmark:is([_title*="${query}"],[tags*=${query}])`) :
-            $('.score_bookmark')
+        const $matchingScores = !query ? $('.score_bookmark') :
+            $('.score_bookmark').filter(function() {
+                const title = $(this).attr('_title')
+                const tags = $(this).attr('tags')
+                return (
+                    title.toLowerCase().includes(query.toLowerCase()) ||
+                    tags.toLowerCase().includes(query.toLowerCase())
+                )
+            })
 
         const no_matching_scores = $matchingScores.length === 0
         if (no_matching_scores){
