@@ -31,23 +31,14 @@ class CustomParser {
         return parsedAbc;
     }
 }
-  
-// Extend the abcjs class to add your custom parser
-class ExtendedAbcjs extends abcjs {
-    constructor(options) {
-        super(options);
 
-        // Create an instance of your custom parser
-        this.customParser = new CustomParser();
-    }
+// Override the original `renderAbc` method to use our custom parser
+const abcjs_original_render = abcjs.renderAbc
+abcjs.renderAbc = function(abcString, paperId, renderParams) {
+    const parsedAbc = new CustomParser().parse(abcString)
 
-    // Override the original `renderAbc` method to use your custom parser
-    renderAbc(abcString, paperId, renderParams) {
-        const parsedAbc = this.customParser.parse(abcString);
-
-        // Call the original `renderAbc` method with the parsed result
-        super.renderAbc(parsedAbc, paperId, renderParams);
-    }
+    // Call the original `renderAbc` method with the parsed result
+    abcjs_original_render(parsedAbc, paperId, renderParams)
 }
 
 //ABC OPTIONS for editor instances
