@@ -1,12 +1,15 @@
 //CUSTOM ABCJS PARSER
+const original_parseOnly = ABCJS.parseOnly
+
 class CustomParser {
     constructor() {
         // Initialize any necessary variables or state
     }
   
     parse(abcString) {
+        console.log('CUSTOM PARSER: ',parsedAbc)
         // Call the original parser to obtain the initial parsed result
-        const originalParsedAbc = ABCJS.parseOnly(abcString)  
+        const originalParsedAbc = original_parseOnly(abcString)  
         const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc)
         return extendedParsedAbc
     }
@@ -20,7 +23,7 @@ class CustomParser {
         //parsedAbc.metaText.title = "Modified Title"
     
         // Example: Add a new property to the parsed ABC
-        //parsedAbc.customProperty = "Custom Value"
+        parsedAbc.customProperty = "Custom Value"
     
         // Return the modified or enhanced parsed result
         return parsedAbc
