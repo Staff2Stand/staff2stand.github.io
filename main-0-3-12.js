@@ -253,7 +253,6 @@ $(function(){
                         }
                     }
                 })
-
                     const $submenu = $('<li/>',{ 
                         'class':'submenu_parent' 
                     }).appendTo($editorUtilMenu)
