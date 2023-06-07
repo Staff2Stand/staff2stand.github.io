@@ -38,10 +38,7 @@ const ExtendedAbcjs = Object.assign({}, window.ABCJS, {
     },
     customParser: new CustomParser(),
     originalRenderAbc: window.ABCJS.renderAbc
-})
-// Use the extended Abcjs object with the abcjs.Editor
-//const editor = new window.ABCJS.Editor("paper", { parser: ExtendedAbcjs });
-    
+})    
 
 
 //ABC OPTIONS for editor instances
@@ -142,7 +139,7 @@ function createAbcEditorOpts (instrument){
             })
         },
         abcjsParams: abcOpts,
-        parser: ExtendedAbcjs
+        parser: CustomParser
     }
 }
 
