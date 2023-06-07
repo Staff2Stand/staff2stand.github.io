@@ -498,8 +498,6 @@ $(function(){
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
 
-        console.log('targets',targets)
-
         //add highlights and such to each target
         targets.forEach(function(target){
             addStringClassesToNoteHeads(target)
