@@ -6,7 +6,7 @@ class CustomParser {
   
     parse(abcString) {
         // Call the original parser to obtain the initial parsed result
-        const originalParsedAbc = window.ABCJS.parseOnly(abcString)  
+        const originalParsedAbc = ABCJS.parseOnly(abcString)  
         const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc)
         return extendedParsedAbc
     }
@@ -26,19 +26,14 @@ class CustomParser {
         return parsedAbc
     }
 }
-  
-// Create the ExtendedAbcjs object with the desired properties and methods
-//      It can't extend window.ABCJS bc window.ABCJS is an object not a function
-const ExtendedAbcjs = Object.assign({}, window.ABCJS, {
-    renderAbc: function (abcString, paperId, renderParams) {
-        const parsedAbc = this.customParser.parse(abcString)
-    
-        // Call the original `renderAbc` method with the parsed result
-        this.originalRenderAbc(parsedAbc, paperId, renderParams)
-    },
-    customParser: new CustomParser(),
-    originalRenderAbc: window.ABCJS.renderAbc
-})    
+
+// Create an instance of the custom parser
+const customParser = new CustomParser()
+
+// Override the parseOnly function of the global ABCJS object
+ABCJS.parseOnly = function (abcString) {
+    return customParser.parse(abcString)
+} 
 
 
 //ABC OPTIONS for editor instances
@@ -138,8 +133,7 @@ function createAbcEditorOpts (instrument){
                 }
             })
         },
-        abcjsParams: abcOpts,
-        parser: CustomParser
+        abcjsParams: abcOpts
     }
 }
 
@@ -442,7 +436,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new ExtendedAbcjs.Editor($editor.attr('id'), abcEditorOpts)
+            abcEditorInstances[instrument] = new ABCJS.Editor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
