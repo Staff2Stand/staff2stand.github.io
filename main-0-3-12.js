@@ -17,7 +17,7 @@ class CustomParser {
     }
   
     extendParsedAbc(parsedAbc) {
-        console.log(parsedAbc)
+        console.log('CUSTOM PARSER:    ',parsedAbc)
         // Implement your modifications or enhancements to the parsed result here
         // You can access and manipulate the properties of the parsed result object
     
