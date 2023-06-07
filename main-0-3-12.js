@@ -33,13 +33,14 @@ class CustomParser {
 }
 
 // Override the original `renderAbc` method to use our custom parser
-const abcjs_original_render = abcjs.renderAbc
-abcjs.renderAbc = function(abcString, paperId, renderParams) {
-    const parsedAbc = new CustomParser().parse(abcString)
+// const abcjs_original_render = abcjs.renderAbc
+// abcjs.renderAbc = function(abcString, paperId, renderParams) {
+//     const parsedAbc = new CustomParser().parse(abcString)
 
-    // Call the original `renderAbc` method with the parsed result
-    abcjs_original_render(parsedAbc, paperId, renderParams)
-}
+//     // Call the original `renderAbc` method with the parsed result
+//     abcjs_original_render(parsedAbc, paperId, renderParams)
+// }
+
 
 //ABC OPTIONS for editor instances
 const abcOpts = {
@@ -139,7 +140,7 @@ function createAbcEditorOpts (instrument){
             })
         },
         abcjsParams: abcOpts,
-        //parser: ExtendedAbcjs
+        parser: new CustomParser()
     }
 }
 
