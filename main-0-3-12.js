@@ -7,7 +7,7 @@ class CustomParser {
     }
   
     parse(abcString) {
-        console.log('CUSTOM PARSER: ',parsedAbc)
+        console.log('CUSTOM PARSER: ',abcString)
         // Call the original parser to obtain the initial parsed result
         const originalParsedAbc = original_parseOnly(abcString)  
         const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc)
@@ -136,7 +136,8 @@ function createAbcEditorOpts (instrument){
                 }
             })
         },
-        abcjsParams: abcOpts
+        abcjsParams: abcOpts,
+        parser: customParser
     }
 }
 
