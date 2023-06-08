@@ -1,13 +1,36 @@
-//CUSTOM ABCJS PARSER
+function extendParsing(tune){
+    console.log('TUNE',tune)
+    
+    tune.lines.forEach(line=>{
+        line.staff.forEach(staff=>{
+            staff.voices.forEach(voice=>{
+                voice.forEach((el,i)=>{
+                    if (!el.chord) el.chord = []
+
+                    const fingering = {
+                        name: '0',
+                        position: 'above'
+                    }
+
+                    const notename = {
+                        name: 'A',
+                        position: 'below'
+                    }
+
+                    el.chord.push(fingering,notename)
+                })
+            })
+        })
+    })
+    return tune
+}
 
 //ABC OPTIONS for editor instances
 const abcOpts = {
     add_classes: true,
     responsive: 'resize',
     oneSvgPerLine: true,
-    afterParsing: function(tune, tuneNumber, abcString){
-        console.log('TUNE',tune,'TUNE NUMBER',tuneNumber,'ABC STRING',abcString)
-    }
+    afterParsing: extendParsing
 }
 
 /**
