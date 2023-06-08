@@ -61,8 +61,11 @@ const stringReference = {
  * @param {*} tune 
  * @returns 
  */
-function extendParsing(tune){
+function extendParsing(tune, tuneNumber, abcString){
     console.log('TUNE',tune)
+
+    const instrumentRegx = /V:\s+([A-Za-z]+)(?=\s+|clef|$)/m
+    const instrument = instrumentRegx.exec(abcString)[1]
 
     tune.lines.forEach(line=>{
         line.staff.forEach(staff=>{
@@ -79,16 +82,18 @@ function extendParsing(tune){
                         name: pitches.join('\n'),
                         position: 'below'
                     }
+                    //push to chords prop, which is where all annotations go
+                    el.chord.push(notenames)
 
                     //Fingerings
+                    const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
+                    if (!instrument_is_in_fingerings_ref) return
+                    
                     const fingerings = {
                         name: '0',
                         position: 'above'
-                    }
-
-                    //Push Both To the Chords Property
-                    //  which is where all annotations go
-                    el.chord.push(notenames,fingerings)
+                    } 
+                    el.chord.push(fingerings)
                 })
             })
         })
