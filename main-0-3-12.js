@@ -27,11 +27,11 @@ class CustomParser {
   // Create an instance of your custom parser
   const customParser = new CustomParser();
   
-  // Override the parse method of the Editor prototype
-  ABCJS.Editor.prototype.parse = function (abcString) {
+  // Override the parseABC method of the Editor class
+  ABCJS.Editor.prototype.parseABC = function (abcString) {
     return customParser.parse(abcString);
   };
-  
+    
   
   
 
