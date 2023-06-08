@@ -1,6 +1,4 @@
 //CUSTOM ABCJS PARSER
-const original_parseOnly = ABCJS.parseOnly
-
 class CustomParser {
     constructor() {
         // Initialize any necessary variables or state
@@ -9,7 +7,7 @@ class CustomParser {
     parse(abcString) {
         console.log('CUSTOM PARSER: ',abcString)
         // Call the original parser to obtain the initial parsed result
-        const originalParsedAbc = original_parseOnly(abcString)  
+        const originalParsedAbc = ABCJS.parseOnly(abcString)  
         const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc)
         return extendedParsedAbc
     }
@@ -23,21 +21,23 @@ class CustomParser {
         //parsedAbc.metaText.title = "Modified Title"
     
         // Example: Add a new property to the parsed ABC
-        parsedAbc.customProperty = "Custom Value"
+        //parsedAbc.customProperty = "Custom Value"
     
         // Return the modified or enhanced parsed result
         return parsedAbc
     }
 }
 
-// Create an instance of the custom parser
-const customParser = new CustomParser()
-
-// Override the parseOnly function of the global ABCJS object
-ABCJS.parseOnly = function (abcString) {
-    return customParser.parse(abcString)
-} 
-
+class CustomEditor extends ABCJS.Editor {
+    constructor(...args) {
+        super(...args)
+        this.parser = new CustomParser()
+    }
+  
+    parse(abcString) {
+        return this.parser.parse(abcString)
+    }
+}
 
 //ABC OPTIONS for editor instances
 const abcOpts = {
@@ -440,7 +440,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new ABCJS.Editor($editor.attr('id'), abcEditorOpts)
+            abcEditorInstances[instrument] = new CustomEditor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
