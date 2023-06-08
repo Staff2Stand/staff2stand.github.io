@@ -1,45 +1,13 @@
 //CUSTOM ABCJS PARSER
-class CustomParser {
-    parse(abcString) {
-      console.log('CUSTOM PARSER: ', abcString);
-      // Call the original parser to obtain the initial parsed result
-      const originalParsedAbc = window.ABCJS.parseOnly(abcString);
-      const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc);
-      return extendedParsedAbc;
-    }
-  
-    extendParsedAbc(parsedAbc) {
-      console.log('CUSTOM PARSER: ', parsedAbc);
-      // Implement your modifications or enhancements to the parsed result here
-      // You can access and manipulate the properties of the parsed result object
-  
-      // Example: Modify the title of the parsed ABC
-      //parsedAbc.metaText.title = "Modified Title"
-  
-      // Example: Add a new property to the parsed ABC
-      //parsedAbc.customProperty = "Custom Value"
-  
-      // Return the modified or enhanced parsed result
-      return parsedAbc;
-    }
-  }
-  
-  // Create an instance of your custom parser
-  const customParser = new CustomParser();
-  
-  // Override the parseABC method of the Editor class
-  ABCJS.Editor.prototype.parseABC = function (abcString) {
-    return customParser.parse(abcString);
-  };
-    
-  
-  
 
 //ABC OPTIONS for editor instances
 const abcOpts = {
     add_classes: true,
     responsive: 'resize',
-    oneSvgPerLine: true
+    oneSvgPerLine: true,
+    afterParsing: function(tune, tuneNumber, abcString){
+        console.log('TUNE',tune,'TUNE NUMBER',tuneNumber,'ABC STRING',abcString)
+    }
 }
 
 /**
