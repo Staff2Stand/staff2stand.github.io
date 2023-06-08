@@ -24,10 +24,14 @@ class CustomParser {
     }
   }
   
-  // Override the parseOnly method of the ABCJS object
-  window.ABCJS.parseOnly = function (abcString) {
-    return new CustomParser().parse(abcString);
-  };  
+  // Create an instance of your custom parser
+  const customParser = new CustomParser();
+  
+  // Override the parse method of the Editor prototype
+  ABCJS.Editor.prototype.parse = function (abcString) {
+    return customParser.parse(abcString);
+  };
+  
   
   
 
