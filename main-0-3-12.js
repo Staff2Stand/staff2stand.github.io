@@ -1,6 +1,12 @@
+/**
+ * AFTER PARSING
+ * Add Fingerings and Notenames
+ * @param {*} tune 
+ * @returns 
+ */
 function extendParsing(tune){
     console.log('TUNE',tune)
-    
+
     tune.lines.forEach(line=>{
         line.staff.forEach(staff=>{
             staff.voices.forEach(voice=>{
