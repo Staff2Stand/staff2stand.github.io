@@ -56,63 +56,6 @@ const stringReference = {
 
 
 /**
- * AFTER PARSING
- * Add Fingerings and Notenames
- * @param {*} tune 
- * @returns 
- */
-function extendParsing(tune, tuneNumber, abcString){
-    console.log('TUNE',tune)
-
-    const instrumentRegx = /V:\s+([A-Za-z]+)(?=\s+|clef|$)/m
-    const instrument = instrumentRegx.exec(abcString)[1]
-
-    tune.lines.forEach(line=>{
-        line.staff.forEach(staff=>{
-            staff.voices.forEach(voice=>{
-                voice.forEach((el,i)=>{
-                    const is_note = el.el_type === 'note' || el.rest
-                    if (!is_note) return
-
-                    if (!el.chord) el.chord = []
-
-                    //Note Names
-                    const pitches = el.pitches.map(pitch=>pitch.name)
-                    const friendlyPitches = pitches.map( pitch=>friendlyNoteName(pitch) )
-
-                    const notenames = {
-                        name: friendlyPitches.join('\n'),
-                        position: 'below'
-                    }
-                    el.chord.push(notenames) //all annotations go in chords prop
-
-                    //Fingerings
-                    const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
-                    if (!instrument_is_in_fingerings_ref) return
-
-                    fingers = pitches.map(noteName=>{
-                        const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-                        
-                        const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
-
-                        const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
-
-                        return finger
-                    })
-
-                    const fingerings = {
-                        name: fingers.join('\n'),
-                        position: 'above'
-                    } 
-                    el.chord.push(fingerings)
-                })
-            })
-        })
-    })
-    return tune
-}
-
-/**
  * TRANSLATE NOTE NAMES FROM ABC
  * @param {*} name 
  * @returns 
@@ -124,14 +67,6 @@ function friendlyNoteName(name) {
     if (name[0] === '^') acc = "#"
     var pitch = name[name.length-1]
     return pitch.toUpperCase() + acc
-}
-
-//ABC OPTIONS for editor instances
-const abcOpts = {
-    add_classes: true,
-    responsive: 'resize',
-    oneSvgPerLine: true,
-    afterParsing: extendParsing
 }
 
 /**
@@ -224,7 +159,70 @@ function createAbcEditorOpts (instrument){
                 }
             })
         },
-        abcjsParams: abcOpts
+        //ABC OPTIONS
+        abcjsParams: {
+            add_classes: true,
+            responsive: 'resize',
+            oneSvgPerLine: true,
+            afterParsing: extendParsing
+        }
+    }
+
+    /**
+     * AFTER PARSING
+     * Add Fingerings and Notenames
+     * @param {*} tune 
+     * @returns 
+     */
+    function extendParsing(tune, tuneNumber, abcString){
+        console.log('TUNE',tune)
+
+        // const instrumentRegx = /V:\s+([A-Za-z]+)(?=\s+|clef|$)/m
+        // const instrument = instrumentRegx.exec(abcString)[1]
+
+        tune.lines.forEach(line=>{
+            line.staff.forEach(staff=>{
+                staff.voices.forEach(voice=>{
+                    voice.forEach((el,i)=>{
+                        const is_note = el.el_type === 'note' || el.rest
+                        if (!is_note) return
+
+                        if (!el.chord) el.chord = []
+
+                        //Note Names
+                        const pitches = el.pitches.map(pitch=>pitch.name)
+                        const friendlyPitches = pitches.map( pitch=>friendlyNoteName(pitch) )
+
+                        const notenames = {
+                            name: friendlyPitches.join('\n'),
+                            position: 'below'
+                        }
+                        el.chord.push(notenames) //all annotations go in chords prop
+
+                        //Fingerings
+                        const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
+                        if (!instrument_is_in_fingerings_ref) return
+
+                        fingers = pitches.map(noteName=>{
+                            const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
+                            
+                            const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
+
+                            const finger = stringReference[instrument][noteString+'Fingers'][noteNameIndex]
+
+                            return finger
+                        })
+
+                        const fingerings = {
+                            name: fingers.join('\n'),
+                            position: 'above'
+                        } 
+                        el.chord.push(fingerings)
+                    })
+                })
+            })
+        })
+        return tune
     }
 }
 
