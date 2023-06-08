@@ -11,24 +11,46 @@ function extendParsing(tune){
         line.staff.forEach(staff=>{
             staff.voices.forEach(voice=>{
                 voice.forEach((el,i)=>{
+                    const is_note = el.el_type === 'note'
+                    if (!is_note) return
+
                     if (!el.chord) el.chord = []
 
-                    const fingering = {
+                    //Fingerings
+                    const fingerings = {
                         name: '0',
                         position: 'above'
                     }
 
-                    const notename = {
-                        name: 'A',
+                    //Note Names
+                    const pitches = el.pitches.map( pitch=>friendlyNoteName(pitch.name) )
+                    const notenames = {
+                        name: pitches.join('\n'),
                         position: 'below'
                     }
 
-                    el.chord.push(fingering,notename)
+                    //Push Both To the Chords Property
+                    //  which is where all annotations go
+                    el.chord.push(notenames,fingerings)
                 })
             })
         })
     })
     return tune
+}
+
+/**
+ * TRANSLATE NOTE NAMES FROM ABC
+ * @param {*} name 
+ * @returns 
+ */
+function friendlyNoteName(name) {
+    // The notes are in ABC format - so translate that to human readable
+    let acc = ''
+    if (name[0] === '_') acc = "b"
+    if (name[0] === '^') acc = "#"
+    var pitch = name[name.length-1]
+    return pitch.toUpperCase() + acc
 }
 
 //ABC OPTIONS for editor instances
@@ -197,7 +219,6 @@ const stringReference = {
 //  contains each editor instance
 const abcEditorInstances = {}
 
-//UTILITY FUNCTIONS
 
 /**
  * FADE NOTEY
