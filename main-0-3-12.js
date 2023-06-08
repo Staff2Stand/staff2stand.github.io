@@ -68,7 +68,7 @@ function extendParsing(tune){
         line.staff.forEach(staff=>{
             staff.voices.forEach(voice=>{
                 voice.forEach((el,i)=>{
-                    const is_note = el.el_type === 'note'
+                    const is_note = el.el_type === 'note' || el.rest
                     if (!is_note) return
 
                     if (!el.chord) el.chord = []
