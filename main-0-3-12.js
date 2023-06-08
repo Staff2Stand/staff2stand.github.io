@@ -73,17 +73,17 @@ function extendParsing(tune){
 
                     if (!el.chord) el.chord = []
 
-                    //Fingerings
-                    const fingerings = {
-                        name: '0',
-                        position: 'above'
-                    }
-
                     //Note Names
                     const pitches = el.pitches.map( pitch=>friendlyNoteName(pitch.name) )
                     const notenames = {
                         name: pitches.join('\n'),
                         position: 'below'
+                    }
+
+                    //Fingerings
+                    const fingerings = {
+                        name: '0',
+                        position: 'above'
                     }
 
                     //Push Both To the Chords Property
