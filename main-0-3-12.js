@@ -1,48 +1,33 @@
 //CUSTOM ABCJS PARSER
 class CustomParser {
-    constructor() {
-        // Initialize any necessary variables or state
-    }
-  
     parse(abcString) {
-        console.log('CUSTOM PARSER: ', abcString)
-        // Call the original parser to obtain the initial parsed result
-        const originalParsedAbc = window.ABCJS.parse(abcString)
-        const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc)
-        return extendedParsedAbc
+      console.log('CUSTOM PARSER: ', abcString);
+      // Call the original parser to obtain the initial parsed result
+      const originalParsedAbc = window.ABCJS.parseOnly(abcString);
+      const extendedParsedAbc = this.extendParsedAbc(originalParsedAbc);
+      return extendedParsedAbc;
     }
   
     extendParsedAbc(parsedAbc) {
-        console.log('CUSTOM PARSER: ', parsedAbc)
-        // Implement your modifications or enhancements to the parsed result here
-        // You can access and manipulate the properties of the parsed result object
-    
-        // Example: Modify the title of the parsed ABC
-        //parsedAbc.metaText.title = "Modified Title"
-    
-        // Example: Add a new property to the parsed ABC
-        //parsedAbc.customProperty = "Custom Value"
-    
-        // Return the modified or enhanced parsed result
-        return parsedAbc
-    }
-}
+      console.log('CUSTOM PARSER: ', parsedAbc);
+      // Implement your modifications or enhancements to the parsed result here
+      // You can access and manipulate the properties of the parsed result object
   
-class CustomEditor extends window.ABCJS.Editor {
-    constructor(...args) {
-        super(...args)
-        this.parser = new CustomParser()
-    }
+      // Example: Modify the title of the parsed ABC
+      //parsedAbc.metaText.title = "Modified Title"
   
-    parse(abcString) {
-        return this.parser.parse(abcString)
-    }
-}
+      // Example: Add a new property to the parsed ABC
+      //parsedAbc.customProperty = "Custom Value"
   
-// Override the parse method of the ABCJS object
-window.ABCJS.parse = function (abcString) {
-    return new CustomParser().parse(abcString)
-}
+      // Return the modified or enhanced parsed result
+      return parsedAbc;
+    }
+  }
+  
+  // Override the parseOnly method of the ABCJS object
+  window.ABCJS.parseOnly = function (abcString) {
+    return new CustomParser().parse(abcString);
+  };  
   
   
 
@@ -446,7 +431,7 @@ $(function(){
 
             //Initialize Editor
             const abcEditorOpts = createAbcEditorOpts(instrument)
-            abcEditorInstances[instrument] = new CustomEditor($editor.attr('id'), abcEditorOpts)
+            abcEditorInstances[instrument] = new window.ABCJS.Editor($editor.attr('id'), abcEditorOpts)
     })
 
     /**
