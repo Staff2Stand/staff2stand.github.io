@@ -184,7 +184,7 @@ function createAbcEditorOpts (instrument){
             line.staff.forEach(staff=>{
                 staff.voices.forEach(voice=>{
                     voice.forEach((el,i)=>{
-                        const is_note = el.el_type === 'note' || el.rest
+                        const is_note = el.el_type === 'note' && el.pitches
                         if (!is_note) return
 
                         if (!el.chord) el.chord = []
