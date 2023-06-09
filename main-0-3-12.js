@@ -227,13 +227,13 @@ function createAbcEditorOpts (instrument){
 
                         fingers = pitches.map(noteName=>{
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
-                            if (!noteString) return
+                            if (!noteString) return ' '
                             
                             const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
-                            if (!noteNameIndex) return
+                            if (!noteNameIndex) return ' '
 
                             const finger = stringReference[instrument]?.[noteString+'Fingers']?.[noteNameIndex]
-                            if (!finger) return
+                            if (!finger) return ' '
 
                             return finger
                         })
