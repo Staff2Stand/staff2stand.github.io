@@ -219,7 +219,7 @@ function createAbcEditorOpts (instrument){
                             name: friendlyPitches.join('\n'),
                             position: 'below'
                         }
-                        el.chord.push(notenames) //all annotations go in chords prop
+                        el.chord.push(notenames) //all annotations go in chord prop
 
                         //FINGERINGS
                         const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
