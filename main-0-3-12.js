@@ -182,6 +182,14 @@ function createAbcEditorOpts (instrument){
 
         tune.lines.forEach(line=>{
             line.staff.forEach(staff=>{
+                //check sharps and flats in keysig
+                const keysigSharps = key.accidentals.map(acc=>{
+                    if (acc.acc === "sharp") return acc.note
+                })
+                const keysigFlats = key.accidentals.map(acc=>{
+                    if (acc.acc === "flat") return acc.note
+                })
+
                 staff.voices.forEach(voice=>{
                     voice.forEach((el,i)=>{
                         const is_note = el.el_type === 'note' && el.pitches
@@ -189,8 +197,22 @@ function createAbcEditorOpts (instrument){
 
                         if (!el.chord) el.chord = []
 
-                        //Note Names
-                        const pitches = el.pitches.map(pitch=>pitch.name)
+                        //NOTE NAMES
+                        const pitches = el.pitches.map(pitch=>{
+                            const noteNameAbc = pitch.name
+                            const already_has_accidental = noteNameAbc.length > 1
+                            if (already_has_accidental) return noteNameAbc
+
+                            const noteIsInKeysigFlats = keysigFlats.includes(noteNameAbc.toLowerCase())
+                            const noteIsInKeysigSharps = keysigSharps.includes(noteNameAbc.toLowerCase())
+                            const acc = noteIsInKeysigFlats ?
+                                        '_' :
+                                        noteIsInKeysigSharps ?
+                                        '^':
+                                        ''
+                            return acc + noteNameAbc
+                        })
+
                         const friendlyPitches = pitches.map( pitch=>friendlyNoteName(pitch) )
 
                         const notenames = {
@@ -199,7 +221,7 @@ function createAbcEditorOpts (instrument){
                         }
                         el.chord.push(notenames) //all annotations go in chords prop
 
-                        //Fingerings
+                        //FINGERINGS
                         const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
                         if (!instrument_is_in_fingerings_ref) return
 
