@@ -581,24 +581,13 @@ $(function(){
             const isNotehead = hasOnly1Letter( $(pathel).attr('data-name') )
             if (!isNotehead) return
 
-            //check sharps in keysig
-            const numKeysigSharps = $(pathel).parent().siblings('.abcjs-key-signature').find('path[data-name="accidentals.sharp"]').length
-            const sharps = ['f','c','g','d','a','e','b']
-            const sharpsInKey = sharps.slice(0,numKeysigSharps)
-
-            //check flats in keysig
-            const numKeysigFlats = $(pathel).parent().siblings('.abcjs-key-signature').find('path[data-name="accidentals.flat"]').length
-            const flats = ['b','e','a','d','g','c','f']
-            const flatsInKey = flats.slice(0,numKeysigFlats)
-
-            //define notename
-            let noteName = $(pathel).attr('data-name')
-            //check if note is in keysig
-            if (sharpsInKey.includes(noteName.toLowerCase())) noteName = '^'+noteName
-            if (flatsInKey.includes(noteName.toLowerCase())) noteName = '_'+noteName
+            const noteName = $(pathel).siblings('text').find('tspan').map(function(){
+                const val = $(this).text()
+                if (isNaN(val) && val.length < 3) return val
+            }).get(0)
 
             //check string reference and add the correct string class
-            const noteString = instruments[instrument] ? 
+            const noteString = instruments.includes(instrument) ? 
                 Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName)) :
                 ''
 
