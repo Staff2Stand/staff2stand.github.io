@@ -68,6 +68,18 @@ function friendlyNoteName(name) {
     var pitch = name[name.length-1]
     return pitch.toUpperCase() + acc
 }
+/**
+ * TRANSLATE NOTE NAMES TO ABC
+ * @param {*} name a notename in human-readable format:  C#
+ * @returns 
+ */
+function unfriendlyNoteName(name) {
+    let acc = ''
+    if (name[0] === 'b') acc = "_"
+    if (name[0] === '#') acc = "^"
+    var pitch = name[0]
+    return acc + pitch.toUpperCase()
+}
 
 /**
  * ABC EDITOR OPTIONS
@@ -582,7 +594,7 @@ $(function(){
 
             const noteName = $(pathel).siblings('text').find('tspan').map(function(){
                 const val = $(this).text()
-                if (isNaN(val) && val.length < 3) return val
+                if (isNaN(val) && val.length < 3) return unfriendlyNoteName(val)
             }).get(0)
 
             //check string reference and add the correct string class
