@@ -82,18 +82,6 @@ function unfriendlyNoteName(name) {
 }
 
 /**
- * ABCJS PLUGINS
- */
-ABCJS.plugin.afterParsing = function(tune) {
-    tune.eachVoice(function(voice) {
-        voice.eachNotehead(function(notehead) {
-            console.log('tune notehead',notehead)
-            notehead.addClass('custom-class')
-        })
-    })
-}
-
-/**
  * ABC EDITOR OPTIONS
  * @param {string} instrument 
  * @returns abc editor options object
@@ -188,7 +176,14 @@ function createAbcEditorOpts (instrument){
             add_classes: true,
             responsive: 'resize',
             oneSvgPerLine: true,
-            afterParsing: extendParsing
+            afterParsing: extendParsing,
+            listener: {
+                startNote: function(note) {
+                    console.log('note',note)
+                    const notehead = document.querySelector(`[id="${note.el_id}"] .notehead`);
+                    notehead.classList.add('custom-class');
+                }
+            }
         }
     }
 
