@@ -598,13 +598,11 @@ $(function(){
             if (flatsInKey.includes(noteName.toLowerCase())) noteName = '_'+noteName
 
             //check string reference and add the correct string class
-            const noteString = instruments.instrument ? 
+            const noteString = instruments[instrument] ? 
                 Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName)) :
                 ''
-            
-            const name_of_string_class = instruments.instrument ? `${noteString}String` : ''
 
-            $(pathel).addClass(name_of_string_class)
+            $(pathel).addClass(`${noteString}String`)
 
             //add data-attrs to note
             $(pathel).closest('.abcjs-note').attr({
