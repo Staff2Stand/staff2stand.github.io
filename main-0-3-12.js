@@ -230,7 +230,6 @@ function createAbcEditorOpts (instrument){
                             if (!noteString) return ' '
                             
                             const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
-                            if (!noteNameIndex) return ' '
 
                             const finger = stringReference[instrument]?.[noteString+'Fingers']?.[noteNameIndex]
                             if (isNaN(finger)) return ' '
