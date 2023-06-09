@@ -521,7 +521,7 @@ $(function(){
         //add highlights and such to each target
         targets.forEach(function(target){
             addStringClassesToNoteHeads(target)
-            addFingeringsAndNoteNames(target)
+            // addFingeringsAndNoteNames(target)
         })
 
         //Clear style attr of all empty abcjsContainer divs
