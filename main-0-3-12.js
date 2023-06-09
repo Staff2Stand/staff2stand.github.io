@@ -183,10 +183,10 @@ function createAbcEditorOpts (instrument){
         tune.lines.forEach(line=>{
             line.staff.forEach(staff=>{
                 //check sharps and flats in keysig
-                const keysigSharps = key.accidentals.map(acc=>{
+                const keysigSharps = staff.key.accidentals.map(acc=>{
                     if (acc.acc === "sharp") return acc.note
                 })
-                const keysigFlats = key.accidentals.map(acc=>{
+                const keysigFlats = staff.key.accidentals.map(acc=>{
                     if (acc.acc === "flat") return acc.note
                 })
 
@@ -595,12 +595,11 @@ $(function(){
             if (flatsInKey.includes(noteName.toLowerCase())) noteName = '_'+noteName
 
             //check string reference and add the correct string class
-            const noteString = instrument === 'piano' ? 
-                'piano' 
-                : 
-                Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
+            const noteString = instruments.instrument ? 
+                Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName)) :
+                ''
             
-            const name_of_string_class = instrument === 'piano' ? 'piano' : `${noteString}String`
+            const name_of_string_class = instruments.instrument ? `${noteString}String` : ''
 
             $(pathel).addClass(name_of_string_class)
 
