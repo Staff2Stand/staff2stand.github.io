@@ -82,6 +82,33 @@ function unfriendlyNoteName(name) {
 }
 
 /**
+ * CONVERT ABCJS PITCH CLASS NUMBERS TO ABC NOTATION NOTES
+ * @description  
+ * @param {number} num a abcjs pitch class number, such as the -2 in "abcjs-p-2"
+ * @returns abc notation note
+ */
+function pitchClassNumToNote(num){
+    const notes = ['B,','A,','G,','F,','E,','D,','C','D','E','F','G','A','B','c','d','e','f','g','a','b','c\'','d\'','e\'','f\'','g\'','a\'','b\'']
+
+    const additional_octave_modifier =  num < 0 ? Math.ceil(num/7) :
+                                        num > notes.length ? Math.floor((num - notes.length + 7) / 7) : 
+                                        false
+    
+
+    let index = num < 0 ? (num % 7) + 6 :
+                num > notes.length ? notes[(num-14) % 7 + 13] : 
+                num + 6
+    
+    //now use the additional_octave_modifier to add , or ' to the end of the string, or to not if its 0
+    const abcNote = additional_octave_modifier === 0 ?  notes[index] :
+                    additional_octave_modifier > 0 ?    notes[index] + '\''.repeat(additional_octave_modifier) :
+                    additional_octave_modifier < 0 ?    notes[index] + ','.repeat(additional_octave_modifier) :
+                    false
+
+    return abcNote
+}
+
+/**
  * ABC EDITOR OPTIONS
  * @param {string} instrument 
  * @returns abc editor options object
@@ -176,14 +203,7 @@ function createAbcEditorOpts (instrument){
             add_classes: true,
             responsive: 'resize',
             oneSvgPerLine: true,
-            afterParsing: extendParsing,
-            listener: {
-                startNote: function(note) {
-                    console.log('note',note)
-                    const notehead = document.querySelector(`[id="${note.el_id}"] .notehead`);
-                    notehead.classList.add('custom-class');
-                }
-            }
+            afterParsing: extendParsing
         }
     }
 
