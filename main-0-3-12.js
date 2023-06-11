@@ -99,7 +99,7 @@ function pitchClassNumToNote(num){
     //  - if the note is in an apostraphy octave (num > 13), cycle through the top octave of the array
     //  - otherwise just add 6 to the number in order to get the correct note from the array
     let index = num < 0 ? (num % 7) + 6 :
-                num > notes.length-8 ? notes[(num-6) % 7 + 20] : 
+                num > notes.length-8 ? (num-6) % 7 + 20 : 
                 num + 6
     
     //now use the additional_octave_modifier to add , or ' to the end of the string if needed
