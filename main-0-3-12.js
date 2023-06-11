@@ -92,18 +92,23 @@ function pitchClassNumToNote(num){
 
     const additional_octave_modifier =  num < 0 ? Math.ceil(num/7) :
                                         num > notes.length ? Math.floor((num - notes.length + 7) / 7) : 
-                                        false
+                                        0
     
-
+    //We want 0 to be C...so:
+    //  - if the note is in a commas octave (num < 0), cycle through the bottom octave of the array
+    //  - if the note is in an apostraphy octave (num > 13), cycle through the top octave of the array
+    //  - otherwise just add 6 to the number in order to get the correct note from the array
     let index = num < 0 ? (num % 7) + 6 :
-                num > notes.length ? notes[(num-14) % 7 + 13] : 
+                num > notes.length-8 ? notes[(num-6) % 7 + 20] : 
                 num + 6
     
-    //now use the additional_octave_modifier to add , or ' to the end of the string, or to not if its 0
+    //now use the additional_octave_modifier to add , or ' to the end of the string if needed
     const abcNote = additional_octave_modifier === 0 ?  notes[index] :
                     additional_octave_modifier > 0 ?    notes[index] + '\''.repeat(additional_octave_modifier) :
-                    additional_octave_modifier < 0 ?    notes[index] + ','.repeat(additional_octave_modifier) :
+                    additional_octave_modifier < 0 ?    notes[index] + ','.repeat(additional_octave_modifier*-1) :
                     false
+    
+    if (!abcNote) console.warn('|| S2S ||  pitchClassNumToNote: abcNote returned false.')
 
     return abcNote
 }
