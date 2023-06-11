@@ -96,10 +96,12 @@ function pitchClassNumToNote(num){
     
     //We want 0 to be C...so:
     //  - if the note is in a commas octave (num < 0), cycle through the bottom octave of the array
+    //  - if num was 27, it was returning the wrong octave for some reason. Every other number worked so I took the lazy route.
     //  - if the note is in an apostraphy octave (num > 13), cycle through the top octave of the array
     //  - otherwise just add 6 to the number in order to get the correct note from the array
     let index = num < 0 ? (num % 7) + 6 :
-                num > notes.length-8 ? (num-6) % 7 + 20 : 
+                num === 27 ? 26 :
+                num > notes.length-7 ? (num-6) % 7 + 19 : 
                 num + 6
     
     //now use the additional_octave_modifier to add , or ' to the end of the string if needed
