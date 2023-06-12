@@ -588,10 +588,10 @@ $(function(){
 
             const $noteEl = $(pathel).closest('.abcjs-note')
 
-            const pitchClassNum = /abcjs-p(.*?)(?=[\s$])/.exec($noteEl.attr('class'))[1]
+            const pitchClassNum = parseFloat(/abcjs-p(.*?)(?=[\s$])/.exec($noteEl.attr('class'))[1])
 
             //adjust the pitch class num (just the arg for noteNmae) if octave or shift is present in the instrument's V field
-            const octaveAdjustment = /octave=\s*(-?\d+)/.exec( voiceFieldReference[instrument] )?.[1] | 0
+            const octaveAdjustment = parseFloat(/octave=\s*(-?\d+)/.exec( voiceFieldReference[instrument] )?.[1] | 0)
             const pitchNumToConvert = pitchClassNum + (octaveAdjustment * 7)
 
             const noteName = pitchClassNumToNote( pitchNumToConvert )
