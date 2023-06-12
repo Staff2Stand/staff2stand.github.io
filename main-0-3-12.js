@@ -350,38 +350,6 @@ function capitalize1stLetter(str){
 }
 
 /**
- * Is Overlapping
- * @param {*} div1 
- * @param {*} div2 
- * @returns Bool
- */
-function isOverlapping(div1, div2){
-    div1 = $(div1).get(0).getBoundingClientRect();
-    div2 = $(div2).get(0).getBoundingClientRect();
-    return (div1.right > div2.left && 
-            div1.left < div2.right && 
-            div1.bottom > div2.top && 
-            div1.top < div2.bottom)
-}
-/**
- * Distance To Separate
- * @param {*} el1 
- * @param {*} el2 
- * @returns {object} object with props left, right, up, down. Value of each is the distance(px) el1 needs to move, as in xy coordinates, to be in that direction from el2.
- */
-function distanceToSeparate(el1,el2){
-    el1 = $(el1).get(0).getBoundingClientRect()
-    el2 = $(el2).get(0).getBoundingClientRect()
-
-    //Max and Min checks which side of el2 its on, and changes that direction val to 0, since el1 is already on that side. For example, left should have a max val of 0 to ensure we don't move el1 to the right.
-    return {
-        left:   Math.min(el2.left - el1.right, 0),
-        right:  Math.max(el2.right - el1.left, 0),
-        up:     Math.min(el2.top - el1.bottom, 0),
-        down:   Math.max(el2.bottom - el1.top, 0)
-    }
-}
-/**
  * Has Only 1 Letter
  * @param {*} string 
  * @returns Bool
