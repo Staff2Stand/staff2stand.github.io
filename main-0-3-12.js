@@ -69,18 +69,6 @@ function friendlyNoteName(name) {
     const pitch = name[index]
     return pitch.toUpperCase() + acc
 }
-/**
- * TRANSLATE NOTE NAMES TO ABC
- * @param {*} name a notename in human-readable format:  C#
- * @returns 
- */
-function unfriendlyNoteName(name) {
-    let acc = ''
-    if (name[0] === 'b') acc = "_"
-    if (name[0] === '#') acc = "^"
-    var pitch = name[0]
-    return acc + pitch.toUpperCase()
-}
 
 /**
  * CONVERT ABCJS PITCH CLASS NUMBERS TO ABC NOTATION NOTES
