@@ -592,7 +592,7 @@ $(function(){
 
         //add highlights and such to each target
         targets.forEach(function(target){
-            addStringClassesToNoteHeads(target)
+            addClassesToNoteHeads(target)
             // addFingeringsAndNoteNames(target)
         })
 
@@ -620,7 +620,7 @@ $(function(){
      * ADD STRING CLASSES
      * also add data-noteName to note element
      */
-    function addStringClassesToNoteHeads(abcContainer){
+    function addClassesToNoteHeads(abcContainer){
         $(abcContainer).find('.abcjs-note path[data-name]').each(function(i,pathel){
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
 
