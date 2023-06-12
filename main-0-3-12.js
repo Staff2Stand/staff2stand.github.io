@@ -65,7 +65,8 @@ function friendlyNoteName(name) {
     let acc = ''
     if (name[0] === '_') acc = "b"
     if (name[0] === '^') acc = "#"
-    var pitch = name[1]
+    const index = acc ? 1 : 0
+    const pitch = name[index]
     return pitch.toUpperCase() + acc
 }
 /**
