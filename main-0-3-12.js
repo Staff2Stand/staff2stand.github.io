@@ -237,7 +237,8 @@ function createAbcEditorOpts (instrument){
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
                             const noteNameAbc = pitch.name
-                            const already_has_accidental = noteNameAbc.length > 1
+                            
+                            const already_has_accidental = noteNameAbc.includes(',') || noteNameAbc.includes('\'')
                             if (already_has_accidental) return noteNameAbc
 
                             const noteIsInKeysigFlats = keysigFlats.includes(noteNameAbc.toLowerCase())
