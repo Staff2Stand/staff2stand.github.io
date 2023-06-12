@@ -88,6 +88,8 @@ function unfriendlyNoteName(name) {
  * @returns abc notation note
  */
 function pitchClassNumToNote(num){
+    num = parseFloat(num)
+
     const notes = ['B,','A,','G,','F,','E,','D,','C','D','E','F','G','A','B','c','d','e','f','g','a','b','c\'','d\'','e\'','f\'','g\'','a\'','b\'']
 
     const additional_octave_modifier =  num < 0 ? Math.ceil(num/7) :
@@ -626,10 +628,11 @@ $(function(){
             const isNotehead = hasOnly1Letter( $(pathel).attr('data-name') )
             if (!isNotehead) return
 
-            const noteName = $(pathel).siblings('text').find('tspan').map(function(){
-                const val = $(this).text()
-                if (isNaN(val) && val.length < 3) return unfriendlyNoteName(val)
-            }).get(0)
+            const $noteEl = $(pathel).closest('.abcjs-note')
+
+            const pitchClassNum = /abcjs-p(.*?)(?=[\s$])/.exec($noteEl.attr('class'))[1]
+
+            const noteName = pitchClassNumToNote(pitchClassNum)
 
             //check string reference and add the correct string class
             const noteString = instruments.includes(instrument) ? 
@@ -639,7 +642,7 @@ $(function(){
             $(pathel).addClass(`${noteString}String`)
 
             //add data-attrs to note
-            $(pathel).closest('.abcjs-note').attr({
+            $noteEl.attr({
                 'data-noteName': noteName,
                 'data-instrument': instrument,
                 'data-string': noteString
