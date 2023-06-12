@@ -237,7 +237,7 @@ function createAbcEditorOpts (instrument){
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
                             const noteNameAbc = pitch.name
-                            
+
                             const already_has_accidental = noteNameAbc.includes(',') || noteNameAbc.includes('\'')
                             if (already_has_accidental) return noteNameAbc
 
@@ -625,7 +625,7 @@ $(function(){
             const noteName = pitchClassNumToNote(pitchClassNum)
 
             //check string reference and add the correct string class
-            const noteString = instruments.includes(instrument) ? 
+            const noteString = stringReference[instrument] ? 
                 Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName)) :
                 ''
 
