@@ -79,7 +79,7 @@ function friendlyNoteName(name) {
 function pitchClassNumToNote(num){
     num = parseFloat(num)
 
-    const notes = ['B,','A,','G,','F,','E,','D,','C','D','E','F','G','A','B','c','d','e','f','g','a','b','c\'','d\'','e\'','f\'','g\'','a\'','b\'']
+    const notes = ['D,','E,','F,','G,','A,','B,','C','D','E','F','G','A','B','c','d','e','f','g','a','b','c\'','d\'','e\'','f\'','g\'','a\'','b\'']
 
     const additional_octave_modifier =  num < 0 ? Math.ceil(num/7) :
                                         num > notes.length ? Math.floor((num - notes.length + 7) / 7) : 
