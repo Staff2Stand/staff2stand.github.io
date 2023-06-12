@@ -638,10 +638,20 @@ $(function(){
             })
 
             //add fingering class
-            $noteEl.addClass('abcjs-fingering')
+            $noteEl.find('.abcjs-annotation tspan').filter(function() {
+                const textContent = $(this).text()
+                const containsNumber = /\d/.test(textContent)
+                return containsNumber
+            })
+            .addClass('abcjs-fingering')
 
             //add notename class
-            $noteEl.addClass('abcjs-noteName')
+            $noteEl$noteEl.find('.abcjs-annotation tspan').filter(function() {
+                const textContent = $(this).text()
+                const containsNote = /[A-Ga-g]['|,]*\d*/.test(textContent)
+                return containsNote
+            })
+            .addClass('abcjs-noteName')
 
         })
     }
