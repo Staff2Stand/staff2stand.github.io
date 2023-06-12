@@ -646,7 +646,7 @@ $(function(){
             .addClass('abcjs-fingering')
 
             //add notename class
-            $noteEl$noteEl.find('.abcjs-annotation tspan').filter(function() {
+            $noteEl.find('.abcjs-annotation tspan').filter(function() {
                 const textContent = $(this).text()
                 const containsNote = /[A-Ga-g]['|,]*\d*/.test(textContent)
                 return containsNote
