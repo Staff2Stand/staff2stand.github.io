@@ -581,7 +581,7 @@ $(function(){
 
         //add highlights and such to each target
         targets.forEach(function(target){
-            addClassesToNoteHeads(target)
+            addClassesToTune(target)
             // addFingeringsAndNoteNames(target)
         })
 
@@ -606,10 +606,10 @@ $(function(){
 
 
     /**
-     * ADD STRING CLASSES
+     * ADD CUSTOM CLASSES TO TUNE
      * also add data-noteName to note element
      */
-    function addClassesToNoteHeads(abcContainer){
+    function addClassesToTune(abcContainer){
         $(abcContainer).find('.abcjs-note path[data-name]').each(function(i,pathel){
             const instrument = $(pathel).closest('.instrument_tunes').attr('instrument').toLowerCase()
 
@@ -636,6 +636,12 @@ $(function(){
                 'data-instrument': instrument,
                 'data-string': noteString
             })
+
+            //add fingering class
+            $noteEl.addClass('abcjs-fingering')
+
+            //add notename class
+            $noteEl.addClass('abcjs-notename')
 
         })
     }
