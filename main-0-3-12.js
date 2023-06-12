@@ -641,7 +641,7 @@ $(function(){
             $noteEl.addClass('abcjs-fingering')
 
             //add notename class
-            $noteEl.addClass('abcjs-notename')
+            $noteEl.addClass('abcjs-noteName')
 
         })
     }
