@@ -236,7 +236,7 @@ function createAbcEditorOpts (instrument){
 
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
-                            const noteNameAbc = pitch.name
+                            const noteNameAbc = pitchClassNumToNote(pitch.pitch)
 
                             const already_has_accidental = noteNameAbc.includes(',') || noteNameAbc.includes('\'')
                             if (already_has_accidental) return noteNameAbc
