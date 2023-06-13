@@ -269,6 +269,14 @@ function createAbcEditorOpts (instrument){
                             const pitchNumToConvert = pitch.pitch + (octaveAdjustment * -7)
 
                             const noteName = pitchClassNumToNote( pitchNumToConvert )
+
+                            const already_has_accidental = noteName.includes('^') || noteName.includes('_') || noteName.includes('=')
+                            const noteIsInKeysigFlats = keysigFlats.includes(noteName.toLowerCase())
+                            const noteIsInKeysigSharps = keysigSharps.includes(noteName.toLowerCase())
+                            const acc = already_has_accidental ? '' :
+                                        noteIsInKeysigFlats ? '_' :
+                                        noteIsInKeysigSharps ? '^':
+                                        ''
                             
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                             if (!noteString) return ' '
