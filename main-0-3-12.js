@@ -263,7 +263,13 @@ function createAbcEditorOpts (instrument){
                         const instrument_is_in_fingerings_ref = stringReference.hasOwnProperty(instrument)
                         if (!instrument_is_in_fingerings_ref) return
 
-                        fingers = pitches.map(noteName=>{
+                        const fingers = el.pitches.map(pitch=>{
+                            //adjust the pitch class num (just the arg for noteNmae) if octave or shift is present in the instrument's V field.  We need to reverse the octave shift to get the correct note to lookup
+                            const octaveAdjustment = parseFloat(/octave=\s*(-?\d+)/.exec( voiceFieldReference[instrument] )?.[1] | 0)
+                            const pitchNumToConvert = pitch.pitch + (octaveAdjustment * -7)
+
+                            const noteName = pitchClassNumToNote( pitchNumToConvert )
+                            
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                             if (!noteString) return ' '
                             
