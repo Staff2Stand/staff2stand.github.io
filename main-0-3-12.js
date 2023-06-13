@@ -282,6 +282,7 @@ function createAbcEditorOpts (instrument){
                             
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                             if (!noteString) return ' '
+                            console.log('note ', noteName, '.  noteString ',noteString)
                             
                             const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
 
