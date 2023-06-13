@@ -10,9 +10,9 @@ const voiceFieldReference = {
 }
 
 // \u2193 = down arrow
-const hi = '\u2193'
+const low = '\u2193'
 // \u2191 = up arrow
-const low = '\u2191'
+const hi = '\u2191'
 const stringReference = {
     violin: {
         g: ['G,' , '=G,' , '^G,' , '_A,' , 'A,' , '=A,' , '^A,' , '_B,' , 'B,' , '=B,' , '^B,' , '_C' , 'C' , '=C' , '^C' , '_D'],
