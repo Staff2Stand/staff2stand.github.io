@@ -264,11 +264,11 @@ function createAbcEditorOpts (instrument){
                         if (!instrument_is_in_fingerings_ref) return
 
                         const fingers = el.pitches.map(pitch=>{
-                            //adjust the pitch class num (just the arg for noteNmae) if octave or shift is present in the instrument's V field.  We need to reverse the octave shift to get the correct note to lookup
+                            //adjust the pitch class num (just the arg for noteNmae) if octave or shift is present in the instrument's V field.  We need to reverse the octave/shift to get the correct note to lookup
                             const octaveAdjustment = parseFloat(/octave=\s*(-?\d+)/.exec( voiceFieldReference[instrument] )?.[1] | 0)
                             const pitchNumToConvert = pitch.pitch + (octaveAdjustment * -7)
 
-                            const noteName = pitchClassNumToNote( pitchNumToConvert )
+                            let noteName = pitchClassNumToNote( pitchNumToConvert )
 
                             const already_has_accidental = noteName.includes('^') || noteName.includes('_') || noteName.includes('=')
                             const noteIsInKeysigFlats = keysigFlats.includes(noteName.toLowerCase())
@@ -277,6 +277,8 @@ function createAbcEditorOpts (instrument){
                                         noteIsInKeysigFlats ? '_' :
                                         noteIsInKeysigSharps ? '^':
                                         ''
+                            
+                            noteName = acc + noteName
                             
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                             if (!noteString) return ' '
