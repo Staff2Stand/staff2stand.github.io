@@ -282,12 +282,12 @@ function createAbcEditorOpts (instrument){
                             
                             const noteString = Object.keys(stringReference[instrument]).find(key => stringReference[instrument][key].includes(noteName))
                             if (!noteString) return ' '
-                            console.log('note ', noteName, '.  noteString ',noteString)
                             
                             const noteNameIndex = stringReference[instrument]?.[noteString]?.indexOf(noteName)
 
                             const finger = stringReference[instrument]?.[noteString+'Fingers']?.[noteNameIndex]
                             if (isNaN(finger)) return ' '
+                            console.log('note ', noteName, '  finger ',finger)
 
                             return finger
                         })
