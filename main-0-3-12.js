@@ -214,11 +214,6 @@ function createAbcEditorOpts (instrument){
      * @returns 
      */
     function extendParsing(tune, tuneNumber, abcString){
-        console.log('TUNE',tune)
-
-        // const instrumentRegx = /V:\s+([A-Za-z]+)(?=\s+|clef|$)/m
-        // const instrument = instrumentRegx.exec(abcString)[1]
-
         tune.lines.forEach(line=>{
             line.staff.forEach(staff=>{
                 //check sharps and flats in keysig
@@ -566,10 +561,9 @@ $(function(){
         //create an array of unique targets from the mutations list
         const targets = [...new Set(mutationsList.map((item) => item.target))]
 
-        //add highlights and such to each target
+        //add classes for highlights and such to each target
         targets.forEach(function(target){
             addClassesToTune(target)
-            // addFingeringsAndNoteNames(target)
         })
 
         //Clear style attr of all empty abcjsContainer divs
@@ -646,210 +640,6 @@ $(function(){
 
         })
     }
-
-    /**
-     * FINGERINGS AND NOTE NAMES
-     * after the tune is rendered, loop through notes and append text and tspan elements to svg
-     */
-    // function addFingeringsAndNoteNames(abcContainer){
-    //     //util func to create svg element
-    //     function SVG(tag) {
-    //         return document.createElementNS('http://www.w3.org/2000/svg', tag);
-    //     }
-
-    //     //loop through all the notes and add svg text element child with class fingering
-    //     $(abcContainer).find('.abcjs-note').each(function(i,note){
-    //         const $note = $(note)
-    //         const noteX = note.getBBox().x
-    //         const noteY = note.getBBox().y
-    //         const noteHeight = note.getBBox().height
-    //         const staffY = $(note).siblings('.abcjs-staff').get(0).getBBox().y
-    //         const staffHeight = $(note).siblings('.abcjs-staff').get(0).getBBox().height
-    //         const noteName = $(note).attr('data-noteName')
-    //         const instrument = $(note).attr('data-instrument')
-    //         const noteString = $(note).attr('data-string')
-
-    //         const noteNameIndex = instrument === 'piano' ? 'piano' : 
-    //             stringReference[instrument]?.[noteString]?.indexOf(noteName)
-
-    //         const finger = instrument === 'piano' ? 'piano' :
-    //             stringReference[instrument]?.[noteString+'Fingers']?.[noteNameIndex]
-
-    //         const hasChordTxtEl = !!($(note).find('.abcjs-chord'))
-    //         const noteIsAboveStaff = (function(){
-    //             $(note).find('path').each(function(i,pathEl){
-    //                 if ( pathEl.getBBox().y < staffY ) return true
-    //             })
-    //             return false
-    //         })()
-    //         const noChord_inStaff = !hasChordTxtEl && !noteIsAboveStaff
-    //         const chord_inStaff = hasChordTxtEl && !noteIsAboveStaff
-    //         const noChord_aboveStaff = !hasChordTxtEl && noteIsAboveStaff
-    //         const chord_aboveStaff = hasChordTxtEl && noteIsAboveStaff
-    //         let fingeringTxtY =   noChord_inStaff ? staffY - 16 :
-    //                                 noChord_aboveStaff ? noteY - 16 :
-    //                                 chord_inStaff ? staffY - 6 :
-    //                                 chord_aboveStaff ? noteY - 6 :
-    //                                 staffY - 16            
-
-    //         const xAdjustmentForChord = hasChordTxtEl ? -6 : 0
-    //         const fingeringTxtX = noteX + xAdjustmentForChord
-
-    //         //Fingering Text
-    //         const $fingering = $(SVG('text'))
-    //         $fingering.attr({
-    //                 stroke: 'none',
-    //                 fontSize: '16',
-    //                 fontStyle: 'normal',
-    //                 fontFamily: 'Helvetica',
-    //                 fontWeight: 'normal',
-    //                 textDecoration: 'none',
-    //                 class: 'abcjs-fingering',
-    //                 textAnchor: 'middle',
-    //                 x: fingeringTxtX,
-    //                 y: fingeringTxtY
-    //             })
-    //             .appendTo(note)
-    //         $(SVG('tspan'))
-    //             .attr('x',noteX)
-    //             .text(finger)
-    //             .appendTo( $fingering )
-
-    //         //Note Name Text
-    //         let noteNameTxtY = staffY + staffHeight + 16
-    //         if (noteY + noteHeight + 6 > noteNameTxtY) noteNameTxtY = noteY + noteHeight + 20
-
-    //         const standardNoteName = noteName
-    //             .replace(/,+/g,'')
-    //             .replace(/'+/g,'')
-    //             .replace("^", "\u266F")
-    //             .replace("_", "\u266D")
-    //             .replace("=", "\u266E")
-    //             .toUpperCase()
-
-    //         const $notename = $(SVG('text'))
-    //         $notename.attr({
-    //                 stroke: 'none',
-    //                 fontSize: '16',
-    //                 fontStyle: 'normal',
-    //                 fontFamily: 'Helvetica',
-    //                 fontWeight: 'normal',
-    //                 textDecoration: 'none',
-    //                 class: 'abcjs-noteName',
-    //                 textAnchor: 'middle',
-    //                 x: noteX,
-    //                 y: noteNameTxtY
-    //             })
-    //             .appendTo(note)
-    //         $(SVG('tspan'))
-    //             .attr('x',noteX)
-    //             .text(standardNoteName)
-    //             .appendTo( $notename )
-            
-    //         //Check For Overlaps
-    //         const $notehead = $(note).find('path[data-name]').filter(function(i){
-    //             const $thisPath = $(this)
-    //             const dataName = $thisPath.attr('data-name')
-    //             return (dataName.match(/[A-Za-z]/g) || []).length === 1
-    //         })
-    //         const noteheadHeight = $notehead.get(0).getBBox().height
-
-    //         /**
-    //          * Distance To Separate From Beam
-    //          * @param {*} element 
-    //          * @param {*} testDirection the direction we expect to have to move the element
-    //          * @returns {object} result of distanceToSeperate, or { left:0, right:0, up:0, down:0 } if the note doesn't have a beam
-    //          */
-    //         function distToSeparateFromBeam(element,testDirection){
-    //             const $element = $(element)
-    //             let result = { left:0, right:0, up:0, down:0 }
-    //             $(abcContainer).find('.abcjs-beam-elem').each((i,beam)=> {
-    //                 const distances = distanceToSeparate($element,beam)
-
-    //                 const beam_is_on_same_line_as_note = (function(){
-    //                     const beamLine = beam.getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
-    //                     const noteLine = note.getAttribute('class').match(/abcjs-l(\d)*\s/)[1]
-    //                     return beamLine === noteLine
-    //                 })()
-
-    //                 const beam_covers_same_x_as_element = distances.left < 0 && distances.right > 0
-
-    //                 const element_needs_to_move = {
-    //                     up:     distances.up < 0 ,
-    //                     down:   distances.down > 0 
-    //                 }[testDirection]
-
-    //                 if (    beam_is_on_same_line_as_note &&
-    //                         beam_covers_same_x_as_element &&
-    //                         element_needs_to_move
-    //                     ) {
-    //                     result = distances
-    //                     return
-    //                 }
-    //             })
-    //             return result
-    //         }
-
-    //         const overlaps = {
-    //             fingering: {
-    //                 notehead: distanceToSeparate($fingering,$notehead).up,
-    //                 beam: distToSeparateFromBeam($fingering,'up').up
-    //             },
-    //             notename: {
-    //                 notehead: distanceToSeparate($notename,$notehead).down,
-    //                 beam: distToSeparateFromBeam($notename,'down').down
-    //             }
-    //         }
-
-    //         const translateDist = {
-    //             fingering: {
-    //                 x:  0,
-    //                 y:  overlaps.fingering.notehead +
-    //                     overlaps.fingering.beam
-    //             },
-    //             notename: {
-    //                 x:  0,
-    //                 y:  overlaps.notename.notehead +
-    //                     overlaps.notename.beam
-    //             }
-    //         }
-
-    //         //Set css to actually move the svg text element
-    //         //note: we need to use setAttribute bc svg elements are annoying
-    //         $fingering.get(0).setAttribute('transform',`translate(${translateDist.fingering.x},${translateDist.fingering.y})`)
-
-    //         $notename.get(0).setAttribute('transform',`translate(${translateDist.notename.x},${translateDist.notename.y})`)
-    //     })
-
-    //     //Adjust viewBox of each line's svg to show notenames and fingerings
-    //     let staffHeight = $(abcContainer).find('.abcjs-staff').get(0)?.getBBox().height
-    //     if (!staffHeight) staffHeight = 32
-
-    //     const $lineDivs = $(abcContainer).children('div')
-    //     const $lineSVGs = $lineDivs.children('svg')
-
-    //     $lineSVGs.each((i,svg)=>{
-    //         const no_notes_in_line = $(svg).find('.abcjs-note').length === 0
-    //         if (no_notes_in_line) return //ie meta top, text lines, blank staff lines
-
-    //         const viewBox = svg.getAttribute('viewBox').split(' ').map(parseFloat)
-    //         const svgRect = svg.getBoundingClientRect()
-    //         const gRect = $(svg).children('g').last().get(0).getBoundingClientRect()
-
-    //         const g_height_is_stupid_large = gRect.height > staffHeight * 3.5
-
-    //         const topDif =  g_height_is_stupid_large ? 
-    //                         0 : //0 bc in this case all the fingerings should already be showing
-    //                         svgRect.top - gRect.top
-    //         const bottomDif = gRect.bottom - svgRect.bottom
-            
-    //         viewBox[1] -= topDif
-    //         viewBox[3] += topDif + bottomDif
-
-    //         svg.setAttribute('viewBox',viewBox)
-    //     })
-    // }
-
 
     /**
      * SEARCH AND SORT
@@ -954,8 +744,6 @@ $(function(){
         $filterMarkers_to_show.show()
         $filterMarkers_to_hide.hide()
 
-        console.log($filterMarkers_to_hide)
-
         const $unwantedScores = $resultsDiv.find('.score_bookmark:not([tags*="' + selectedTags.join('"],[tags*="') + '"])')
         const $wantedScores = $resultsDiv.find('.score_bookmark:is([tags*="' + selectedTags.join('"],[tags*="') + '"])')
         $wantedScores.show()
@@ -1044,14 +832,6 @@ $(function(){
         //append this section to the sidebar
         $('#sidebar').append($section)
     })
-
-    /**
-     * Copy Score Data
-     * @param {*} $bkmk 
-     */
-    function copyScoreData($bkmk){
-
-    }
 
     /**
      * Remove Score From Editors
@@ -1318,26 +1098,6 @@ $(function(){
     }
 
     /**
-     * TOP BAR
-     */
-    //PAGE SIZE SLIDER
-    const $pageContent = $('#page_content')
-    const maxPageWidth = $pageContent.outerWidth()
-    $('#pageSize')
-        //set max and val on slider to max page width
-        .attr({
-            'max': maxPageWidth,
-            'value': maxPageWidth
-        })
-        //on input, set page width to slider val
-        .on('input', e => {
-            const sliderVal = e.target.value
-            const newWidth = sliderVal+'px'
-            $pageContent.css('width',newWidth)
-        })
-
-
-    /**
      * MY SCORES UTILS
      * new score, load score, download my scores
      */
@@ -1437,11 +1197,11 @@ $(function(){
     //FILE INPUT LOAD
     // when the file has finished reading
     fileReader.onload = function( ev ) {
-        //(validate the file extension)
+        //TODO: validate the file extension
 
         //get and validate contents
         const contents = JSON.parse( decodeURIComponent( ev.target.result ) );
-        console.log('||S2S||  ',contents)
+        console.log('||S2S||  file contents: ',contents)
 
         //  if the length of the array is empty, throw an error
         if (contents.length === 0){
@@ -1571,7 +1331,7 @@ $(function(){
 
             $tempTxtArea.remove()
 
-            console.log('S2S || copied score data',contentsObj)
+            console.log('|| S2S || copied score data',contentsObj)
 
             return
         }
