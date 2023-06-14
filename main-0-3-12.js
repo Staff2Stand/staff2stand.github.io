@@ -1726,12 +1726,7 @@ $(function(){
      */
     const $homepage = $('#homepage')
 
-    const $homepage_content = $(
-        `
-        <h1>Welcome Message</h1>
-        <p>This is going to be the homepage.</p>
-        `
-    ).appendTo( $('#homepage_content') )
+    $('#homepage_content').load('homepage_content.html')
 
     $('#logo.load_homepage, #close_homepage').click(()=>{
         $homepage.fadeToggle()
