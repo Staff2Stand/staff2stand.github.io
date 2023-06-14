@@ -57,7 +57,7 @@ header {
   justify-content: space-between;
 }
 
-#logo{
+#logo img{
   height: var(--header_content_height);
 }
 #logo.load_homepage{
