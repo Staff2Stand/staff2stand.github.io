@@ -310,7 +310,7 @@ const abcEditorInstances = {}
 
 /**
  * FADE NOTEY
- * @param {string | 'in', 'out', 'toggle'} mode whether to fade notey in, fade out, or toggle
+ * @param {string} mode 'in', 'out', 'toggle' | whether to fade notey in, fade out, or toggle
  * @param {string} classToAdd 'class1' or 'class1 class2 etc'
  * @returns 
  */
@@ -1734,7 +1734,8 @@ $(function(){
     ).appendTo( $('#homepage_content') )
 
     $('#logo.load_homepage, #close_homepage').click(()=>{
-        $homepage.slideToggle()
+        $homepage.toggle()
+        fadeNotey('out')
     })
 
 
