@@ -1734,7 +1734,7 @@ $(function(){
     ).appendTo( $('#homepage_content') )
 
     $('#logo.load_homepage, #close_homepage').click(()=>{
-        $homepage.toggle()
+        $homepage.fadeToggle()
         fadeNotey('out')
     })
 
