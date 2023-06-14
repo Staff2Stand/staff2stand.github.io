@@ -56,10 +56,15 @@ header {
   justify-content: space-between;
 }
 
+#logo{
+  
+}
+
 #header_buttons_toggle{
   display: none;
+  position: absolute;
+  right: 8px;
 }
-@media only screen and (max-width:900px) {
   /* 
     show header buttons toggler
     hide header buttons on hidden class (toggler click event)
@@ -68,12 +73,6 @@ header {
   #header_buttons.hidden{
     display: none !important;
   }
-  #header_buttons_toggle{
-    display: inline;
-    position: absolute;
-    right: 8px;
-  }
-
   #header_buttons{
     display: flex;
     flex-flow: column nowrap;
@@ -86,17 +85,6 @@ header {
     padding-bottom: 8px;
     border-radius: 0 0 8px 8px;
   }
-  #header_buttons:before {
-    width: 100%;
-    content: '';
-    height: calc(100% + 8px);
-    box-shadow: -4px 4px 4px black;
-    display: block;
-    position: absolute;
-    border-radius: 0 0 8px 8px;
-    top: -9px;
-  }
-}
 
 /* DIALOG */
 /* fixed pos */
