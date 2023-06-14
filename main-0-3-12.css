@@ -6,8 +6,8 @@ body {
 
 /* ROOT VARIABLES */
 :root {
-  --header_content_height: 20px;
-  --header_content_padding: 10px;
+  --header_content_height: 48px;
+  --header_content_padding: 4px;
   --header_height: calc(
     var(--header_content_height) + var(--header_content_padding) * 2
   );
@@ -57,7 +57,10 @@ header {
 }
 
 #logo{
-  
+  height: var(--header_content_height);
+}
+#logo.load_homepage{
+  cursor: pointer;
 }
 
 #header_buttons_toggle{
