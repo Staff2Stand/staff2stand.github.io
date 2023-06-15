@@ -157,6 +157,7 @@ header {
   right: 0;
   height: 54px;
   width: 54px;
+  transform: scale(1.5);
 }
 .cardIcon svg {
   position: absolute;
