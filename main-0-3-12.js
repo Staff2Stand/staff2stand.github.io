@@ -1740,7 +1740,6 @@ $(function(){
         .on('transitionend', function() {
             $homepage.css('top', top)
             $homepage.toggleClass('open')
-            fadeNotey('out')
         })
     })
 
