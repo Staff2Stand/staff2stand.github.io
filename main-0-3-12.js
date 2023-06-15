@@ -1734,7 +1734,6 @@ $(function(){
         const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
         $homepage.css('top',top).toggleClass('open')
-        })
         .css({
             'background-size': bgSize
         })

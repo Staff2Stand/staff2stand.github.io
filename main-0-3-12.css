@@ -96,14 +96,15 @@ header {
 
 /* HOMEPAGE */
 #homepage {
-  --h: calc(100vh - 20px - 85px - 25px - var(--header_height));
+  --h: calc(100vh - 16px - 85px - 25px - var(
+--header_height));
   --w: calc(100% - 10px);
   position: absolute;
   top: 0px;
   left: 0;
   width: var(--w);
   height: var(--h);
-  padding: 10px;
+  padding: 8px;
   padding-right: 0;
   overflow-y: scroll;
   background: #fff;
@@ -119,8 +120,7 @@ header {
   margin-right: 8px;
 }
 #homepage_content {
-  padding: 12px;
-  padding-bottom: 20px;
+  padding: 0 16px;
 }
 #homepage::-webkit-scrollbar-track {
   background: #333;
