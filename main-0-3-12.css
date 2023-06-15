@@ -97,20 +97,20 @@ header {
 /* HOMEPAGE */
 #homepage {
   position: absolute;
-  top: 10px;
-  left: 2.5%;
-  width: calc(95% - 30px);
-  min-height: 50vh;
-  max-height: calc(90vh - 30px);
+  top: 0;
+  left: 0;
+  width: calc(100% - 10px);
+  height: calc(100vh - 20px - 85px - var(--header_height));
+  padding: 10px;
+  padding-right: 0;
   overflow-y: scroll;
   background: #fff;
-  border-bottom-left-radius: 100px;
-  box-shadow: -10px 10px hsl(0deg 0% 0% / 75%);
+  background-image: linear-gradient(to right, white, white), linear-gradient(to right bottom, rgb(118, 239, 233), rgb(119, 197, 193));
+  background-size: calc(100% - 30px) calc(100% - 35px), 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center, left top;
+  transition: all 500ms ease 0s;
   z-index: 99;
-  border-top: 5px solid teal;
-  border-left: 30px solid teal;
-  border-right: 5px solid teal;
-  border-bottom: 30px solid teal;
 }
 #close_homepage {
   cursor: pointer;
@@ -124,7 +124,7 @@ header {
   padding-bottom: 20px;
 }
 #homepage::-webkit-scrollbar-track {
-  background: var(--border_color);
+  background: linear-gradient(to bottom, hsl(177 60% 70% / 1), hsl(177 40% 62% / 1));
 }
 
 /* DIALOG */
