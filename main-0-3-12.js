@@ -1730,17 +1730,18 @@ $(function(){
 
     $('.open_homepage, #close_homepage').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
-        const pos = homepage_is_open ? '-100%' : '0'
+        const top = homepage_is_open ? '-100%' : '0'
         const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
-        $homepage.css('background-size',bgSize)
-        .promise()
-        .then(function(){
-            $homepage.css('top',pos)
+        $homepage.css({
+            transition: 'background-size 200ms',
+            'background-size': bgSize
         })
-        
-        $homepage.toggleClass('open')
-        fadeNotey('out')
+        .on('transitionend', function() {
+            $homepage.css('top', top)
+            $homepage.toggleClass('open')
+            fadeNotey('out')
+        })
     })
 
 
