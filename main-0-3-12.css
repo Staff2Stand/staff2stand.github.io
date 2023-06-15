@@ -150,19 +150,28 @@ header {
   width: calc(100% - 12px);
   color: #fff;
 }
-#card_notenames.card .cardIcon {
+.card .cardIcon {
   position: absolute;
   top: 0;
   right: 0;
   height: 54px;
   width: 54px;
 }
-#card_notenames .cardIcon svg {
-  transform: scale(0.5);
+.cardIcon svg {
   position: absolute;
-  top: -42px;
+  top: 0;
   right: 0;
   filter: drop-shadow(2px 4px 6px black);
+}
+#card_highlights .cardIcon svg{
+  color: hsl(64deg 100% 50%);
+}
+#card_fingerings .cardIcon svg{
+  color: hsl(181.97deg 100% 50%);
+}
+#card_notenames .cardIcon svg {
+  transform: scale(0.5);
+  top: -42px;
 }
 
 /* DIALOG */
