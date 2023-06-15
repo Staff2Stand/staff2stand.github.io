@@ -1733,16 +1733,13 @@ $(function(){
         const pos = homepage_is_open ? '-100%' : '0'
         const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
-        $homepage.animate({
-            top: pos
-        },20,()=>{
-            $homepage.animate({
-                'background-size': bgSize
-            },180, ()=>{
-                $homepage.toggleClass('open')
-            })
+        $homepage.css('background-size',bgSize)
+        .promise()
+        .then(()=>{
+            $homepage.css('top',pos)
         })
-
+        
+        $homepage.toggleClass('open')
         fadeNotey('out')
     })
 
