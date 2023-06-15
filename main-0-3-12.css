@@ -96,17 +96,21 @@ header {
 
 /* HOMEPAGE */
 #homepage {
+  --border_color: teal;
   position: absolute;
-  top: 12px;
+  top: 10px;
   left: 2.5%;
-  width: 95%;
+  width: calc(95% - 30px);
   min-height: 50vh;
-  max-height: 90vh;
+  max-height: calc(90vh - 30px);
   overflow-y: scroll;
   background: #fff;
-  box-shadow: 0 0 12px 2px;
-  border-radius: 24px;
+  border-radius: 0px 14px 0 225px / 0px 12px 0px 50px;
   z-index: 99;
+  border-top: 5px solid var(--border_color);
+  border-left: 30px solid var(--border_color);
+  border-right: 5px solid var(--border_color);
+  border-bottom: 30px solid var(--border_color);
 }
 #close_homepage {
   cursor: pointer;
@@ -116,6 +120,9 @@ header {
 }
 #homepage_content {
   padding: 12px;
+}
+#homepage::-webkit-scrollbar-track {
+  background: var(--border_color);
 }
 
 /* DIALOG */
