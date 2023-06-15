@@ -130,6 +130,25 @@ header {
 .cards_container.cols-3 {
   display: flex;
   gap: 16px;
+  justify-content: space-around;
+}
+.card {
+  --hColor: hsl(177deg 100% 31.96%);
+  background: #333;
+  background-image: linear-gradient(to bottom, var(--hColor), var(--hColor)), linear-gradient(to bottom, black 107px, transparent);
+  background-size: 100% 57px, 100% 60%;
+  background-repeat: no-repeat;
+  color: #eee;
+  padding: 12px;
+  width: min-content;
+  flex-grow: 1;
+  border-radius: 0 64px;
+}
+.card h2 {
+  margin: 0;
+  padding: 6px 0;
+  width: calc(100% - 12px);
+  color: #fff;
 }
 
 /* DIALOG */
