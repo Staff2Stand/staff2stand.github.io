@@ -1726,10 +1726,18 @@ $(function(){
      */
     const $homepage = $('#homepage')
 
-    $('#homepage_content').load('homepage_content.html')
+    $('#homepage_content').load('homepage_content.html').then(()=> $('#logo.open_homepage').click() )
 
-    $('#logo.load_homepage, #close_homepage').click(()=>{
-        $homepage.fadeToggle()
+    $('.open_homepage, #close_homepage').click(()=>{
+        const homepage_is_open = $homepage.hasClass('open')
+        const pos = homepage_is_open ? '-100%' : '0'
+
+        $homepage.animate({
+            top: pos,
+            left: pos
+        },150,"linear")
+        .toggleClass('open')
+
         fadeNotey('out')
     })
 
