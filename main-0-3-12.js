@@ -1733,14 +1733,7 @@ $(function(){
         const top = homepage_is_open ? '-100%' : '0'
         const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
-        $homepage
-        .off('transitionend').on('transitionend', function(e) {
-            const prop = e.propertyName
-            console.log(prop, e)
-            
-            if (prop === 'background-size') $homepage.css('top', top)
-
-            if (prop === 'top') $homepage.toggleClass('open')
+        $homepage.css('top',top).toggleClass('open')
         })
         .css({
             'background-size': bgSize
