@@ -150,6 +150,20 @@ header {
   width: calc(100% - 12px);
   color: #fff;
 }
+#card_notenames.card .cardIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 54px;
+  width: 54px;
+}
+#card_notenames .cardIcon svg {
+  transform: scale(0.5);
+  position: absolute;
+  top: -42px;
+  right: 0;
+  filter: drop-shadow(2px 4px 6px black);
+}
 
 /* DIALOG */
 /* fixed pos */
