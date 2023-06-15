@@ -143,6 +143,7 @@ header {
   width: min-content;
   flex-grow: 1;
   border-radius: 0 64px;
+  position: relative;
 }
 .card h2 {
   margin: 0;
