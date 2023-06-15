@@ -1735,7 +1735,7 @@ $(function(){
 
         $homepage.css('background-size',bgSize)
         .promise()
-        .then(()=>{
+        .then(function(){
             $homepage.css('top',pos)
         })
         

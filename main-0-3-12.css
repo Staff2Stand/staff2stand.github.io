@@ -111,7 +111,7 @@ header {
   background-size: 100% 100%, 100% 110%;
   background-repeat: no-repeat;
   background-position: top, left top;
-  transition: all 500ms ease 0s;
+  transition: all 500ms;
   z-index: 99;
 }
 #close_homepage {
