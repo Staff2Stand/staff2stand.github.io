@@ -1726,7 +1726,7 @@ $(function(){
      */
     const $homepage = $('#homepage')
 
-    $('#homepage_content').load('homepage_content.html').then(()=> $('#logo.open_homepage').click() )
+    $('#homepage_content').load('homepage_content.html', ()=> $('#logo.open_homepage').click() )
 
     $('.open_homepage, #close_homepage').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
