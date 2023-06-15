@@ -98,7 +98,7 @@ header {
 #homepage {
   --h: calc(100vh - 16px - 85px - 25px - var(
 --header_height));
-  --w: calc(100% - 10px);
+  --w: calc(100% - 8px);
   position: absolute;
   top: 0px;
   left: 0;
@@ -121,9 +121,15 @@ header {
 }
 #homepage_content {
   padding: 0 16px;
+  color: #333;
 }
 #homepage::-webkit-scrollbar-track {
   background: #333;
+}
+/* "Cards" on homepage */
+.cards_container.cols-3 {
+  display: flex;
+  gap: 16px;
 }
 
 /* DIALOG */
