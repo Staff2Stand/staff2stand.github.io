@@ -96,7 +96,6 @@ header {
 
 /* HOMEPAGE */
 #homepage {
-  --border_color: teal;
   position: absolute;
   top: 10px;
   left: 2.5%;
@@ -105,21 +104,24 @@ header {
   max-height: calc(90vh - 30px);
   overflow-y: scroll;
   background: #fff;
-  border-radius: 0px 14px 0 225px / 0px 12px 0px 50px;
+  border-bottom-left-radius: 100px;
+  box-shadow: -10px 10px hsl(0deg 0% 0% / 75%);
   z-index: 99;
-  border-top: 5px solid var(--border_color);
-  border-left: 30px solid var(--border_color);
-  border-right: 5px solid var(--border_color);
-  border-bottom: 30px solid var(--border_color);
+  border-top: 5px solid teal;
+  border-left: 30px solid teal;
+  border-right: 5px solid teal;
+  border-bottom: 30px solid teal;
 }
 #close_homepage {
   cursor: pointer;
-  position: absolute;
+  position: sticky;
   top: 4px;
-  right: 8px;
+  float: right;
+  margin-right: 8px;
 }
 #homepage_content {
   padding: 12px;
+  padding-bottom: 20px;
 }
 #homepage::-webkit-scrollbar-track {
   background: var(--border_color);
