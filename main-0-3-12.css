@@ -127,7 +127,7 @@ header {
   background: #333;
 }
 /* "Cards" on homepage */
-.cards_container.cols-3 {
+.cards_container.cols {
   display: flex;
   gap: 16px;
   justify-content: space-around;
