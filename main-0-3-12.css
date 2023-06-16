@@ -159,19 +159,19 @@ header {
   width: 54px;
   transform: scale(1.5);
 }
-.cardIcon svg {
+.cardIcon {
   position: absolute;
   top: 0;
   right: 0;
   filter: drop-shadow(2px 4px 6px black);
 }
-#card_highlights .cardIcon svg{
+#card_highlights .cardIcon{
   color: hsl(64deg 100% 50%);
 }
-#card_fingerings .cardIcon svg{
+#card_fingerings .cardIcon{
   color: hsl(181.97deg 100% 50%);
 }
-#card_notenames .cardIcon svg {
+#card_notenames .cardIcon {
   transform: scale(0.5);
   top: -42px;
 }
