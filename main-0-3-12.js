@@ -873,6 +873,9 @@ $(function(){
 
     //On Score Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
+        //close the homepage
+        $('.open_homepage')[0].click()
+
         const $bkmk = $(this)
 
         //if they clicked (not shift-click) the same score, return
