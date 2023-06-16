@@ -142,7 +142,7 @@ header {
   justify-content: space-around;
 }
 .card {
-  --hColor: hsl(177deg 100% 31.96%);
+  --hColor: hsl(177 88% 41% / 1);
   background: #333;
   background-image: linear-gradient(to bottom, var(--hColor), var(--hColor)), linear-gradient(to bottom, black 107px, transparent);
   background-size: 100% 57px, 100% 60%;
