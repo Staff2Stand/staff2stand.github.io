@@ -144,12 +144,23 @@ header {
   flex-grow: 1;
   border-radius: 0 64px;
   position: relative;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 0 0px black;
+  transition: all 200ms;
+}
+.card:hover {
+  box-shadow: -8px 8px 0px 0px black;
+  top: -8px;
+  right: -8px;
 }
 .card h2 {
   margin: 0;
   padding: 6px 0;
   width: calc(100% - 12px);
   color: #fff;
+  font-size: 18px;
+  text-shadow: -1px 1px 0px BLACK;
 }
 .card .cardIcon {
   position: absolute;
@@ -157,13 +168,7 @@ header {
   right: 0;
   height: 54px;
   width: 54px;
-  transform: scale(1.5);
-}
-.cardIcon {
-  position: absolute;
-  top: 0;
-  right: 0;
-  filter: drop-shadow(2px 4px 6px black);
+  filter: drop-shadow(-2px 2px 2px black);
 }
 #card_highlights .cardIcon{
   color: hsl(64deg 100% 50%);
@@ -172,8 +177,6 @@ header {
   color: hsl(181.97deg 100% 50%);
 }
 #card_notenames .cardIcon {
-  transform: scale(0.5);
-  top: -42px;
 }
 
 /* DIALOG */
