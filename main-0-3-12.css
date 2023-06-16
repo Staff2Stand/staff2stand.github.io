@@ -186,6 +186,15 @@ header {
   color: var(--color2);
   transition: all 200ms;
 }
+/* first section */
+#homepage_content section:first-child h1 {
+  text-align: center;
+}
+#homepage_content section:first-child p {
+  width: calc(90% - 100px - 24px);
+  text-align: center;
+  margin-left: 10%;
+}
 
 
 /* DIALOG */
