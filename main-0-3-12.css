@@ -190,7 +190,7 @@ header {
 #homepage_content section:first-child h1 {
   text-align: center;
 }
-#homepage_content section:first-child p {
+#homepage_content section:first-child .speachBubble {
   width: calc(80% - 100px - 24px);
   text-align: center;
   margin-left: 15%;
@@ -200,7 +200,7 @@ header {
   border-radius: 15px;
   filter: drop-shadow(2px 4px 2px black);
 }
-#homepage_content section:first-child p:before {
+#homepage_content section:first-child .speachBubble:before {
   content: "";
   position: absolute;
   bottom: -20px;
