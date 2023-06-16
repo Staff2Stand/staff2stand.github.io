@@ -158,6 +158,11 @@ header {
   box-shadow: 0 0 0 0px var(--color2);
   transition: all 200ms;
 }
+.card:hover .cardIcon {
+  filter: drop-shadow(-6px 6px 2px black);
+  top: -4px;
+  right: -4px;
+}
 .card:hover {
   box-shadow: -8px 8px 0px 0px var(--color2);
   top: -8px;
@@ -179,6 +184,7 @@ header {
   width: 54px;
   filter: drop-shadow(-2px 2px 2px black);
   color: var(--color2);
+  transition: all 200ms;
 }
 
 
