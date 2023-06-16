@@ -127,6 +127,15 @@ header {
   background: #333;
 }
 /* "Cards" on homepage */
+#card_fingerings{
+  --color2: hsl(181.97deg 100% 50%);
+}
+#card_highlights{
+  --color2: hsl(64deg 100% 50%);
+}
+#card_notenames {
+  --color2: #4bd130;
+}
 .cards_container.cols {
   display: flex;
   gap: 16px;
@@ -146,11 +155,11 @@ header {
   position: relative;
   top: 0;
   right: 0;
-  box-shadow: 0 0 0 0px black;
+  box-shadow: 0 0 0 0px var(--color2);
   transition: all 200ms;
 }
 .card:hover {
-  box-shadow: -8px 8px 0px 0px black;
+  box-shadow: -8px 8px 0px 0px var(--color2);
   top: -8px;
   right: -8px;
 }
@@ -169,15 +178,9 @@ header {
   height: 54px;
   width: 54px;
   filter: drop-shadow(-2px 2px 2px black);
+  color: var(--color2);
 }
-#card_highlights .cardIcon{
-  color: hsl(64deg 100% 50%);
-}
-#card_fingerings .cardIcon{
-  color: hsl(181.97deg 100% 50%);
-}
-#card_notenames .cardIcon {
-}
+
 
 /* DIALOG */
 /* fixed pos */
