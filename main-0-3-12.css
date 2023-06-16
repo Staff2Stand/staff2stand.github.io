@@ -159,9 +159,9 @@ header {
   transition: all 200ms;
 }
 .card:hover .cardIcon {
-  filter: drop-shadow(-6px 6px 2px black);
-  top: -4px;
-  right: -4px;
+  filter: drop-shadow(-4px 4px 2px black);
+  top: -2px;
+  right: -2px;
 }
 .card:hover {
   box-shadow: -8px 8px 0px 0px var(--color2);
