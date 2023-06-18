@@ -138,6 +138,7 @@ header {
 }
 .cards_container.cols {
   display: flex;
+  flex-flow: row wrap;
   gap: 16px;
   justify-content: space-around;
 }
@@ -149,7 +150,8 @@ header {
   background-repeat: no-repeat;
   color: #eee;
   padding: 12px;
-  width: min-content;
+  max-width: 200px;
+  min-width: 10em;
   flex-grow: 1;
   border-radius: 0 64px;
   position: relative;
@@ -157,6 +159,7 @@ header {
   right: 0;
   box-shadow: 0 0 0 0px var(--color2);
   transition: all 200ms;
+
 }
 .card:hover .cardIcon {
   filter: drop-shadow(-4px 4px 2px black);
