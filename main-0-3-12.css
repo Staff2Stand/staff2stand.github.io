@@ -347,9 +347,9 @@ header {
   filter: invert(0);
 }
 #searchAndSort_container .expand_results.flip {
-  transform: rotatex(180deg) translate(-0.6em, -1.25em);
+  transform: rotatex(180deg) translate(-0.4em, -1.25em);
   filter: invert(1);
-  background: #000;
+  /* background: #000; */
 }
 
 #searchAndSort_results {
