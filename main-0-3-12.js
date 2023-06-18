@@ -923,12 +923,15 @@ $(function(){
     //  this prevents the elements from jumping below the sidebar buttons
     $( "#sidebar" ).on( "resize", function( event, ui ) {
         const sidebarWidth = $('#sidebar').width()
-        
+
         const $bkmkSections = $('.score_bookmark_section')
         sidebarWidth < 43 ? $bkmkSections.hide() : $bkmkSections.show()
 
         const $searchEls = $('#searchAndSort_container, #searchAndSort_results')
-        if (sidebarWidth < 43) $searchEls.hide()
+        if (sidebarWidth < 43) {
+            $searchEls.hide()
+            $('.expand_results').removeClass('flip')
+        }
     })
 
 
