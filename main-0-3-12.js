@@ -252,18 +252,18 @@ function createAbcEditorOpts (instrument){
 
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
-                            const noteNameAbc = pitchClassNumToNote(pitch.pitch)
-
-                            const already_has_accidental = noteNameAbc.includes('^') || noteNameAbc.includes('_') || noteNameAbc.includes('=')
-                            if (already_has_accidental) return noteNameAbc
-
                             const noteIsInKeysigFlats = keysigFlats.includes(noteNameAbc.toLowerCase())
                             const noteIsInKeysigSharps = keysigSharps.includes(noteNameAbc.toLowerCase())
-                            const acc = noteIsInKeysigFlats ?
+                            const acc = noteIsInKeysigFlats || pitch.accidental === 'flat' ?
                                         '_' :
-                                        noteIsInKeysigSharps ?
-                                        '^':
+                                        noteIsInKeysigSharps || pitch.accidental === 'sharp' ?
+                                        '^' :
+                                        pitch.accidental === 'natural' ?
+                                        '=' :
                                         ''
+                    
+                            const noteNameAbc = pitchClassNumToNote(pitch.pitch)
+                            
                             return acc + noteNameAbc
                         })
 
@@ -286,12 +286,14 @@ function createAbcEditorOpts (instrument){
 
                             let noteName = pitchClassNumToNote( pitchNumToConvert )
 
-                            const already_has_accidental = noteName.includes('^') || noteName.includes('_') || noteName.includes('=')
                             const noteIsInKeysigFlats = keysigFlats.includes(noteName.toLowerCase())
                             const noteIsInKeysigSharps = keysigSharps.includes(noteName.toLowerCase())
-                            const acc = already_has_accidental ? '' :
-                                        noteIsInKeysigFlats ? '_' :
-                                        noteIsInKeysigSharps ? '^':
+                            const acc = noteIsInKeysigFlats || pitch.accidental === 'flat' ?
+                                        '_' :
+                                        noteIsInKeysigSharps || pitch.accidental === 'sharp' ?
+                                        '^' :
+                                        pitch.accidental === 'natural' ?
+                                        '=' :
                                         ''
                             
                             noteName = acc + noteName
