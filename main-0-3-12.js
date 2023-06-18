@@ -253,7 +253,7 @@ function createAbcEditorOpts (instrument){
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
                             const noteNameAbc = pitchClassNumToNote(pitch.pitch)
-                            
+
                             const noteIsInKeysigFlats = keysigFlats.includes(noteNameAbc.toLowerCase())
                             const noteIsInKeysigSharps = keysigSharps.includes(noteNameAbc.toLowerCase())
                             const acc = noteIsInKeysigFlats || pitch.accidental === 'flat' ?
@@ -919,13 +919,13 @@ $(function(){
         alsoResizeReverse: '#page_content'
     })
 
-    //hide bookmark sections if the sidebar is resized below 43px
-    //  this prevents the bookmarks from jumping below the sidebar buttons and screwing up the layout
+    //hide bookmark sections and search elements if the sidebar is resized below 43px
+    //  this prevents the elements from jumping below the sidebar buttons
     $( "#sidebar" ).on( "resize", function( event, ui ) {
         const sidebarWidth = $('#sidebar').width()
-        const $bkmkSections = $('.score_bookmark_section')
-        //hide/show bkmk sections at sidebar width of 43px
-        sidebarWidth < 43 ? $bkmkSections.hide() : $bkmkSections.show()
+        const $els = $('.score_bookmark_section, #searchAndSort_container, #searchAndSort_results')
+        //hide/show elements at sidebar width of 43px
+        sidebarWidth < 43 ? $els.hide() : $els.show()
     })
 
 
