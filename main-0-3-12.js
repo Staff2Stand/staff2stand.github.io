@@ -924,12 +924,13 @@ $(function(){
     $( "#sidebar" ).on( "resize", function( event, ui ) {
         const sidebarWidth = $('#sidebar').width()
 
-        const $bkmkSections = $('.score_bookmark_section')
-        sidebarWidth < 43 ? $bkmkSections.hide() : $bkmkSections.show()
+        const $els = $('.score_bookmark_section, #searchAndSort_container')
+        sidebarWidth < 43 ? $els.hide() : $els.show()
 
-        const $searchEls = $('#searchAndSort_container, #searchAndSort_results')
+        //some needs to be done only when sidebar is shrunk below 43px
         if (sidebarWidth < 43) {
-            $searchEls.hide()
+            const $searchResults = $('#searchAndSort_results')
+            $searchResults.hide()
             $('.expand_results').removeClass('flip')
         }
     })
