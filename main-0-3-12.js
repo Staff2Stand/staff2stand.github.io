@@ -252,6 +252,8 @@ function createAbcEditorOpts (instrument){
 
                         //NOTE NAMES
                         const pitches = el.pitches.map(pitch=>{
+                            const noteNameAbc = pitchClassNumToNote(pitch.pitch)
+                            
                             const noteIsInKeysigFlats = keysigFlats.includes(noteNameAbc.toLowerCase())
                             const noteIsInKeysigSharps = keysigSharps.includes(noteNameAbc.toLowerCase())
                             const acc = noteIsInKeysigFlats || pitch.accidental === 'flat' ?
@@ -262,7 +264,7 @@ function createAbcEditorOpts (instrument){
                                         '=' :
                                         ''
                     
-                            const noteNameAbc = pitchClassNumToNote(pitch.pitch)
+                            
                             
                             return acc + noteNameAbc
                         })
