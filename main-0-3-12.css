@@ -97,10 +97,10 @@ header {
 /* HOMEPAGE */
 #homepage {
   --h: calc(100vh - var(--header_height) - 8px);
-  --w: calc(100% - 8px);
-  position: absolute;
+  --w: calc(100% - 235px - 8px);
+  position: fixed;
   top: 0px;
-  left: 0;
+  right: 0;
   width: var(--w);
   height: var(--h);
   padding: 8px;
@@ -108,8 +108,8 @@ header {
   padding-right: 0;
   overflow-y: scroll;
   background: #fff;
-  border-bottom: 25px solid #333;
-  transition: all 1s cubic-bezier(0.57, 2.4, 0, -0.01);
+  /* border-bottom: 25px solid #333; */
+  transition: all 800ms;
   z-index: 99;
 }
 #close_homepage {
