@@ -232,6 +232,7 @@ function createAbcEditorOpts (instrument){
      * @returns 
      */
     function extendParsing(tune, tuneNumber, abcString){
+        console.log('|| S2S || tune',tune)
         tune.lines.forEach(line=>{
             line.staff.forEach(staff=>{
                 //check sharps and flats in keysig
