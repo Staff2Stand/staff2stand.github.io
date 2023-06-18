@@ -1738,7 +1738,7 @@ $(function(){
 
     $('.open_homepage, #close_homepage').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
-        const top = homepage_is_open ? '-100%' : '0'
+        const top = homepage_is_open ? '-100vh' : '0'
         const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
         $homepage.css('top',top).toggleClass('open')
