@@ -11,6 +11,7 @@ body {
   --header_height: calc(
     var(--header_content_height) + var(--header_content_padding) * 2
   );
+  --color2: hsl(177 88% 41% / 1);
 }
 
 /* LAYOUT */
