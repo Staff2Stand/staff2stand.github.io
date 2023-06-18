@@ -55,6 +55,24 @@ const stringReference = {
         eFingers: ['0' , '0' , '1(1/2pos)' , '0' , '1(1/2pos)' , '1(1/2pos)' , '1' , '1' , '2' , '4' , '4']
     }
 }
+/**
+ * Test Fingers
+ * @description test if notes in string reference have correct fingers
+ * @param {*} string 
+ * @param {*} i 
+ */
+function testFingers(instrument,string,i){
+    const note = stringReference[instrument][string][i]
+    const finger = stringReference[instrument][string+'Fingers'][i]
+    console.log(note+' : '+finger)
+}
+function logAllFingersOfString(instrument,string){
+    const notes = stringReference[instrument][string]
+    notes.forEach((note,i)=>{
+        const finger = stringReference[instrument][string+'Fingers'][i]
+        console.log(note+' : '+finger)
+    })
+}
 
 
 /**
