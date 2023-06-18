@@ -874,7 +874,8 @@ $(function(){
     //On Score Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         //close the homepage
-        $('.open_homepage')[0].click()
+        const homepage_is_open = $homepage.hasClass('open')
+        if(homepage_is_open) $('.open_homepage')[0].click()
 
         const $bkmk = $(this)
 
@@ -1729,7 +1730,11 @@ $(function(){
      */
     const $homepage = $('#homepage')
 
+    const $footerCopy = $('footer').clone()
+
     $('#homepage_content').load('homepage_content.html', ()=> $('#logo.open_homepage').click() )
+
+    $footerCopy.appendTo('#homepage')
 
     $('.open_homepage, #close_homepage').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
