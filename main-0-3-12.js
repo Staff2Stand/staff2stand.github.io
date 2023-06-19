@@ -1780,7 +1780,7 @@ $(function(){
         $homepage.css('top',top).toggleClass('open')
 
         //reset notey to their default position and show them
-        $('#notey .notey').css({
+        if (!homepage_is_open) $('#notey .notey').css({
             top:'',
             left:''
         })
