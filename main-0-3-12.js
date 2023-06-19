@@ -993,14 +993,68 @@ $(function(){
     /**
      * NOTEY
      */
-    const $notey = $('#notey .notey')
-    const $noteySB = $notey.find('.speechBubble')
+    class Notey {
+        constructor(noteyContainerSelector='#notey'){
+            this.container = $(noteyContainerSelector)
+            this.body = this.container.find('.notey')
+            this.speechBubble = this.container.find('.speechBubble')
 
+            this.speechBubble.click( ()=> this.speechBubble.hide() )
+        }
+    
+        /**
+         * @param {string} html 
+         */
+        setSpeechBubbleContent(html){
+            this.speechBubble.html(html)
+        }
+
+        /**
+         * @param {string} classes sets the classes property. Animations and emotions are defined in css classes
+         */
+        setClasses(classes){
+            this.container.attr('class',classes)
+        }
+
+        
+        isVisible(){
+            return !this.body.hasClass('hide')
+        }
+        setVisible(){
+            this.body.removeClass('hide')
+        }
+        setHidden(){
+            this.body.addClass('hide')
+        }
+
+        /**
+         * FADE NOTEY
+         * @param {string} mode 'in', 'out', 'toggle' | whether to fade notey in, fade out, or toggle
+         * @param {string} classToAdd 'class1' or 'class1 class2 etc'
+         * @returns 
+         */
+        fade(mode,classToAdd='playing-violin'){
+            if (mode === 'toggle'){
+                mode = this.isVisible() ? 'out' : 'in'
+            }
+
+            if (mode === 'in') {
+                this.setClasses(`eyes-blinking ${classToAdd}`)
+                this.setVisible()
+                return
+            }
+
+            if (mode === 'out') this.setHidden()
+        }
+    }
+    const notey = new Notey()
+
+    //NOTEY TOGGLER
     // load tiny notey toggle button (and other noteys)
     $('.noteyContainer').each(function(){
         $(this).html( $('#notey').html() )
     })
-    //hover
+    //hover notey container
     $(".noteyContainer").hover(
         function () {
             $(this).addClass("eyes-blinking");
@@ -1009,13 +1063,9 @@ $(function(){
             $(this).removeClass("eyes-blinking");
         }
     )
-    // notey toggler
     $('#noteyToggle').click(function(){
         fadeNotey('toggle')
     })
-
-    //Notey Speach Bubbles
-    $noteySB.click(function(){ $(this).hide() } )
 
 
     /**
