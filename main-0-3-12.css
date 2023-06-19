@@ -99,6 +99,7 @@ header {
 #homepage {
   --h: calc(100vh - var(--header_height));
   --w: calc(100% - 8px);
+  display: none;
   position: fixed;
   top: 0px;
   left: 0;
