@@ -1223,7 +1223,7 @@ footer {
 /* Position notey */
 #notey .notey {
   position: fixed;
-  top: calc(var(--header_height) + 160px);
+  top: calc(var(--header_height) + 100px);
   left: calc(100vw - 170px);
   z-index: 999;
 }
