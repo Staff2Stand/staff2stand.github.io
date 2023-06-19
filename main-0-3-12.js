@@ -993,6 +993,9 @@ $(function(){
     /**
      * NOTEY
      */
+    const $notey = $('#notey .notey')
+    const $noteySB = $notey.find('.speechBubble')
+
     // load tiny notey toggle button (and other noteys)
     $('.noteyContainer').each(function(){
         $(this).html( $('#notey').html() )
@@ -1010,6 +1013,9 @@ $(function(){
     $('#noteyToggle').click(function(){
         fadeNotey('toggle')
     })
+
+    //Notey Speach Bubbles
+    $noteySB.click(function(){ $(this).hide() } )
 
 
     /**
