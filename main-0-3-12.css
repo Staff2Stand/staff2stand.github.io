@@ -109,7 +109,7 @@ header {
   padding-right: 0;
   overflow-y: scroll;
   background: #fff;
-  transition: all 800ms;
+  transition: top 800ms;
   z-index: 99;
 }
 #close_homepage {
