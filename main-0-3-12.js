@@ -916,7 +916,13 @@ $(function(){
             e: $('#sidebar_resize_handle').get(0)
         },
         minWidth: 35,
-        alsoResizeReverse: '#page_content, #homepage'
+        alsoResizeReverse: '#page_content',
+        stop: function(){
+            const totalWidth = $('#sidebar').width() + $('#page_content').width()
+            const windowWidth = $(window).width()
+            const difference = $(window).width() - $('#sidebar').width()
+            if (totalWidth !== windowWidth) $('#page_content').width(difference)
+        }
     })
 
     //hide bookmark sections and search elements if the sidebar is resized below 43px
