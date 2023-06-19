@@ -101,7 +101,6 @@ header {
   --w: calc(100% - 235px - 8px);
   position: fixed;
   top: 0px;
-  right: 0;
   width: var(--w);
   height: var(--h);
   padding: 8px;
