@@ -916,7 +916,7 @@ $(function(){
             e: $('#sidebar_resize_handle').get(0)
         },
         minWidth: 35,
-        alsoResizeReverse: '#page_content'
+        alsoResizeReverse: '#page_content, #homepage'
     })
 
     //hide bookmark sections and search elements if the sidebar is resized below 43px
