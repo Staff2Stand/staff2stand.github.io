@@ -1778,6 +1778,13 @@ $(function(){
         const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
 
         $homepage.css('top',top).toggleClass('open')
+
+        //reset notey to their default position and show them
+        $('#notey .notey').css({
+            top:'',
+            left:''
+        })
+        fadeNotey('in')
     })
 
 
