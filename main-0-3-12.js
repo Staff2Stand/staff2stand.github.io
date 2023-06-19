@@ -918,6 +918,7 @@ $(function(){
         minWidth: 35,
         alsoResizeReverse: '#page_content',
         stop: function(){
+            //also resize reverse can shrink #page_content by 1px, so adjust for it
             const totalWidth = $('#sidebar').width() + $('#page_content').width()
             const windowWidth = $(window).width()
             const difference = $(window).width() - $('#sidebar').width()
