@@ -1780,11 +1780,13 @@ $(function(){
         $homepage.css('top',top).toggleClass('open')
 
         //reset notey to their default position and show them
-        if (!homepage_is_open) $('#notey .notey').css({
-            top:'',
-            left:''
-        })
-        fadeNotey('in')
+        if (!homepage_is_open) {
+            $('#notey .notey').css({
+                top:'',
+                left:''
+            })
+            fadeNotey('in')
+        }
     })
 
 
