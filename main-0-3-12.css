@@ -1223,9 +1223,9 @@ footer {
 /* Position notey */
 #notey .notey {
   position: fixed;
-  top: calc(var(--header_height) + 125px);
-  left: calc(100vw - 150px);
-  z-index: 101;
+  top: calc(var(--header_height) + 160px);
+  left: calc(100vw - 170px);
+  z-index: 999;
 }
 
 #sidebar_buttons .notey {
