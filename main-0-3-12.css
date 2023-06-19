@@ -107,7 +107,7 @@ header {
   padding: 0 0 0 8px;
   overflow-y: scroll;
   background: #fff;
-  transition: top 800ms;
+  transition: top 600ms;
   z-index: 101;
 }
 #close_homepage {
