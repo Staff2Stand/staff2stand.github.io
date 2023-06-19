@@ -1769,12 +1769,8 @@ $(function(){
     $('.open_homepage, #close_homepage').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
         const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
-        const bgSize = homepage_is_open ? '100% 90%, 100% 100%' : '100% 100%, 100% 110%'
 
         $homepage.css('top',top).toggleClass('open')
-        .css({
-            'background-size': bgSize
-        })
     })
 
 

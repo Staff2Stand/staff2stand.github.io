@@ -50,7 +50,7 @@ header {
   background: #333;
   position: sticky;
   top: 0;
-  z-index: 101;
+  z-index: 102;
   color: #fff;
   padding: var(--header_content_padding);
   height: var(--header_content_height);
@@ -97,26 +97,35 @@ header {
 
 /* HOMEPAGE */
 #homepage {
-  --h: calc(100vh - var(--header_height) - 8px);
-  --w: calc(100% - 235px - 8px);
+  --h: calc(100vh - var(--header_height));
+  --w: calc(100% - 8px);
   position: fixed;
   top: 0px;
+  left: 0;
   width: var(--w);
   height: var(--h);
-  padding: 8px;
-  padding-bottom: 0;
-  padding-right: 0;
+  padding: 0 0 0 8px;
   overflow-y: scroll;
   background: #fff;
   transition: top 800ms;
-  z-index: 99;
+  z-index: 101;
 }
 #close_homepage {
   cursor: pointer;
   position: sticky;
-  top: 4px;
-  float: right;
-  margin-right: 8px;
+  top: 0;
+  margin-left: -8px;
+  text-align: center;
+  background: hsl(0deg 0% 71.96% / 36%);
+  border-bottom: 2px solid hsl(0deg 0% 0% / 46%);
+  color: hsl(0deg 0% 0% / 73%);
+  z-index: 1;
+  transition: all 150ms;
+}
+#close_homepage:hover {
+  background: hsl(0deg 0% 87.71%);
+  border-bottom: 2px solid hsl(0deg 0% 0%);
+  color: hsl(0deg 0% 0%);
 }
 #homepage_content {
   padding: 0 16px;
@@ -191,6 +200,7 @@ header {
 /* first section */
 #homepage_content section:first-child h1 {
   text-align: center;
+  margin-top: 0;
 }
 #homepage_content section:first-child .speachBubble {
   width: calc(80% - 100px - 24px);
