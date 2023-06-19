@@ -1769,7 +1769,7 @@ $(function(){
 
     const $footerCopy = $('footer').clone()
 
-    $('#homepage_content').load('homepage_content.html', ()=> $('#logo.open_homepage').click() )
+    $('#homepage_content').load('homepage_content.html')
 
     $footerCopy.appendTo('#homepage')
 
