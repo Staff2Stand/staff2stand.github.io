@@ -477,6 +477,13 @@ $(function(){
     }
     const notey = new Notey()
 
+    //Notey Speech Bubble Content
+    const notey_welcome_message = `
+        <p>Hi, I'm Notey! I'm here to help you master your instrument. Let's rock and roll!</p>
+        <p> <i>Click the little Notey icon on the sidebar to hide and show me.</i> </p>
+    `
+    notey.setSpeechBubbleContent(notey_welcome_message)
+
     /**
      * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
      * CREATE HTML FOR EACH INSTRUMENT
