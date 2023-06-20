@@ -416,6 +416,65 @@ $(function(){
     S2S.activeScores = []
 
     /**
+     * NOTEY
+     */
+    class Notey {
+        constructor(noteyContainerSelector='#notey'){
+            this.container = $(noteyContainerSelector)
+            this.body = this.container.find('.notey')
+            this.speechBubble = this.container.find('.speechBubble')
+
+            this.speechBubble.click( ()=> this.speechBubble.hide() )
+        }
+    
+        /**
+         * @param {string} html 
+         */
+        setSpeechBubbleContent(html){
+            this.speechBubble.html(html)
+        }
+
+        /**
+         * @param {string} classes sets the classes property. Animations and emotions are defined in css classes
+         */
+        setClasses(classes){
+            this.container.attr('class',classes)
+        }
+
+        
+        isVisible(){
+            return !this.body.hasClass('hide')
+        }
+        setVisible(){
+            this.body.removeClass('hide')
+        }
+        setHidden(){
+            this.body.addClass('hide')
+        }
+
+        /**
+         * FADE NOTEY
+         * @param {string} mode 'in', 'out', 'toggle' | whether to fade notey in, fade out, or toggle
+         * @param {string} classToAdd 'class1' or 'class1 class2 etc'
+         * @returns 
+         */
+        fade(mode,classToAdd='playing-violin'){
+            if (mode === 'toggle'){
+                mode = this.isVisible() ? 'out' : 'in'
+            }
+
+            if (mode === 'in') {
+                this.setClasses(`eyes-blinking ${classToAdd}`)
+                this.setVisible()
+                return
+            }
+
+            if (mode === 'out') this.setHidden()
+        }
+    }
+    const notey = new Notey()
+
+    /**
      * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
      * CREATE HTML FOR EACH INSTRUMENT
      */
@@ -599,7 +658,6 @@ $(function(){
         //Fade Out Notey
         const last_part_to_change = $('.part:not(.hidden)').last().attr('instrument')
         const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
-
         if (instrument_of_target === last_part_to_change) fadeNotey('out')
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
@@ -988,66 +1046,6 @@ $(function(){
         //toggle editor utils
         $('.abcEditor-utils').toggleClass('hidden')
     })
-
-
-    /**
-     * NOTEY
-     */
-    class Notey {
-        constructor(noteyContainerSelector='#notey'){
-            this.container = $(noteyContainerSelector)
-            this.body = this.container.find('.notey')
-            this.speechBubble = this.container.find('.speechBubble')
-
-            this.speechBubble.click( ()=> this.speechBubble.hide() )
-        }
-    
-        /**
-         * @param {string} html 
-         */
-        setSpeechBubbleContent(html){
-            this.speechBubble.html(html)
-        }
-
-        /**
-         * @param {string} classes sets the classes property. Animations and emotions are defined in css classes
-         */
-        setClasses(classes){
-            this.container.attr('class',classes)
-        }
-
-        
-        isVisible(){
-            return !this.body.hasClass('hide')
-        }
-        setVisible(){
-            this.body.removeClass('hide')
-        }
-        setHidden(){
-            this.body.addClass('hide')
-        }
-
-        /**
-         * FADE NOTEY
-         * @param {string} mode 'in', 'out', 'toggle' | whether to fade notey in, fade out, or toggle
-         * @param {string} classToAdd 'class1' or 'class1 class2 etc'
-         * @returns 
-         */
-        fade(mode,classToAdd='playing-violin'){
-            if (mode === 'toggle'){
-                mode = this.isVisible() ? 'out' : 'in'
-            }
-
-            if (mode === 'in') {
-                this.setClasses(`eyes-blinking ${classToAdd}`)
-                this.setVisible()
-                return
-            }
-
-            if (mode === 'out') this.setHidden()
-        }
-    }
-    const notey = new Notey()
 
     //NOTEY TOGGLER
     // load tiny notey toggle button (and other noteys)
