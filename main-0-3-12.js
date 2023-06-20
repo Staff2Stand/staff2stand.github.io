@@ -433,12 +433,11 @@ $(function(){
             this.messages = {
                 welcome: `
                     <p>Hi, I'm Notey! I'm here to help you master your instrument. Let's rock and roll!</p>
-                    <p> Tips
-                        <ul style="text-align:left; font-style:italic; padding-left:1em;">
-                            <li>Click the little Notey icon on the sidebar to hide and show me.</li>
-                            <li>Click the Staff to Stand Logo to learn more about this site.</li>
-                        </ul>
-                    </p>
+                    <p style="margin-bottom:0;">Tips:</p>
+                    <ul style="text-align:left; font-style:italic; padding-left:1em; margin-top:6px;">
+                        <li>Click the little Notey icon on the sidebar to hide and show me.</li>
+                        <li>Click the Staff to Stand Logo to learn more about this site.</li>
+                    </ul>
                 `
             }
         }
@@ -493,7 +492,7 @@ $(function(){
 
     //Notey Speech Bubble Content
     notey.setSpeechBubbleContent(notey.messages.welcome)
-    
+
 
     /**
      * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
