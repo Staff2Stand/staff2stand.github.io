@@ -433,10 +433,12 @@ $(function(){
             this.messages = {
                 welcome: `
                     <p>Hi, I'm Notey! I'm here to help you master your instrument. Let's rock and roll!</p>
-                    <ul> Tips
-                        <li>Click the little Notey icon on the sidebar to hide and show me.</li>
-                        <li>Click the Staff to Stand Logo to learn more about this site.</li>
-                    </ul>
+                    <p> Tips
+                        <ul style="text-align:left; font-style:italic; padding-left:1em;">
+                            <li>Click the little Notey icon on the sidebar to hide and show me.</li>
+                            <li>Click the Staff to Stand Logo to learn more about this site.</li>
+                        </ul>
+                    </p>
                 `
             }
         }
