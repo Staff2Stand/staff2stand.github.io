@@ -448,6 +448,7 @@ $(function(){
          */
         setSpeechBubbleContent(html){
             this.speechBubble.html(html)
+            this.speechBubble.show()
         }
 
         /**
@@ -492,6 +493,7 @@ $(function(){
 
     //Notey Speech Bubble Content
     notey.setSpeechBubbleContent(notey.messages.welcome)
+    
 
     /**
      * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
@@ -1851,6 +1853,8 @@ $(function(){
         const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
 
         $homepage.css('top',top).toggleClass('open')
+
+        if (!homepage_is_open) notey.fade('out')
     })
 
 
