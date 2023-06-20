@@ -1036,7 +1036,7 @@ footer {
   content: '\2717';
   position: absolute;
   top: 3px;
-  right: 6px;
+  left: 6px;
 }
 
 .notey-body {
