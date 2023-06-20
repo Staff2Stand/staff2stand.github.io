@@ -428,6 +428,17 @@ $(function(){
 
             //initialize draggable
             this.body.draggable()
+
+            //Messages
+            this.messages = {
+                welcome: `
+                    <p>Hi, I'm Notey! I'm here to help you master your instrument. Let's rock and roll!</p>
+                    <ul> Tips
+                        <li>Click the little Notey icon on the sidebar to hide and show me.</li>
+                        <li>Click the Staff to Stand Logo to learn more about this site.</li>
+                    </ul>
+                `
+            }
         }
     
         /**
@@ -478,11 +489,7 @@ $(function(){
     const notey = new Notey()
 
     //Notey Speech Bubble Content
-    const notey_welcome_message = `
-        <p>Hi, I'm Notey! I'm here to help you master your instrument. Let's rock and roll!</p>
-        <p> <i>Click the little Notey icon on the sidebar to hide and show me.</i> </p>
-    `
-    notey.setSpeechBubbleContent(notey_welcome_message)
+    notey.setSpeechBubbleContent(notey.messages.welcome)
 
     /**
      * CREATE PART, EDITORS, ETC, FOR EACH INSTRUMENT
