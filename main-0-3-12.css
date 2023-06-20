@@ -1247,10 +1247,9 @@ footer {
 
 #sidebar_buttons #noteyToggle {
   height: fit-content;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
-#sidebar_buttons #noteyToggle:hover .notey {
-  --bgColor: var(--bgColor-light);
+#sidebar_buttons #noteyToggle:hover {
+  filter: brightness(1.5);
 }
 
 /* Notey Shading */
