@@ -204,18 +204,20 @@ header {
   color: var(--color2);
   transition: all 200ms;
 }
-/* first section */
-#homepage_content section:first-child h1 {
-  text-align: center;
-  margin-top: 0;
-}
-
 #homepage footer {
   position: sticky;
   width: 100%;
   bottom: 0;
   margin-left: -8px;
   margin-top: 1em;
+}
+/* first section */
+#homepage_content section:first-child {
+  width: calc(100% - 160px);
+}
+#homepage_content section:first-child h1 {
+  text-align: center;
+  margin-top: 0;
 }
 
 
