@@ -425,6 +425,9 @@ $(function(){
             this.speechBubble = this.container.find('.speechBubble')
 
             this.speechBubble.click( ()=> this.speechBubble.hide() )
+
+            //initialize draggable
+            this.body.draggable()
         }
     
         /**
@@ -658,7 +661,7 @@ $(function(){
         //Fade Out Notey
         const last_part_to_change = $('.part:not(.hidden)').last().attr('instrument')
         const instrument_of_target = $(targets[0]).closest('.part').attr('instrument')
-        if (instrument_of_target === last_part_to_change) fadeNotey('out')
+        if (instrument_of_target === last_part_to_change) notey.fade('out')
     })
     const observerOpts = {characterData:false, childList:true, attributes:false}
     document.querySelectorAll('.instrument_tunes > div').forEach(function(div){
@@ -1062,7 +1065,7 @@ $(function(){
         }
     )
     $('#noteyToggle').click(function(){
-        fadeNotey('toggle')
+        notey.fade('toggle')
     })
 
 
@@ -1669,7 +1672,7 @@ $(function(){
     function renderScoreFromBkmk($bkmk,appendScore=false, bkmk_was_already_active=false){
         console.log('||S2S||  rendering score from bkmk:',$bkmk)
 
-        fadeNotey('in','looking-at-left-hand playing-violin')
+        notey.fade('in','looking-at-left-hand playing-violin')
 
         instruments.forEach((instrument,i)=>{
             //get abc string from the bkmk's attr
@@ -1760,7 +1763,7 @@ $(function(){
     /**
      * MAKE NOTEY DRAGGABLE
      */
-    $('#notey .notey').draggable()
+    // $('#notey .notey').draggable()
 
 
     /**
@@ -1839,7 +1842,7 @@ $(function(){
                 top:'',
                 left:''
             })
-            fadeNotey('in')
+            notey.fade('in')
         }
     })
 
