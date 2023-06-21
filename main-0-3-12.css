@@ -1003,7 +1003,7 @@ footer {
   filter: drop-shadow(2px 4px 2px rgba(0 0 0 / 0.7));
 
   transform: scale(1);
-  transition: all 1s;
+  transition: transform 1s;
 }
 
 .notey.hide{
