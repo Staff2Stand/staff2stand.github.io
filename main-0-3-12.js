@@ -1022,12 +1022,32 @@ $(function(){
 
     /**
      * Handle Screen Orientation Changes
-     * Manually trigger the stop function, we use the resizable("option", "stop") method to retrieve the stop function from the resizable widget options. Then, we invoke it manually by passing null as the event argument and an object representing the ui parameter (which may contain relevant properties for the function, such as a helper element in this case).
      */
     screen.orientation.onchange = function(){
-        const orientation_type = screen.orientation.type
-        $("#sidebar").resizable("option", "stop")(null, { helper: $("#sidbar") })
-        console.log('Orientation changed to ',orientation_type)
+        const checkWidthsInterval = setInterval(() => {
+            //Manually drag the sidebar to trigger the resizable stop function and fix layout sizing
+            const $handle = $('#sidebar_resize_handle');
+
+            const offset = $handle.offset();
+            const startX = offset.left
+            const startY = offset.top
+            const midX = startX + 1
+            const midY = startY
+            const endX = startX
+            const endY = startY
+
+            // Trigger the mouse events
+            $handle
+            .trigger($.Event('mousedown', { which: 1, pageX: startX, pageY: startY }))
+            .trigger($.Event('mousemove', { which: 1, pageX: midX, pageY: midY }))
+            .trigger($.Event('mousemove', { which: 1, pageX: endX, pageY: endY }))
+            .trigger($.Event('mouseup', { which: 1, pageX: endX, pageY: endY }))
+
+            //check if page width is fixed and if so cancel the interval
+            const htmlWidthCheck = $('html').width() === screen.availWidth
+            const pageContentWidthCheck = $('#page_content').width() + $('#sidebar').width() === $('#page_content').parent().width()
+            if ( htmlWidthCheck && pageContentWidthCheck ) clearInterval(checkWidthsInterval)
+        }, 10)
     }
 
 
