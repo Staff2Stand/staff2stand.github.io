@@ -300,6 +300,8 @@ header {
 }
 #sidebar .score_bookmark::after {
   content: attr(_title);
+  display: inline-block;
+  max-width: calc(100% - 12px);
 }
 #sidebar .score_bookmark:hover::after {
   color: #888;
