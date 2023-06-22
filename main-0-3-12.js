@@ -1020,6 +1020,16 @@ $(function(){
         }
     })
 
+    /**
+     * Handle Screen Orientation Changes
+     * Manually trigger the stop function, we use the resizable("option", "stop") method to retrieve the stop function from the resizable widget options. Then, we invoke it manually by passing null as the event argument and an object representing the ui parameter (which may contain relevant properties for the function, such as a helper element in this case).
+     */
+    screen.orientation.onchange = function(){
+        const orientation_type = screen.orientation.type
+        $("#sidebar").resizable("option", "stop")(null, { helper: $("#sidbar") })
+        console.log('Orientation changed to ',orientation_type)
+    }
+
 
 
     /** SIDEBAR SECTION COLLAPSING */
@@ -1855,7 +1865,6 @@ $(function(){
 
         if (!homepage_is_open) notey.fade('out')
     })
-
 
 
 
