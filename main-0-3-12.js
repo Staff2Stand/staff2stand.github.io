@@ -975,7 +975,7 @@ $(function(){
     //On Score Bookmark Click
     $(document).on('click','.score_bookmark',function(e){
         //close the homepage
-        const homepage_is_open = $homepage.hasClass('open')
+        const homepage_is_open = $('#homepage').hasClass('open')
         if(homepage_is_open) $('.open_homepage')[0].click()
 
         const $bkmk = $(this)
