@@ -45,6 +45,11 @@ header {
     position: relative;
   }
 
+/* links */
+a{
+  color: var(--color2);
+}
+
 /* HEADER */
 header {
   background: #333;
@@ -140,6 +145,9 @@ header {
 }
 #homepage::-webkit-scrollbar-track {
   background: #333;
+}
+#homepage_content section {
+  max-width: 900px;
 }
 /* "Cards" on homepage */
 #card_fingerings{
