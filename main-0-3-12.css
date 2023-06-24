@@ -92,6 +92,9 @@ header {
   max-height: calc(100vh - var(--header_height) - 2em);
   overflow-y: scroll;
 }
+.form_container {
+  max-width: 600px;
+}
 .form_container h1 {
   margin: 0;
   margin-bottom: 22px;
