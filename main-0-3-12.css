@@ -86,6 +86,7 @@ header {
   left: 0;
   background: #333;
   padding: 1em;
+  width: calc(100% - 2em);
   max-height: calc(100vh - var(--header_height));
   overflow-y: scroll;
 }
