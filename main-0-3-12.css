@@ -78,6 +78,7 @@ header {
   display: flex;
   flex-flow: row wrap;
   align-content: center;
+  gap: 0.5em;
   cursor: pointer;
 }
 #contact_container {
