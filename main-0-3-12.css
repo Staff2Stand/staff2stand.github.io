@@ -93,16 +93,17 @@ header {
   overflow-y: scroll;
 }
 .form_container h1 {
-  margin: 8px 0;
+  margin: 0;
+  margin-bottom: 22px;
   font-size: 24;
 }
 .form_container form {
   display: flex;
   flex-flow: row wrap;
+  gap: 1.5em 8px;
 }
 .form_container label {
   position: relative;
-  margin: 1em 0;
 }
 .form_container label span {
   position: absolute;
