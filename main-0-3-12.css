@@ -122,6 +122,11 @@ header {
 .form_container input {
   width: 100%;
 }
+.form_container button {
+  width: 100px;
+  margin-left: calc(50% - 50px);
+  margin-top: -1em;
+}
 
 
 /* HOMEPAGE */
