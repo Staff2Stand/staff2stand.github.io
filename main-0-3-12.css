@@ -73,32 +73,38 @@ header {
 #logo.open_homepage:hover{
   filter: drop-shadow(0px 0px 4px #0cfeb4);
 }
-
-#header_buttons_toggle{
-  display: none;
-  position: absolute;
-  right: 8px;
+/* Contact */
+#contact_toggle {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  cursor: pointer;
 }
-  /* 
-    show header buttons toggler
-    hide header buttons on hidden class (toggler click event)
-    header buttons into a drop-down menu
-   */
-  #header_buttons.hidden{
-    display: none !important;
-  }
-  #header_buttons{
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 8px;
-    height: max-content;
-    position: absolute;
-    right: 0;
-    top: var(--header_height);
-    background: #333;
-    padding-bottom: 8px;
-    border-radius: 0 0 8px 8px;
-  }
+#contact_container {
+  position: absolute;
+  top: var(--header_height);
+  left: 0;
+  background: #333;
+  padding: 1em;
+  max-height: calc(100vh - var(--header_height));
+  overflow-y: scroll;
+}
+.form_container h1 {
+  margin: 0;
+  font-size: 24;
+}
+.form_container form {
+  display: flex;
+  flex-flow: row wrap;
+}
+.form_container label:has(textarea) {
+  width: 100%;
+}
+.form_container textarea {
+  width: 600px;
+  height: 150px;
+}
+
 
 /* HOMEPAGE */
 #homepage {
