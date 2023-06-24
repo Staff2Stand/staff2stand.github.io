@@ -82,6 +82,7 @@ header {
   cursor: pointer;
 }
 #contact_container {
+  display: none;
   position: absolute;
   top: var(--header_height);
   left: 0;

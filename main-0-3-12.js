@@ -1796,11 +1796,9 @@ $(function(){
 
 
     /**
-     * header buttons toggler
+     * Contact Forms
      */
-    $(document).on('click','#header_buttons_toggle',function(){
-        $('#header_buttons').toggleClass('hidden')
-    })
+    $('#contact_toggle').click(()=> $('#contact_container').slideToggle())
 
 
     /**
