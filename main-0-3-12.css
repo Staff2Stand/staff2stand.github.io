@@ -94,6 +94,11 @@ header {
 }
 .form_container {
   max-width: 600px;
+  border-radius: 0 20%;
+  margin-bottom: 1em;
+  background: var(--color2);
+  color: #222;
+  padding: 1em;
 }
 .form_container h1 {
   margin: 0;

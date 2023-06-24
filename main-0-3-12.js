@@ -1800,6 +1800,24 @@ $(function(){
      */
     $('#contact_toggle').click(()=> $('#contact_container').slideToggle())
 
+    $('#contact_container form').each(form=>{
+        form.on('submit',(e)=>{
+            e.preventDefault()
+
+            const myForm = e.target;
+            const formData = new FormData(myForm);
+            
+            fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+            })
+            .then(() => alert("Thank you for your submission"))
+            .catch((error) => alert(error));
+        })
+    })
+      
+
 
     /**
      * CUSTOM CONTEXT MENU
