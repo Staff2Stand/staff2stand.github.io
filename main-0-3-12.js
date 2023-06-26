@@ -1869,10 +1869,17 @@ $(function(){
     $('.header_button').click(e => {
         const $btn = $(e.target)
         const $page = $(`#${ $btn.attr('for') }`)
-        $page.slideToggle()
-        $btn.toggleClass('active')
 
         notey.fade('out')
+
+        //if the btn is active, we want to delay the removal of the class
+        if($btn.hasClass('active')) {
+            $page.slideToggle(400, ()=> $btn.toggleClass('active') )
+            return
+        }
+
+        $page.slideToggle()
+        $btn.toggleClass('active')
     })
 
     //close page on close page click
