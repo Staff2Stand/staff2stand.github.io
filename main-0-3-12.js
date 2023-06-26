@@ -1851,23 +1851,37 @@ $(function(){
 
     $footerCopy.appendTo('#homepage')
 
-    $('.open_homepage, #close_homepage, #about_toggle').click(()=>{
-        const homepage_is_open = $homepage.hasClass('open')
-        const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
+    $('.open_homepage').click(()=> $('#about_toggle').click() )
 
-        $homepage.css('top',top).toggleClass('open')
+    // $('.open_homepage, #close_homepage, #about_toggle').click(()=>{
+    //     const homepage_is_open = $homepage.hasClass('open')
+    //     const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
 
-        if (!homepage_is_open) notey.fade('out')
-    })
+    //     $homepage.css('top',top).toggleClass('open')
+
+    //     if (!homepage_is_open) notey.fade('out')
+    // })
 
     /**
      * Header Buttons
      */
     // toggle active on header button click
-    $('.header_button').click(e => $(e.target).toggleClass('active') )
+    $('.header_button').click(e => {
+        const $btn = $(e.target)
+        $btn.toggleClass('active')
+        const $page = $(`#${ $btn.attr('for') }`)
+        $page.slideToggle()
 
-    // contact
-    $('#contact_toggle, #close_contact').click(() => $('#contact_container').slideToggle() )
+        notey.fade('out')
+    })
+
+    //close page on close page click
+    $('.close_page').click(e=>{
+        const $container = $(e.target).parent()
+        const id = $container.attr('id')
+        $container.slideToggle()
+        $(`.header_button[for="${id}"]`).removeClass('active')
+    })
     
 
 

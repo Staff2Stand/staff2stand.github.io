@@ -115,11 +115,13 @@
         <header id="top_bar">
           <span id="logo" class="open_homepage"><img src="Staff_To_Stand_Logo-transparent.png" alt="Staff To Stand"></span>
 
-          <span id="about_toggle" class="header_button">About<i class="fa-solid fa-circle-info"></i></span>
-          <span id="contact_toggle" class="header_button">Contact<i class="fa-solid fa-message"></i></span>
+          <!-- header buttons -->
+          <span id="about_toggle" class="header_button" for="homepage">About<i class="fa-solid fa-circle-info"></i></span>
+          <span id="contact_toggle" class="header_button" for="contact_container">Contact<i class="fa-solid fa-message"></i></span>
 
+          <!-- pages -->
           <div id="contact_container">
-            <div id="close_contact"><i class="fa-solid fa-circle-chevron-up fa-2xl"></i></div>
+            <div id="close_contact" class="close_page"><i class="fa-solid fa-circle-chevron-up fa-2xl"></i></div>
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfXvkYU5oWNPZn5I8318sjL7n03p-4RxF97JYTpKJc9U_0K5g/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0" width="600px" style="height: calc(100% - 2.5em); margin-left: calc(50% - 300px); border-radius: 1em;">Loading…</iframe>
           </div>
         </header>
@@ -180,8 +182,9 @@
       
           <div id="page_content">   
               <div id="tunes_container">
+                <!-- homepage -->
                 <div id="homepage">
-                  <div id="close_homepage"><i class="fa-solid fa-circle-chevron-up fa-2xl"></i></div>
+                  <div id="close_homepage" class="close_page"><i class="fa-solid fa-circle-chevron-up fa-2xl"></i></div>
                   <div id="homepage_content"></div>
                 </div>
               </div>
