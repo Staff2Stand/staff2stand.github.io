@@ -57,7 +57,7 @@ header {
   top: 0;
   z-index: 102;
   color: #fff;
-  padding: var(--header_content_padding);
+  padding: var(--header_content_padding) calc(var(--header_content_padding) * 4);
   height: var(--header_content_height);
   display: flex;
   justify-content: space-between;
@@ -80,7 +80,11 @@ header {
   align-content: center;
   gap: 0.5em;
   cursor: pointer;
+  font-size: 22px;
 }
+  #contact_toggle:hover {
+    filter: drop-shadow(0px 0px 4px #0cfeb4);
+  }
 #contact_container {
   display: none;
   position: absolute;
