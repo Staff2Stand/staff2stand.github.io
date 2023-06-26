@@ -1869,8 +1869,8 @@ $(function(){
     $('.header_button').click(e => {
         const $btn = $(e.target)
         const $page = $(`#${ $btn.attr('for') }`)
-        $page.slideToggle(400,()=>$btn.toggleClass('active') )
-        
+        $page.slideToggle()
+        $btn.toggleClass('active')
 
         notey.fade('out')
     })
@@ -1881,8 +1881,6 @@ $(function(){
         const id = $container.attr('id')
         $container.slideToggle(400, ()=>$(`.header_button[for="${id}"]`).removeClass('active') )
     })
-    
-
 
 
 
