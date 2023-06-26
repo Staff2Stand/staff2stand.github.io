@@ -93,7 +93,7 @@ header {
   background: #333;
   padding: 1em;
   width: calc(100% - 2em);
-  max-height: calc(100vh - var(--header_height) - 2em);
+  height: calc(100vh - var(--header_height) - 2em);
   /* overflow-y: scroll; */
 }
 #close_contact {
@@ -122,7 +122,7 @@ header {
 }
 #close_contact iframe{
   width: 600px;
-  height: 100%;
+  height: calc(100% - 2.5em);
   margin-left: calc(50% - 300px);
   border-radius: 1em;
 }
