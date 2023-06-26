@@ -115,6 +115,9 @@ header {
   border: 2px solid var(--color1);
   color: #333;
 }
+.header_button.brighten{
+  background: hsl(162 100% 54% / 1);
+}
 
 /* pages */
 .page{
