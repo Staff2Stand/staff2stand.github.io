@@ -90,7 +90,7 @@ header {
   padding: 1em;
   width: calc(100% - 2em);
   max-height: calc(100vh - var(--header_height) - 2em);
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 
