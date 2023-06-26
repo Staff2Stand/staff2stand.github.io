@@ -82,6 +82,12 @@ header {
   border-radius: 0.5em;
   transition: all 200ms;
   position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  gap: 0.5em;
+  cursor: pointer;
+  font-size: 22px;
 }
 .header_button:after {
   content: '';
@@ -110,14 +116,6 @@ header {
 }
 
 /* Contact */
-#contact_toggle {
-  display: flex;
-  flex-flow: row wrap;
-  align-content: center;
-  gap: 0.5em;
-  cursor: pointer;
-  font-size: 22px;
-}
 #contact_container {
   display: none;
   position: absolute;
