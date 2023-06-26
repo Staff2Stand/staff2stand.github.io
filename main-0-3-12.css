@@ -104,6 +104,11 @@ header {
   color: #333;
 }
 
+/* pages */
+.page{
+  display: none;
+}
+
 /* Contact */
 #contact_toggle {
   display: flex;
@@ -163,7 +168,8 @@ header {
   --h: calc(100vh - var(--header_height));
   --w: calc(100% - 8px);
   position: fixed;
-  top: calc(-100vh + var(--header_height));
+  /* top: calc(-100vh + var(--header_height)); */
+  top: var(--header_height);
   left: 0;
   width: var(--w);
   height: var(--h);
