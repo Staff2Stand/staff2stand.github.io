@@ -1801,7 +1801,7 @@ $(function(){
     $('#contact_toggle').click(()=> $('#contact_container').slideToggle())
 
     $('#contact_container form').each(form=>{
-        form.on('submit',(e)=>{
+        $(form).on('submit',(e)=>{
             e.preventDefault()
 
             const myForm = e.target;
