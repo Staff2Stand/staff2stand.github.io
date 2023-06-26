@@ -1868,9 +1868,9 @@ $(function(){
     // toggle active on header button click
     $('.header_button').click(e => {
         const $btn = $(e.target)
-        $btn.toggleClass('active')
         const $page = $(`#${ $btn.attr('for') }`)
-        $page.slideToggle()
+        $page.slideToggle(400,()=>$btn.toggleClass('active') )
+        
 
         notey.fade('out')
     })
@@ -1879,8 +1879,7 @@ $(function(){
     $('.close_page').click(e=>{
         const $container = $(e.target).parent()
         const id = $container.attr('id')
-        $container.slideToggle()
-        $(`.header_button[for="${id}"]`).removeClass('active')
+        $container.slideToggle(400, ()=>$(`.header_button[for="${id}"]`).removeClass('active') )
     })
     
 
