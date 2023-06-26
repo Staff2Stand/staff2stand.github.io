@@ -1853,21 +1853,15 @@ $(function(){
 
     $('.open_homepage').click(()=> $('#about_toggle').click() )
 
-    // $('.open_homepage, #close_homepage, #about_toggle').click(()=>{
-    //     const homepage_is_open = $homepage.hasClass('open')
-    //     const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
-
-    //     $homepage.css('top',top).toggleClass('open')
-
-    //     if (!homepage_is_open) notey.fade('out')
-    // })
-
     /**
      * Header Buttons
      */
     // toggle active on header button click
-    $('.header_button').click(e => {
-        const $btn = $(e.target)
+    $('.header_button').click(function(){
+        //close all other active pages
+        $('.header_button').not(this).filter('.active')?.click()
+
+        const $btn = $(this)
         const $page = $(`#${ $btn.attr('for') }`)
 
         notey.fade('out')
