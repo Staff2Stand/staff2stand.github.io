@@ -78,6 +78,7 @@ header {
   padding: 0.5em;
   border-radius: 0.5em;
   transition: all 200ms;
+  position: relative;
 }
 .header_button:after {
   content: '';
@@ -85,9 +86,9 @@ header {
   background: #00e2a0;
   height: 0;
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% - 8px);
   left: -2px;
-  transition: height 200px;
+  transition: height 200ms;
 }
 .header_button.active:after {
   height: 14px;
