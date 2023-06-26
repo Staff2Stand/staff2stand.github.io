@@ -87,12 +87,13 @@ header {
   position: absolute;
   top: calc(100% + 6px);
   left: -2px;
-  transition: all 200px;
+  transition: height 200px;
 }
-.header_button:hover:after {
+.header_button.active:after {
   height: 14px;
 }
-.header_button:hover {
+.header_button:hover,
+.header_button.active {
   background: hsl(162.48deg 100% 44.31%);
   border: 2px solid #00e2a0;
 }
