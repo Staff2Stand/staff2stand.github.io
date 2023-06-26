@@ -1798,7 +1798,10 @@ $(function(){
     /**
      * Contact Page
      */
-    $('#contact_toggle').click(()=> $('#contact_container').slideToggle())
+    $('#contact_toggle, #close_homepage').click(function() {
+        $('#close_homepage').toggleClass('active')
+        $('#contact_container').slideToggle()
+    })
       
 
 
