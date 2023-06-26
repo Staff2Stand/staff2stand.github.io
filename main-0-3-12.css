@@ -96,6 +96,30 @@ header {
   max-height: calc(100vh - var(--header_height) - 2em);
   /* overflow-y: scroll; */
 }
+#close_contact {
+  cursor: pointer;
+  height: 1.5em;
+  position: sticky;
+  top: 0;
+  margin-left: -8px;
+  margin-bottom: 1em;
+  text-align: center;
+  background: hsl(0deg 0% 71.96% / 36%);
+  border-bottom: 2px solid hsl(0deg 0% 0% / 46%);
+  color: hsl(0deg 0% 0% / 73%);
+  z-index: 1;
+  transition: all 150ms;
+}
+#close_contact:hover {
+  background: hsl(0deg 0% 87.71%);
+  border-bottom: 2px solid hsl(0deg 0% 0%);
+}
+#close_contact svg {
+  position: absolute;
+  bottom: -.5em;
+  color: black;
+  background: radial-gradient(white 60%, transparent 60%);
+}
 
 
 /* HOMEPAGE */
