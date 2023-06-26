@@ -90,10 +90,11 @@ header {
   position: absolute;
   top: var(--header_height);
   left: 0;
-  background: #333;
+  background: #f6f6f6;
   padding: 1em;
+  padding-top: 0;
   width: calc(100% - 2em);
-  height: calc(100vh - var(--header_height) - 2em);
+  height: calc(100vh - var(--header_height) - 1em);
   /* overflow-y: scroll; */
 }
 #close_contact {
@@ -101,17 +102,18 @@ header {
   height: 1.5em;
   position: sticky;
   top: 0;
-  margin-left: -8px;
+  margin-left: -1em;
+  margin-right: -1em;
   margin-bottom: 1em;
   text-align: center;
-  background: hsl(0deg 0% 71.96% / 36%);
+  background: hsl(162.48deg 100% 44.31%);
   border-bottom: 2px solid hsl(0deg 0% 0% / 46%);
   color: hsl(0deg 0% 0% / 73%);
   z-index: 1;
   transition: all 150ms;
 }
 #close_contact:hover {
-  background: hsl(0deg 0% 87.71%);
+  background: hsl(162 100% 54% / 1);
   border-bottom: 2px solid hsl(0deg 0% 0%);
 }
 #close_contact svg {
