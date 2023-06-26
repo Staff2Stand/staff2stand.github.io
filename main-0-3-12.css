@@ -83,14 +83,14 @@ header {
   content: '';
   width: calc(100% + 4px);
   background: #00e2a0;
-  height: calc(1em - 6px);
+  height: calc(14px - 6px);
   position: absolute;
   top: calc(100% + 0px);
   left: -2px;
   transition: all 200px;
 }
 .header_button:hover:after {
-  height: calc(1em - 0px);
+  height: calc(14px - 0px);
   top: calc(100% + 6px);
 }
 .header_button:hover {
