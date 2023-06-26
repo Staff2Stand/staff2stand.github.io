@@ -1798,8 +1798,8 @@ $(function(){
     /**
      * Contact Page
      */
-    $('#contact_toggle, #close_homepage').click(function() {
-        $('#close_homepage').toggleClass('active')
+    $('#contact_toggle, #close_contact').click(function() {
+        $('#contact_toggle').toggleClass('active')
         $('#contact_container').slideToggle()
     })
       
