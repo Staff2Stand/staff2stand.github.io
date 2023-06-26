@@ -186,6 +186,10 @@ header {
 #close_homepage {
   margin-right: 0;
 }
+#close_homepage svg{
+  color: black;
+  background: radial-gradient(white 60%, transparent 60%);
+}
 #homepage_content {
   padding: 0 16px;
   color: #333;
