@@ -1796,16 +1796,6 @@ $(function(){
 
 
     /**
-     * Contact Page
-     */
-    $('#contact_toggle, #close_contact').click(function() {
-        $('#contact_toggle').toggleClass('active')
-        $('#contact_container').slideToggle()
-    })
-      
-
-
-    /**
      * CUSTOM CONTEXT MENU
      * @param {String} bindTo selector to bind the context menu to.
      * @param {Object} menuItems an object whose keys are the item names, and values are anonymous functions to be called on click (underscores in the name will be turned to spaces) { itemName: function($targetBkmkLi){...}, anotherItemName: function($targetBkmkLi){...} }.  The first arg in the functions is the selected menu item
@@ -1861,7 +1851,7 @@ $(function(){
 
     $footerCopy.appendTo('#homepage')
 
-    $('.open_homepage, #close_homepage').click(()=>{
+    $('.open_homepage, #close_homepage, #about_toggle').click(()=>{
         const homepage_is_open = $homepage.hasClass('open')
         const top = homepage_is_open ? 'calc(-100vh + var(--header_height))' : 'var(--header_height)'
 
@@ -1869,6 +1859,16 @@ $(function(){
 
         if (!homepage_is_open) notey.fade('out')
     })
+
+    /**
+     * Header Buttons
+     */
+    // toggle active on header button click
+    $('.header_button').click(e => $(e.target).toggleClass('active') )
+
+    // contact
+    $('#contact_toggle, #close_contact').click(() => $('#contact_container').slideToggle() )
+    
 
 
 
