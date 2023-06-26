@@ -184,28 +184,7 @@ header {
   z-index: 101;
 }
 #close_homepage {
-  cursor: pointer;
-  height: 1.5em;
-  position: sticky;
-  top: 0;
-  margin-left: -8px;
-  margin-bottom: 1em;
-  text-align: center;
-  background: hsl(0deg 0% 71.96% / 36%);
-  border-bottom: 2px solid hsl(0deg 0% 0% / 46%);
-  color: hsl(0deg 0% 0% / 73%);
-  z-index: 1;
-  transition: all 150ms;
-}
-#close_homepage:hover {
-  background: hsl(0deg 0% 87.71%);
-  border-bottom: 2px solid hsl(0deg 0% 0%);
-}
-#close_homepage svg {
-  position: absolute;
-  bottom: -.5em;
-  color: black;
-  background: radial-gradient(white 60%, transparent 60%);
+  margin-right: 0;
 }
 #homepage_content {
   padding: 0 16px;
