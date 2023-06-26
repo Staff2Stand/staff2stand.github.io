@@ -119,22 +119,17 @@ header {
 /* pages */
 .page{
   display: none;
-}
-
-/* Contact */
-#contact_container {
   display: none;
   position: absolute;
   top: var(--header_height);
   left: 0;
-  background: #333;
+  background: #f6f6f6;
   padding: 1em;
   padding-top: 0;
   width: calc(100% - 2em);
   height: calc(100vh - var(--header_height) - 1em);
-  /* overflow-y: scroll; */
 }
-#close_contact {
+.close_page {
   cursor: pointer;
   height: 1.5em;
   position: sticky;
@@ -149,17 +144,22 @@ header {
   z-index: 1;
   transition: all 150ms;
 }
-#close_contact:hover {
+.close_page:hover {
   background: hsl(162 100% 54% / 1);
   border-bottom: 2px solid hsl(0deg 0% 0%);
 }
-#close_contact svg {
+.close_page svg {
   position: absolute;
   bottom: -.5em;
   color: #fff;
   background: radial-gradient(black 60%, transparent 60%);
 }
-#close_contact iframe{
+
+/* Contact */
+#contact_container {
+  background: #333;
+}
+#contact_container iframe{
   width: 600px;
   height: calc(100% - 2.5em);
   margin-left: calc(50% - 300px);
