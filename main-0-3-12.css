@@ -95,7 +95,6 @@ header {
 }
 .header_button.active:after {
   height: 14px;
-  transition-delay: 400ms;
 }
 .header_button:hover,
 .header_button.active {
