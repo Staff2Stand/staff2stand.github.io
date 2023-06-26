@@ -117,6 +117,10 @@ header {
 }
 .header_button.brighten{
   background: hsl(162 100% 54% / 1);
+  border: 2px solid hsl(162 100% 54% / 1);
+}
+.header_button.brighten:after{
+  background: hsl(162 100% 54% / 1);
 }
 
 /* pages */
