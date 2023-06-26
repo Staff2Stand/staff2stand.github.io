@@ -120,6 +120,12 @@ header {
   color: black;
   background: radial-gradient(white 60%, transparent 60%);
 }
+#close_contact iframe{
+  width: 600px;
+  height: 100%;
+  margin-left: calc(50% - 300px);
+  border-radius: 1em;
+}
 
 
 /* HOMEPAGE */
