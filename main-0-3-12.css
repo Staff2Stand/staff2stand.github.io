@@ -90,7 +90,7 @@ header {
   transition: all 200px;
 }
 .header_button:hover:after {
-  height: 14px
+  height: 14px;
 }
 .header_button:hover {
   background: hsl(162.48deg 100% 44.31%);
