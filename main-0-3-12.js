@@ -1812,8 +1812,17 @@ $(function(){
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams(formData).toString(),
             })
-            .then(() => alert("Thank you for your submission"))
-            .catch((error) => alert(error));
+            .then(() => openDialog(
+                `Thanks for contacting us.`,
+                { title:'Message Sent' }
+            ))
+            .catch((error) => {
+                console.error(error)
+                openDialog(
+                    error.message,
+                    {title:'ERROR'}
+                )
+            });
         })
     })
       
