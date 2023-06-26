@@ -90,7 +90,7 @@ header {
   position: absolute;
   top: var(--header_height);
   left: 0;
-  background: #f6f6f6;
+  background: #333;
   padding: 1em;
   padding-top: 0;
   width: calc(100% - 2em);
@@ -119,8 +119,8 @@ header {
 #close_contact svg {
   position: absolute;
   bottom: -.5em;
-  color: black;
-  background: radial-gradient(white 60%, transparent 60%);
+  color: #fff;
+  background: radial-gradient(black 60%, transparent 60%);
 }
 #close_contact iframe{
   width: 600px;
