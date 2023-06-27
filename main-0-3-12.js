@@ -1878,8 +1878,8 @@ $(function(){
 
     //close page on close page click
     $('.close_page')
-    .click(e=>{
-        const $container = $(e.target).parent()
+    .click(function(){
+        const $container = $(this).parent()
         const id = $container.attr('id')
         const $header_button = $(`.header_button[for="${id}"]`)
         $container.slideToggle(400, ()=>$header_button.removeClass('active') )
